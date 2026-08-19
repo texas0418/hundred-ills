@@ -37,6 +37,26 @@ SETTLED
     B is not a twist bolted to the end. It is a constraint on every
     scene in the game. Consequences at 65-80. Those are now the spine.
 
+81. WHERE THE WALK ENDS - APPROVED 2026-08-19. Written out beat by beat
+    in ENDING-SEQUENCE.txt. Four movements, three endings.
+
+    Third bridge is the covered one, its 石敢當 broken, so it is crossed
+    DEAD - and she leans over the gap in the boards to count flames she
+    does not have, and there is a body in the water. The last stretch is
+    the walk home knowing, with every creature stepping aside. The
+    terminus is her own house, whose door gods are eleven days old and
+    perfect, and THEY HOLD - three fires is a costume, not a key. She
+    gets in only by being called past her own protection by her family,
+    which is what 叫魂 is.
+
+    Endings: she answers, she waits until dawn, or - walk two only - the
+    破血湖 release at the temple, which costs her the child.
+
+    The 一更 planting list at the end of ENDING-SITE.txt and in
+    ENDING-SEQUENCE.txt is now binding, including the hard constraint
+    that the lamp in her window is visible from the first watch and is
+    NEVER remarked on by anyone.
+
 56. NO RELEASE DATE. Ships when it is done. The 正月十六 2027 hook is
     dropped and will not be chased. If it happens to land near a lunar
     new year, fine, but nothing in the schedule bends toward it.
@@ -375,20 +395,6 @@ MECHANICS STILL UNRESOLVED
     your proven lane. Is it a mechanic, one set-piece, or cut?
 
 52. RESOLVED by 75. She has a name and the game speaks it.
-
-81. Where the walk ends. PROPOSED AND WAITING ON YOU - full options and
-    argument in ENDING-SITE.txt. Short version: they are a sequence,
-    not a choice. Third bridge is the covered one and she sees her own
-    body in the water; the last stretch is the walk home knowing;
-    the terminus is the house, the lit lamp, the voice calling her
-    name, one input. Hidden mercy path at the temple for walk two.
-
-    WRITTEN OUT BEAT BY BEAT IN ENDING-SEQUENCE.txt, which also
-    resolves the finale: the wards on her own door HOLD. Three fires
-    is a costume, not a key. She gets in only by being called past her
-    own protection by her family, which is what 叫魂 is. Three
-    endings - answer, do nothing until dawn, or the 破血湖 release on
-    walk two.
 
 82. NEW LORE, changes the motive - 血湖地獄, the Blood Pool Hell for
     women who die in childbirth, and 破血湖, the rite that releases
