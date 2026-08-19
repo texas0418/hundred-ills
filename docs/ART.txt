@@ -248,6 +248,29 @@ Bloom ruins this. Hence the negative list in PROMPTS.txt, which is not
 a style preference and must not be relaxed for a plate that "looks
 better" with shading. It will look better and it will break the game.
 
+VERIFIED 2026-08-19 ON A REAL GENERATED PLATE. The first style-key image
+was run through tools/registration_test.py. The luminance histogram is
+strongly bimodal - 6.9% ink below 70, 92.2% colour above 120, and only
+1.0% in the valley between. The line plate extracts at 7.3% of pixels and
+the colour walks off it cleanly at all four fire states. Sample output at
+docs/proof/registration-test.png.
+
+THE MECHANIC IS NOT A THEORY. It works on real model output.
+
+Two things that measurement also settled:
+
+  FLATNESS IS THE FAILING TEST, NOT SEPARATION. Standard deviation inside
+  supposedly flat areas: paper margin 2.8 (flat, correct), water 23.8,
+  white wall 16.6. The colour has printing mottle baked in. Separation
+  survives it, but Skia's own paper grain and ink bleed will land on top
+  of texture that is already there and the result will be muddy. The
+  negative list has to actually hold.
+
+  THE ZERO-FIRES LOOK NEEDS REDOING. The test rig splits RGB channels,
+  which reads as digital chromatic aberration, not 套色 failure. The
+  shipping renderer must segment by INK - green plate, gamboge plate, red
+  plate - and offset each independently, the way a press misregisters.
+
 THE THREE REAL RISKS, all practical:
 
 1. CONSISTENCY across 30-60 plates is the hard problem, not quality.
