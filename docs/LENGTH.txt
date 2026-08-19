@@ -1,0 +1,164 @@
+HUNDRED ILLS - LENGTH
+Compiled 2026-08-19. Supersedes DECISIONS 32 and 43.
+
+DIRECTIVE: it needs to be hours long.
+TARGET SET: 6-8 hours for the first walk. 10-12 including the second.
+
+
+=============================================================
+THE ONLY REAL DANGER
+=============================================================
+
+Year Walk is two hours because Simogo cut everything. Going to eight
+means SIX MORE HOURS OF AUTHORED CONTENT. It does not mean six hours
+of walking, a bigger town, or slower doors.
+
+Every hour added has to come from one of the sources below. If an hour
+cannot be traced to one of them, it is padding and it will be the thing
+reviews mention.
+
+
+=============================================================
+SOURCE ONE - THE FIRES BECOME THE TRAVERSAL SYSTEM
+=============================================================
+
+This is the answer. Everything else is secondary.
+
+Right now the three fires only go DOWN, which makes them a countdown.
+Let them go up as well and the game doubles without a single new
+street.
+
+  RELIGHTING. 陽氣, yang vitality, is warmth and life and fire. You
+  relight a flame at a hearth, a brazier, a lamp, an oven, or by
+  standing close to a living person who does not know you are there.
+  All of these are sourced, all are ordinary objects in a winter town.
+
+  EXTINGUISHING is already designed. Turn and look behind you. Answer
+  to your name. Let something tap your shoulder. Per DECISIONS 18,
+  these were always prices rather than walls. Now the player pays them
+  ON PURPOSE.
+
+THE TWO TOWNS, ON THE SAME GEOGRAPHY:
+
+  THREE FIRES - the living town. You read as alive, so the door gods
+  let you pass, per DECISIONS 60. Warm houses, hearths, people behind
+  the doors. Registration perfect. But the dead hide from the living,
+  so the entire spirit layer is invisible and unreachable.
+
+  ZERO FIRES - the dead town. The door gods see what you are and every
+  warded house is shut to you. But the dead stop hiding: the spirit
+  layer is visible and walkable, and the places with lapsed or broken
+  wards - the ruined shrine, the water, the covered bridge - are open.
+  No reflection. The colour plates have walked off the drawing.
+
+  CORRECTED 2026-08-19. An earlier draft of this passage had the door
+  gods backwards. Wards are installed against the DEAD. Alive gets you
+  into houses, dead gets you into the spirit layer. Each state still
+  opens exactly what the other closes; it just now agrees with 60.
+
+Each state opens exactly what the other closes. The player's core verb
+stops being WALK and becomes DECIDE HOW ALIVE TO BE.
+
+WHY THIS IS THE RIGHT ANSWER AND NOT A TRICK:
+
+  It costs almost no new art. Per ART.txt, the registration mechanic
+  already renders both states from ONE set of plates. Two towns, one
+  art budget.
+
+  It is entirely sourced. Nothing above is invented. It is the three
+  fires belief plus the door god custom, used honestly.
+
+  It pays off ending B better than anything else in the document. The
+  mechanic the player masters over eight hours is PRETENDING TO BE
+  ALIVE. Then the game tells them she never was. The skill was the
+  symptom.
+
+
+=============================================================
+SOURCE TWO - THREE DISTRICTS, NOT THREE SCREENS
+=============================================================
+
+DECISIONS 14 fixes three bridges. Keep it. Make each crossing open a
+DISTRICT rather than a corridor - a small non-linear area you re-cross
+repeatedly as your fire state changes, roughly two hours each.
+
+  first district    the living town, learning the rules
+  second district   both states in play, the real puzzles
+  third district    across the covered bridge, mostly dead town
+
+Non-linear re-traversal of a small area is the honest way to get hours.
+A long corridor is the dishonest way.
+
+
+=============================================================
+SOURCE THREE - THE ALMANAC AS ACTUAL RESEARCH
+=============================================================
+
+Cheapest hours in the project and the ones you are best at. You have
+shipped puzzle books. This is that skill, applied.
+
+Make the 黃曆 genuinely dense - real 宜 and 忌 for every day, the
+clashing zodiac and its direction, the presiding spirit, the lucky
+hours - and build puzzles that require CROSS-REFERENCING it rather
+than reading one entry. Which hour is safe. Which direction to leave
+by. Which day a thing must have happened on.
+
+This is hours of deduction, it is all text, it needs no art, and it is
+the part of the game that makes people feel clever. It also loads the
+gun for DECISIONS 77, where the almanac turns out to be about her.
+
+
+=============================================================
+SOURCE FOUR - HARD PUZZLES, HELD TO YOUR EXISTING DOCTRINE
+=============================================================
+
+Last Seen already runs a hard-puzzle doctrine with an anti-leak test.
+Apply it here unchanged. No hints, no nudges, no waypoint. Difficulty
+is legitimate length; ambiguity is not. A puzzle that takes forty
+minutes because it is hard is content. One that takes forty minutes
+because the player did not know it existed is a bug.
+
+
+=============================================================
+SOURCE FIVE - MORE CREATURES, SAME RESTRAINT
+=============================================================
+
+DECISIONS 29 capped it at four to six. Raise to EIGHT to TEN. The cap
+was there to prevent dilution, and the thing that actually dilutes is
+unsourced creatures, not the count. Every addition needs an [A] or [B]
+entry in LORE.txt and one clear obligation it is bound by. If it
+cannot be sourced, it does not go in, and we stay at six.
+
+
+=============================================================
+WHAT THIS COSTS - straight
+=============================================================
+
+1. ART VOLUME roughly triples, to maybe 120-180 plates. In money that
+   is now fine. In CONSISTENCY it is the real risk - sixty plates that
+   match is hard, a hundred and eighty is much harder, and drift will
+   be invisible to you as it happens because you will see them one at
+   a time. Build a contact sheet from day one and look at all of them
+   together every week.
+
+2. PLAYTESTING scales linearly and you have no testers. An eight-hour
+   game with no hints and no map WILL have a wall you cannot see,
+   because you know every answer. This is now the largest unmitigated
+   risk in the project. It was survivable at two hours. It is not at
+   eight.
+
+3. PRICE moves. Two hours justified 3.99. Eight to twelve justifies
+   7.99 to 9.99. Amend DECISIONS 53.
+
+4. SCHEDULE. Already handled - DECISIONS 56 says ships when done.
+
+
+=============================================================
+THE TEST
+=============================================================
+
+For every hour of the finished game, name the authored thing in it: a
+puzzle, a creature with a rule, a district in a state you have not seen
+it in, or a piece of the almanac that pays off.
+
+If an hour has no name, cut it.

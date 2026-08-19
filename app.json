@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "Hundred Ills",
+    "slug": "hundred-ills",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "hundredills",
+    "owner": "boyscout1970",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#E0D2B4",
+    "ios": {
+      "supportsTablet": false,
+      "buildNumber": "1",
+      "bundleIdentifier": "com.simonbuilds.hundredills",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.simonbuilds.hundredills",
+      "predictiveBackGestureEnabled": false,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#E0D2B4"
+      }
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#E0D2B4",
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 180
+        }
+      ],
+      "expo-audio"
+    ]
+  }
+}

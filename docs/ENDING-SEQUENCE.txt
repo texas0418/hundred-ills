@@ -1,0 +1,191 @@
+HUNDRED ILLS - THE ENDING SEQUENCE
+Compiled 2026-08-19. Beat by beat. Assumes the corrected ward rule in
+LENGTH.txt: alive gets you into houses, dead gets you into the spirit
+layer.
+
+Four movements and three endings. Nothing below invents a new system.
+Every beat is an existing mechanic firing for the last time.
+
+
+=============================================================
+MOVEMENT ONE - THE THIRD BRIDGE
+=============================================================
+
+THE SETUP, planted across the whole game
+Every bridge in the town has a 石敢當 at its head - the stone that
+refuses passage, DECISIONS 27. Bridges one and two have theirs intact,
+so both are crossed ALIVE, at three fires. The player learns across
+eight hours that bridges are a living-state affair.
+
+The third bridge's stone has fallen into the water and broken.
+
+THE CROSSING
+So the third bridge is the one you cross DEAD. The player must put out
+all three fires on purpose. By now this is routine - they have done it
+a hundred times, it is just how you get into the other half of a place.
+There is no dread attached to it. That is deliberate.
+
+The bridge is covered, roofed, enclosed. The only one you cannot see
+through, per PROMPTS.txt. It is dark and it is long.
+
+THE GESTURE
+Midway there is a gap in the boards where people look down at the
+water. She leans over it. This is the habitual action of the entire
+game - lean over water, count your flames, DECISIONS 67. The player has
+done it hundreds of times and will do it here without being asked.
+
+She is at zero. There is no reflection. The player expects no
+reflection. That is the trap: the absence is not the reveal.
+
+There is a body in the water. Face up. In her clothes.
+
+No sting. No music cue. No text. No camera move. The player understands
+here, roughly ten minutes early, exactly as DECISIONS 68 and 69 require.
+She does not understand. She straightens up and keeps walking, because
+she has somewhere to be.
+
+
+=============================================================
+MOVEMENT TWO - THE LAST STRETCH
+=============================================================
+
+She is in the third district, which is mostly dead town, at zero fires,
+and she has to get home.
+
+THE FLIP MADE VISIBLE
+Every creature she passes now steps aside. The drowned does not reach
+for her. The painted skin turns its face away. The night bird does not
+descend. For eight hours the player read this as menace barely held
+off. Now, in one uninterrupted walk, they watch it be deference.
+
+This is DECISIONS 65 paying out in real time, and it costs no new art -
+it is the same creature plates with different behaviour flags.
+
+THE SCRAMBLE
+Her own door will have intact wards. To pass them she must be at THREE
+fires. So the finale is mechanical and it is desperate: relight all
+three in a district that is mostly dead, where living hearths are
+almost nonexistent. Every relighting trick the game has taught gets
+used one last time, under pressure, in the wrong place for it.
+
+The player will work hard at this. They will feel competent. They are
+racing to make her alive enough to get in.
+
+THE VOICE
+叫魂. It has been distant all night, once per watch, unremarked. Now it
+is a street away and it is unmistakably a name, and it is hers, and it
+is a living person calling.
+
+She hurries toward it. Nothing threatens her. Nothing has threatened
+her for twenty minutes. That is the most frightening stretch in the
+game and it contains no threat at all.
+
+
+=============================================================
+MOVEMENT THREE - THE DOOR
+=============================================================
+
+She arrives at three fires. Her own house.
+
+The door gods on it are ELEVEN DAYS OLD. Pasted up at New Year,
+uncreased, unfaded, bright. In a game full of torn and peeling wards,
+this is the only perfect pair left, and it is on her house, because her
+family is the one household with something to protect.
+
+THE WARDS HOLD.
+
+Three fires is not enough. It was never a key - it was a costume, and
+the gods are not fooled by a costume. She cannot cross. She stands on
+her own doorstep and cannot cross.
+
+The lamp is lit in the window. It has been lit in every scene she has
+been visible in since 一更, and nobody has ever remarked on it.
+
+The voice calls her name again, from inside, six feet away.
+
+AND THE GAME WAITS.
+
+No prompt. No button. No timer. No indicator of any kind. The player
+sits in front of a still image of a door and a lamp and a name being
+called, and the game does not tell them what it wants.
+
+
+=============================================================
+MOVEMENT FOUR - THE THREE ENDINGS
+=============================================================
+
+ENDING ONE - SHE ANSWERS
+The player taps. Answering to your name costs a fire; the player has
+known that cold for eight hours, and here it is not a cost. It is the
+door opening.
+
+The wards do not fail. Nothing breaks them. A soul called home by its
+own family is not an intruder - that is what 叫魂 IS, and the game has
+been showing the player the mechanism all night. Her family has spent
+the entire night calling her past her own protection, out of love,
+because they want her back.
+
+She goes in. Cut. The bird is inside the house with the child.
+
+ENDING TWO - SHE DOES NOT ANSWER
+The player does nothing, which is the trained-correct play of the
+entire game, and keeps doing nothing.
+
+Dawn. Cockcrow, per DECISIONS 7 and 15. The lamp goes out because it is
+morning. The wards held. She is still outside.
+
+The child lives. She is not released - she is exactly what she was, and
+per DECISIONS 78 and the coda at ENDING-SITE.txt option E, she will
+walk again next year. Someone will read her in the almanac.
+
+ENDING THREE - THE RELEASE, second walk only
+Only available if the player did the 破血湖 work across the game, which
+requires knowing the Blood Pool material exists, which requires the
+almanac reading of DECISIONS 82 and 77 that nobody completes first
+time through.
+
+A third option stands at the door: not in, not waiting - away, to the
+temple, to the rite her family never bought her.
+
+She is released. It costs her the child, permanently and knowingly.
+It is the only ending in which she rests, and it is the only one she
+chooses with full knowledge of what she is.
+
+
+=============================================================
+WHY THE FINAL INPUT WORKS
+=============================================================
+
+The last decision in the game is between DOING NOTHING and DOING THE
+ONE THING THE GAME SPENT EIGHT HOURS PUNISHING.
+
+Doing nothing is the trained play, the disciplined play, the play a
+good player makes automatically - and it is mercy.
+Answering is the human play, the one every instinct wants - and it is
+catastrophe.
+
+The game never says which it prefers, has no fail state, and does not
+grade you. Both are complete. Both are correct readings of the folklore.
+
+And whichever the player chooses, they chose it about a woman they had
+understood for twenty minutes and she had not.
+
+
+=============================================================
+WHAT THIS FORCES BACK UPSTREAM
+=============================================================
+
+Additions to the 一更 planting list in ENDING-SITE.txt:
+
+  7. The 石敢當 at the head of bridge one, intact and unremarkable, so
+     that a broken one reads as broken.
+  8. Someone's door gods being pasted up, in a flashback or as a
+     neighbour's chore, so the player knows they are eleven days old.
+  9. At least one relighting taught in a place where it is easy, so
+     that doing it in the dead district is recognisably the same act
+     under worse conditions.
+
+And one hard constraint: the lamp in her window must be visible in
+every single scene it could plausibly be visible in, from the first
+watch, and NO character, line, or camera may ever draw attention to it.
+If it is remarked on once, the ending is spoiled.

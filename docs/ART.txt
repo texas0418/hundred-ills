@@ -1,0 +1,219 @@
+HUNDRED ILLS - ART DIRECTION
+Compiled 2026-08-19. Supersedes "cheap picture" in DECISIONS 42.
+
+Confidence marks as in LORE.txt: [A] attested, [B] widely held / thinly
+documented, [C] my invention.
+
+
+=============================================================
+THE TRAP
+=============================================================
+
+The default answer for a Chinese-themed game is 水墨 ink wash. Grey
+mountains, bleeding brushstrokes, a lot of negative space. It is the
+visual form of the pan-Chinese soup banned at DECISIONS 11. It is what
+everyone does, it is not regional, it is not period, and it is not ours.
+
+We are not doing ink wash.
+
+
+=============================================================
+THE ANSWER: 桃花塢年畫
+=============================================================
+
+Taohuawu nianhua - the New Year woodblock prints of SUZHOU.  [A]
+
+Nianhua are the prints pasted up at New Year: door gods, the Kitchen
+God, fat auspicious babies holding carp, blessings for sons. Taohuawu
+is the Suzhou school, which puts it in Jiangnan, in our exact region,
+satisfying DECISIONS 11 with no stretching at all.
+
+Five reasons this is not merely apt but structural.
+
+1. THE GAME TAKES PLACE INSIDE THE OCCASION. Our night is the sixteenth
+   of the first lunar month. Nianhua are the images that go up for
+   precisely that new year. The art form and the calendar night are the
+   same event. The pictures are not a style laid over the world - they
+   are physically on the walls of the world.
+
+2. THE SUBJECT MATTER IS THE STORY. The single most reproduced nianhua
+   subject is a fat healthy baby, often with a carp, meaning 年年有餘
+   and, plainly, sons. Our game is about a woman touching gate studs for
+   a son and walking home to a child she died having. Rendering it in
+   the print tradition whose most famous image is an auspicious baby
+   means the happiest object in Chinese popular art becomes the most
+   frightening object in the game. We do not have to do anything to it.
+   We just have to keep showing it.
+
+3. IT LICENSES THE DEPTH. Taohuawu at its 18th-century height - the
+   姑蘇版 Gusu prints - absorbed European perspective and copperplate
+   hatching through Jesuit contact, sometimes labelled 泰西筆法, western
+   brush method. [A, verify wording] A print tradition that already did
+   receding planes is the historical justification for our layered
+   parallax walk at DECISIONS 14. The art history and the mechanic agree.
+
+4. THE PERIOD DEGRADATION IS FREE ATMOSPHERE. Suzhou's printing quarter
+   was largely destroyed during the Taiping war in the 1860s and the
+   craft never recovered its former refinement. [A, verify] Late Qing
+   nianhua are coarser, cheaper, fewer blocks, cruder registration than
+   the Qianlong-era work. Our game is set in that afterward. The art is
+   a diminished version of something that used to be finer, which is
+   also what the town is, and what she is.
+
+5. IT IS CHEAP TO PRODUCE AND EXPENSIVE TO LOOK AT. Woodblock is flat
+   colour, a black keyline block, and four to six registered colour
+   blocks on buff paper. No rendering, no lighting, no gradients. Two
+   people can make it look like a museum piece.
+
+
+=============================================================
+THE MECHANIC HIDING IN THE STYLE: MISREGISTRATION
+=============================================================
+
+套色 multi-block colour printing needs the paper to line up under each
+block. When it slips, the colour sits off its outline. Everyone has seen
+this on a cheap print and nobody can name it, which is exactly the
+register we want.  [A as a printing fact, C as a game mechanic]
+
+WE DRIVE REGISTRATION OFF THE THREE FIRES.
+
+  three fires   perfect registration. colour sits inside the line.
+  two fires     a hair of drift. the reader feels it before they see it.
+  one fire      colour visibly detached, a red ghost beside every edge.
+  zero fires    the colour plates and the line plate have separated
+                completely, and the coloured version of the world is
+                standing slightly to one side of the drawn one.
+
+This is the health bar rendered as a printing defect. It never says a
+number, never draws a bar, and satisfies DECISIONS 66. It is also, as
+far as I know, original - I have not seen a game use print registration
+as a state meter.
+
+
+=============================================================
+THE SECOND MECHANIC: 門神
+=============================================================
+
+Door gods.  [A]  Paired warrior figures - 神荼 and 鬱壘, or 秦叔寶 and
+尉遲恭 - printed as nianhua and pasted on the two leaves of a door at
+New Year to keep out what should stay out.
+
+Every door in a Jiangnan town on the sixteenth night has a pair, put up
+eleven days ago.
+
+RULE: a door with intact door gods cannot be entered. A door whose gods
+are torn, faded, peeled, or pasted crooked can. The player will read
+this all night as "the neglected houses are the ones open to me" and
+will feel clever.
+
+The second reading, per DECISIONS 65: they are not neglected houses.
+They are houses whose protection has lapsed, and the thing the
+protection lapsed against is her.
+
+This costs us nothing. It is a locked-door system rendered as wall art,
+sourced, period-correct, and it flips.
+
+
+=============================================================
+PALETTE
+=============================================================
+
+A New Year print, seen at night, by lamp.
+
+  paper         buff / raw ochre, warm, grain visible at all times
+  keyline       soot black, slightly broken, never pure #000
+  standing ink  ONE mineral green and ONE gamboge yellow, both drained
+                heavily by darkness, present but nearly given up
+
+  RED           桃紅 peach-red / vermilion. RESERVED.
+
+Red is the New Year colour, the door god colour, the wedding colour, the
+child's-jacket colour, and the other thing. It is the only saturated
+value in the game. Spend it deliberately - a couplet on a door, a scrap
+of cloth, the baby's coat in a print - and let the player build the
+association themselves over two hours. By the end red should be doing
+work no line of dialogue could.
+
+At zero fires, per the misregistration rule, red is the plate that has
+walked away from the drawing.
+
+
+=============================================================
+PRODUCTION - HOW THIS GETS MADE FOR REAL
+=============================================================
+
+"Original and beautiful" and the under-500-per-bet rule are in tension.
+A two-hour walk needs on the order of 30-60 scene plates plus five
+creatures plus the almanac interiors. Commissioning that as finished
+illustration is thousands of dollars and months.
+
+The style choice is what makes it affordable. THE ILLUSTRATOR DRAWS LINE
+ART ONLY.
+
+  Commissioned, by a human, original:
+     the keyline block for each plate
+     flat colour separations as solid shapes, no shading
+     the five creatures
+     the auspicious-baby print, which must be genuinely lovely
+
+  Generated in Skia at runtime, by us, free and infinitely variable:
+     paper grain and fibre
+     ink absorption and bleed at the edges of every shape
+     registration offset per plate, driven by the fires
+     lamp falloff and the darkness drain on the palette
+     parallax separation of the planes
+     wear, foxing, damp, and the tear state of every door god
+
+That split is the whole production plan. The human makes the drawing.
+The engine makes the printing. It cuts commissioned volume by more than
+half, every plate is alive rather than static, and the same line art
+renders differently at three fires and at zero, which means the second
+playthrough required by DECISIONS 80 literally looks different without
+drawing it twice.
+
+RESOLVED 2026-08-19: the images are AI-GENERATED, directed by Simon.
+My earlier line barring generated art is withdrawn - it was my call to
+make as a recommendation, not as a rule, and it is his project.
+
+THE SPLIT SURVIVES INTACT AND MATTERS MORE NOW.
+
+Generate the PLATE, not the picture. The model produces flat woodblock
+line-and-colour with nothing baked in. Skia still does paper, ink bleed,
+registration drift, lamp, parallax and wear at runtime.
+
+This is not aesthetic preference, it is a hard requirement of the
+registration mechanic at 59. If the model bakes lighting, gradients,
+texture or atmosphere into the image, the line and the colour cannot be
+pulled apart, and the fires meter is dead on arrival.
+
+HOW THE SEPARATION ACTUALLY WORKS - the reason the prompts are strict:
+
+A true woodblock image is black keylines plus flat unmodulated colour.
+That is separable by luminance in one pass. We do not need the model to
+output registered plates, which it cannot do reliably. We need one image
+that DECOMPOSES:
+
+   line plate    = pixels below a luminance threshold, near-neutral
+   colour plate  = everything else, flattened to its nearest palette entry
+   offset the two by a few pixels and you have misregistration
+
+A gradient anywhere in the image ruins this. A soft shadow ruins this.
+Bloom ruins this. Hence the negative list in PROMPTS.txt, which is not
+a style preference and must not be relaxed for a plate that "looks
+better" with shading. It will look better and it will break the game.
+
+THE THREE REAL RISKS, all practical:
+
+1. CONSISTENCY across 30-60 plates is the hard problem, not quality.
+   Solved by a locked style preamble reused verbatim, a style-reference
+   image, and fixed seeds. See PROMPTS.txt.
+
+2. THE MODEL'S DEFAULT CHINESE IS THE BANNED ONE. Ask for anything
+   Chinese and you get ink wash, red lanterns, cherry blossom, gold
+   dragons. Every prompt has to actively fight this, every time.
+
+3. GENERATED CHINESE CHARACTERS ARE ALWAYS WRONG. No text in any
+   generated image, ever. All characters are set live in the app with
+   a real font. This is non-negotiable - the game's whole claim is that
+   the reference layer is real, and a garbled couplet on a door kills it
+   for exactly the audience most likely to write about the game.

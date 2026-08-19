@@ -1,0 +1,191 @@
+HUNDRED ILLS - CHAPTER STRUCTURE
+Compiled 2026-08-19. Answers: an eight-hour phone game needs stopping
+points, without breaking the one-continuous-night illusion.
+
+
+=============================================================
+THE PROBLEM
+=============================================================
+
+Phone sessions are twenty to forty minutes. The game is eight hours,
+has no map, no HUD, no quest log and no hint system by design. A player
+who puts it down at a random moment and comes back four days later has
+lost the thread and will not finish.
+
+But a chapter select screen, a "Chapter 3 of 25" card, or a save menu
+puts a game-shaped object between the player and the night. The whole
+premise is that this is ONE walk.
+
+Both things have to be true. They already are, because the period
+solved it.
+
+
+=============================================================
+THE ANSWER - 更點, WATCHES AND POINTS
+=============================================================
+
+[A, verify] The night was divided into five watches, 五更, of roughly
+two hours each. Each watch was further divided into five 點, points, of
+roughly twenty-four minutes. 三更二點 is a real way to say a time. The
+phrase 五更三點 turns up in literature.
+
+  5 watches x 5 points = 25 CHAPTERS of about twenty minutes
+  25 x 20 minutes = roughly eight hours
+
+READ THAT TWICE. The game has TWENTY-FIVE chapters, not five. Five is
+the number of WATCHES, which are ninety-minute acts, and the only
+thing that gets a title card. The chapter - the unit a player actually
+plays in one sitting and stops at - is the 點, and there are five of
+them inside every watch.
+
+Twenty minutes is a phone session. The traditional Chinese night is
+already subdivided into exactly the granularity a mobile game needs.
+We did not have to invent anything and we do not have to explain
+anything.
+
+THEY ARE NOT UNIFORM, and should not be. Real watches were measured by
+actual darkness and stretched or shrank with the season. Ours is the
+first lunar month - deep winter, the longest nights of the year, which
+is itself the justification for a long game. So some points run ten
+minutes and some run thirty-five. The average lands the whole night at
+six to eight hours per DECISIONS 83, and the unevenness stops the game
+feeling gridded.
+
+THE THREE GRIDS, which are independent and should stay that way:
+
+  TIME, ACTS       five watches, 一更 to 五更, ninety minutes each
+  TIME, CHAPTERS   five points per watch, twenty minutes each, 25 total
+  SPACE            three districts, per DECISIONS 85
+
+Space does not align to time. You will be in the second district across
+parts of two watches. That misalignment is good - it stops the game
+feeling gridded.
+
+
+=============================================================
+WHO MARKS THEM - 打更人, THE NIGHTWATCHMAN
+=============================================================
+
+[A] The 打更 watchman walked the streets all night striking a bamboo
+clapper or a small gong, calling the watch and the point aloud so the
+town knew the hour.
+
+HE IS THE CHAPTER BREAK. Not a card, not a menu. You hear the clapper
+somewhere in the streets, he calls 三更二點, and the game saves.
+
+What this buys, all at once and all diegetic:
+
+  A STOPPING POINT. The player hears a chapter end. They know it is a
+  clean place to put the phone down, and nobody had to tell them.
+
+  A CLOCK. DECISIONS 15 wants the night tightening toward cockcrow.
+  Now it is audible and it is counting.
+
+  A SAVE. Autosave on his call. No save menu anywhere in the game.
+
+  A PLACE MARKER. Come back four days later and the game says 三更二點
+  and you know exactly where you are in the night.
+
+  A HEAT SOURCE. He is a living man walking around outside all night
+  carrying a lamp. Per DECISIONS 84 he is a relighting opportunity that
+  MOVES, which is mechanically valuable in the dead districts.
+
+  A CHARACTER. He is the only other person out walking. Over eight
+  hours he becomes the most familiar presence in the game.
+
+THE BEAT THIS UNLOCKS, and it is free:
+
+Early on he greets her. Nods, says something ordinary about the cold,
+calls the watch, moves on. The player registers nothing - a man doing
+his job. It quietly establishes that she is seen, that she is alive,
+that the world acknowledges her.
+
+Some hours later he walks straight past her.
+
+No music, no comment, no reaction from her. He simply does not see her
+and continues calling the hour. The player notices. She does not.
+
+That is a mid-game confirmation of ending B that costs one line of
+dialogue removed, and it lands harder than any set piece we could
+build.
+
+CAREFUL: he must never be spooky. He is a cold, bored man doing a
+tedious job. The moment he is written as an omen he stops working.
+
+
+=============================================================
+MAKING THE BREAK PERCEPTIBLE - the fix
+=============================================================
+
+A stopping point the player does not NOTICE is not a stopping point.
+An earlier draft of this file marked the points with an ambient clapper
+and nothing else, which is too subtle to do the job it exists to do.
+The player has to know, without a card and without being told, that a
+chapter just ended and this is a clean place to stop.
+
+Three things do it, all diegetic, none of them UI.
+
+1. HE STRIKES THE COUNT. [A, verify] The watchman's strikes encoded the
+   hour. Ours does it legibly: the watch as slow deep strikes, then the
+   point as quick light ones. 三更二點 is three slow, pause, two quick.
+
+   The player learns to count within the first watch because nobody
+   explains it and the number is always right. From then on every
+   chapter break announces exactly where you are in the night, in a
+   language you taught yourself. It is the game's clock, its chapter
+   number, and its progress bar, and it is a man hitting a piece of
+   bamboo.
+
+2. THE WORLD HOLDS. For the two or three seconds he is calling, input
+   is still live but nothing moves and no other sound plays. Not a cut,
+   not a fade - a held breath. It reads unmistakably as a beat ending.
+
+3. THE SAVE IS VISIBLE BY BEING AUDIBLE. Because the strike ALWAYS
+   coincides with the autosave, the sound becomes the save indicator
+   inside about forty minutes of play. Players will start walking to
+   the next clapper before putting the phone down, which is exactly the
+   behaviour we want and we never asked for it.
+
+HOW THE BREAK IS PRESENTED
+
+Between points: the strike, the count, the held beat, and the walk
+continues unbroken. No fade, no card, no menu, no interruption.
+
+Between WATCHES, five times only: a full stop. Black. The watch name
+set large in the app's real type, per DECISIONS 57's no-text-in-images
+rule.
+
+        二更
+        the second watch
+
+Nothing else on the card. No chapter number, no progress bar, no
+percentage, no "continue" button that has to be pressed. It holds for
+a few seconds and the night resumes.
+
+Five of these in eight hours - one every ninety minutes, at the act
+breaks only. Twenty-five audible chapter breaks, five visible cards.
+That is the entire chapter furniture of the game.
+
+RESUME BEHAVIOUR: relaunching drops you back at the last point with the
+clapper sounding and the watch called once. That single audio cue is
+the whole "previously on" and it is enough.
+
+
+=============================================================
+WHAT IT COSTS THE ENDING
+=============================================================
+
+Check ENDING-SEQUENCE.txt against this. The watchman is calling points
+all through the finale, which means the last stretch has an audible
+countdown running under it - good, and free tension.
+
+But he must be ABSENT for the door sequence in Movement Three. That
+scene is a still image, a lamp, a name, and a game that will not tell
+you what it wants. A clapper in the distance during it would give the
+player something to wait for, and the entire point is that there is
+nothing to wait for.
+
+Last call is 五更三點, some minutes before she reaches the door. Then
+nothing until cockcrow, which only sounds in ending two.
+
+The silence after his last call is the loudest thing in the game.

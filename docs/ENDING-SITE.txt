@@ -1,0 +1,160 @@
+HUNDRED ILLS - WHERE THE WALK ENDS (DECISIONS 81)
+Compiled 2026-08-19.
+
+THE QUESTION
+Ending B says she died in childbirth, the child lived, and she is
+walking home to him. Home to WHERE, physically. It blocks writing 一更
+because whatever the answer is has to be planted in the first watch.
+
+
+=============================================================
+FIRST - A PIECE OF LORE THAT CHANGES THE QUESTION
+=============================================================
+
+血湖地獄 / 血盆經 - the Blood Pool Hell and the Blood Bowl Sutra
+[A, verify with sources - I am confident this exists and is well
+studied, I have not read the scholarship with this project in mind]
+
+A Chinese popular-religious belief, carried by an apocryphal sutra:
+women who die in childbirth are consigned to a hell of blood, polluted
+by the blood of the birth itself. They cannot leave. The family must
+perform a releasing ritual - 破血湖, breaking the blood pool - to get
+her out. In many accounts the rite is properly performed BY HER
+CHILDREN, as filial duty.
+
+Read that against our story.
+
+  She cannot rest because the rite was never performed for her.
+  The only person who can perform it is her son.
+  Her son is eleven days old.
+
+This gives her a reason to walk that is sourced rather than sentimental,
+and it collapses the entire game into one action. She needs him. She
+loves him. 姑獲鳥 takes children. Going to the baby is simultaneously
+the mother's love, the ghost's only hope of release, and the monster's
+appetite. They are not three motives in tension. They are one motion.
+
+That is the game. Everything below is just choosing the address.
+
+
+=============================================================
+THE OPTIONS
+=============================================================
+
+A. THE HOUSE WITH THE CHILD IN IT
+
+   She arrives home. The lamp is lit. The 叫魂 voice that has been
+   calling her name all night is coming from inside her own house - the
+   husband, or her mother, calling her soul back, the way you call a
+   startled soul home. The last thing the game asks is whether she
+   answers.
+
+   FOR: it is the only option where the final input at DECISIONS 74
+   lands on the child. Two hours of "never answer to your name" and the
+   voice turns out to be her family trying to bring her home, and
+   answering it means going in, and she is the bird. Maximum payoff,
+   every system firing at once.
+   AGAINST: none structural. It is the obvious answer and it is
+   obvious because it is right.
+
+B. THE ROOM SHE DIED IN
+
+   The birthing room, preserved or stripped. She has to recognise it.
+
+   FOR: quieter, more interior, horror by recognition rather than
+   threat. Cheaper to build - one room, one reveal.
+   AGAINST: puts the child offstage at the climax and wastes the
+   strongest material in the game. Also largely redundant: in a real
+   house the birthing room and the house with the child are the same
+   building. This is not a separate ending, it is a ROOM INSIDE A.
+
+C. THE WATER
+
+   Her body is still in the canal, never found. That is why she cannot
+   rest, and why she has spent all night leaning over water.
+
+   FOR: it converges beautifully with the reflection mechanic at
+   DECISIONS 67. Every time the player leans over the canal to count
+   her fires, she is leaning over her own corpse. That is worth having
+   and it is nearly free.
+   AGAINST as a TERMINUS: she died in childbirth, not drowning. Adding
+   a second death muddies the 姑獲鳥 claim, which is specifically about
+   dying in the birth. It also steps on 水鬼's territory, and we have a
+   drowned ghost already.
+   VERDICT: keep the body in the water, do not end there. See the
+   recommendation.
+
+D. THE TEMPLE WHERE THE RITE WAS NEVER PERFORMED
+
+   The 破血湖 was owed and never done. She ends at the shrine, in front
+   of the god who could have released her and did not, because nobody
+   paid for the ritual.
+
+   FOR: the angriest version, and the most political - a woman failed
+   by her family and by an institution, not by fate. Pairs viciously
+   with 五通神 at DECISIONS 28, the local god who is not good.
+   AGAINST: it is an ending about an injustice rather than about a
+   child, and it asks the player to have absorbed a fairly technical
+   piece of religious practice for the climax to land.
+   VERDICT: this is the MERCY PATH, not the main ending. See below.
+
+E. THE CITY GATE - CLOSED LOOP
+
+   She ends where she began, touching the studs for a son, and the walk
+   starts again. She does this every year.
+
+   FOR: bleak, elegant, and it pays off DECISIONS 78 exactly - she
+   becomes an entry in the almanac and somebody reads her next year.
+   AGAINST: denies the reunion the whole game is walking toward, and
+   trades a devastating specific ending for a tidy structural one.
+   VERDICT: not the ending. Possibly the last four seconds after it.
+
+
+=============================================================
+RECOMMENDATION
+=============================================================
+
+Do not pick one. They are a sequence, and the geography already exists.
+
+  THIRD BRIDGE  = C. The covered bridge, the only one you cannot see
+                  through. She looks down at the water and there is a
+                  body in it. The reflection mechanic pays off here,
+                  not at the end, and this is the DECISIONS 68 moment
+                  where the player understands.
+
+  LAST STRETCH  = the walk from the water to the house, knowing. This
+                  is the dramatic irony at DECISIONS 69 made literal.
+                  Nothing threatens her. The player just watches her
+                  hurry.
+
+  TERMINUS      = A. The house, the lamp, the voice calling her name,
+                  and one input.
+
+  MERCY PATH    = D, hidden. If the player has done the right things
+                  with the 破血湖 material - and the almanac has been
+                  quietly carrying the instructions the whole time,
+                  per DECISIONS 77 - the temple offers the release the
+                  family never bought her. It costs her the child.
+                  A second ending nobody gets on the first walk, which
+                  is what DECISIONS 80 needs.
+
+  CODA          = E, four seconds. The gate. Next year.
+
+
+=============================================================
+WHAT THIS FORCES INTO 一更
+=============================================================
+
+Plant in the first watch, all of it quiet and none of it flagged:
+
+  1. The house. She passes it early and does not go in, and gives a
+     mundane reason.
+  2. The lamp in its window, lit. It is lit all night, every scene it
+     is visible. Nobody remarks on it.
+  3. The voice, once, distant, at the very edge of the first watch.
+  4. The auspicious baby print on a neighbour's wall, seen plainly and
+     warmly, with no music cue whatsoever.
+  5. The almanac's 姑獲鳥 entry available from minute one, and the
+     血湖 entry beside it, both dry, both unremarked.
+  6. Her name, spoken by someone living, so the player learns it in
+     the ordinary way before it is ever used against her.

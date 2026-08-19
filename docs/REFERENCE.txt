@@ -1,0 +1,116 @@
+HUNDRED ILLS - VISUAL REFERENCE LINKS
+Compiled 2026-08-19. Every link below was checked this session unless
+marked otherwise.
+
+Use these two ways: to train your own eye before you judge a generated
+plate, and as style-reference images attached to the prompts in
+PROMPTS.txt.
+
+
+=============================================================
+START HERE - the single best free resource
+=============================================================
+
+135 woodblock prints: nianhua, door gods, historical figures and
+Taoist deities. Metropolitan Museum, accession CP446, 19th-20th
+century, polychrome woodblock, ink and colour on paper. Free download.
+VERIFIED.
+
+https://archive.org/details/mma_one_hundred_thirtyfive_woodblock_prints_including_new_years_pictures_nian_63878
+
+This is exactly our register: LATE, popular, coarse, cheap village
+printing rather than refined 18th-century work. Per ART.txt point 4,
+the degraded late-Qing look is the one we want. Pull door gods from
+here.
+
+The same object on the Met's own site (was rate-limiting when checked,
+try again later):
+https://www.metmuseum.org/art/collection/search/63932
+
+
+=============================================================
+THE HIGH END - what Suzhou printing was before it declined
+=============================================================
+
+Cleveland Museum of Art acquired 113 Suzhou colour woodblock prints
+from the Christer von der Burg collection. CMA and the Met jointly took
+220 Gusu prints. Open access, high resolution. VERIFIED.
+
+https://www.clevelandart.org/articles/18th-century-prints-suzhou
+
+Named works with accession numbers to look up directly in CMA's
+collection search:
+   Mother and Sons, 1736-95, accession 2025.23
+   Bird on Lotus, accession 2025.118
+   Plum and Camellia in a Bronze Vase, first half 1700s, 2025.127
+
+CMA collection search, filter to Open Access for downloadable files:
+https://www.clevelandart.org/art/collection/search
+
+Why look at these if we are making the coarse late version: because
+this is where the perspective and receding planes come from, per
+ART.txt point 3. Study the depth, then throw away the refinement.
+
+
+=============================================================
+SCHOLARLY BLOG - the most useful single site
+=============================================================
+
+Chinese Woodblock Printing. Notes on ancient Chinese prints, run by
+specialists, heavy on Suzhou/Gusu material with large images and real
+attribution. VERIFIED.
+
+https://chiwoopri.wordpress.com/
+https://chiwoopri.wordpress.com/category/chinese-prints/suzhou-prints/
+https://chiwoopri.wordpress.com/2015/09/17/%EF%BF%BCthree-rediscovered-gusu-prints-in-the-bodleian-library/
+
+
+=============================================================
+TAOHUAWU SPECIFICALLY - our named school
+=============================================================
+
+Suzhou Taohuawu Museum online exhibition, including the printing
+process step by step, which is worth reading before you judge whether
+a generated plate could actually have been carved. VERIFIED.
+
+https://suzhoutaohuawu.wordpress.com/
+https://suzhoutaohuawu.wordpress.com/printing-process/
+
+
+=============================================================
+FOLK DEITIES AND PAPER GODS
+=============================================================
+
+Columbia University, Chinese Paper Gods - the Anne S. Goodrich
+collection of popular religious prints. Directly relevant to 五通神,
+door gods, and the almanac interiors. NOTE: blocked automated fetch
+when checked, so open it in a browser rather than assuming it is down.
+
+https://www.columbia.edu/cu/lweb/digital/collections/eastasian/paper_gods/essays/new_years_prints.html
+
+Ashmolean Museum, Eastern Art blog on Chinese New Year prints.
+From search, not individually opened.
+
+https://blogs.ashmolean.org/easternart/2018/03/16/chinese-new-year-prints/index.html
+
+
+=============================================================
+WHAT TO ACTUALLY LOOK FOR
+=============================================================
+
+When you open these, you are calibrating on four things and nothing
+else. Ignore subject matter, ignore beauty.
+
+  1. LINE WEIGHT. Even, carved, slightly blunt. Not tapered like a
+     brush stroke. This is the single tell that separates a woodcut
+     from everything the model wants to give you.
+
+  2. FLATNESS. Every colour is one solid value. Where you think you
+     see shading it is almost always a second flat block overprinted.
+
+  3. REGISTRATION. Find prints where the colour sits slightly off its
+     outline. That misalignment is our whole health system, per
+     DECISIONS 59. Screenshot the good examples and keep them.
+
+  4. PALETTE COUNT. Count the colours. It is usually four or five.
+     If a generated plate has eight, it is wrong no matter how nice.

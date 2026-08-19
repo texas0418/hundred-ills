@@ -1,0 +1,182 @@
+HUNDRED ILLS - LORE AND SOURCING
+Compiled 2026-08-19.
+
+READ THIS FIRST
+Every entry is marked with how solid it is. This matters more than usual,
+because the entire product claim is "this is real and you can look it up."
+If we ship something invented while implying it is attested, the whole
+thing collapses into the pastiche we are trying to avoid.
+
+  [A] Well attested. Named in Ming/Qing texts or solid modern scholarship.
+  [B] Widely held folk belief, regionally variable, thinly documented.
+  [C] My extrapolation or design invention. NOT real. Never implied real.
+
+Anything the almanac app presents as a real entry must be [A] or [B],
+and [B] entries must say "in some places" or equivalent. [C] material
+lives only in the fiction, never in the reference layer.
+
+BEFORE BUILD: every [A] below needs a primary or scholarly citation
+attached. I have written them from knowledge, not from sources open in
+front of me. Treat this file as a research plan, not a bibliography.
+
+
+=============================================================
+THE FRAME RITUAL
+=============================================================
+
+走百病  zou bai bing  "walking off the hundred illnesses"   [A]
+Also 散百病, 游百病, 走百病儿 depending on region.
+
+Ming and Qing. Night of the fifteenth or sixteenth of the first lunar
+month - the sixteenth in many northern and Sichuan/Guizhou accounts, the
+fifteenth elsewhere, folded into Lantern Festival. Women went out after
+dark, in groups, and walked. The walking itself shed the coming year's
+sickness.
+
+Components, all [A] but not all present in every account:
+
+  走三桥   crossing three bridges. Jiangnan variant especially. Some
+           accounts require three DIFFERENT bridges, never doubling back.
+           THIS IS THE MAP. See DECISIONS 14.
+
+  摸钉     mo ding. Touching the bronze studs on a city gate. A pun:
+           釘 ding, nail, on 丁 ding, a male child. Women touched them
+           for sons. THIS IS THE THEME. See DECISIONS 30.
+
+  度厄     crossing over misfortune. The bridge-crossing framed as
+           passing out of one condition into another.
+
+Why this and not Ghost Month: it is a WALK with a RULE SET and a
+YEAR-AHEAD OUTCOME, which is structurally identical to arsgang. Ghost
+Month is a season, not a journey.
+
+RESEARCH TODO: find the actual Ming/Qing sources. 帝京景物略 (Beijing,
+1635) is the one I am most confident carries a 走百病 passage. Local
+gazetteers 地方志 for Jiangnan variants. Get the wording; the almanac
+app should quote it.
+
+
+=============================================================
+THE THREE FIRES
+=============================================================
+
+三把火  san ba huo   [B]
+
+A living person carries three flames - one on each shoulder, one on the
+crown of the head - visible to spirits, not to people. While they burn,
+the dead cannot easily see or touch you. Associated with 陽氣, yang
+vitality.
+
+Ways they are said to go out:
+  - someone taps you on the shoulder at night              [B]
+  - you turn your head sharply to look behind you          [B]
+  - you answer aloud when something calls your name        [B]
+  - illness, exhaustion, grief                             [B]
+
+This belief travels with Ghost Month customs but is not confined to
+them, so using it inside a first-lunar-month frame is defensible. Flag
+it in the almanac as widely held rather than textually fixed.
+
+Design note: the "do not turn to look behind you" rule appears in BOTH
+this belief and in 走百病 accounts. That overlap is the seam the whole
+game is built on. Verify it holds up; if it does, lead the press with it.
+
+
+=============================================================
+DIVINATION
+=============================================================
+
+擲筊  jiaobei / bwa bwei   [A]
+Two crescent blocks, one flat face and one curved face each. Thrown
+before a deity to ask a yes/no question.
+   one flat up, one curved up   聖筊  approval, yes
+   both flat faces up           笑筊  the "laughing" cast - unclear,
+                                      the question was wrong, ask again
+   both curved faces up         陰筊  no
+Convention in many temples: ask three times for a serious matter.
+Overwhelmingly Fujian/Taiwan-associated today but present across the
+south historically. VERIFY it is defensible in late-Qing Jiangnan before
+making it the core verb. If it is not, it moves to a Fujianese character
+who brought it with her, per DECISIONS 11.
+
+求籤  qiu qian / kau chim   [A]
+Shaking a cylinder until one numbered bamboo stick falls out. The number
+maps to a printed poem, usually four lines, graded auspicious to
+inauspicious. The poem is oblique and requires interpretation, often by
+a temple attendant. Standard practice: confirm the stick with 擲筊.
+We do not provide the attendant.
+
+扶乩  fuji, planchette / spirit-writing   [A]
+A suspended stylus, held by two people, writes characters in sand or
+ash, dictated by a spirit. Enormously popular in the Qing among literati.
+Real, textual, and visually perfect for us. See DECISIONS 51.
+
+黃曆 / 通書  the almanac   [A]
+Per-day structure, all standard:
+   宜   auspicious for  (marry, travel, break ground, bury)
+   忌   avoid
+   沖   which zodiac sign the day clashes with, and its direction
+   值神  the presiding spirit of the day
+   吉時  the auspicious hours
+This is the companion app. It is a real document format and it is
+already eerie. Do not embellish it.
+
+
+=============================================================
+THE BESTIARY
+=============================================================
+
+水鬼  shui gui, the drowned   [A]
+Someone who drowned and cannot leave the water or be reborn until they
+pull in a substitute - 找替身, finding a replacement. Deeply attested,
+and specifically strong in canal and river country, which is why the
+setting is a water town. Its whole existence is one obligation aimed at
+the player. Some accounts: a shui gui that refuses to take a substitute
+is eventually promoted to a local water god. That mercy is a puzzle.
+
+姑獲鳥  gu huo niao, the night-bird woman   [A]
+Women dead in childbirth become a bird that flies at night and takes
+or marks other people's children. Also 夜行游女, 天帝少女, and tangled
+with 九頭鳥 in some regions. Recorded from the Six Dynasties onward -
+玄中記 is the citation I would chase first. Said to leave a mark on
+clothing left out overnight, which is why you bring the washing in
+after dark. This is the Myling seat and the thematic core.
+
+畫皮  hua pi, the painted skin   [A as literature]
+A demon that wears a human hide it paints itself. From 聊齋志異
+(Pu Songling, c. 1740) - so it is LITERARY, not folk-anonymous, and the
+almanac must say so. Attributing a Pu Songling story to "ancient Chinese
+folklore" is exactly the sloppiness that gets noticed.
+
+石敢當  shi gandang   [A]
+An inscribed stone set at a road's end, a T-junction, or a bridgehead to
+block malign influence.泰山石敢當 is the common full form. Real,
+physical, still standing in villages today. A thing that refuses passage
+is a locked door with three thousand years of documentation.
+
+五通神  wu tong shen   [A]
+Southern local gods, Jiangnan especially, of ambiguous or frankly
+predatory character - associated with sudden wealth and with sexual
+menace toward women. Officially suppressed in the Qing, which is itself
+a story beat. The god you bargain with who is not good.
+
+買路錢  mai lu qian, road-buying money   [B]
+Paper money scattered for the dead to clear a funeral route. Picking up
+money found on the road at night takes on what it was paying for.
+A prohibition with a visible object attached - ideal.
+
+叫魂  jiao hun, soul-calling   [A]
+Calling a startled soul back, usually a child's, by name, at a doorway
+or crossroads. Philip Kuhn's SOULSTEALERS documents the 1768 panic
+around it. Relevant to DECISIONS 19 and 52: the thing behind you calling
+your name may not be hostile. It may be someone calling you home.
+
+
+=============================================================
+DELIBERATELY EXCLUDED
+=============================================================
+
+殭屍 jiangshi          pastiche risk, see DECISIONS 92
+狐仙 fox spirits       overexposed, and northern more than Jiangnan
+Journey to the West, Sanxingdui, anything Tang-dynasty-imperial
+Anything I cannot mark [A] or [B]

@@ -1,0 +1,532 @@
+HUNDRED ILLS / 走百病 - DECISIONS TO DATE
+Working title only. Compiled 2026-08-19.
+
+Every line is numbered. To change one, just say the number.
+Sections: SETTLED, ASSUMED, OPEN, DEAD.
+
+SETTLED means you said it or agreed to it directly.
+ASSUMED means I proposed it, you did not object, and I am building on it.
+Check the ASSUMED section carefully. That is where I will have put words
+in your mouth. This project has a LARGE assumed section because you gave
+three lines of direction and I built a spine off them.
+
+
+=============================================================
+SETTLED
+=============================================================
+
+1. Year Walk (Simogo, 2013) is the model. Not a clone. The things being
+   copied are its PRINCIPLES, listed at 40-46.
+
+2. The source material is Chinese folklore.
+
+3. This is the NEXT project. It starts now.
+
+4. WALK structure. A traversal game through a landscape, not a one-room
+   game. The one-room idea stays with Stereopsis.
+
+5. Bilingual. English is primary. Chinese appears as labels, names and
+   titles - texture, not translation duty. A player who reads no Chinese
+   loses nothing but atmosphere.
+
+55. THE ENDING IS CANDIDATE B. The walker died in childbirth before the
+    game begins. The night is 姑獲鳥's own night. The almanac entry you
+    have been reading all game - the bird-woman who takes children - is
+    about you.
+
+    B is not a twist bolted to the end. It is a constraint on every
+    scene in the game. Consequences at 65-80. Those are now the spine.
+
+56. NO RELEASE DATE. Ships when it is done. The 正月十六 2027 hook is
+    dropped and will not be chased. If it happens to land near a lunar
+    new year, fine, but nothing in the schedule bends toward it.
+
+
+=============================================================
+ASSUMED
+=============================================================
+
+THE RITUAL
+
+6. The frame ritual is 走百病 (zou bai bing), "walking off the hundred
+   illnesses." Ming-Qing, attested with regional variants. On the
+   fifteenth or sixteenth night of the first lunar month, women walked
+   out after dark in groups to shed the coming year's sickness.
+
+7. Its real rules become the game's real rules:
+      cross three bridges          走三桥
+      touch the gate studs         摸钉   (a pun on 丁, for a son)
+      do not turn back
+      be home before light
+
+8. This is the Chinese arsgang. Same shape: a real calendar night, a
+   bounded walk, a prohibition list, an outcome that binds the year ahead.
+   It is also genuinely obscure, which is the "found, not invented"
+   quality the whole thing runs on.
+
+9. Ghost Month / 中元 is DEAD as a frame. See 90.
+
+SETTING
+
+10. Late Qing. A Jiangnan water town. Canals, stone bridges, whitewash
+    and black tile.
+
+11. ONE region, ONE century, sourced. The failure mode of this genre is
+    pan-Chinese soup - Journey to the West plus jiangshi plus a fox
+    spirit plus a bronze mask. Everything in the game comes from Jiangnan
+    or is explicitly marked as an import by a character who is wrong.
+
+12. The water town is chosen because its geography IS the ritual. A town
+    made of bridges, for a rite about crossing three of them.
+
+THE THREE SYSTEMS
+
+13. The game's architecture is three real folk systems, not invented
+    mechanics. This is the whole bet. Each one is a rule a player can
+    look up and verify.
+
+14. SPACE = THE THREE BRIDGES. You walk left and right along a canal
+    bank on a flat plane. You go DEEPER into the world only by crossing a
+    bridge. Three bridges, three depth layers. The town rearranges behind
+    each crossing.
+
+    This replaces Year Walk's arbitrary tree-corridors with something
+    diegetic. You are never confused about how to go deeper. You are
+    confused about where deeper GOES.
+
+15. TIME = THE FIVE WATCHES. 一更 二更 三更 四更 五更, the five
+    two-hour watches of the night, roughly 7pm to 5am. Period-accurate,
+    and a clock the player can feel tightening. Cockcrow at the end of
+    五更 is the deadline in rule 7.
+
+    EXTENDED BY 88 - at eight hours a watch is ninety minutes, which is
+    too long to be a stopping point on a phone.
+
+88. CHAPTERS ARE 更點, WATCHES AND POINTS. Your call, 2026-08-19. Each
+    watch subdivides into five 點 of about twenty-four minutes, which
+    is period-real and is also exactly a phone session.
+
+    TWENTY-FIVE CHAPTERS, NOT FIVE. Five is the count of WATCHES, which
+    are ninety-minute acts and the only thing that gets a title card.
+    The chapter is the 點. 25 x 20 minutes is the eight hours at 83.
+
+    Points are NOT uniform - real watches stretched with the season,
+    and ours is the longest night of the year. Ten to thirty-five
+    minutes each, averaging out to 83's target. Full scheme in
+    CHAPTERS.txt.
+
+    The strike encodes the count: watch as slow deep strikes, point as
+    quick light ones. The player teaches themselves to read it inside
+    the first watch, and from then on it is clock, chapter number,
+    progress bar and save indicator in one, with no UI at all.
+
+89. THE 打更人 NIGHTWATCHMAN MARKS THEM. You hear his clapper, he calls
+    三更二點, the game autosaves. No menu, no card, no chapter select
+    anywhere. He is simultaneously the clock, the save point, the place
+    marker, a MOVING relight source per 84, and the only other person
+    out walking all night.
+
+    Free beat: early on he greets her, ordinary and bored. Hours later
+    he walks straight past. No cue, no comment. Costs one deleted line
+    of dialogue and confirms ending B harder than any set piece.
+
+    He must never be written as spooky or as an omen. He is a cold man
+    doing a tedious job.
+
+    He is SILENT for the door sequence. Last call is 五更三點, minutes
+    before she arrives. The silence after it is the loudest thing in
+    the game.
+
+16. LIFE = THE THREE FIRES. 三把火. Folk belief: a living person carries
+    three flames, one on each shoulder and one on the crown. The dead
+    cannot see you while they burn. They go out if someone taps your
+    shoulder at night, if you turn your head sharply, if you answer to
+    your name in the dark.
+
+    THIS IS THE HEALTH SYSTEM AND IT IS THE BEST IDEA IN THE DOCUMENT.
+
+17. Consequence of 16: losing all three fires is NOT a game over. It is a
+    lore-accurate transformation. With no fires you are indistinguishable
+    from the dead - which means the dead stop hiding from you, and half
+    the map only opens in that state. The lose condition is a door.
+
+18. Consequence of 16: "do not turn back" (rule 7) costs a fire instead of
+    being forbidden. Every prohibition is a PRICE, never a wall. The
+    player is always allowed to break the rite. The rite just charges.
+
+19. Something calls your name from behind you, by name, in the dark. The
+    correct play is to not touch the screen. Doing nothing is a verb.
+
+THE ASK / THE HINT SYSTEM
+
+20. There is no hint system. There is 擲筊 (jiaobei) - the two crescent
+    divination blocks. You throw them to ask the world a yes/no question.
+    Three outcomes, all real:
+       one up one down   聖筊   yes
+       both flat up      笑筊   the god is laughing. ask a better question.
+       both curved up    陰筊   no
+
+21. 笑筊 is the point. An unreliable oracle that tells you your QUESTION
+    was wrong is worth more than a hint button.
+
+22. Second knowledge verb: 求籤, drawing a numbered fortune stick that
+    gives you a four-line poem you have to interpret yourself. The poem
+    is the clue. Nobody explains it.
+
+THE BESTIARY
+
+23. Creatures are rules, not monsters. You beat them by knowing what they
+    are obligated to do. Full sourcing in LORE.txt.
+
+24. 水鬼 the drowned - cannot leave the water until it finds a
+    substitute. An entity whose entire behavior is one rule about you.
+
+25. 姑获鸟 the night-bird woman - women dead in childbirth, who take
+    children. This is the Myling seat. It is also the THEME. See 30.
+
+26. 画皮 the painted skin - wears a human hide it painted itself.
+
+27. 石敢当 the stone that stands where a road ends and refuses passage.
+
+28. 五通神 - the local god you must bargain with, who is not good.
+
+29. Four to six creatures TOTAL. Year Walk had five. Restraint is the
+    whole aesthetic.
+
+STORY
+
+30. You play a woman. The historical walkers were women; this is not a
+    choice, it is the source. Her stated reason is to shed the year's
+    illness. Her real reason is a child, and the 摸钉 rule at 7 is the
+    tell planted in the first five minutes.
+
+31. The gut punch has to be Year Walk grade: the visions of the year to
+    come are true, and what they show is what SHE does. Two candidates
+    at 62-63, both open.
+
+LENGTH AND SHAPE
+
+32. SUPERSEDED BY 83. Was two hours. What survives unchanged: no hub,
+    no collectibles, no padding, no tutorial, no HUD, no map.
+
+83. LENGTH IS 6-8 HOURS for the first walk, 10-12 with the second.
+    Your call, 2026-08-19. Full plan in LENGTH.txt.
+
+    The added time comes from FIVE named sources and nothing else.
+    The main one, 84, is the important one.
+
+84. THE FIRES BECOME THE TRAVERSAL SYSTEM. They now go UP as well as
+    down - relight at a hearth, brazier, lamp, oven, or close to a
+    living body. So the same town has two states and each opens what
+    the other closes:
+
+      three fires  you read as alive. door gods LET YOU PASS. houses,
+                   hearths and people are open. the dead hide, so the
+                   spirit layer is shut. registration perfect.
+      zero fires   you read as dead. every warded door is SHUT to you.
+                   but the dead stop hiding, and everywhere the wards
+                   have lapsed or broken is open. no reflection.
+                   plates separated.
+
+      (Corrected from an earlier draft that had this backwards. Wards
+       are installed against the dead. See LENGTH.txt.)
+
+    The core verb stops being WALK and becomes DECIDE HOW ALIVE TO BE.
+    Two towns on one geography, rendered from ONE set of plates by the
+    registration system at 59. Nothing here is invented - it is the
+    three fires belief plus the door god custom used honestly.
+
+    And it is the best possible setup for ending B: the skill the
+    player spends eight hours mastering is PRETENDING TO BE ALIVE.
+
+85. Three bridges now open three DISTRICTS, not three screens. Small
+    non-linear areas re-crossed as fire state changes, roughly two
+    hours each. 14 is unchanged, just bigger.
+
+86. Creature cap raised from 29's four-to-six to EIGHT TO TEN. Every
+    addition needs an [A] or [B] entry in LORE.txt and one clear
+    obligation. Unsourced ones dilute; the count does not.
+
+87. BIGGEST UNMITIGATED RISK IN THE PROJECT, stated plainly: an
+    eight-hour game with no hints and no map, tested only by the person
+    who wrote the answers, will have a wall you cannot see. This was
+    survivable at two hours. It is not at eight. Testers are now a real
+    line item, not a nicety.
+
+33. Players will draw maps on paper. That is a feature and it is the
+    single loudest signal that the game respects them.
+
+BILINGUAL EXECUTION
+
+34. Traditional characters, 繁體. Late Qing Jiangnan would not have been
+    simplified. It is also simply more beautiful at large sizes.
+
+35. Pattern everywhere: characters first, English beneath, smaller.
+       水鬼
+       the drowned
+    Creature names, chapter titles, almanac entries, the fortune poems.
+
+36. Chapter cards are the five watches, 15. Nothing else needs a title.
+
+37. The English is period-plain and unadorned. No wuxia-translation
+    register, no "ancient Chinese proverb" voice, no chinoiserie. It
+    should read like a translated primary source, because half of it is.
+
+TECH
+
+38. Expo 57 / RN 0.86 / Skia, matching koi. Skia is required - layered
+    parallax planes, ink rendering, and the sand-writing surface at 51.
+    expo-sqlite for state. No nav library, house pattern.
+
+39. Audio is a major budget line. Year Walk's sound did most of its
+    work and you direct film, so this is your unfair advantage. But see
+    57 - it is no longer the ONLY place the money goes.
+
+57. THE ART MUST BE ORIGINAL AND BEAUTIFUL. Your call, 2026-08-19, and
+    it overrides my "cheap picture" line at 42.
+
+    AMENDED same day: images are AI-GENERATED, directed by you. My bar
+    on generated art is withdrawn. The production split at 61 survives
+    and becomes MORE important, not less - generate flat plates, never
+    finished pictures, or the registration mechanic at 59 cannot exist.
+
+    Hard rule that follows: NO TEXT IN ANY GENERATED IMAGE. All Chinese
+    characters are set live in the app with a real font.
+
+58. The style is 桃花塢年畫 - the New Year woodblock prints of Suzhou.
+    Full argument in ART.txt. Not ink wash. Ink wash is banned for the
+    same reason Ghost Month is.
+
+59. Registration drift is the three-fires meter. As the fires go out the
+    colour plates walk off the keyline, until at zero the coloured world
+    is standing beside the drawn one. Satisfies 66 with no HUD.
+
+60. 門神 door gods are the lock system. Intact gods, door closed. Torn
+    or faded gods, door open. Reads all night as "neglected houses let
+    me in" and flips to "these are the houses whose protection lapsed,
+    and it lapsed against me." Satisfies 65.
+
+61. Production split: the illustrator delivers KEYLINE AND FLAT COLOUR
+    SEPARATIONS ONLY. Skia generates paper, ink bleed, registration,
+    lamp, parallax, and wear at runtime. This is what makes 57
+    affordable, and it means one set of line art renders differently at
+    three fires and at zero - which pays for 80 without drawing twice.
+
+PRINCIPLES BEING COPIED (these are the actual product)
+
+40. The lore IS the mechanic. Learning what a 水鬼 must do IS learning how
+    to pass it. Reading feels like progress because it is progress.
+
+41. Withhold help. No map, no tutorial, no hints, no waypoint.
+
+42. SUPERSEDED BY 57. Was "cheap picture, expensive sound." The picture
+    is now a real budget line. What survives of the principle: the
+    picture is FLAT and LIMITED - no rendering, no gradients, no
+    lighting - which is a restraint, not a saving.
+
+43. AMENDED BY 83. Dense, zero filler - but no longer short. The test
+    at the end of LENGTH.txt replaces the two-hour rule: every hour
+    must contain a nameable authored thing or it gets cut.
+
+44. Use the fact that it lives on a phone. See 47.
+
+45. Go narrow and sourced. Specificity is the entire trick.
+
+46. The twist earns a second layer for players who finish. Year Walk hid
+    a true ending behind the companion app.
+
+
+=============================================================
+OPEN - I need you on these
+=============================================================
+
+THE COMPANION
+
+47. The Year Walk move was a SECOND FREE APP, a folklore encyclopedia,
+    that the main game required you to leave and consult - and which
+    updated after you finished with a code for the true ending.
+
+    The translation is the 黃曆, the almanac. A real one is dense and
+    faintly alien: every day carries 宜 (auspicious for) and 忌 (avoid),
+    the zodiac it clashes with, the direction the malign influence sits
+    in, the lucky hours. Ship it free, standalone, reading the device's
+    REAL date.
+
+    OPEN: second app, or in-game journal? Second app is the better
+    design and you are one of about four people who can actually execute
+    a two-app release, given the ASC pipeline. It is also more work and
+    more review surface.
+
+TITLE
+
+49. HUNDRED ILLS is a working title. Others on the table:
+       THE SIXTEENTH NIGHT
+       WALK THE HUNDRED
+       THREE BRIDGES
+    Nothing is locked. 走百病 sits under whichever wins.
+
+MECHANICS STILL UNRESOLVED
+
+50. Does the walk have a fail state at cockcrow, or does dawn simply
+    arrive and end the game wherever you are? The second is braver.
+
+51. 扶乩, spirit-writing - a stylus dragging characters through sand,
+    written by something that is not you. This is Device 6 territory and
+    your proven lane. Is it a mechanic, one set-piece, or cut?
+
+52. RESOLVED by 75. She has a name and the game speaks it.
+
+81. Where the walk ends. PROPOSED AND WAITING ON YOU - full options and
+    argument in ENDING-SITE.txt. Short version: they are a sequence,
+    not a choice. Third bridge is the covered one and she sees her own
+    body in the water; the last stretch is the walk home knowing;
+    the terminus is the house, the lit lamp, the voice calling her
+    name, one input. Hidden mercy path at the temple for walk two.
+
+    WRITTEN OUT BEAT BY BEAT IN ENDING-SEQUENCE.txt, which also
+    resolves the finale: the wards on her own door HOLD. Three fires
+    is a costume, not a key. She gets in only by being called past her
+    own protection by her family, which is what 叫魂 is. Three
+    endings - answer, do nothing until dawn, or the 破血湖 release on
+    walk two.
+
+82. NEW LORE, changes the motive - 血湖地獄, the Blood Pool Hell for
+    women who die in childbirth, and 破血湖, the rite that releases
+    them, performed by her children. The rite was never done for her.
+    The only one who can do it is eleven days old.
+
+    This is why she walks. It means her love, her only hope of release,
+    and the bird's appetite are ONE MOTION, not three motives. Best
+    single thing found so far. Needs real sourcing - see LORE.txt.
+
+53. Price. Paid up front, no IAP - the opposite of everything else in
+    the portfolio. Two hours justified 3.99; per 83 the target is now
+    8-12 hours, which justifies 7.99-9.99. Still open, but the floor
+    moved up.
+
+
+=============================================================
+STORY - THE ENDING AND WHAT IT COSTS
+=============================================================
+
+62. SETTLED, see 55. She died in childbirth before the game begins. The
+    walk is 姑獲鳥's night. The reveal reframes every encounter: they
+    were never hiding from you, they were hiding from what you are.
+
+63. She is walking home to her baby. The child LIVED. Every maternal
+    beat in the game is sincere and true, and the horror is that her
+    arriving is the worst thing that can happen. Nothing about her love
+    is a trick. That is what keeps this from being a cheap rug-pull.
+
+64. CRAFT FLOOR: 姑獲鳥 is a myth about women dying in childbirth, which
+    was an ordinary mass horror for most of human history. Play it as
+    tragedy, not as monster-of-the-week. The bird is grief with a rule
+    set. If any scene makes her death feel like a gotcha, it is wrong.
+
+THE CONSEQUENCES - these are now load-bearing
+
+65. EVERY ENCOUNTER MUST READ TWO WAYS. First pass: it menaces you.
+    Second pass, knowing: it defers, avoids, or is afraid. No line of
+    dialogue and no creature behavior ships until it survives both
+    readings. This is the expensive part of the whole game and it is
+    also the entire reason anyone will write about it.
+
+66. THE THREE FIRES ARE NOT HEALTH. They are DENIAL. She is dead and
+    does not know it; the fires are the performance of being alive.
+    Losing one is not damage, it is the mask slipping. At zero she is
+    seen for what she is, which is why the dead stop hiding. The game
+    must never use the word health, never show a bar, never say you
+    lost anything.
+
+67. Consequence of 66: the fires are counted DIEGETICALLY, in the canal.
+    You lean over the water and count the flames in your reflection.
+    A water town is nothing but reflective surfaces, and the 水鬼 lives
+    in exactly the surface you have to keep checking. Perfect convergence.
+
+68. Consequence of 67: at zero fires, THE REFLECTION IS GONE. No text,
+    no sting. You lean over the water to count and there is only water.
+    That is the moment the player understands, and it should arrive
+    roughly ten minutes before she does.
+
+69. DRAMATIC IRONY, NOT A RUG PULL. Let the player get there first. The
+    last stretch of the game is watching a woman you now understand walk
+    happily toward the thing you cannot stop. Dread beats surprise, and
+    a clever player getting it early becomes a feature instead of a
+    failure.
+
+70. 摸釘 IS NOW THE CRUELEST OBJECT IN THE GAME. She touches the gate
+    studs for a son, in the first five minutes, sincerely. She already
+    had him. He is the reason she is dead.
+
+71. THE THREE BRIDGES ARE A FUNERAL ROUTE. 度厄 stops meaning "crossing
+    out of misfortune" and starts meaning the procession. Reread 14
+    with that in mind - the town rearranging behind each crossing is the
+    road closing behind a coffin.
+
+72. 買路錢 PAYS OFF. Road-buying money is scattered to clear a route for
+    the DEAD. The prohibition against picking up money on the road has
+    been in front of the player all night. It is her own road money. She
+    has been walking past the payments for her own passage.
+
+73. THE VOICE BEHIND YOU IS 叫魂. Someone living is calling her soul
+    home - the husband, the mother, whoever is holding the child. It was
+    never hostile. It was always someone trying to bring her back.
+
+74. THE FINAL INPUT IS ANSWERING TO YOUR NAME. Two hours of training the
+    player that responding costs a fire, that the correct play is to do
+    nothing - and the last thing the game asks is whether she answers.
+    This is the "enter the code" beat. The whole game is the setup.
+
+75. Therefore 52 IS SETTLED: SHE HAS A NAME, and the game says it aloud.
+    Rule 74 does not work on an unnamed avatar. Player projection loses;
+    take the trade.
+
+76. WHERE THE WALK ENDS: not at the city gate. At the water she drowned
+    in, or the room she died in, or the house with the child in it -
+    and the almanac has been quietly telling you which since the start.
+    Pick one and plant it in 一更. OPEN, see 81.
+
+77. THE ALMANAC IS THE MURDER WEAPON. The 姑獲鳥 entry is present, dry
+    and factual and readable, from the first minute. It never occurs to
+    anyone that it is a mirror. Nothing is hidden. That is the trick.
+
+78. THE ALMANAC UPDATE AFTER COMPLETION: the entry for 正月十六 gains one
+    line in its 忌 column - 忌 夜行, avoid walking at night - and her
+    name beneath it. She is now an entry. Somebody else will read her
+    next year.
+
+79. THE PLAYER'S HANDS DO IT. 姑獲鳥 marks children by touching clothing
+    left out overnight. At least one puzzle must require the player to
+    handle laundry on a line, for a good and innocent reason, at their
+    own initiative. Year Walk made you the murderer. This makes you the
+    bird before you know you are.
+
+80. REPLAYABILITY IS NOW A REQUIREMENT, NOT A BONUS. B only pays if the
+    second walk is a different game. Budget for it. This is the cost of
+    choosing B and it was chosen with eyes open.
+
+
+=============================================================
+DEAD
+=============================================================
+
+90. Ghost Month / 中元 / Hungry Ghost as the frame. Crowded. Twenty years
+    of Asian horror film have already spent its rule set. Its individual
+    beliefs are still fair game - the three fires at 16 come from that
+    tradition - but it is not the container.
+
+91. Pan-Chinese mythology sampler. See 11.
+
+92. A jiangshi. No hopping vampires. They are Qing-era and technically
+    on-theme and they will make the whole thing read as pastiche.
+
+93. Combat of any kind.
+
+94. A map.
+
+95. CANDIDATE A, the foretelling ending - the visions are true prophecy
+    and what they foretell is what she does to the child. Rejected
+    2026-08-19 in favour of B. Cleaner and safer and it lands for more
+    players, and it wastes the three fires system. Not coming back.
+
+96. The 正月十六 2027 release hook. See 56.

@@ -1,0 +1,265 @@
+HUNDRED ILLS - IMAGE PROMPTS
+Compiled 2026-08-19. Plain text so you can copy straight out.
+
+Read the RULES section once. After that the prompts are copy-paste.
+
+
+=============================================================
+RULES - the four that actually matter
+=============================================================
+
+1. EVERY prompt is STYLE PREAMBLE + the plate description + NEGATIVE
+   LIST. The preamble is copied verbatim every single time, never
+   paraphrased, never trimmed to save space. Consistency across sixty
+   plates comes from the preamble being byte-identical, not from the
+   model remembering.
+
+2. GENERATE PLATES, NOT PICTURES. Flat colour inside black outlines,
+   nothing else. No lighting, no atmosphere, no weather, no gradient.
+   The engine adds all of that. If a plate arrives looking moody and
+   finished, it is a REJECT even though it is prettier, because the
+   line and colour can no longer be pulled apart and the three-fires
+   registration mechanic dies. This is the single most common way this
+   pipeline will fail.
+
+3. NO TEXT. No Chinese characters, no couplets, no signs, no seals, no
+   signature. Models produce garbage characters and the one thing this
+   game cannot survive is a nonsense couplet on a door. All type is set
+   live in the app.
+
+4. ONE ELEMENT PER PLATE, on empty background, for parallax. A scene is
+   assembled in the engine from three to five separately generated
+   plates. Do not ask for a finished composed scene.
+
+
+=============================================================
+THE STYLE PREAMBLE - copy verbatim, every time
+=============================================================
+
+Chinese New Year woodblock print in the Taohuawu style of late Qing
+dynasty Suzhou. Hand-carved woodcut. Bold black keyline outlines of
+even weight around every shape. Flat unmodulated areas of solid colour
+filled inside the outlines. Provincial and slightly coarse, a cheap
+village print, not refined court painting. Limited palette only: warm
+buff paper, soot black line, one muted mineral green, one dull gamboge
+yellow, and peach red used very sparingly. Flat frontal composition,
+no camera perspective. Simple, legible, graphic, few elements.
+
+
+=============================================================
+THE NEGATIVE LIST - copy verbatim, every time
+=============================================================
+
+Negative: ink wash, sumi-e, watercolour, brush painting, gradient,
+soft shading, ambient occlusion, cinematic lighting, glow, bloom, fog,
+haze, depth of field, 3D render, digital painting, concept art, anime,
+cel shading, photorealistic, oil painting, gold leaf, ornate, dragons,
+red paper lanterns, cherry blossom, bamboo, pagoda, generic oriental
+fantasy, text, characters, calligraphy, letters, watermark, signature,
+frame, border, vignette.
+
+
+=============================================================
+STEP ONE - THE STYLE KEY
+=============================================================
+
+Generate this FIRST. Iterate until it is right, then keep it forever
+and attach it as a style reference image to every later prompt. Nothing
+else gets made until this one is correct.
+
+  [STYLE PREAMBLE]
+  A single stone arch bridge over a narrow canal, seen straight on.
+  Whitewashed wall and dark tiled roof behind it. Nothing else in the
+  frame. Empty buff background.
+  [NEGATIVE LIST]
+
+Judge it on: is the line an even carved weight, is every colour area
+completely flat, are there exactly four or five colours, does it look
+printed rather than painted. Do not judge it on beauty yet.
+
+Lock the seed once you have it.
+
+
+=============================================================
+SCENE PLATES
+=============================================================
+
+Aspect 21:9 for ground planes. Generate each layer separately.
+
+CANAL BANK, FAR PLANE
+
+  [STYLE PREAMBLE]
+  A long low row of whitewashed water town houses with dark tiled
+  roofs, seen flat from across a canal, receding gently. Small square
+  windows, no people, no signs, no lanterns. Isolated on empty buff
+  background with nothing above or below.
+  [NEGATIVE LIST]
+
+CANAL BANK, MID PLANE
+
+  [STYLE PREAMBLE]
+  A stone embankment along a canal with worn steps descending into
+  water, mooring posts, one small flat wooden boat tied up and empty.
+  No people. Isolated on empty buff background.
+  [NEGATIVE LIST]
+
+CANAL BANK, NEAR PLANE
+
+  [STYLE PREAMBLE]
+  A few bare winter branches and a low stone kerb, silhouette shapes
+  only, occupying the bottom edge. Nothing else. Isolated on empty
+  buff background.
+  [NEGATIVE LIST]
+
+THE THREE BRIDGES - generate as a set, same session, same seed family
+
+  Bridge one: [STYLE PREAMBLE] A modest single stone arch footbridge,
+  low and worn, plain and unornamented, seen from the side. Isolated on
+  empty buff background. [NEGATIVE LIST]
+
+  Bridge two: [STYLE PREAMBLE] A taller humpbacked stone arch bridge
+  with stepped sides and a carved stone post at each end, seen from the
+  side. Isolated on empty buff background. [NEGATIVE LIST]
+
+  Bridge three: [STYLE PREAMBLE] A long covered bridge with a tiled
+  roof over its walkway, dark and enclosed, the far end not visible,
+  seen from the side. Isolated on empty buff background. [NEGATIVE LIST]
+
+  Note: bridge three is where she sees her body. It must be the only
+  one you cannot see through.
+
+THE CITY GATE - the 摸釘 site, first five minutes
+
+  [STYLE PREAMBLE]
+  A heavy wooden city gate with rows of large round bronze studs in a
+  grid across it, closed, framed by plain stone. Straight on, flat.
+  No text, no plaque, no inscription. Isolated on empty buff background.
+  [NEGATIVE LIST]
+
+
+=============================================================
+DOOR GODS - three wear states of the SAME pair
+=============================================================
+
+This is the lock system. Generate the intact pair first, then produce
+the other two states from it as edits so it is recognisably the same
+print decaying.
+
+  [STYLE PREAMBLE]
+  A pair of traditional door god warrior figures as a New Year print,
+  one facing left and one facing right, armoured, holding weapons,
+  stern symmetrical faces, standing frontally. Flat and graphic. No
+  text anywhere. Isolated on empty buff background.
+  [NEGATIVE LIST]
+
+  State two, add: The print is sun faded and washed pale, its colours
+  weak, edges lifting from the paper.
+
+  State three, add: The print is torn in half and hanging in strips,
+  most of it missing, only fragments still stuck to the wood.
+
+
+=============================================================
+THE AUSPICIOUS BABY - the most important image in the game
+=============================================================
+
+This has to be genuinely lovely. It is played straight for two hours
+and it does all the work at the end. Do not make it creepy. Do not
+add anything. The whole effect depends on it being a completely
+ordinary, warm, mass-produced good-luck print.
+
+  [STYLE PREAMBLE]
+  A plump smiling baby boy in a peach red jacket sitting and holding a
+  large carp in both arms, the classic auspicious New Year print
+  subject. Cheerful, round, warm, benign. Flat and graphic. No text.
+  Isolated on empty buff background.
+  [NEGATIVE LIST]
+
+Generate a lot of these. Pick the sweetest one.
+
+
+=============================================================
+CREATURES - five, per DECISIONS 29
+=============================================================
+
+Rule for all five: they are printed folk images, not monsters. A
+village woodcut of a spirit is stylised and almost heraldic, not
+gory. Restraint reads as older and frightens more.
+
+水鬼 the drowned
+  [STYLE PREAMBLE]
+  A human figure standing waist deep in still water, seen from the
+  front, hair hanging flat and wet over the face, arms at its sides,
+  completely motionless. Simple and stylised, not gory. Isolated on
+  empty buff background.
+  [NEGATIVE LIST]
+
+姑獲鳥 the night bird woman
+  [STYLE PREAMBLE]
+  A large bird with a woman's face and long hair, wings spread, seen
+  frontally and symmetrically like a heraldic emblem. Calm expression,
+  not snarling. Stylised folk print. Isolated on empty buff background.
+  [NEGATIVE LIST]
+
+  This one is her. Get it right and keep it dignified. The reveal at
+  the end is ruined if the player has spent the game looking at a
+  gargoyle.
+
+畫皮 the painted skin
+  [STYLE PREAMBLE]
+  An empty human skin held up flat and spread out like a garment on a
+  line, with a face painted on it, hollow and limp. Stylised and flat,
+  not gory or bloody. Isolated on empty buff background.
+  [NEGATIVE LIST]
+
+石敢當 the stone
+  [STYLE PREAMBLE]
+  A short upright weathered stone slab set into the ground at the end
+  of a road, plain and blank with no inscription, slightly leaning.
+  Isolated on empty buff background.
+  [NEGATIVE LIST]
+
+五通神 the local god
+  [STYLE PREAMBLE]
+  A seated enshrined folk deity figure, robed, frontal and symmetrical,
+  with an expression that is pleasant but not kind. Small crude village
+  shrine idol. No text. Isolated on empty buff background.
+  [NEGATIVE LIST]
+
+
+=============================================================
+PROPS
+=============================================================
+
+  Laundry on a line: [STYLE PREAMBLE] Small children's clothes hanging
+  on a line, still, seen flat from the front. Isolated on empty buff
+  background. [NEGATIVE LIST]
+
+  Road money: [STYLE PREAMBLE] Round paper spirit money coins scattered
+  loose on flagstones, seen from above, flat. Isolated on empty buff
+  background. [NEGATIVE LIST]
+
+  Divination blocks: [STYLE PREAMBLE] Two small crescent shaped wooden
+  blocks, one flat face and one curved face each, lying on the ground.
+  Isolated on empty buff background. [NEGATIVE LIST]
+
+  Fortune sticks: [STYLE PREAMBLE] A cylinder of thin bamboo fortune
+  sticks, one stick fallen out beside it. No text or numbers on the
+  sticks. Isolated on empty buff background. [NEGATIVE LIST]
+
+
+=============================================================
+QA - reject a plate if ANY of these are true
+=============================================================
+
+  There is a gradient anywhere.
+  There is a cast shadow, glow or bloom.
+  Any colour area is modulated rather than flat.
+  There are more than six colours.
+  There is any text, character, seal or signature.
+  The line weight varies dramatically or looks brush painted.
+  It looks like a painting rather than a print.
+  It has atmosphere baked in - fog, night, moonlight, warm lamp.
+  It is composed as a finished scene rather than an isolated element.
+
+The last two are the ones you will be tempted to let through.
