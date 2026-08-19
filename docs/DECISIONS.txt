@@ -313,13 +313,58 @@ TECH
     Hard rule that follows: NO TEXT IN ANY GENERATED IMAGE. All Chinese
     characters are set live in the app with a real font.
 
-58. The style is 桃花塢年畫 - the New Year woodblock prints of Suzhou.
-    Full argument in ART.txt. Not ink wash. Ink wash is banned for the
-    same reason Ghost Month is.
+58. REVERSED 2026-08-19. Was 桃花塢年畫, Suzhou New Year woodblock. You
+    looked at a generated woodblock plate and did not like it. The style
+    is now CHINESE INK AND COLOUR, 水墨設色 - the thing I had banned as
+    a trap. My objection was aesthetic and yours is the call that counts.
 
-59. Registration drift is the three-fires meter. As the fires go out the
-    colour plates walk off the keyline, until at zero the coloured world
-    is standing beside the drawn one. Satisfies 66 with no HUD.
+    The trap was never the medium, it was genericness. It is avoided the
+    same way: one region, one century, sourced, and a negative list that
+    actively fights the model's default. See 97.
+
+97. INK MEDIUM RULES, all measurable, all in docs/PROMPTS.txt:
+      留白 at 25% minimum. Bare paper for mist and water is what
+      separates a Chinese painting from an "oriental" render. Two of the
+      six candidate references were rejected on 0.8% and 3.9% white.
+      RED IS A SLIVER, about 3%, never a mass. The style reference has
+      27% red and that is wrong; A's 3.12% is right.
+      NOT JAPAN. Vermilion lacquer, torii, gold leaf, stone lanterns,
+      pagodas, cherry blossom, koi. One cue propagates into every plate.
+      NO MOUNTAINS. Jiangnan is flat. The horizon is roofs and mist.
+
+98. STYLE REFERENCE IS "images (1).jpeg" - rename to STYLE-KEY.jpg and
+    attach to every generation. Chosen because its bridge is our bridge:
+    a low arched stone footbridge, plain parapet, ink and wash, no
+    Japanese cues. Its red canopy is explicitly NOT wanted.
+
+    Secondary: the panoramic wash for 2:1 framing and depth planes.
+    The near-monochrome water-town bridge is the ZERO-FIRES target - at
+    0.076 saturation it is already the dead world.
+
+99. THE LIVING END IS UNSOLVED AND BLOCKS PLATE PRODUCTION. Every
+    reference we have is already drained. Before any scene plates get
+    made, generate a warm, populated, coloured Jiangnan night - lamplit
+    windows, ochre wall, boats - or the colour drain at 59 has nowhere
+    to fall from and the whole two-state system is invisible.
+
+59. THE THREE-FIRES METER, REWRITTEN FOR INK. Registration drift is
+    DEAD - it needs a keyline and flat colour, and no wash medium can
+    separate. Measured across three references: woodblock valley 1.0%
+    (pass), Guilin ink 21.0%, water-town ink 11.3% (both reject). Stop
+    looking for a wash image that passes; there isn't one.
+
+    The replacement, native to the medium and arguably better:
+
+      COLOUR IS THE LIVING WORLD. As the fires go out it drains, until
+      at zero the town is pure 水墨. Monochrome ink is the HIGHER
+      classical form, so the dead world reads austere, not degraded.
+      RED NEVER DRAINS. The one reserved colour is the last thing
+      standing - door couplets, a child's jacket, 姑獲鳥.
+      留白 GROWS. As she dies the bare paper eats the world, palest
+      ground first.
+
+    Working implementation at tools/inkstate_test.py. Still satisfies
+    66 with no HUD, no bar and no number.
 
 60. 門神 door gods are the lock system. Intact gods, door closed. Torn
     or faded gods, door open. Reads all night as "neglected houses let
