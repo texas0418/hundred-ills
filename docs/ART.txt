@@ -6,6 +6,52 @@ documented, [C] my invention.
 
 
 =============================================================
+SUPERSEDED 2026-08-19 - READ THIS FIRST
+=============================================================
+
+Everything below argued for 桃花塢年畫, Suzhou New Year woodblock, and
+banned ink wash as "the trap". DECISIONS 58 reversed that: Simon looked
+at a generated woodblock plate and did not want it. The medium is now
+CHINESE INK AND COLOUR, 水墨設色.
+
+The woodblock argument is kept, not deleted, because two of its findings
+outlived it and now govern the ink work:
+
+  THE TRAP WAS NEVER THE MEDIUM, IT WAS GENERICNESS. Ink wash is only
+  the trap when it is nobody's ink wash. It is avoided the same way the
+  woodblock version would have been: one region, one century, sourced,
+  and a negative list that actively fights the model's default.
+
+  THE MEASURABLE TESTS SURVIVE, ONLY THE QUANTITY CHANGED. Woodblock was
+  judged on flat colour and a near-empty luminance valley. Ink is judged
+  on 留白 at 25% minimum and red held to a sliver. Both are numbers, both
+  are checkable, and both exist so "it looks nice" cannot decide it.
+
+WHAT DIED WITH THE WOODBLOCK: registration drift as the fires meter.
+It needs a keyline and flat colour. Measured: woodblock valley 1.0%
+(pass), Guilin ink 21.0%, water-town ink 11.3% (both reject). No wash
+image will ever pass, so stop testing for it.
+
+WHAT REPLACED IT, and it is better: colour drain to pure 水墨, red
+surviving the drain, and 留白 growing as she dies. See DECISIONS 59 and
+tools/inkstate_test.py. Colour is the living world; the dead town is
+monochrome ink, which is the higher classical form, so the ending looks
+more austere rather than more broken.
+
+THE ONE UNSOLVED THING, and it blocks production: every reference we
+have is ALREADY the dead world. The water-town bridge measures 0.076
+saturation and 3.97 drain distance - there is nothing left in it to
+lose. The living end has to be generated before any scene plates are,
+or the two-state system is invisible. See DECISIONS 99.
+
+Current prompts, reference choice and QA: docs/PROMPTS.txt.
+
+
+=============================================================
+BELOW HERE IS THE SUPERSEDED WOODBLOCK ARGUMENT
+=============================================================
+
+=============================================================
 THE TRAP
 =============================================================
 
