@@ -50,3 +50,15 @@ near-plane-with-landmark.jpg
   That also needed a fourth prompt class - "overlay" - because a thing
   that hangs into frame from an edge cannot be centred with clear paper
   on all four sides the way a cut-out object is.
+
+shigandang-as-scene.jpg
+  Plate [17], one of two attempts. The other one - a stone alone on
+  bare paper - was right. This one drew the stone inside a whole
+  landscape: houses, willows, a red sunset, and perspective recession
+  down a path. Every one of those is banned, and the object clause
+  says "nothing else in the frame, no ground, no background".
+
+  Worth keeping because it is the failure mode of a prompt that is
+  ALREADY CORRECT. Two generations from the same text went opposite
+  ways, so some of this is just variance and the answer is to generate
+  a couple and check, not to keep rewording.

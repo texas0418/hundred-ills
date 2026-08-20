@@ -68,3 +68,28 @@ canal-mid-drain.png  ->  assets/plates/canal-mid.png
   Note it kept a small red paper lantern, which the negative list bans.
   It is doing exactly the job reserved red exists for - one point of
   colour that outlives the drain - so it stays.
+
+THE FIRST BIG BATCH - 2026-08-20
+  Twenty images, nineteen keepers, and NINE landed. The other ten were
+  rejected on resolution, which was my prompt's fault:
+
+  The object clause said "drawn small and centred with clear empty
+  paper on all four sides". Gemini obliged. Trimmed to actual content,
+  ten of nineteen came back under 700px on the long edge - 水鬼 was
+  EIGHTY-SEVEN pixels wide. A phone at 3x wants about 1000px for a
+  creature, so they are unusable at any size that matters.
+
+  The clause now says LARGE, filling most of the frame, with only a
+  narrow margin, and explicitly "it must not be a small object floating
+  in a big empty field". plate_check --size enforces 700px.
+
+  LANDED:   bridge-two, bridge-three-covered, city-gate, her-door,
+            door-gods-faded, door-gods-torn, guhuoniao, huapi, watchman
+  REGENERATE: bridge-one, door-gods-new, door-gods-intact, shuigui,
+            shigandang, wutongshen, laundry, road-money, jiaobei,
+            lamp-in-window
+  STILL TO DO: [04] the kerb strip, [24] the willow
+
+  Note on 姑獲鳥: it came back dignified and calm rather than a
+  gargoyle, which DECISIONS 15 asks for and which the ending depends
+  on. Keep it.
