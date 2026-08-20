@@ -114,6 +114,10 @@ THE THREE SYSTEMS
     diegetic. You are never confused about how to go deeper. You are
     confused about where deeper GOES.
 
+    AMENDED BY 100-104. The flat bank survives; the idea that the town
+    is a LINE of them does not. Bridges now cross between the two banks
+    of one canal, and 弄 lanes are what take you deeper. See 100.
+
 15. TIME = THE FIVE WATCHES. 一更 二更 三更 四更 五更, the five
     two-hour watches of the night, roughly 7pm to 5am. Period-accurate,
     and a clock the player can feel tightening. Cockcrow at the end of
@@ -261,7 +265,11 @@ LENGTH AND SHAPE
 
 85. Three bridges now open three DISTRICTS, not three screens. Small
     non-linear areas re-crossed as fire state changes, roughly two
-    hours each. 14 is unchanged, just bigger.
+    hours each.
+
+    AMENDED BY 100-104. "Non-linear" was doing more work here than the
+    design actually supported - it meant backtracking, not branching.
+    Now it means a network.
 
 86. Creature cap raised from 29's four-to-six to EIGHT TO TEN. Every
     addition needs an [A] or [B] entry in LORE.txt and one clear
@@ -561,6 +569,82 @@ THE CONSEQUENCES - these are now load-bearing
 80. REPLAYABILITY IS NOW A REQUIREMENT, NOT A BONUS. B only pays if the
     second walk is a different game. Budget for it. This is the cost of
     choosing B and it was chosen with eyes open.
+
+
+
+=============================================================
+THE TOWN IS A NETWORK  (100-104, added 2026-08-20)
+=============================================================
+
+100. THE DESIGN CONTRADICTED ITSELF AND SIMON CAUGHT IT.
+
+     33 promises that players will draw maps on paper, and calls that
+     the loudest signal the game respects them. 14 specified a flat
+     bank with three bridges on it.
+
+     A LINE NEEDS NO MAP. Both could not be true, and the code had
+     built the line - an endless left-to-right treadmill.
+
+     Resolved in favour of 33. The walking stays horizontal, but the
+     town is a NETWORK of horizontal strips, and the player may wander
+     it freely.
+
+101. THE THREE ELEMENTS. All of them are things a Jiangnan water town
+     is actually made of, so none of this is invented level design.
+
+     岸  BANK   a horizontal strip you walk along. Every canal has two
+                of them, facing each other across the water. This is
+                what is already built.
+     橋  BRIDGE crosses to the OTHER BANK of the same canal. Lateral.
+     弄  LANE   a narrow alley running away from the water, connecting
+                a bank of one canal to a bank of the NEXT. This is the
+                move that takes you deeper, and it takes over that job
+                from the bridge.
+
+     Movement never leaves the horizontal. A lane or a bridge is a
+     transition between strips, not a new axis to steer on. The player
+     is always walking left or right; the choice is which strip they
+     come out on.
+
+102. 走三桥 IS THE CONSTRAINT, AND IT IS THE PUZZLE.
+
+     The rite requires three bridges, and per LORE.txt some accounts
+     require three DIFFERENT bridges with no doubling back. So:
+
+       The town is open. The rite through it is not.
+       Any bridge may be crossed. Only three of them count.
+       They must be three distinct bridges.
+       Recrossing one you have already used is doubling back.
+
+     ENFORCED BY THE FIRES, NOT BY A LOCKED GATE. Recrossing a spent
+     bridge is turning back, and turning back costs a flame - exactly
+     the price already set at 18, where every prohibition is a price
+     and never a wall. Wander as much as you like; wandering carelessly
+     makes you less alive.
+
+     THE GAME NEVER TELLS YOU WHICH BRIDGES YOU HAVE SPENT. That is
+     what the paper is for. 33 and 41 both hold.
+
+103. SCALE, per district, and these are starting numbers not gospel:
+     two or three canals, four to six banks, three to five bridges,
+     two to four lanes. Small enough to learn, tangled enough that
+     learning it takes a pencil.
+
+104. WHAT THIS MAKES NECESSARY RATHER THAN DECORATIVE.
+
+     Three systems were sitting in the design doing nothing, because a
+     corridor gives them nothing to do:
+
+       石敢當 blocks a lane - which only means something when there is
+              another lane.
+       門神   gate houses - which only matters when there is a choice
+              of door.
+       THE FIRE STATE opens and closes different routes, per 84 - so
+              the same network is two networks, and the map the player
+              drew while alive is wrong once she is not.
+
+     And the third bridge, the covered one where she sees the body, is
+     now a place to FIND rather than a gate to arrive at.
 
 
 =============================================================

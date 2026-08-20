@@ -49,6 +49,16 @@ CHAPTERS.txt · ENDING-SITE.txt · ENDING-SEQUENCE.txt
   as menace (first walk) and as deference (knowing). This is the expensive
   part of the game and the reason anyone will write about it.
 
+## The town is a network, not a corridor
+- Walking is always horizontal, but the town is a graph of horizontal
+  strips: banks along a canal, bridges across to the far bank, 弄 lanes
+  through to the next canal. The player wanders it freely.
+- 走三桥 is the constraint: any bridge may be crossed, only three count,
+  they must be distinct, and recrossing a spent one costs a flame. The
+  game never says which are spent - that is what the paper map is for.
+- DECISIONS 100-104. Do not re-flatten this into a line; a line was the
+  original spec and it contradicted the promise that players draw maps.
+
 ## No help
 - No map, no HUD, no tutorial, no hint system, no waypoint, no chapter
   select, no save menu. The watchman's clapper is the clock, the chapter
