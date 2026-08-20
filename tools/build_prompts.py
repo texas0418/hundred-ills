@@ -65,6 +65,14 @@ KIND_CLAUSE = {
         "on with no perspective. Nothing else in the frame, no ground, no "
         "background. Isolated on bare paper."
     ),
+    # Things that hang into frame from an edge - they cannot be centred
+    # with clear paper all round, because the anchoring edge is the point.
+    "overlay": (
+        " Drawn against completely empty paper so it can be cut out, entering "
+        "from one edge only and touching none of the other three. Seen flat "
+        "and straight on with no perspective. Nothing else in the frame, no "
+        "ground, no background. Isolated on bare paper."
+    ),
 }
 
 # (id, title, kind, note shown above the block, body)
@@ -123,18 +131,21 @@ PLATES = [
      "surface so it reads warm and lived in, not white. Deserted, nobody "
      "outside. "),
 
-    ("04", "CANAL BANK - NEAR PLANE",
+    ("04", "CANAL BANK - NEAR PLANE, THE KERB",
      "plane",
-     "Aspect 21:9. The DARKEST of the three and the only one with no colour\n"
-     "at all. It sits closest to the player, so it reads as shape rather\n"
-     "than as detail. Target: ink above 25%, saturation under 0.05.\n"
-     "It occupies only the bottom band - most of the plate is empty so the\n"
-     "planes behind it show through.",
-     "A few bare winter willow branches and a low stone kerb along the very "
-     "bottom edge, as near-black silhouette shapes in solid wet ink, no "
-     "colour anywhere, no detail inside the shapes. The branches hang down "
-     "from the top edge at one side only. The upper three quarters of the "
-     "image is completely empty bare paper."),
+     "Aspect 21:9. The DARKEST plate and the only one with no colour at all.\n"
+     "It sits closest to the player, moves fastest and therefore repeats\n"
+     "most often, so it must carry NO distinctive feature - anything\n"
+     "memorable in here will visibly recur every screen width.\n"
+     "The willow moved out to [24] for exactly that reason.\n"
+     "Target: ink above 25%, saturation under 0.05, and a clean seam.\n"
+     "Check with --near --tile.",
+     "A low broken stone kerb running the full width along the very bottom "
+     "edge, as a near-black silhouette in solid wet ink, no colour anywhere, "
+     "no detail inside the shape, no single object standing out from it. "
+     "Even along its whole length, nothing on one side that is not on the "
+     "other. The upper three quarters of the image is completely empty bare "
+     "paper."),
 
     ("05", "BRIDGE ONE",
      "object", "Generate 05, 06 and 07 in one session, same seed family.",
@@ -260,6 +271,17 @@ PLATES = [
      "the ending is spoiled.",
      "A small oil lamp burning behind a paper window at night, seen from "
      "outside, warm. Nothing else in frame."),
+
+    ("24", "WILLOW BRANCHES - NEAR OVERLAY",
+     "overlay",
+     "Not part of the kerb strip. This hangs over the near plane\n"
+     "occasionally, so it can be distinctive - that is the whole point of\n"
+     "pulling it out of [04]. Pure ink, no colour: it sits closest to the\n"
+     "player of anything in the game.",
+     "A few bare winter willow branches hanging down from above, brushed in "
+     "solid wet ink as a near-black silhouette, no colour anywhere, no leaves, "
+     "no detail inside the strokes. They enter from the top edge and hang "
+     "into the upper part of the frame only."),
 ]
 
 W = 68
@@ -386,7 +408,14 @@ THE THREE CANAL PLANES ARE A SET
 =============================================================
 
 02, 03 and 04 stack on top of each other and slide at different speeds
-to make the walk. They are the first real test of whether separately
+to make the walk. [24], the willow, is an overlay dropped on top of 04
+here and there - it is NOT part of the strip.
+
+A TILING STRIP CANNOT CONTAIN A LANDMARK. The first near plane baked a
+willow into one side and the seam went to 18.5 while the kerb itself
+measured almost perfectly even across its width. Anything memorable in
+a plate that repeats every screen width will be seen to repeat. Strips
+carry texture; features are separate plates placed by hand. They are the first real test of whether separately
 generated plates will parallax, so treat them as one job:
 
   Generate all three in ONE session, same seed family.
