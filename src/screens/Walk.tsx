@@ -29,7 +29,12 @@ import {
   slotX,
   type Plane,
 } from '../engine/parallax';
-import { bridgesOn, clampTo, strip as stripById } from '../engine/town';
+import {
+  bridgesOn,
+  clampTo,
+  linksOn,
+  strip as stripById,
+} from '../engine/town';
 import { LIVE, DEAD, isPlate, type PlateName } from '../plates';
 import {
   applyCrossing,
@@ -197,11 +202,15 @@ function Reflection({ state, screenH }: { state: WalkState; screenH: number }) {
  * on, so a wide plate and a tall one come out the same size of object.
  */
 function WorldObject({
-  plate, worldX, band, walkX, drain,
+  plate, worldX, band, walkX, drain, speed = 1, scale = 1.31, anchor = 0.247,
+  align = 0.314,
 }: {
   plate: PlateName; worldX: number;
   band: { y: number; height: number };
   walkX: SharedValue<number>; drain: number;
+  /** Parallax rate of the plane this thing belongs to. */
+  speed?: number;
+  scale?: number; anchor?: number; align?: number;
 }) {
   const live = useImage(LIVE[plate]);
   const dead = useImage(DEAD[plate]);
@@ -215,13 +224,13 @@ function WorldObject({
   //
   // The first version sized this by a flat world width and stood it on
   // a "footing", which put a bridge in the canal twice.
-  const h = band.height * 1.31;
+  const h = band.height * scale;
   const w = live ? (h * live.width()) / live.height() : 0;
-  const y = band.y + 0.314 * band.height - 0.247 * h;
+  const y = band.y + align * band.height - anchor * h;
 
   const transform = useDerivedValue(
-    () => [{ translateX: worldX - walkX.value - w / 2 }],
-    [worldX, w],
+    () => [{ translateX: worldX - walkX.value * speed - w / 2 }],
+    [worldX, w, speed],
   );
   if (!live) return null;
   return (
@@ -281,13 +290,34 @@ const Scene = memo(function Scene({
           drain={drain}
         />
       ))}
-      {/* NO LANE MOUTH IS DRAWN. The plate that exists is a standalone
+      {/* A lane mouth is a GAP IN THE TERRACE, not an object in the
+          walkway - DECISIONS 105 and a plate that failed once for
+          being at the wrong depth. It is the same row of houses as the
+          far plane, with a gap in it, laid over the far plane at the
+          far plane's own rate so it stays put among the houses.
+          Positioned at linkX * far.speed so the gap is in front of her
+          when her walk reaches the link. */}
+      {linksOn(stripId).map(({ link, x }) => (
+        <WorldObject
+          key={link.id}
+          plate="lane-mouth"
+          worldX={x * planes[0].speed}
+          band={planeRect(planes[0], height)}
+          walkX={walkX}
+          drain={drain}
+          speed={planes[0].speed}
+          scale={1}
+          anchor={0}
+          align={0}
+        />
+      ))}
+      {/* OLD NOTE, kept because it is why the plate was redrawn. The plate that exists is a standalone
           alley - two whole buildings, their roofs and sky - and laying
           it over the bank gives two sets of architecture at two depths.
           It is also at the wrong depth entirely: she walks the
           embankment with the houses BEHIND her, so a lane off her bank
           is a gap in the FAR terrace, not an object in the walkway.
-          Re-prompted as [27]; the crossing works and is invisible. */}
+          Re-prompted as [27] and now drawn above. */}
     </Canvas>
   );
 });
