@@ -10,6 +10,7 @@ import {
   cross,
   linkInReach,
   payForDoublingBack,
+  walkTo,
   type Position,
   beginAt,
 } from './town';
@@ -58,20 +59,32 @@ export function beginFirstWatch(): WalkState {
 }
 
 /**
- * Step onto whatever crossing she is standing at. DECISIONS 102.
- *
- * Returns the state unchanged if nothing is in reach, so the caller can
- * fire this at any gesture without checking first.
+ * Turn into whatever lane she is standing at. Returns the state
+ * unchanged if there is nothing in reach, so the caller can fire this at
+ * any gesture without checking first.
  */
 export function applyCrossing(s: WalkState, atX: number): WalkState {
   const link = linkInReach(s.pos.strip, atX);
   if (!link) return s;
   const c = cross({ ...s.pos, x: atX }, link);
+  return { ...s, pos: c.position, x: c.position.x };
+}
+
+/**
+ * Report where the walk has got to, crossing any bridges passed on the
+ * way. DECISIONS 105: a bridge is crossed by WALKING OVER IT, not by a
+ * gesture - which is what makes "do not turn back" literal. Walking back
+ * over a bridge already spent costs a flame, and never stops her.
+ */
+export function arriveAt(s: WalkState, toX: number): WalkState {
+  const c = walkTo(s.pos, toX);
+  if (c.position.crossed.length === s.pos.crossed.length && !c.costsAFlame) {
+    return s.x === toX ? s : { ...s, x: toX, pos: c.position };
+  }
   return {
     ...s,
+    x: toX,
     pos: c.position,
-    x: c.position.x,
-    // She is never blocked. She crosses either way, and pays.
     fires: c.costsAFlame ? payForDoublingBack(s.fires) : s.fires,
   };
 }

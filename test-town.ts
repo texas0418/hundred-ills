@@ -1,7 +1,7 @@
 import {
-  TOWN, BANK_LENGTH, REACH, beginAt, clampToStrip, cross, linkInReach,
-  linksOn, otherEnd, strip, bridgesRemaining, riteComplete,
-  payForDoublingBack,
+  TOWN, BANK_LENGTH, REACH, BRIDGE_SPAN, beginAt, clampToStrip, cross,
+  linkInReach, linksOn, otherEnd, strip, bridgesRemaining, riteComplete,
+  payForDoublingBack, bridgesOn, bridgesCrossed, walkTo,
 } from './src/engine/town';
 
 let n = 0;
@@ -13,53 +13,59 @@ ok(clampToStrip('north', -500) === 0, 'she cannot walk off the left end');
 ok(clampToStrip('north', BANK_LENGTH + 5000) === BANK_LENGTH, 'nor off the right');
 ok(clampToStrip('north', 1234) === 1234, 'and moves freely in between');
 
-// Every link is reachable from both of its ends.
-for (const l of TOWN.links) {
-  ok(linkInReach(l.a.strip, l.a.x)?.id === l.id, `${l.id} reachable from a`);
-  ok(linkInReach(l.b.strip, l.b.x)?.id === l.id, `${l.id} reachable from b`);
-  ok(otherEnd(l, l.a.strip).strip === l.b.strip, `${l.id} leads across`);
-  ok(otherEnd(l, l.b.strip).strip === l.a.strip, `${l.id} leads back`);
-}
-ok(linkInReach('north', 900 + REACH - 1)?.id === 'bridge-a', 'in reach just inside');
-ok(linkInReach('north', 900 + REACH + 60) === null, 'and out of reach beyond');
-ok(linksOn('north').length === 2, 'both bridges touch the north bank');
+// LANES are the only branching (DECISIONS 105). None exist yet - the
+// art does not - so the model is asserted empty rather than pretended.
+ok(TOWN.links.length === 0, 'no lanes yet, and the code says so plainly');
+ok(linksOn('north').length === 0, 'so nothing to turn into');
+ok(linkInReach('north', 900) === null, 'and nothing in reach');
 
-// Strips are bounded and known.
-ok(strip('north').length === BANK_LENGTH, 'strips know their length');
-ok(TOWN.strips.every((s) => s.length > 0), 'no zero-length strips');
-ok(TOWN.links.every((l) => l.a.x <= strip(l.a.strip).length
-  && l.b.x <= strip(l.b.strip).length), 'no link sits past the end of its strip');
+// BRIDGES are landmarks ON a strip, not ways off it.
+ok(TOWN.bridges.length >= 2, 'the north bank has bridges standing on it');
+ok(TOWN.bridges.every((b) => b.x <= strip(b.strip).length),
+   'no bridge stands past the end of its strip');
+ok(bridgesOn('north').length === TOWN.bridges.length, 'all on the north bank');
+ok(bridgesOn('nowhere').length === 0, 'and none anywhere else');
+ok(BRIDGE_SPAN > 0, 'a bridge is a size in the TOWN, not a fraction of a screen');
 
-// 走三桥. The town is open; the rite through it is not.
+// She crosses one by WALKING OVER IT.
+const b0 = TOWN.bridges[0];
+ok(bridgesCrossed('north', 0, b0.x + 10).some((b) => b.id === b0.id),
+   'walking past a bridge crosses it');
+ok(bridgesCrossed('north', 0, b0.x - 10).length === 0, 'stopping short does not');
+ok(bridgesCrossed('north', b0.x + 10, 0).some((b) => b.id === b0.id),
+   'and walking back over it counts as meeting it again');
+
 let p = beginAt('north');
-ok(bridgesRemaining(p) === 3 && !riteComplete(p), 'the rite wants three');
+const one = walkTo(p, b0.x + 10);
+ok(one.position.crossed.length === 1, 'a fresh bridge counts toward the three');
+ok(one.costsAFlame === false, 'and costs nothing');
+p = one.position;
 
-const first = cross(p, TOWN.links[0]);
-ok(first.position.strip === 'south', 'crossing puts her on the far bank');
-ok(first.costsAFlame === false, 'a fresh bridge costs nothing');
-ok(bridgesRemaining(first.position) === 2, 'and counts toward the three');
-p = first.position;
+// DOUBLING BACK - now literal, because it is done by walking.
+const back = walkTo(p, 0);
+ok(back.costsAFlame === true, 'walking back over it is doubling back, and costs a flame');
+ok(back.position.crossed.length === 1, 'and never counts twice');
+ok(back.position.x === 0, 'she is not stopped - she walks, and pays');
+ok(payForDoublingBack(3) === 2 && payForDoublingBack(0) === 0, 'one flame, never below zero');
 
-const second = cross(p, TOWN.links[1]);
-ok(second.position.strip === 'north', 'the second bridge leads back across');
-ok(second.costsAFlame === false, 'still fresh');
-ok(second.position.crossed.length === 2, 'two spent');
-p = second.position;
+// Both bridges in one sweep.
+const sweep = walkTo(beginAt('north'), BANK_LENGTH);
+ok(sweep.position.crossed.length === TOWN.bridges.length,
+   'one long walk crosses every bridge on the strip');
+ok(sweep.costsAFlame === false, 'all fresh, so nothing to pay');
 
-// DOUBLING BACK. Recrossing a spent bridge is turning back, and turning
-// back costs a flame - never a locked gate.
-const again = cross(p, TOWN.links[0]);
-ok(again.costsAFlame === true, 'recrossing a spent bridge costs a flame');
-ok(again.position.crossed.length === 2, 'and does not count again');
-ok(again.position.strip === 'south', 'but she is NOT blocked - she still crosses');
-ok(payForDoublingBack(3) === 2, 'the price is one flame');
-ok(payForDoublingBack(0) === 0, 'and cannot go below zero');
+// The rite still wants three DISTINCT bridges.
+ok(bridgesRemaining(beginAt('north')) === 3, 'the rite wants three');
+ok(!riteComplete(sweep.position), 'two bridges is not three');
+ok(riteComplete({ ...p, crossed: ['a', 'b', 'c'] }), 'three distinct completes it');
 
-// The rite completes on three DISTINCT bridges.
-ok(!riteComplete(p), 'two is not three');
-const three = { ...p, crossed: ['bridge-a', 'bridge-b', 'bridge-c'] };
-ok(riteComplete(three) && bridgesRemaining(three) === 0, 'three distinct completes it');
-const dupes = { ...p, crossed: ['bridge-a', 'bridge-b'] };
-ok(!riteComplete(dupes), 'recrossings never accumulate toward it');
+// A lane, once one exists, is free and not part of the rite.
+const lane = { id: 'l', a: { strip: 'north', x: 100 }, b: { strip: 'south', x: 100 } };
+const turned = cross(beginAt('north'), lane);
+ok(turned.position.strip === 'south', 'a lane leads to another strip');
+ok(turned.costsAFlame === false, 'lanes are free');
+ok(turned.position.crossed.length === 0, 'and are not part of 走三桥');
+ok(otherEnd(lane, 'south').strip === 'north', 'and lead back');
+ok(REACH > 0, 'reach is a real distance');
 
 console.log(`test-town: ${n} assertions passed`);
