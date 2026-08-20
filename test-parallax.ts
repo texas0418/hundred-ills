@@ -1,4 +1,6 @@
-import { PLANES, tilesFor, planeRect, scaledWidth } from './src/engine/parallax';
+import {
+  PLANES, tilesFor, planeRect, scaledWidth, slotCount, slotX, mod,
+} from './src/engine/parallax';
 
 let n = 0;
 function ok(cond: boolean, msg: string) {
@@ -11,7 +13,7 @@ const far = PLANES[0], mid = PLANES[1], kerb = PLANES[2];
 ok(far.speed < mid.speed, 'the far bank moves slower than the lane she walks on');
 ok(kerb.speed > mid.speed, 'the kerb is in front of her, so it moves faster');
 ok(mid.speed === 1.0, 'the lane is the reference');
-ok(far.mirror && !mid.mirror, 'only the featureless far plane may mirror');
+ok(far.paired && !mid.paired, 'only the featureless far plane uses the mirrored pair');
 ok(far.top < mid.top && mid.top < kerb.top, 'planes stack far to near down the screen');
 
 // Coverage: the viewport is always filled, at any walk position.
@@ -32,13 +34,27 @@ for (let i = 1; i < seq.length; i++) {
   ok(seq[i].index === seq[i - 1].index + 1, 'indices run consecutively');
 }
 
-// Mirroring alternates, including to the LEFT of the origin where a
-// naive % would return negative and break the parity.
-const left = tilesFor(far, -2000, 400, 390);
-for (let i = 1; i < left.length; i++) {
-  ok(left[i].mirrored !== left[i - 1].mirrored, 'mirroring alternates left of origin');
+// Positive modulo, including left of the origin where a naive % is negative.
+ok(mod(-1, 4) === 3, 'mod stays positive left of the origin');
+ok(mod(9, 4) === 1, 'and behaves normally right of it');
+
+// SLOTS: a fixed set of nodes the renderer animates, never rebuilds.
+const N = slotCount(400, 390);
+ok(N >= 3, 'enough slots to cover the viewport plus a spare each side');
+ok(slotCount(400, 390) === slotCount(400, 390), 'slot count is stable');
+ok(slotCount(0, 390) === 0 && slotCount(400, 0) === 0, 'degenerate inputs yield none');
+
+for (const w of [0, 137, -450, 99999, 1e7]) {
+  const xs = Array.from({ length: N }, (_, k) => slotX(mid, w, 400, k));
+  ok(Math.min(...xs) <= 0, `slots cover the left edge at ${w}`);
+  ok(Math.max(...xs) + 400 >= 390, `slots cover the right edge at ${w}`);
+  for (let k = 1; k < N; k++) {
+    ok(Math.abs(xs[k] - (xs[k - 1] + 400)) < 1e-9, `slots are flush at ${w}`);
+  }
 }
-ok(tilesFor(far, 0, 400, 390)[0].mirrored === false, 'tile 0 is unmirrored');
+// Slot positions are bounded however far she walks - nothing drifts off
+// into float imprecision after an hour of walking.
+ok(Math.abs(slotX(mid, 1e7, 400, 0)) <= 400, 'slot 0 stays near the origin at huge walkX');
 
 // Cost is constant however far she walks.
 ok(tilesFor(mid, 0, 400, 390).length === tilesFor(mid, 5_000_000, 400, 390).length,

@@ -23,7 +23,11 @@ export const DEMO_TIME_SCALE = 60;
 const POINT_MS = 20 * 60 * 1000;
 
 export interface WalkState {
-  /** Pixels walked from the start of the district. Negative is left. */
+  /**
+   * Pixels walked. Mirrors the shared value the renderer animates - the
+   * screen owns the authoritative x on the UI thread, because a React
+   * state update per frame is not a walk.
+   */
   readonly x: number;
   readonly fires: FireCount;
   /** Milliseconds since the watch began. Callers pass it; no clock here. */
@@ -43,6 +47,11 @@ export function step(s: WalkState, dx: number, dtMs: number): WalkState {
   // Leaning over the water is standing still. You cannot count and walk.
   const x = s.looking ? s.x : Math.max(DISTRICT_START, s.x + dx);
   return { ...s, x, elapsedMs: s.elapsedMs + dtMs * DEMO_TIME_SCALE };
+}
+
+/** Advance only the night. The walk itself is animated elsewhere. */
+export function tick(s: WalkState, dtMs: number): WalkState {
+  return { ...s, elapsedMs: s.elapsedMs + dtMs * DEMO_TIME_SCALE };
 }
 
 export function pointIndex(s: WalkState): number {

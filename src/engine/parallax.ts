@@ -22,18 +22,23 @@ export interface Plane {
   /** Height of the plate, as a fraction of screen height. */
   readonly height: number;
   /**
-   * Mirror alternate tiles. Makes the seam exactly zero by construction,
-   * at the cost of a visible symmetry - so it is only safe on a plane
-   * with no distinctive feature. The far bank qualifies; the mid plane
-   * does not, its steps and boat would ping-pong.
+   * Use the pre-mirrored double-width tile. Baking [plate | mirrored
+   * plate] into one image makes its two edges the same column of pixels,
+   * so it repeats with no seam and the renderer only has to translate -
+   * no per-tile parity, nothing to swap mid-animation.
+   *
+   * Only safe on a plane with no distinctive feature. The far bank
+   * qualifies; the mid plane does not, its boat would ping-pong.
    */
-  readonly mirror: boolean;
+  readonly paired: boolean;
 }
 
+export const DISTRICT_START = 0;
+
 export const PLANES: readonly Plane[] = [
-  { id: 'far', speed: 0.25, top: 0.26, height: 0.22, mirror: true },
-  { id: 'mid', speed: 1.0, top: 0.44, height: 0.24, mirror: false },
-  { id: 'kerb', speed: 1.45, top: 0.78, height: 0.2, mirror: false },
+  { id: 'far', speed: 0.25, top: 0.26, height: 0.22, paired: true },
+  { id: 'mid', speed: 1.0, top: 0.44, height: 0.24, paired: false },
+  { id: 'kerb', speed: 1.45, top: 0.78, height: 0.2, paired: false },
 ];
 
 export interface Tile {
@@ -41,13 +46,40 @@ export interface Tile {
   readonly index: number;
   /** Left edge in screen pixels. */
   readonly x: number;
-  readonly mirrored: boolean;
 }
 
-/** Positive modulo. JS % keeps the sign of the dividend, which breaks
- *  mirroring for tiles to the left of the origin. */
-function mod(n: number, m: number): number {
+/** Positive modulo. JS % keeps the sign of the dividend, which puts
+ *  tiles left of the origin in the wrong slot. */
+export function mod(n: number, m: number): number {
+  'worklet';
   return ((n % m) + m) % m;
+}
+
+/**
+ * How many copies of a plate it takes to cover the viewport, whatever
+ * the scroll position. Fixed for a given plate and screen, which is the
+ * point: the renderer allocates this many nodes ONCE and then only
+ * animates their x, so nothing is created or destroyed mid-walk.
+ */
+export function slotCount(plateWidth: number, screenWidth: number): number {
+  if (plateWidth <= 0 || screenWidth <= 0) return 0;
+  return Math.ceil(screenWidth / plateWidth) + 2;
+}
+
+/**
+ * Where slot k sits, for a walk position. Pure arithmetic and marked as
+ * a worklet so it can run on the UI thread every frame without touching
+ * React.
+ */
+export function slotX(
+  plane: Plane,
+  walkX: number,
+  plateWidth: number,
+  slot: number,
+): number {
+  'worklet';
+  const offset = -walkX * plane.speed;
+  return mod(offset, plateWidth) + (slot - 1) * plateWidth;
 }
 
 /**
@@ -68,11 +100,7 @@ export function tilesFor(
   const first = Math.floor(-offset / plateWidth);
   const tiles: Tile[] = [];
   for (let i = first; i * plateWidth + offset < screenWidth; i++) {
-    tiles.push({
-      index: i,
-      x: i * plateWidth + offset,
-      mirrored: plane.mirror && mod(i, 2) === 1,
-    });
+    tiles.push({ index: i, x: i * plateWidth + offset });
   }
   return tiles;
 }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { PanResponder, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import {
   Canvas,
@@ -7,13 +7,21 @@ import {
   Rect,
   useImage,
 } from '@shopify/react-native-skia';
+import {
+  useDerivedValue,
+  useSharedValue,
+  withDecay,
+  type SharedValue,
+} from 'react-native-reanimated';
 
 import { PAPER, PEACH_RED, SOOT } from '../palette';
 import {
+  DISTRICT_START,
   PLANES,
   planeRect,
   scaledWidth,
-  tilesFor,
+  slotCount,
+  slotX,
   type Plane,
 } from '../engine/parallax';
 import {
@@ -23,7 +31,7 @@ import {
   lookBack,
   reflection,
   setLooking,
-  step,
+  tick,
   watchmanCalling,
   type WalkState,
 } from '../engine/walk';
@@ -31,22 +39,25 @@ import {
 /**
  * 一更 - one walkable minute of the first watch.
  *
- * All arithmetic is in src/engine/{parallax,walk}.ts, tested by Node.
- * This file owns input and drawing only.
+ * THE WALK NEVER TOUCHES REACT. walkX is a reanimated shared value that
+ * the gesture writes and Skia reads on the UI thread; a first version
+ * kept it in useState and re-rendered the whole tree every frame, which
+ * is exactly as smooth as it sounds. React state here holds only things
+ * that change a few times a minute - the fires, the watch, whether she
+ * is leaning over the water.
  *
- * Plates load from assets/plates-alpha (paper is transparent, so planes
- * layer through each other) and assets/plates-drained (monochrome except
- * vermilion). The drain is a cross-fade between the two - DECISIONS 59.
+ * Each plane owns a FIXED set of tile nodes (slotCount) whose x is a
+ * derived value. Nothing is created or destroyed while she walks.
  */
 
 const LIVE = {
-  far: require('../../assets/plates-alpha/canal-far.png'),
+  far: require('../../assets/plates-alpha/canal-far-pair.png'),
   mid: require('../../assets/plates-alpha/canal-mid.png'),
   kerb: require('../../assets/plates-alpha/canal-near-kerb.png'),
 } as const;
 
 const DEAD = {
-  far: require('../../assets/plates-drained/canal-far.png'),
+  far: require('../../assets/plates-drained/canal-far-pair.png'),
   mid: require('../../assets/plates-drained/canal-mid.png'),
   kerb: require('../../assets/plates-drained/canal-near-kerb.png'),
 } as const;
@@ -54,45 +65,73 @@ const DEAD = {
 function PlaneLayer({
   plane, walkX, screenW, screenH, drain,
 }: {
-  plane: Plane; walkX: number; screenW: number; screenH: number; drain: number;
+  plane: Plane;
+  walkX: SharedValue<number>;
+  screenW: number;
+  screenH: number;
+  drain: number;
 }) {
   const live = useImage(LIVE[plane.id]);
   const dead = useImage(DEAD[plane.id]);
   const band = planeRect(plane, screenH);
 
-  const tiles = useMemo(() => {
-    if (!live) return [];
-    const w = scaledWidth(plane, live.width(), live.height(), screenH);
-    return tilesFor(plane, walkX, w, screenW).map((t) => ({ ...t, w }));
-  }, [live, plane, walkX, screenW, screenH]);
+  const tileW = live
+    ? scaledWidth(plane, live.width(), live.height(), screenH)
+    : 0;
+  const slots = slotCount(tileW, screenW);
 
-  if (!live) return null;
+  if (!live || slots === 0) return null;
 
   return (
     <Group>
-      {tiles.map((t) => (
-        <Group
-          key={`${plane.id}:${t.index}`}
-          transform={
-            t.mirrored
-              ? [{ translateX: t.x + t.w }, { scaleX: -1 }]
-              : [{ translateX: t.x }]
-          }
-        >
-          <SkImage image={live} x={0} y={band.y} width={t.w} height={band.height} fit="fill" />
-          {dead && drain > 0 ? (
-            <SkImage
-              image={dead}
-              x={0}
-              y={band.y}
-              width={t.w}
-              height={band.height}
-              fit="fill"
-              opacity={drain}
-            />
-          ) : null}
-        </Group>
+      {Array.from({ length: slots }, (_, k) => (
+        <Slot
+          key={`${plane.id}:${k}`}
+          plane={plane}
+          slot={k}
+          walkX={walkX}
+          tileW={tileW}
+          band={band}
+          live={live}
+          dead={dead}
+          drain={drain}
+        />
       ))}
+    </Group>
+  );
+}
+
+function Slot({
+  plane, slot, walkX, tileW, band, live, dead, drain,
+}: {
+  plane: Plane;
+  slot: number;
+  walkX: SharedValue<number>;
+  tileW: number;
+  band: { y: number; height: number };
+  live: ReturnType<typeof useImage>;
+  dead: ReturnType<typeof useImage>;
+  drain: number;
+}) {
+  const transform = useDerivedValue(
+    () => [{ translateX: slotX(plane, walkX.value, tileW, slot) }],
+    [plane, tileW, slot],
+  );
+  if (!live) return null;
+  return (
+    <Group transform={transform}>
+      <SkImage image={live} x={0} y={band.y} width={tileW} height={band.height} fit="fill" />
+      {dead && drain > 0 ? (
+        <SkImage
+          image={dead}
+          x={0}
+          y={band.y}
+          width={tileW}
+          height={band.height}
+          fit="fill"
+          opacity={drain}
+        />
+      ) : null}
     </Group>
   );
 }
@@ -120,36 +159,56 @@ function Reflection({ state, screenH }: { state: WalkState; screenH: number }) {
 
 export function Walk() {
   const { width, height } = useWindowDimensions();
+  const walkX = useSharedValue(0);
   const [state, setState] = useState<WalkState>(beginFirstWatch);
 
-  // The night runs whether or not she moves.
+  // The night runs whether or not she moves. Once every 100ms, not
+  // once a frame - the watch is the only thing here that needs React.
   useEffect(() => {
-    const id = setInterval(() => setState((s) => step(s, 0, 100)), 100);
+    const id = setInterval(() => setState((s) => tick(s, 100)), 100);
     return () => clearInterval(id);
   }, []);
 
-  const pan = useMemo(
-    () =>
-      PanResponder.create({
-        onStartShouldSetPanResponder: () => true,
-        onMoveShouldSetPanResponder: (_e, g) => Math.abs(g.dx) > 2 || Math.abs(g.dy) > 2,
-        onPanResponderMove: (_e, g) => {
-          // Dragging down is leaning over the water to count.
-          if (g.dy > 40 && Math.abs(g.dy) > Math.abs(g.dx)) {
-            setState((s) => setLooking(s, true));
-            return;
-          }
-          setState((s) => step(setLooking(s, false), -g.dx * 0.35, 0));
-        },
-        onPanResponderRelease: () => setState((s) => setLooking(s, false)),
-        onPanResponderTerminate: () => setState((s) => setLooking(s, false)),
-      }),
-    [],
+  // Where the walk was when the thumb went down. A shared value rather
+  // than a closure variable so the gesture can read and write it without
+  // reassigning across renders.
+  const from = useSharedValue(0);
+
+  // Built once, via a state initializer rather than useMemo: the shared
+  // values are captured from the closure instead of being passed into a
+  // hook, which is what lets the handlers write to them.
+  const [pan] = useState(() =>
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_e, g) => Math.abs(g.dx) > 2 || Math.abs(g.dy) > 2,
+      onPanResponderGrant: () => {
+        from.value = walkX.value;
+      },
+      onPanResponderMove: (_e, g) => {
+        if (g.dy > 40 && Math.abs(g.dy) > Math.abs(g.dx)) {
+          setState((s) => (s.looking ? s : setLooking(s, true)));
+          return;
+        }
+        walkX.value = Math.max(DISTRICT_START, from.value - g.dx);
+      },
+      onPanResponderRelease: (_e, g) => {
+        setState((s) => (s.looking ? setLooking(s, false) : s));
+        // Let go and she keeps going, slowing down. Without this the
+        // walk stops dead the instant your thumb lifts, which is what
+        // made it feel like dragging a picture rather than walking.
+        walkX.value = withDecay({
+          velocity: -g.vx * 1000,
+          deceleration: 0.997,
+          clamp: [DISTRICT_START, Number.MAX_SAFE_INTEGER],
+        });
+      },
+      onPanResponderTerminate: () => setState((s) => setLooking(s, false)),
+    }),
   );
 
   const onLookBack = useCallback(() => setState(lookBack), []);
   const call = currentCall(state);
-  const calling = watchmanCalling(state);
+  const drain = drainAmount(state);
 
   return (
     <View style={styles.fill} {...pan.panHandlers}>
@@ -159,19 +218,17 @@ export function Walk() {
           <PlaneLayer
             key={p.id}
             plane={p}
-            walkX={state.x}
+            walkX={walkX}
             screenW={width}
             screenH={height}
-            drain={drainAmount(state)}
+            drain={drain}
           />
         ))}
       </Canvas>
 
       <Reflection state={state} screenH={height} />
 
-      {/* The watchman is heard, not met. No audio yet, so the call is
-          drawn as the strike count he beats out - see DECISIONS 89. */}
-      {calling ? (
+      {watchmanCalling(state) ? (
         <View style={styles.call} pointerEvents="none">
           <Text style={styles.callLabel}>{call.label}</Text>
           <View style={styles.strikes}>
@@ -186,8 +243,6 @@ export function Walk() {
         </View>
       ) : null}
 
-      {/* Temporary. A real "look back" is a gesture in the world, not a
-          word on the screen; this exists so the drain can be seen. */}
       <Text style={styles.lookBack} onPress={onLookBack}>
         look back
       </Text>
