@@ -29,3 +29,24 @@ far-plane-perspective.jpg
   camera perspective" from the beginning and it was ignored. A
   constraint that matters has to appear in the negative list AND in
   positive per-plate language, not just in the preamble.
+
+near-plane-with-landmark.jpg
+  Plate [04], attempt 1. A willow baked into one side of a strip that
+  has to repeat every screen width, plus a red scrap on the kerb and
+  colour wash in the mist.
+
+  Prepped: ink 27.9% (fine), saturation 0.137 against a 0.05 ceiling,
+  seam mismatch 18.53 against a limit of 8.
+
+  The diagnosis is the useful part. Ink density across the width, in
+  eighths: 102.7 96.3 93.8 87.9 78.5 81.2 88.8 89.5 - the KERB is
+  almost perfectly even. The seam was not the strip's fault at all. One
+  lump of ink on one side was doing all the damage.
+
+  THE LESSON, and it changed the plate list: A TILING STRIP CANNOT
+  CONTAIN A LANDMARK. Anything memorable in a plate that repeats every
+  screen width will be seen to repeat. [04] is now a featureless kerb
+  and the willow became [24], an overlay placed by hand here and there.
+  That also needed a fourth prompt class - "overlay" - because a thing
+  that hangs into frame from an edge cannot be centred with clear paper
+  on all four sides the way a cut-out object is.
