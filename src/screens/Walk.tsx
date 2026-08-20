@@ -29,12 +29,7 @@ import {
   slotX,
   type Plane,
 } from '../engine/parallax';
-import {
-  BANK_LENGTH,
-  BRIDGE_SPAN,
-  bridgesOn,
-  clampToStrip,
-} from '../engine/town';
+import { BANK_LENGTH, clampToStrip } from '../engine/town';
 import {
   applyCrossing,
   arriveAt,
@@ -178,67 +173,36 @@ function Reflection({ state, screenH }: { state: WalkState; screenH: number }) {
   );
 }
 
-const BRIDGES = {
-  'bridge-one': require('../../assets/plates-alpha/bridge-one.png'),
-  'bridge-two': require('../../assets/plates-alpha/bridge-two.png'),
-} as const;
-
 /**
- * A bridge standing in the world where it actually is. No marker and no
- * prompt - DECISIONS 41 withholds help, and a bridge is already the most
- * legible object in a water town.
+ * NOTHING IS DRAWN FOR A BRIDGE YET, AND THAT IS DELIBERATE.
  *
- * SIZED IN WORLD PIXELS, not as a fraction of the screen. The first
- * version scaled by band height, so a wide plate rendered two screens
- * across and a tall one filled the view - the same code producing two
- * completely different objects.
+ * The plates that exist - bridge-one, bridge-two, bridge-three - are
+ * LANDMARK views: a whole arch with its own reflection, seen across
+ * water from a distance. Two attempts to place one in the world both
+ * failed, and for the same reason rather than two:
  *
- * These are still the LANDMARK plates, a whole arch seen across water.
- * The bridge she actually walks over is prompt [26] and does not exist
- * yet; until it does, this reads as a bridge further along the canal
- * rather than one underfoot. See DECISIONS 105.
+ *   in the near canal   it is a bridge floating in the water, because
+ *                       that is literally what an arch-plus-reflection
+ *                       dropped into a canal is
+ *   on the far plane    it slides away from her path, because a bridge
+ *                       standing at a world x on the BANK cannot be
+ *                       drawn on a plane that scrolls at another speed
+ *
+ * There is no correct placement for these plates, so there is no
+ * placeholder. The bridge she walks over is prompt [26] and does not
+ * exist yet; a bridge in the wrong place teaches the player something
+ * false about the town, which is worse than an empty bank.
+ *
+ * The crossings still WORK - she spends them by walking past, per
+ * DECISIONS 105 - they are simply invisible until the art lands.
  */
-function BridgeObject({
-  plate, worldX, walkX, screenH,
-}: {
-  plate: keyof typeof BRIDGES; worldX: number;
-  walkX: SharedValue<number>; screenH: number;
-}) {
-  const image = useImage(BRIDGES[plate]);
-  const mid = PLANES[1];
-  const band = planeRect(mid, screenH);
-  const w = BRIDGE_SPAN * 0.42;
-  const h = image ? (w * image.height()) / image.width() : 0;
-  const transform = useDerivedValue(
-    () => [{ translateX: worldX - walkX.value * mid.speed - w / 2 }],
-    [worldX, w],
-  );
-  if (!image) return null;
-  // Anchor by the plate's waterline (its mirror axis, measured at 0.485
-  // for bridge-one and 0.736 for bridge-two) rather than by its box, so
-  // both sit on the water instead of one floating and one sinking.
-  const waterline = band.y + band.height * 0.82;
-  return (
-    <Group transform={transform}>
-      <SkImage
-        image={image}
-        x={0}
-        y={waterline - h * 0.5}
-        width={w}
-        height={h}
-        fit="fill"
-      />
-    </Group>
-  );
-}
 
 const Scene = memo(function Scene({
-  walkX, width, height, drain, stripId,
+  walkX, width, height, drain,
 }: {
   walkX: SharedValue<number>; width: number; height: number;
-  drain: number; stripId: string;
+  drain: number;
 }) {
-  const bridges = bridgesOn(stripId);
   return (
     <Canvas style={StyleSheet.absoluteFill}>
       <Rect x={0} y={0} width={width} height={height} color={PAPER} />
@@ -252,17 +216,6 @@ const Scene = memo(function Scene({
           drain={drain}
         />
       ))}
-      {bridges.map((b) =>
-        b.plate in BRIDGES ? (
-          <BridgeObject
-            key={b.id}
-            plate={b.plate as keyof typeof BRIDGES}
-            worldX={b.x}
-            walkX={walkX}
-            screenH={height}
-          />
-        ) : null,
-      )}
     </Canvas>
   );
 });
@@ -359,7 +312,6 @@ export function Walk() {
             width={width}
             height={height}
             drain={drain}
-            stripId={state.pos.strip}
           />
         </View>
       </GestureDetector>
