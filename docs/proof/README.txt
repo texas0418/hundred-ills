@@ -188,3 +188,29 @@ PARALLAX PROVEN - 2026-08-20
   mirror - the boat would ping-pong - so the fix is either a second mid
   plate to alternate with, or accept it and let the districts be short
   enough that it is not seen twice. Not blocking; noted.
+
+一更 - THE FIRST WALKABLE MINUTE - 2026-08-20
+  first-watch.png is what Walk.tsx draws, rendered from the same plates
+  the app loads. Five states: walking, leaning over the water at three
+  fires, then two, then one, then zero.
+
+  THE COUNT IS DIEGETIC. Drag down to lean over the canal and the flames
+  appear in the water. At zero fires nothing appears - not a zero, not a
+  message, just water. DECISIONS 67 and 68.
+
+  THE DRAIN IS A CROSS-FADE, not a shader. tools/drain_plate.py bakes a
+  monochrome-except-vermilion copy of every plate using the SAME
+  vermilion mask as inkstate_test.py, and the screen fades between the
+  two by (3 - fires) / 3. Cheap, exact, and it cannot diverge from the
+  harness the effect was designed in.
+
+  NOT YET RUN ON A DEVICE. There is no ios/ project, and expo run:ios
+  is known broken on this machine's Xcode 26 without the
+  expo-modules-jsi patches. The logic is covered by 168 assertions and
+  typecheck and lint are clean, but nobody has seen it move. The
+  picture above is a faithful preview, not a screenshot.
+
+  THE DRAIN IS SUBTLER THAN IT SHOULD BE, and the cause is known: the
+  mid plane measures 10.74 painted-drain, the least colourful of the
+  three. It is also the plane that fills the middle of the screen. If
+  the effect wants more punch, that is the plate to redo warmer.

@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { WatchCard } from './src/screens/WatchCard';
 import { Walk } from './src/screens/Walk';
 import { PAPER, SOOT } from './src/palette';
 import { newGame } from './src/dbCore';
-import { chapterAt, label, showsWatchCard } from './src/engine/watches';
-import { readingOf } from './src/engine/fires';
+import { chapterAt, showsWatchCard } from './src/engine/watches';
 
 type Screen = 'title' | 'card' | 'walk';
 
@@ -17,7 +16,6 @@ type Screen = 'title' | 'card' | 'walk';
 export default function App() {
   const [screen, setScreen] = useState<Screen>('title');
   const [save] = useState(() => newGame(0));
-  const [walkX, setWalkX] = useState(0);
   const chapter = chapterAt(save.ordinal);
 
   if (screen === 'title') {
@@ -42,21 +40,7 @@ export default function App() {
     );
   }
 
-  // Drag to walk. Real input, pacing and the fires all come later; this
-  // is here so the parallax can be looked at on a device.
-  return (
-    <View style={styles.fill}>
-      <StatusBar hidden />
-      <Walk walkX={walkX} />
-      <Pressable
-        style={styles.overlay}
-        onPress={() => setWalkX((x) => x + 120)}
-      >
-        <Text style={styles.chapter}>{label(chapter)}</Text>
-        <Text style={styles.state}>she reads as {readingOf(save.fires)}</Text>
-      </Pressable>
-    </View>
-  );
+  return <Walk />;
 }
 
 const styles = StyleSheet.create({
