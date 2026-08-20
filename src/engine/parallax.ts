@@ -41,6 +41,20 @@ export const PLANES: readonly Plane[] = [
   { id: 'kerb', speed: 1.45, top: 0.78, height: 0.2, paired: false },
 ];
 
+/**
+ * A LANE is not shaped like a bank. The wall opposite is an arm's length
+ * away, so it is tall and close and moves nearly at her own pace, and
+ * there is no middle distance at all - just the wall and the kerb.
+ */
+export const LANE_PLANES: readonly Plane[] = [
+  { id: 'far', speed: 0.75, top: 0.14, height: 0.62, paired: true },
+  { id: 'kerb', speed: 1.45, top: 0.78, height: 0.2, paired: false },
+];
+
+export function planesFor(kind: 'bank' | 'lane'): readonly Plane[] {
+  return kind === 'lane' ? LANE_PLANES : PLANES;
+}
+
 export interface Tile {
   /** Which repeat this is. Negative to the left of the origin. */
   readonly index: number;

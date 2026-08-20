@@ -22,14 +22,20 @@ import {
 
 import { PAPER, PEACH_RED, SOOT } from '../palette';
 import {
-  PLANES,
   planeRect,
+  planesFor,
   scaledWidth,
   slotCount,
   slotX,
   type Plane,
 } from '../engine/parallax';
-import { BANK_LENGTH, clampToStrip } from '../engine/town';
+import {
+  bridgesOn,
+  clampTo,
+  linksOn,
+  strip as stripById,
+} from '../engine/town';
+import { LIVE, DEAD, isPlate, type PlateName } from '../plates';
 import {
   applyCrossing,
   arriveAt,
@@ -66,29 +72,18 @@ import {
  * derived value. Nothing is created or destroyed while she walks.
  */
 
-const LIVE = {
-  far: require('../../assets/plates-alpha/canal-far-pair.png'),
-  mid: require('../../assets/plates-alpha/canal-mid.png'),
-  kerb: require('../../assets/plates-alpha/canal-near-kerb.png'),
-} as const;
-
-const DEAD = {
-  far: require('../../assets/plates-drained/canal-far-pair.png'),
-  mid: require('../../assets/plates-drained/canal-mid.png'),
-  kerb: require('../../assets/plates-drained/canal-near-kerb.png'),
-} as const;
-
 function PlaneLayer({
-  plane, walkX, screenW, screenH, drain,
+  plane, plate, walkX, screenW, screenH, drain,
 }: {
   plane: Plane;
+  plate: PlateName;
   walkX: SharedValue<number>;
   screenW: number;
   screenH: number;
   drain: number;
 }) {
-  const live = useImage(LIVE[plane.id]);
-  const dead = useImage(DEAD[plane.id]);
+  const live = useImage(LIVE[plate]);
+  const dead = useImage(DEAD[plate]);
   const band = planeRect(plane, screenH);
 
   const tileW = live
@@ -102,7 +97,7 @@ function PlaneLayer({
     <Group>
       {Array.from({ length: slots }, (_, k) => (
         <Slot
-          key={`${plane.id}:${k}`}
+          key={`${plate}:${plane.id}:${k}`}
           plane={plane}
           slot={k}
           walkX={walkX}
@@ -197,21 +192,96 @@ function Reflection({ state, screenH }: { state: WalkState; screenH: number }) {
  * DECISIONS 105 - they are simply invisible until the art lands.
  */
 
+/**
+ * Something standing in the world at a fixed place on the strip - the
+ * bridge she walks over, or the mouth of a lane. No marker and no
+ * prompt: DECISIONS 41 withholds help, and both of these are already
+ * the most legible things a water town has.
+ *
+ * Sized in WORLD pixels and anchored to the ground the strip is walked
+ * on, so a wide plate and a tall one come out the same size of object.
+ */
+function WorldObject({
+  plate, worldX, worldW, footing, walkX, screenH, drain,
+}: {
+  plate: PlateName; worldX: number; worldW: number; footing: number;
+  walkX: SharedValue<number>; screenH: number; drain: number;
+}) {
+  const live = useImage(LIVE[plate]);
+  const dead = useImage(DEAD[plate]);
+  const h = live ? (worldW * live.height()) / live.width() : 0;
+  const transform = useDerivedValue(
+    () => [{ translateX: worldX - walkX.value - worldW / 2 }],
+    [worldX, worldW],
+  );
+  if (!live) return null;
+  const y = footing * screenH - h;
+  return (
+    <Group transform={transform}>
+      <SkImage image={live} x={0} y={y} width={worldW} height={h} fit="fill" />
+      {dead && drain > 0 ? (
+        <SkImage
+          image={dead}
+          x={0}
+          y={y}
+          width={worldW}
+          height={h}
+          fit="fill"
+          opacity={drain}
+        />
+      ) : null}
+    </Group>
+  );
+}
+
 const Scene = memo(function Scene({
-  walkX, width, height, drain,
+  walkX, width, height, drain, stripId,
 }: {
   walkX: SharedValue<number>; width: number; height: number;
-  drain: number;
+  drain: number; stripId: string;
 }) {
+  const here = stripById(stripId);
+  const planes = planesFor(here.kind);
+  // The footing is where the ground reads as being, per plane set: the
+  // lane surface on a bank, the flagstones in an alley.
+  const footing = here.kind === 'lane' ? 0.86 : 0.68;
   return (
     <Canvas style={StyleSheet.absoluteFill}>
       <Rect x={0} y={0} width={width} height={height} color={PAPER} />
-      {PLANES.map((p) => (
-        <PlaneLayer
-          key={p.id}
-          plane={p}
+      {planes.map((p) => {
+        const name = here.plates[p.id === 'kerb' ? 'kerb' : p.id];
+        return isPlate(name) ? (
+          <PlaneLayer
+            key={p.id}
+            plane={p}
+            plate={name}
+            walkX={walkX}
+            screenW={width}
+            screenH={height}
+            drain={drain}
+          />
+        ) : null;
+      })}
+      {bridgesOn(stripId).map((b) => (
+        <WorldObject
+          key={b.id}
+          plate="bridge-walkover"
+          worldX={b.x}
+          worldW={560}
+          footing={footing}
           walkX={walkX}
-          screenW={width}
+          screenH={height}
+          drain={drain}
+        />
+      ))}
+      {linksOn(stripId).map(({ link, x }) => (
+        <WorldObject
+          key={link.id}
+          plate="lane-mouth"
+          worldX={x}
+          worldW={210}
+          footing={footing}
+          walkX={walkX}
           screenH={height}
           drain={drain}
         />
@@ -223,6 +293,9 @@ const Scene = memo(function Scene({
 export function Walk() {
   const { width, height } = useWindowDimensions();
   const walkX = useSharedValue(0);
+  // How far she can walk on the strip she is on. A shared value because
+  // the gesture is built once and must not capture a strip that changes.
+  const stripMax = useSharedValue(0);
   const [state, setState] = useState<WalkState>(beginFirstWatch);
 
   // The night runs whether or not she moves, and this is also where the
@@ -266,7 +339,7 @@ export function Walk() {
           runOnJS(takeCrossing)(walkX.value);
           return;
         }
-        walkX.value = clampToStrip('north', walkX.value - e.changeX);
+        walkX.value = clampTo(walkX.value - e.changeX, stripMax.value);
       })
       .onFinalize((e) => {
         'worklet';
@@ -279,7 +352,7 @@ export function Walk() {
           deceleration: 0.996,
           // The district has two ends now. Walking into one stops her,
           // rather than the endless belt the first build had.
-          clamp: [0, BANK_LENGTH],
+          clamp: [0, stripMax.value],
         });
       }),
   );
@@ -289,6 +362,8 @@ export function Walk() {
   // ordinary walking never fights the gesture for control of walkX.
   const crossings = state.pos.crossed.length;
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/immutability
+    stripMax.value = stripById(state.pos.strip).length;
     // react-hooks/immutability mis-reads useSharedValue as useState. A
     // shared value is a mutable box by design - assigning to .value is
     // the whole API - so this is a false positive, not a shortcut.
@@ -312,6 +387,7 @@ export function Walk() {
             width={width}
             height={height}
             drain={drain}
+            stripId={state.pos.strip}
           />
         </View>
       </GestureDetector>

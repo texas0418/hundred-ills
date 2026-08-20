@@ -62,6 +62,13 @@ export const REACH = 140;
  */
 export const BANK_LENGTH = 3600;
 
+/**
+ * A lane is short. An alley you can wander in is a corridor with
+ * different wallpaper, and the branching is supposed to come from the
+ * NETWORK, not from length.
+ */
+export const LANE_LENGTH = 900;
+
 export const TOWN: { strips: Strip[]; links: Link[]; bridges: Landmark[] } = {
   strips: [
     {
@@ -69,16 +76,30 @@ export const TOWN: { strips: Strip[]; links: Link[]; bridges: Landmark[] } = {
       plates: { far: 'canal-far-pair', mid: 'canal-mid', kerb: 'canal-near-kerb' },
     },
     {
-      // The far side of the same canal. Uses the same plates until the
-      // second bank plate exists - so crossing currently changes WHERE
-      // you are without changing what you see. See the art note below.
       id: 'south', kind: 'bank', length: BANK_LENGTH,
-      plates: { far: 'canal-far-pair', mid: 'canal-mid', kerb: 'canal-near-kerb' },
+      plates: { far: 'canal-far-b-pair', mid: 'canal-mid', kerb: 'canal-near-kerb' },
+    },
+    {
+      /**
+       * A 弄. Short, because an alley is short, and because a lane you
+       * can get lost in is a corridor by another name.
+       *
+       * NO MID PLANE. A lane has the opposite wall and the near kerb and
+       * nothing between - exactly as the bank has no plate for the
+       * ground she walks on. See the note on LANE_LENGTH.
+       */
+      id: 'lane-a', kind: 'lane', length: LANE_LENGTH,
+      plates: { far: 'lane-wall-pair', mid: '', kerb: 'canal-near-kerb' },
     },
   ],
-  // Lanes. None yet - the art does not exist, so there is nowhere to
-  // turn off to. The model is here so the first lane is a data change.
-  links: [],
+  // 弄 lanes - the only branching in the game, DECISIONS 105.
+  links: [
+    {
+      id: 'lane-a-mouth',
+      a: { strip: 'north', x: 1650 },
+      b: { strip: 'lane-a', x: 0 },
+    },
+  ],
   bridges: [
     { id: 'bridge-a', strip: 'north', x: 900, plate: 'bridge-one' },
     { id: 'bridge-b', strip: 'north', x: 2400, plate: 'bridge-two' },
@@ -92,9 +113,18 @@ export function strip(id: string): Strip {
 }
 
 export function clampToStrip(stripId: string, x: number): number {
-  'worklet';
   const s = TOWN.strips.find((t) => t.id === stripId);
-  const max = s ? s.length : 0;
+  return clampTo(x, s ? s.length : 0);
+}
+
+/**
+ * The worklet form. The gesture is built once at mount, so it cannot
+ * capture a strip id - she changes strips, and the captured one would
+ * be stale the moment she turned into a lane. It clamps to a length the
+ * screen keeps in a shared value instead.
+ */
+export function clampTo(x: number, max: number): number {
+  'worklet';
   return Math.min(max, Math.max(0, x));
 }
 
