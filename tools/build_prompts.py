@@ -113,7 +113,6 @@ LANDED = {
     "23": "lamp-in-window.png",
     "25": "baby-print.png",
     "26": "bridge-walkover.png",
-    "27": "lane-mouth.png",
     # [29] deliberately NOT here. The plate exists and is unused - the
     # prompt asked for something a side-on game cannot show. Left out of
     # LANDED so it stays visible as work, until someone decides to
@@ -363,19 +362,32 @@ PLATES = [
      "arch. A stretch of ordinary embankment continues at both the left "
      "and right ends so it joins the lane on either side. Deserted."),
 
-    ("27", "弄口 - THE MOUTH OF A LANE",
-     "object",
-     "THE ONLY BRANCHING IN THE GAME, per DECISIONS 105. This is what an\n"
-     "opening off the bank looks like, and the player has to be able to\n"
-     "read it as somewhere she can go without a single word of UI.\n"
+    ("27", "弄口 - THE MOUTH OF A LANE  (SECOND ATTEMPT)",
+     "plane",
+     "THE ONLY BRANCHING IN THE GAME, per DECISIONS 105, and the first\n"
+     "attempt was at the WRONG DEPTH. It came back as a standalone alley\n"
+     "- two whole buildings, their roofs, sky above - and laying that\n"
+     "over the bank gave two sets of architecture at two distances.\n"
      "\n"
-     "It must be UNMISTAKABLY a way through and NOT a doorway - a door\n"
-     "is the lock system at 60 and the two cannot be confused.",
-     "A narrow gap between two whitewashed buildings where an alley leads "
-     "away from the canal, seen straight on. The gap is tall and very "
-     "narrow, dark inside, with worn stone flagging running into it and "
-     "no door and no gate of any kind. The buildings on either side are "
-     "plain whitewashed wall with black tile above. Deserted."),
+     "Think about where she actually is: she walks the embankment with\n"
+     "the houses BEHIND her and the water in front. So a lane off her\n"
+     "bank is A GAP IN THAT ROW OF HOUSES - the same row as\n"
+     "canal-far.png, at the same scale, with the same roofline.\n"
+     "\n"
+     "So this is a FAR-PLANE plate, not an object. It replaces a stretch\n"
+     "of the terrace. ATTACH canal-far.png and match it exactly: same\n"
+     "roof height, same wall height, same pallor.\n"
+     "\n"
+     "It must read as a way THROUGH and never as a doorway - a door is\n"
+     "the lock system at 60 and the two cannot be confused.",
+     "A row of whitewashed water town houses with black tile roofs seen "
+     "from across a canal, identical to a plain terrace except that at "
+     "the centre a narrow gap runs between two of them where an alley "
+     "leads away. The gap is tall and very narrow and dark inside, with "
+     "no door, no gate and no frame of any kind. Every house is the same "
+     "size and the roofline is level all the way across. Very pale and "
+     "washed out, ink only in the roof lines. The top two thirds is bare "
+     "paper. Deserted."),
 
     ("28", "弄 - THE LANE WALL",
      "plane",

@@ -29,12 +29,7 @@ import {
   slotX,
   type Plane,
 } from '../engine/parallax';
-import {
-  bridgesOn,
-  clampTo,
-  linksOn,
-  strip as stripById,
-} from '../engine/town';
+import { bridgesOn, clampTo, strip as stripById } from '../engine/town';
 import { LIVE, DEAD, isPlate, type PlateName } from '../plates';
 import {
   applyCrossing,
@@ -202,29 +197,42 @@ function Reflection({ state, screenH }: { state: WalkState; screenH: number }) {
  * on, so a wide plate and a tall one come out the same size of object.
  */
 function WorldObject({
-  plate, worldX, worldW, footing, walkX, screenH, drain,
+  plate, worldX, band, walkX, drain,
 }: {
-  plate: PlateName; worldX: number; worldW: number; footing: number;
-  walkX: SharedValue<number>; screenH: number; drain: number;
+  plate: PlateName; worldX: number;
+  band: { y: number; height: number };
+  walkX: SharedValue<number>; drain: number;
 }) {
   const live = useImage(LIVE[plate]);
   const dead = useImage(DEAD[plate]);
-  const h = live ? (worldW * live.height()) / live.width() : 0;
+
+  // MEASURED, not guessed. The bridge plate carries its own embankment
+  // at each end, and the only way it reads as part of the walkway is if
+  // that embankment lands exactly on the strip's. Its wing occupies
+  // 0.456 of the plate; the strip's embankment occupies 0.599 of its
+  // own - hence 1.31x - and the two bands are then aligned by their
+  // tops, 0.247 into the bridge and 0.314 into the strip.
+  //
+  // The first version sized this by a flat world width and stood it on
+  // a "footing", which put a bridge in the canal twice.
+  const h = band.height * 1.31;
+  const w = live ? (h * live.width()) / live.height() : 0;
+  const y = band.y + 0.314 * band.height - 0.247 * h;
+
   const transform = useDerivedValue(
-    () => [{ translateX: worldX - walkX.value - worldW / 2 }],
-    [worldX, worldW],
+    () => [{ translateX: worldX - walkX.value - w / 2 }],
+    [worldX, w],
   );
   if (!live) return null;
-  const y = footing * screenH - h;
   return (
     <Group transform={transform}>
-      <SkImage image={live} x={0} y={y} width={worldW} height={h} fit="fill" />
+      <SkImage image={live} x={0} y={y} width={w} height={h} fit="fill" />
       {dead && drain > 0 ? (
         <SkImage
           image={dead}
           x={0}
           y={y}
-          width={worldW}
+          width={w}
           height={h}
           fit="fill"
           opacity={drain}
@@ -242,9 +250,10 @@ const Scene = memo(function Scene({
 }) {
   const here = stripById(stripId);
   const planes = planesFor(here.kind);
-  // The footing is where the ground reads as being, per plane set: the
-  // lane surface on a bank, the flagstones in an alley.
-  const footing = here.kind === 'lane' ? 0.86 : 0.68;
+  // Objects that stand in the walkway belong to the plane the walkway
+  // is drawn on, and are aligned to that band rather than to the screen.
+  const ground = planes.find((p) => p.id === 'mid') ?? planes[0];
+  const groundBand = planeRect(ground, height);
   return (
     <Canvas style={StyleSheet.absoluteFill}>
       <Rect x={0} y={0} width={width} height={height} color={PAPER} />
@@ -267,25 +276,18 @@ const Scene = memo(function Scene({
           key={b.id}
           plate="bridge-walkover"
           worldX={b.x}
-          worldW={560}
-          footing={footing}
+          band={groundBand}
           walkX={walkX}
-          screenH={height}
           drain={drain}
         />
       ))}
-      {linksOn(stripId).map(({ link, x }) => (
-        <WorldObject
-          key={link.id}
-          plate="lane-mouth"
-          worldX={x}
-          worldW={210}
-          footing={footing}
-          walkX={walkX}
-          screenH={height}
-          drain={drain}
-        />
-      ))}
+      {/* NO LANE MOUTH IS DRAWN. The plate that exists is a standalone
+          alley - two whole buildings, their roofs and sky - and laying
+          it over the bank gives two sets of architecture at two depths.
+          It is also at the wrong depth entirely: she walks the
+          embankment with the houses BEHIND her, so a lane off her bank
+          is a gap in the FAR terrace, not an object in the walkway.
+          Re-prompted as [27]; the crossing works and is invisible. */}
     </Canvas>
   );
 });

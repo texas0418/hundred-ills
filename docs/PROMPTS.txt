@@ -131,8 +131,6 @@ ALREADY DONE - not repeated below
         baby-print.png
   [26] 橋 - A BRIDGE SHE WALKS OVER
         bridge-walkover.png
-  [27] 弄口 - THE MOUTH OF A LANE
-        lane-mouth.png
   [28] 弄 - THE LANE WALL
         lane-wall.png
   [30] THE SECOND BANK
@@ -146,6 +144,61 @@ If one needs redoing, remove its id from LANDED and re-run.
 =============================================================
 STILL TO MAKE
 =============================================================
+
+[27] 弄口 - THE MOUTH OF A LANE  (SECOND ATTEMPT)
+      THE ONLY BRANCHING IN THE GAME, per DECISIONS 105, and the first
+      attempt was at the WRONG DEPTH. It came back as a standalone alley
+      - two whole buildings, their roofs, sky above - and laying that
+      over the bank gave two sets of architecture at two distances.
+      
+      Think about where she actually is: she walks the embankment with
+      the houses BEHIND her and the water in front. So a lane off her
+      bank is A GAP IN THAT ROW OF HOUSES - the same row as
+      canal-far.png, at the same scale, with the same roofline.
+      
+      So this is a FAR-PLANE plate, not an object. It replaces a stretch
+      of the terrace. ATTACH canal-far.png and match it exactly: same
+      roof height, same wall height, same pallor.
+      
+      It must read as a way THROUGH and never as a doorway - a door is
+      the lock system at 60 and the two cannot be confused.
+
+--------------------------------------------------------------  copy from here
+Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
+of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
+wet blooming edges, visible brush direction, the paper showing
+through. Large areas of the paper left completely unpainted to stand
+for mist, water and sky. Muted and drained palette - ink black, warm
+grey, pale ochre, washed-out green. One small area of vermilion red
+and no other saturated colour. Flat frontal composition, no camera
+perspective, no photographic realism. Quiet, plain, unspectacular.
+
+A row of whitewashed water town houses with black tile roofs seen
+from across a canal, identical to a plain terrace except that at the
+centre a narrow gap runs between two of them where an alley leads
+away. The gap is tall and very narrow and dark inside, with no door,
+no gate and no frame of any kind. Every house is the same size and
+the roofline is level all the way across. Very pale and washed out,
+ink only in the roof lines. The top two thirds is bare paper.
+Deserted. Seen straight on from directly across the water, as flat
+as a stage backdrop, with no perspective and no vanishing point,
+everything at the same distance. Cut off at both the left and right
+edges at the same height so the image could be repeated end to end
+without a join showing. Isolated on bare paper.
+
+Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
+leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
+gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
+concept art, 3D render, anime, oversaturated, neon, HDR, glow,
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
+--------------------------------------------------------------  to here
 
 [29] 弄 - THE LANE GROUND  ** DO NOT GENERATE **
       THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.
