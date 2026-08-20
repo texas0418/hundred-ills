@@ -8,35 +8,25 @@ there are ~150 plates and drift is invisible one image at a time.
     python3 tools/plate_check.py <plate> [more plates...]
 
 LIVING is the flag for plate [01] and anything meant to be the warm end
-of the colour drain - it enforces a much higher drain distance, because
-a living-world plate that measures like the dead one makes the whole
+of the colour drain - it enforces a much higher drain, because a
+living-world plate that measures like the dead one makes the whole
 three-fires system invisible.
+
+Drain is measured on the PAINTED AREA only. See tools/plate_metrics.py:
+averaging over the whole frame punished 留白, which is required.
+Reference points, painted-only: dead world 5.83, style key 18.10.
 
     python3 tools/plate_check.py --living <plate>
 """
+import os
 import sys
-import numpy as np
-from PIL import Image
 
-
-def measure(path):
-    a = np.asarray(Image.open(path).convert("RGB")).astype(np.float32)
-    mx, mn = a.max(axis=2), a.min(axis=2)
-    lum = 0.299 * a[:, :, 0] + 0.587 * a[:, :, 1] + 0.114 * a[:, :, 2]
-    r, g, b = a[:, :, 0], a[:, :, 1], a[:, :, 2]
-    grey = np.repeat(lum[..., None], 3, axis=2)
-    return {
-        "bare paper 留白": 100 * (lum > 225).mean(),
-        "reserved red": 100 * ((r > g * 1.18) & (r > b * 1.18) & (r > 70) & (mx - mn > 22)).mean(),
-        "warm light": 100 * ((r > b * 1.15) & (lum > 140) & (mx - mn > 30)).mean(),
-        "ink": 100 * (lum < 70).mean(),
-        "saturation": float(np.where(mx > 0, (mx - mn) / np.maximum(mx, 1), 0).mean()),
-        "drain distance": float(np.abs(a - grey).mean()),
-    }
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from plate_metrics import load, measure  # noqa: E402
 
 
 def check(path, living):
-    m = measure(path)
+    m = measure(load(path))
     fails = []
     if m["bare paper 留白"] < 25:
         fails.append(f"留白 {m['bare paper 留白']:.1f}% - under the 25% floor, "
@@ -47,10 +37,11 @@ def check(path, living):
     if m["saturation"] > 0.30:
         fails.append(f"saturation {m['saturation']:.3f} - over 0.30, the palette "
                      "is supposed to be drained")
-    floor = 10.0 if living else 6.0
-    if m["drain distance"] < floor:
-        fails.append(f"drain {m['drain distance']:.2f} - under {floor:.0f}, there is "
-                     "not enough colour here to lose, so the fires will be invisible")
+    floor = 12.0 if living else 8.0
+    if m["drain (painted)"] < floor:
+        fails.append(f"drain {m['drain (painted)']:.2f} - under {floor:.0f}, there is "
+                     "not enough colour in the painted area to lose, so the fires "
+                     "will be hard to see")
 
     print(f"\n{path}")
     for k, v in m.items():

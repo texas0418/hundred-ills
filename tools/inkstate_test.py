@@ -19,9 +19,14 @@ it is native to the medium rather than bolted onto it:
 
     python3 tools/inkstate_test.py <plate> [out.png]
 """
+import os
 import sys
+
 import numpy as np
 from PIL import Image
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from plate_metrics import vermilion_mask  # noqa: E402
 
 PAPER = np.array([246.0, 243.0, 236.0], np.float32)
 
@@ -30,11 +35,10 @@ STATES = [(3, 1.00, 0.00), (2, 0.55, 0.10), (1, 0.25, 0.22), (0, 0.00, 0.38)]
 
 
 def red_mask(a):
-    """Vermilion and cinnabar only - not warm greys, not skin, not ochre."""
-    r, g, b = a[:, :, 0], a[:, :, 1], a[:, :, 2]
-    strong = (r > g * 1.18) & (r > b * 1.18) & (r > 70)
-    sat = (a.max(axis=2) - a.min(axis=2)) > 22
-    return (strong & sat).astype(np.float32)[..., None]
+    """Vermilion only. See tools/plate_metrics.py - an earlier version of
+    this caught warm lamplight, and every window in the town stayed lit
+    at zero fires."""
+    return vermilion_mask(a).astype(np.float32)[..., None]
 
 
 def render(a, keep, bloom):
