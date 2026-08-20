@@ -110,8 +110,10 @@ PLATES = [
     ("03", "CANAL BANK - MID PLANE",
      "plane",
      "Aspect 21:9. This is the plane she walks on, so it carries the colour.\n"
-     "Match LIVING-KEY.jpg for warmth - target drain 12 or better, 留白\n"
-     "around 30%. Run plate_check with --living on this one.",
+     "Match LIVING-KEY.jpg for warmth. Run plate_check with --mid --tile.\n"
+     "The floor is 10 rather than the 12 a whole scene needs - a plane is\n"
+     "one band cropped out of a scene and carries less colour by\n"
+     "construction.",
      "A narrow stone embankment running the full width of the image with a "
      "flagged lane along the top of it, the lane level all the way across. "
      "Worn steps "
