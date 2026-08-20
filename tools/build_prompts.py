@@ -82,6 +82,25 @@ KIND_CLAUSE = {
     ),
 }
 
+# Plates already landed in assets/plates/. Their definitions stay here -
+# they are the record, and a plate can need redoing later - but they are
+# NOT emitted into docs/PROMPTS.txt, so that file only ever contains
+# work still to do.
+LANDED = {
+    "01": "docs/proof/LIVING-KEY.jpg",
+    "02": "canal-far.png",
+    "03": "canal-mid.png",
+    "06": "bridge-two.png",
+    "07": "bridge-three-covered.png",
+    "08": "city-gate.png",
+    "09": "her-door.png",
+    "12": "door-gods-faded.png",
+    "13": "door-gods-torn.png",
+    "15": "guhuoniao.png",
+    "16": "huapi.png",
+    "19": "watchman.png",
+}
+
 # (id, title, kind, note shown above the block, body)
 PLATES = [
     ("01", "THE LIVING-WORLD KEY",
@@ -328,6 +347,10 @@ file directly - the style preamble has to stay byte-identical across all
 EVERY PROMPT BELOW IS COMPLETE. Copy one block between its rules and
 paste it. Nothing needs assembling.
 
+THIS FILE ONLY CONTAINS WORK STILL TO DO. Plates already landed are
+listed by name and then dropped. Regenerate this file after each batch
+lands:  python3 tools/build_prompts.py
+
 
 =============================================================
 BEFORE YOU START
@@ -484,10 +507,25 @@ renders 3 / 2 / 1 / 0 fires so you can look at the journey yourself.
 """
 
 
+def done_list():
+    lines = ["", "=" * 61, "ALREADY DONE - not repeated below", "=" * 61, ""]
+    for pid, title, _kind, _note, _body in PLATES:
+        if pid in LANDED:
+            lines.append(f"  [{pid}] {title}")
+            lines.append(f"        {LANDED[pid]}")
+    lines += ["", "Definitions for these are kept in tools/build_prompts.py.",
+              "If one needs redoing, remove its id from LANDED and re-run.", "", ""]
+    return "\n".join(lines)
+
+
 def main():
-    body = "".join(block(*p) for p in PLATES)
-    open("docs/PROMPTS.txt", "w", encoding="utf-8").write(HEAD + body + TAIL)
-    print(f"docs/PROMPTS.txt written: {len(PLATES)} complete prompts")
+    todo = [p for p in PLATES if p[0] not in LANDED]
+    body = "".join(block(*p) for p in todo)
+    open("docs/PROMPTS.txt", "w", encoding="utf-8").write(
+        HEAD + done_list() + "=" * 61 + "\nSTILL TO MAKE\n" + "=" * 61 + "\n\n"
+        + body + TAIL)
+    print(f"docs/PROMPTS.txt written: {len(todo)} outstanding "
+          f"({len(LANDED)} landed, hidden)")
 
 
 if __name__ == "__main__":
