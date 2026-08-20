@@ -310,6 +310,27 @@ PLATES = [
      "A small oil lamp burning behind a paper window at night, seen from "
      "outside, warm. Nothing else in frame."),
 
+    ("25", "年畫 - THE AUSPICIOUS BABY PRINT",
+     "object",
+     "LOST IN THE WOODBLOCK-TO-INK REWRITE AND PUT BACK. The old prompt\n"
+     "file called this the most important image in the game and the ink\n"
+     "rewrite silently dropped it. It is item 4 on the 一更 planting list\n"
+     "in ENDING-SITE.txt, so the first watch cannot be built without it.\n"
+     "\n"
+     "It is a PRINT INSIDE THE PAINTING - a cheap New Year woodblock\n"
+     "pasted on a wall, drawn in our ink medium. Different register from\n"
+     "everything around it, which is the point.\n"
+     "\n"
+     "PLAY IT COMPLETELY STRAIGHT. Do not make it creepy, do not add\n"
+     "anything. It is seen plainly and warmly in the first watch with no\n"
+     "music cue, and it does all its work at the end without being\n"
+     "touched. Generate several and pick the sweetest.",
+     "A cheap New Year woodblock print pasted on a whitewashed wall, "
+     "showing a plump smiling baby boy in a red jacket holding a large "
+     "carp in both arms - the classic auspicious New Year subject. "
+     "Cheerful, round, warm, benign. The print itself is flat and "
+     "graphic and slightly coarse, pasted crooked, its edges lifting. No "
+     "text anywhere"),
     ("24", "WILLOW BRANCHES - NEAR OVERLAY",
      "overlay",
      "Not part of the kerb strip. This hangs over the near plane\n"

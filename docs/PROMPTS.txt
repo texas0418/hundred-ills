@@ -137,6 +137,56 @@ If one needs redoing, remove its id from LANDED and re-run.
 STILL TO MAKE
 =============================================================
 
+[25] 年畫 - THE AUSPICIOUS BABY PRINT
+      LOST IN THE WOODBLOCK-TO-INK REWRITE AND PUT BACK. The old prompt
+      file called this the most important image in the game and the ink
+      rewrite silently dropped it. It is item 4 on the 一更 planting list
+      in ENDING-SITE.txt, so the first watch cannot be built without it.
+      
+      It is a PRINT INSIDE THE PAINTING - a cheap New Year woodblock
+      pasted on a wall, drawn in our ink medium. Different register from
+      everything around it, which is the point.
+      
+      PLAY IT COMPLETELY STRAIGHT. Do not make it creepy, do not add
+      anything. It is seen plainly and warmly in the first watch with no
+      music cue, and it does all its work at the end without being
+      touched. Generate several and pick the sweetest.
+
+--------------------------------------------------------------  copy from here
+Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
+of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
+wet blooming edges, visible brush direction, the paper showing
+through. Large areas of the paper left completely unpainted to stand
+for mist, water and sky. Muted and drained palette - ink black, warm
+grey, pale ochre, washed-out green. One small area of vermilion red
+and no other saturated colour. Flat frontal composition, no camera
+perspective, no photographic realism. Quiet, plain, unspectacular.
+
+A cheap New Year woodblock print pasted on a whitewashed wall,
+showing a plump smiling baby boy in a red jacket holding a large
+carp in both arms - the classic auspicious New Year subject.
+Cheerful, round, warm, benign. The print itself is flat and graphic
+and slightly coarse, pasted crooked, its edges lifting. No text
+anywhere Drawn LARGE, filling most of the frame, with only a narrow
+margin of empty paper around it - it must not be a small object
+floating in a big empty field. Centred, touching none of the edges.
+Seen flat and straight on with no perspective. Nothing else in the
+frame, no ground, no background. Isolated on bare paper.
+
+Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
+leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
+gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
+concept art, 3D render, anime, oversaturated, neon, HDR, glow,
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
+--------------------------------------------------------------  to here
+
 =============================================================
 QA - reject a plate if ANY of these are true
 =============================================================
