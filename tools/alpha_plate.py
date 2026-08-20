@@ -29,26 +29,74 @@ from PIL import Image, ImageDraw
 # own arch, as if she could see the wall she was walking along through
 # the hole in the bridge. What belongs under an arch is the side canal
 # it spans, and the plate says so by leaving it empty.
-SEAL = {"bridge-walkover"}
+# EMPTY, DELIBERATELY. Two attempts to seal the bridge arch in the
+# pipeline both produced something worse than the problem:
+#
+#   enclosed-only   did nothing. An arch is open at the bottom, so the
+#                   space under it connects to the space around the
+#                   plate and is correctly not a hole.
+#   below-the-top   a hard-edged opaque box. Watercolour has no hard
+#                   edges, so any opacity synthesised from it shows its
+#                   own boundary - and the plate's paper is a different
+#                   white from the scene's, so the box is visible.
+#
+# THIS BELONGS IN THE ART. A plate drawn with water under the arch and
+# shadow beneath the deck has nothing to seal. One sentence in the
+# prompt beats any amount of masking. See [26].
+#
+# The machinery is kept because it is correct for a plate that really
+# does have an enclosed hole; nothing needs it yet.
+SEAL: set[str] = set()
 
 
 def seal_holes(alpha):
-    """Make enclosed transparent regions opaque.
+    """Make the object opaque everywhere BELOW its own top edge.
 
-    Enclosed means: transparent, and not reachable from outside the
-    picture. Flood the OUTSIDE from a one-pixel transparent border and
-    whatever transparency is left over is a hole in the object rather
-    than space around it.
+    Two earlier versions were wrong and the reasons are worth keeping.
+
+    Sealing only ENCLOSED transparency did nothing: a bridge arch is
+    open at the bottom, so the space under it connects to the space
+    around the plate. The flood fill was right that it is not a hole,
+    and the embankment carried on showing through the arch.
+
+    Filling everything below the first opaque pixel then overshot into a
+    white box, because the plate carries faint paper fibre right to its
+    bottom edge, so "the last row with any ink" was the last row.
+
+    What is true: nothing behind a solid object should show between the
+    object's top and its FOOTPRINT - and the footprint is where a row is
+    genuinely part of the object, not where a stray fibre lives.
     """
     h, w = alpha.shape
-    mask = Image.new("L", (w + 2, h + 2), 255)
-    mask.paste(Image.fromarray(((alpha < 0.5) * 255).astype(np.uint8)), (1, 1))
-    ImageDraw.floodfill(mask, (0, 0), 128)
-    inner = np.asarray(mask)[1:-1, 1:-1]
-    enclosed = inner == 255
+    solid = alpha > 0.12
+    if not solid.any():
+        return alpha, 0
+
+    # The plate has faint paper fibre everywhere, so "any solid pixel in
+    # the row" runs to the very bottom edge and the fill spills into the
+    # empty margin as a white box. Bound it by where the row is actually
+    # PART of the object - a tenth of its width or more.
+    frac = solid.mean(axis=1)
+    body = np.where(frac > 0.10)[0]
+    if not len(body):
+        return alpha, 0
+    top, bottom = body[0], body[-1]
+
+    # First opaque row per column; columns with nothing stay untouched.
+    first = np.argmax(solid, axis=0)
+    has = solid.any(axis=0)
+
+    yy = np.arange(h)[:, None]
+    below = (
+        (yy >= np.maximum(first, top)[None, :])
+        & (yy <= bottom)
+        & has[None, :]
+    )
+    filled = below & ~solid
+
     out = alpha.copy()
-    out[enclosed] = 1.0
-    return out, int(enclosed.sum())
+    out[filled] = 1.0
+    return out, int(filled.sum())
 
 
 def to_alpha(path):

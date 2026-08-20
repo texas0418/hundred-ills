@@ -112,7 +112,6 @@ LANDED = {
     "11": "door-gods-intact.png",
     "23": "lamp-in-window.png",
     "25": "baby-print.png",
-    "26": "bridge-walkover.png",
     # [29] deliberately NOT here. The plate exists and is unused - the
     # prompt asked for something a side-on game cannot show. Left out of
     # LANDED so it stays visible as work, until someone decides to
@@ -353,14 +352,25 @@ PLATES = [
      "\n"
      "It has to sit at the same height as the lane in canal-mid.png and\n"
      "carry a little embankment at each end so it blends into it.\n"
-     "Attach canal-mid.png as a second reference for the stonework.",
+     "Attach canal-mid.png as a second reference for the stonework.\n"
+     "\n"
+     "SECOND ATTEMPT, AND THE CHANGE IS ONE THING: the first plate left\n"
+     "the space under the arch as bare paper. Bare paper becomes\n"
+     "TRANSPARENT in the pipeline, so the embankment behind the bridge\n"
+     "showed through its own arch - she could see the wall she was\n"
+     "walking along through the hole in the bridge. Two attempts to seal\n"
+     "that in code both looked worse than the bug. Paint the shadow and\n"
+     "the water in, and there is nothing to seal.",
      "A short humpbacked stone footbridge carrying a flagged lane up and "
      "over a narrow side canal, seen from the side at the level of the "
      "lane itself. A low stone parapet runs along the near edge and rises "
-     "with the deck. Only the top of the arch shows below the deck; the "
-     "water is a narrow dark gap. NO reflection and no full circular "
-     "arch. A stretch of ordinary embankment continues at both the left "
-     "and right ends so it joins the lane on either side. Deserted."),
+     "with the deck. NO reflection and no full circular arch. A stretch "
+     "of ordinary embankment continues at both the left and right ends "
+     "so it joins the lane on either side. Deserted. "
+     "IMPORTANT: the opening under the arch is NOT left blank - it is "
+     "filled with deep shadow washing down into dark still water, so "
+     "that nothing can be seen through the bridge. Every part of the "
+     "picture inside the bridge's outline is painted."),
 
     ("27", "弄口 - THE MOUTH OF A LANE  (SECOND ATTEMPT)",
      "plane",

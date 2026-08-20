@@ -129,8 +129,6 @@ ALREADY DONE - not repeated below
         lamp-in-window.png
   [25] 年畫 - THE AUSPICIOUS BABY PRINT
         baby-print.png
-  [26] 橋 - A BRIDGE SHE WALKS OVER
-        bridge-walkover.png
   [28] 弄 - THE LANE WALL
         lane-wall.png
   [30] THE SECOND BANK
@@ -144,6 +142,68 @@ If one needs redoing, remove its id from LANDED and re-run.
 =============================================================
 STILL TO MAKE
 =============================================================
+
+[26] 橋 - A BRIDGE SHE WALKS OVER
+      REPLACES the way the existing bridge plates were being used. Those
+      are LANDMARK views - a whole arch seen across water, with its
+      reflection - and they stay, for seeing a bridge at a distance.
+      
+      This is the other thing entirely: the bridge she is ON. Per
+      DECISIONS 105 a flat side-on view cannot show a crossing toward
+      the camera, so the bridges she walks over span SIDE CANALS - a
+      smaller waterway joining the main one, where the lane humps up
+      and over it.
+      
+      It has to sit at the same height as the lane in canal-mid.png and
+      carry a little embankment at each end so it blends into it.
+      Attach canal-mid.png as a second reference for the stonework.
+      
+      SECOND ATTEMPT, AND THE CHANGE IS ONE THING: the first plate left
+      the space under the arch as bare paper. Bare paper becomes
+      TRANSPARENT in the pipeline, so the embankment behind the bridge
+      showed through its own arch - she could see the wall she was
+      walking along through the hole in the bridge. Two attempts to seal
+      that in code both looked worse than the bug. Paint the shadow and
+      the water in, and there is nothing to seal.
+
+--------------------------------------------------------------  copy from here
+Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
+of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
+wet blooming edges, visible brush direction, the paper showing
+through. Large areas of the paper left completely unpainted to stand
+for mist, water and sky. Muted and drained palette - ink black, warm
+grey, pale ochre, washed-out green. One small area of vermilion red
+and no other saturated colour. Flat frontal composition, no camera
+perspective, no photographic realism. Quiet, plain, unspectacular.
+
+A short humpbacked stone footbridge carrying a flagged lane up and
+over a narrow side canal, seen from the side at the level of the
+lane itself. A low stone parapet runs along the near edge and rises
+with the deck. NO reflection and no full circular arch. A stretch of
+ordinary embankment continues at both the left and right ends so it
+joins the lane on either side. Deserted. IMPORTANT: the opening
+under the arch is NOT left blank - it is filled with deep shadow
+washing down into dark still water, so that nothing can be seen
+through the bridge. Every part of the picture inside the bridge's
+outline is painted. Drawn LARGE, filling most of the frame, with
+only a narrow margin of empty paper around it - it must not be a
+small object floating in a big empty field. Centred, touching none
+of the edges. Seen flat and straight on with no perspective. Nothing
+else in the frame, no ground, no background. Isolated on bare paper.
+
+Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
+leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
+gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
+concept art, 3D render, anime, oversaturated, neon, HDR, glow,
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
+--------------------------------------------------------------  to here
 
 [27] 弄口 - THE MOUTH OF A LANE  (SECOND ATTEMPT)
       THE ONLY BRANCHING IN THE GAME, per DECISIONS 105, and the first
