@@ -11,7 +11,9 @@ there are ~150 plates and drift is invisible one image at a time.
     --mid      the mid depth plane: drain >= 10. Lower than --living
                because a plane is one band of a scene, not a scene
     --far      the far plane: must be PALE, 留白 >= 50 and drain <= 9
-    --near     the near plane: near-solid silhouette, ink >= 25
+    --near     the near plane: a silhouette, so judged on ink DARKNESS
+               rather than ink coverage - the prompt requires three
+               quarters of it to be empty paper
     --tile     also check the plate repeats: the edges must meet, and it
                must not empty out towards one side
 
@@ -59,10 +61,13 @@ def check(path, mode, tile):
             fails.append(f"drain {m['drain (painted)']:.2f} - over 9, too rich for "
                          "a far plane. Distance drains colour by itself.")
     elif mode == "near":
-        if m["ink"] < 25:
-            fails.append(f"ink {m['ink']:.1f}% - under 25%, a near plane is almost "
-                         "solid silhouette")
-        if m["saturation"] > 0.05:
+        # Judged on how BLACK the ink is, not how much frame it covers.
+        # The prompt requires three quarters empty paper, so the old
+        # ink-fraction gate of 25% could never be satisfied.
+        if m["ink darkness"] > 140:
+            fails.append(f"ink darkness {m['ink darkness']:.0f} - too pale for a "
+                         "silhouette, a near plane is solid wet ink")
+        if m["saturation"] > 0.09:
             fails.append(f"saturation {m['saturation']:.3f} - a near plane carries "
                          "no colour at all")
     else:
