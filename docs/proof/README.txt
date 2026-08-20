@@ -127,3 +127,34 @@ BATCH TWO - 2026-08-20
 
   NOT LANDED: [23] the lamp, contaminated by subject bleed from [22];
   [11] door-gods-intact, not generated.
+
+ALL 24 PLATES LANDED - 2026-08-20
+  contact-sheet.png is every plate on one page. Rebuild it after each
+  batch:  python3 tools/contact_sheet.py
+
+  IT EARNED ITS KEEP ON THE FIRST LOOK. The four door god wear states
+  are supposed to be ONE PRINT DECAYING - that is the whole lock
+  system, DECISIONS 60, and the player is meant to read them as the
+  same paper aging. They do not. Measured:
+
+                     留白     sat     darkness
+    new             59.3%   0.113      60.0
+    intact           0.1%   0.228      40.9   <- odd one out
+    faded           33.4%   0.133      93.9
+    torn            58.0%   0.087     113.0
+
+  door-gods-intact is on dark brown wood at 0.228 saturation, against a
+  median of 0.096 across the other nineteen plates. It reads as a
+  different artist, not a different amount of wear. Side by side on the
+  sheet it is obvious; alone it looked fine, which is exactly why the
+  sheet exists.
+
+  CAUSE: [11] says "Edit of 10" and the prompt file says to generate
+  the NEW pair first and produce the others AS EDITS of it. It was
+  generated fresh instead. Four independent generations of "door gods"
+  give four different prints.
+
+  NOT BLOCKING. The set works as four door states. It does not work as
+  one print aging, and if the player is meant to notice the SAME print
+  decaying, [10]-[13] need redoing as a chain of edits from one image.
+  Simon's call.
