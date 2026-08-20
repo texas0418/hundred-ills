@@ -129,6 +129,14 @@ ALREADY DONE - not repeated below
         lamp-in-window.png
   [25] 年畫 - THE AUSPICIOUS BABY PRINT
         baby-print.png
+  [26] 橋 - A BRIDGE SHE WALKS OVER
+        bridge-walkover.png
+  [27] 弄口 - THE MOUTH OF A LANE
+        lane-mouth.png
+  [28] 弄 - THE LANE WALL
+        lane-wall.png
+  [30] THE SECOND BANK
+        canal-far-b.png
   [24] WILLOW BRANCHES - NEAR OVERLAY
         willow.png
 
@@ -139,145 +147,19 @@ If one needs redoing, remove its id from LANDED and re-run.
 STILL TO MAKE
 =============================================================
 
-[26] 橋 - A BRIDGE SHE WALKS OVER
-      REPLACES the way the existing bridge plates were being used. Those
-      are LANDMARK views - a whole arch seen across water, with its
-      reflection - and they stay, for seeing a bridge at a distance.
+[29] 弄 - THE LANE GROUND  ** DO NOT GENERATE **
+      THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.
       
-      This is the other thing entirely: the bridge she is ON. Per
-      DECISIONS 105 a flat side-on view cannot show a crossing toward
-      the camera, so the bridges she walks over span SIDE CANALS - a
-      smaller waterway joining the main one, where the lane humps up
-      and over it.
+      It asks for flagstones "seen from slightly above so the ground
+      reads flat", which is a contradiction. A SIDE-ON GAME NEVER DRAWS
+      THE GROUND SHE WALKS ON. Look at the canal strip: far bank,
+      embankment seen from across, near kerb - the surface under her
+      feet is not a plate and never was. A lane is the same: the wall
+      opposite and the kerb, and nothing between.
       
-      It has to sit at the same height as the lane in canal-mid.png and
-      carry a little embankment at each end so it blends into it.
-      Attach canal-mid.png as a second reference for the stonework.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A short humpbacked stone footbridge carrying a flagged lane up and
-over a narrow side canal, seen from the side at the level of the
-lane itself. A low stone parapet runs along the near edge and rises
-with the deck. Only the top of the arch shows below the deck; the
-water is a narrow dark gap. NO reflection and no full circular arch.
-A stretch of ordinary embankment continues at both the left and
-right ends so it joins the lane on either side. Deserted. Drawn
-LARGE, filling most of the frame, with only a narrow margin of empty
-paper around it - it must not be a small object floating in a big
-empty field. Centred, touching none of the edges. Seen flat and
-straight on with no perspective. Nothing else in the frame, no
-ground, no background. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[27] 弄口 - THE MOUTH OF A LANE
-      THE ONLY BRANCHING IN THE GAME, per DECISIONS 105. This is what an
-      opening off the bank looks like, and the player has to be able to
-      read it as somewhere she can go without a single word of UI.
-      
-      It must be UNMISTAKABLY a way through and NOT a doorway - a door
-      is the lock system at 60 and the two cannot be confused.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A narrow gap between two whitewashed buildings where an alley leads
-away from the canal, seen straight on. The gap is tall and very
-narrow, dark inside, with worn stone flagging running into it and no
-door and no gate of any kind. The buildings on either side are plain
-whitewashed wall with black tile above. Deserted. Drawn LARGE,
-filling most of the frame, with only a narrow margin of empty paper
-around it - it must not be a small object floating in a big empty
-field. Centred, touching none of the edges. Seen flat and straight
-on with no perspective. Nothing else in the frame, no ground, no
-background. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[28] 弄 - THE LANE WALL
-      Aspect 21:9. The far plane of a LANE strip - the wall on the other
-      side of the alley. A lane is narrow, so this is CLOSE and TALL and
-      fills much more of the frame than the far bank does.
-      Run plate_check with --mid --tile: it is close, so it carries
-      colour like the mid plane rather than being drained by distance.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A long whitewashed wall running the full width of the image, close
-to the viewer, the other side of a narrow alley. Damp and stained
-near the ground, a few shuttered windows set high, one plain closed
-door. Black tile eaves along the top edge. The upper quarter is bare
-paper. Deserted, nobody about. Seen straight on from directly across
-the water, as flat as a stage backdrop, with no perspective and no
-vanishing point, everything at the same distance. Cut off at both
-the left and right edges at the same height so the image could be
-repeated end to end without a join showing. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[29] 弄 - THE LANE GROUND
-      Aspect 21:9. The mid plane of a LANE strip: what she walks on
-      between the walls. Check with --mid --tile.
+      It was generated once and came back a handsome receding pavement
+      with nowhere to put it. If a lane ever needs a floor, the answer
+      is a near kerb, not a ground plane.
 
 --------------------------------------------------------------  copy from here
 Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
@@ -298,50 +180,6 @@ perspective and no vanishing point, everything at the same distance.
 Cut off at both the left and right edges at the same height so the
 image could be repeated end to end without a join showing. Isolated
 on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[30] THE SECOND BANK
-      Aspect 21:9. A far bank that is NOT the one already built, so that
-      moving to another strip changes what she sees and not only where
-      she is. Check with --far --tile.
-      Attach canal-far.png so it is recognisably the same town, and then
-      make it a DIFFERENT part of it.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A long low row of whitewashed water town houses with black tile
-roofs seen from across a canal, all at the same distance with a
-level roofline and no recession. Taller and narrower buildings than
-an even terrace - two of them stand a storey higher than the rest,
-and one has a small covered landing at the water. Very pale and
-washed out, ink only in the roof lines. The top two thirds is bare
-paper. No boat, no lane, no figures. Seen straight on from directly
-across the water, as flat as a stage backdrop, with no perspective
-and no vanishing point, everything at the same distance. Cut off at
-both the left and right edges at the same height so the image could
-be repeated end to end without a join showing. Isolated on bare
-paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked

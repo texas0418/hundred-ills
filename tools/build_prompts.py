@@ -112,6 +112,14 @@ LANDED = {
     "11": "door-gods-intact.png",
     "23": "lamp-in-window.png",
     "25": "baby-print.png",
+    "26": "bridge-walkover.png",
+    "27": "lane-mouth.png",
+    # [29] deliberately NOT here. The plate exists and is unused - the
+    # prompt asked for something a side-on game cannot show. Left out of
+    # LANDED so it stays visible as work, until someone decides to
+    # delete the prompt instead.
+    "28": "lane-wall.png",
+    "30": "canal-far-b.png",
 }
 
 # (id, title, kind, note shown above the block, body)
@@ -382,10 +390,20 @@ PLATES = [
      "door. Black tile eaves along the top edge. The upper quarter is "
      "bare paper. Deserted, nobody about."),
 
-    ("29", "弄 - THE LANE GROUND",
+    ("29", "弄 - THE LANE GROUND  ** DO NOT GENERATE **",
      "plane",
-     "Aspect 21:9. The mid plane of a LANE strip: what she walks on\n"
-     "between the walls. Check with --mid --tile.",
+     "THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.\n"
+     "\n"
+     "It asks for flagstones \"seen from slightly above so the ground\n"
+     "reads flat\", which is a contradiction. A SIDE-ON GAME NEVER DRAWS\n"
+     "THE GROUND SHE WALKS ON. Look at the canal strip: far bank,\n"
+     "embankment seen from across, near kerb - the surface under her\n"
+     "feet is not a plate and never was. A lane is the same: the wall\n"
+     "opposite and the kerb, and nothing between.\n"
+     "\n"
+     "It was generated once and came back a handsome receding pavement\n"
+     "with nowhere to put it. If a lane ever needs a floor, the answer\n"
+     "is a near kerb, not a ground plane.",
      "Wet stone flagging running the full width of the image, worn "
      "smooth and uneven, a shallow drainage channel down the middle "
      "catching a little light. Seen from slightly above so the ground "
