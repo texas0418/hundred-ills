@@ -62,3 +62,19 @@ shigandang-as-scene.jpg
   ALREADY CORRECT. Two generations from the same text went opposite
   ways, so some of this is just variance and the answer is to generate
   a couple and check, not to keep rewording.
+
+lamp-contaminated.jpg
+  Plate [23], the lamp in her window. The prompt was correct and the
+  lamp is there - and so are the two divination blocks from [22], the
+  prompt generated immediately before it, floating over the window in
+  full size.
+
+  SUBJECT BLEED. The set instructions say to generate related plates in
+  ONE session so they share a seed family and look like the same night.
+  That is right for the three canal planes. It is a liability for a run
+  of unrelated objects, where the previous subject can survive into the
+  next image.
+
+  THE LESSON: batch by set, not by convenience. Generate the things
+  that must match together, and start a fresh session between unrelated
+  objects.

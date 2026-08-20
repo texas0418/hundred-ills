@@ -8,6 +8,10 @@ would show as a hard edge when the plane slides, and the aspect has to
 be 21:9 for a ground plane.
 
     python3 tools/prep_plate.py <in> <out> [--aspect 2.33|none] [--anchor bottom]
+                                          [--no-trim]
+
+--no-trim keeps the empty paper. Use it for planes: a kerb strip is
+mostly emptiness by design, and trimming to content destroys it.
 
 --anchor bottom keeps the ground and drops empty sky, which is what a
 ground plane wants. --anchor centre is for objects.
@@ -63,7 +67,13 @@ def main():
 
     a = np.asarray(Image.open(src).convert("RGB")).astype(np.float32)
     h0, w0 = a.shape[:2]
-    a, box = trim_mount(a)
+    # A near-empty PLANE must keep its empty paper - the emptiness is
+    # where the planes behind show through. Trimming to content would
+    # reduce a kerb strip to the ink band alone.
+    if "--no-trim" in sys.argv:
+        box = (0, 0, w0, h0)
+    else:
+        a, box = trim_mount(a)
     h1, w1 = a.shape[:2]
     a = a if aspect is None else crop_aspect(a, aspect, anchor)
     h2, w2 = a.shape[:2]

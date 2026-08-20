@@ -87,6 +87,10 @@ ALREADY DONE - not repeated below
         canal-far.png
   [03] CANAL BANK - MID PLANE
         canal-mid.png
+  [04] CANAL BANK - NEAR PLANE, THE KERB
+        canal-near-kerb.png
+  [05] BRIDGE ONE
+        bridge-one.png
   [06] BRIDGE TWO
         bridge-two.png
   [07] BRIDGE THREE - THE COVERED BRIDGE
@@ -95,16 +99,32 @@ ALREADY DONE - not repeated below
         city-gate.png
   [09] HER DOOR
         her-door.png
+  [10] DOOR GODS - NEW
+        door-gods-new.png
   [12] DOOR GODS - FADED
         door-gods-faded.png
   [13] DOOR GODS - TORN
         door-gods-torn.png
+  [14] 水鬼 - THE DROWNED
+        shuigui.png
   [15] 姑獲鳥 - THE NIGHT BIRD WOMAN
         guhuoniao.png
   [16] 畫皮 - THE PAINTED SKIN
         huapi.png
+  [17] 石敢當 - THE STONE
+        shigandang.png
+  [18] 五通神 - THE LOCAL GOD
+        wutongshen.png
   [19] 打更人 - THE NIGHTWATCHMAN
         watchman.png
+  [20] LAUNDRY ON A LINE
+        laundry.png
+  [21] 買路錢 - ROAD MONEY
+        road-money.png
+  [22] 擲筊 - THE DIVINATION BLOCKS
+        jiaobei.png
+  [24] WILLOW BRANCHES - NEAR OVERLAY
+        willow.png
 
 Definitions for these are kept in tools/build_prompts.py.
 If one needs redoing, remove its id from LANDED and re-run.
@@ -112,124 +132,6 @@ If one needs redoing, remove its id from LANDED and re-run.
 =============================================================
 STILL TO MAKE
 =============================================================
-
-[04] CANAL BANK - NEAR PLANE, THE KERB
-      Aspect 21:9. The DARKEST plate and the only one with no colour at all.
-      It sits closest to the player, moves fastest and therefore repeats
-      most often, so it must carry NO distinctive feature - anything
-      memorable in here will visibly recur every screen width.
-      The willow moved out to [24] for exactly that reason.
-      Target: ink above 25%, saturation under 0.05, and a clean seam.
-      Check with --near --tile.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A low broken stone kerb running the full width along the very bottom
-edge, as a near-black silhouette in solid wet ink, no colour
-anywhere, no detail inside the shape, no single object standing out
-from it. Even along its whole length, nothing on one side that is
-not on the other. The upper three quarters of the image is
-completely empty bare paper. Seen straight on from directly across
-the water, as flat as a stage backdrop, with no perspective and no
-vanishing point, everything at the same distance. Cut off at both
-the left and right edges at the same height so the image could be
-repeated end to end without a join showing. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[05] BRIDGE ONE
-      Generate 05, 06 and 07 in one session, same seed family.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A modest low single arch stone footbridge, worn and plain and
-unornamented, seen from the side, its reflection in still water
-below. Drawn LARGE, filling most of the frame, with only a narrow
-margin of empty paper around it - it must not be a small object
-floating in a big empty field. Centred, touching none of the edges.
-Seen flat and straight on with no perspective. Nothing else in the
-frame, no ground, no background. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[10] DOOR GODS - NEW
-      The lock system, DECISIONS 60. Generate this one FIRST, then make 11,
-      12 and 13 as edits of it so it is recognisably one print decaying.
-      This is the pair on her own door and the only perfect one in the game.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A pair of Chinese door god warrior figures printed on paper and
-pasted on a wooden door, one facing left and one facing right,
-armoured, stern, symmetrical, seen straight on, freshly pasted,
-crisp and bright and uncreased. No text anywhere. Drawn LARGE,
-filling most of the frame, with only a narrow margin of empty paper
-around it - it must not be a small object floating in a big empty
-field. Centred, touching none of the edges. Seen flat and straight
-on with no perspective. Nothing else in the frame, no ground, no
-background. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
 
 [11] DOOR GODS - INTACT
       Edit of 10.
@@ -268,219 +170,6 @@ crowd, text, characters, calligraphy, inscription, seal, signature,
 watermark, frame, border.
 --------------------------------------------------------------  to here
 
-[14] 水鬼 - THE DROWNED
-      Cannot leave the water until it finds a substitute. Its whole existence
-      is one obligation aimed at the player.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A human figure standing waist deep in still water seen from the
-front, wet hair hanging flat over the face, arms at its sides,
-completely motionless, brushed in wet ink. Not gory. Drawn LARGE,
-filling most of the frame, with only a narrow margin of empty paper
-around it - it must not be a small object floating in a big empty
-field. Centred, touching none of the edges. Seen flat and straight
-on with no perspective. Nothing else in the frame, no ground, no
-background. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[17] 石敢當 - THE STONE
-      A locked door with three thousand years of documentation.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A short upright weathered stone slab set into the ground at the end
-of a lane, plain and blank with no inscription, leaning slightly.
-Drawn LARGE, filling most of the frame, with only a narrow margin of
-empty paper around it - it must not be a small object floating in a
-big empty field. Centred, touching none of the edges. Seen flat and
-straight on with no perspective. Nothing else in the frame, no
-ground, no background. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[18] 五通神 - THE LOCAL GOD
-      The god you bargain with, who is not good.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A small seated enshrined folk deity figure, robed, frontal and
-symmetrical, with an expression that is pleasant but not kind. A
-crude village shrine idol. No text. Drawn LARGE, filling most of the
-frame, with only a narrow margin of empty paper around it - it must
-not be a small object floating in a big empty field. Centred,
-touching none of the edges. Seen flat and straight on with no
-perspective. Nothing else in the frame, no ground, no background.
-Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[20] LAUNDRY ON A LINE
-      姑獲鳥 marks children by touching clothing left out overnight. The
-      player must handle this at their own initiative. DECISIONS 79.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-Small children's clothes hanging still on a pole over water, seen
-flat from the front. Drawn LARGE, filling most of the frame, with
-only a narrow margin of empty paper around it - it must not be a
-small object floating in a big empty field. Centred, touching none
-of the edges. Seen flat and straight on with no perspective. Nothing
-else in the frame, no ground, no background. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[21] 買路錢 - ROAD MONEY
-      Scattered to clear a route for the dead. It is hers.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-Round paper spirit money coins scattered loose on wet flagstones
-seen from above. No text or markings on the coins. Drawn LARGE,
-filling most of the frame, with only a narrow margin of empty paper
-around it - it must not be a small object floating in a big empty
-field. Centred, touching none of the edges. Seen flat and straight
-on with no perspective. Nothing else in the frame, no ground, no
-background. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[22] 擲筊 - THE DIVINATION BLOCKS
-      The game's only way to ask a question.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-Two small crescent shaped wooden blocks, one flat face and one
-curved face each, lying on stone. Drawn LARGE, filling most of the
-frame, with only a narrow margin of empty paper around it - it must
-not be a small object floating in a big empty field. Centred,
-touching none of the edges. Seen flat and straight on with no
-perspective. Nothing else in the frame, no ground, no background.
-Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
 [23] THE LAMP IN HER WINDOW
       Visible from the first watch onward, in every scene it could plausibly
       appear in, and NEVER remarked on by anyone. If it is mentioned once,
@@ -503,45 +192,6 @@ must not be a small object floating in a big empty field. Centred,
 touching none of the edges. Seen flat and straight on with no
 perspective. Nothing else in the frame, no ground, no background.
 Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[24] WILLOW BRANCHES - NEAR OVERLAY
-      Not part of the kerb strip. This hangs over the near plane
-      occasionally, so it can be distinctive - that is the whole point of
-      pulling it out of [04]. Pure ink, no colour: it sits closest to the
-      player of anything in the game.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A few bare winter willow branches hanging down from above, brushed
-in solid wet ink as a near-black silhouette, no colour anywhere, no
-leaves, no detail inside the strokes. They enter from the top edge
-and hang into the upper part of the frame only. Drawn LARGE, filling
-most of the frame, against completely empty paper so it can be cut
-out, entering from one edge only and touching none of the other
-three. Seen flat and straight on with no perspective. Nothing else
-in the frame, no ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked

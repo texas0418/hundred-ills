@@ -93,3 +93,37 @@ THE FIRST BIG BATCH - 2026-08-20
   Note on 姑獲鳥: it came back dignified and calm rather than a
   gargoyle, which DECISIONS 15 asks for and which the ending depends
   on. Keep it.
+
+BATCH TWO - 2026-08-20
+  Eleven images for twelve outstanding plates. TEN LANDED.
+
+  The LARGE fix worked. Where the first batch had ten plates under
+  700px and one at 87px, this batch came back:
+
+    willow          2768 x 880
+    jiaobei         1403 x 591
+    bridge-one      1408 x 474
+    door-gods-new   1170 x 667
+    laundry         1002 x 445
+    wutongshen       580 x 895
+    road-money       720 x 666
+    shigandang       400 x 704
+    shuigui          365 x 629   <- marginal, see below
+
+  水鬼 IS THE ONE EXCEPTION AND IT IS DELIBERATE. 629px on the long
+  edge, under the 700 floor. Landed anyway because the figure is a
+  slender standing person seen at middle distance in the canal, not a
+  creature that fills the screen. If it ever needs to appear large, it
+  needs redoing. Flagged rather than waved through.
+
+  TWO METRIC BUGS FIXED, both mine, both found by real plates:
+    the near-plane gate demanded 25% ink coverage while the PROMPT
+    demands three quarters empty paper. Those cannot both be true.
+    Replaced with ink darkness - but the first version of THAT, mean
+    luminance of the painted area, then failed the willow, because thin
+    branches on a big sheet average out towards the paper. Now it is
+    the mean of the darkest 5%: a claim about how black the strokes
+    get, which is what a silhouette actually means.
+
+  NOT LANDED: [23] the lamp, contaminated by subject bleed from [22];
+  [11] door-gods-intact, not generated.

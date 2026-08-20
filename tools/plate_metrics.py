@@ -70,6 +70,15 @@ def measure(a):
         "warm light": 100 * ((r > b * 1.15) & (lum > 140) & (mx - mn > 30)).mean(),
         "ink": 100 * (lum < 70).mean(),
         "saturation": float(np.where(mx > 0, (mx - mn) / np.maximum(mx, 1), 0).mean()),
+        # How black the plate GETS, as the mean of its darkest 5%.
+        #
+        # Two earlier attempts at this were both wrong. Ink FRACTION
+        # failed the kerb, because the prompt requires three quarters of
+        # a near plane to be empty paper. Mean luminance of the painted
+        # area then failed the willow, because thin branches on a big
+        # sheet drag the average up towards the paper. A silhouette is a
+        # claim about how dark the darkest strokes are, so measure that.
+        "ink darkness": float(np.percentile(lum, 5)),
         "drain (painted)": float(dist[painted].mean()) if painted.any() else 0.0,
         "drain (whole frame)": float(dist.mean()),
     }
