@@ -1,0 +1,312 @@
+#!/usr/bin/env python3
+"""
+Generates docs/PROMPTS.txt with every prompt written out IN FULL.
+
+docs/PROMPTS.txt rule 1 says the style preamble must be byte-identical
+across every generation, because that is where consistency across ~150
+plates actually comes from. Hand-maintaining 23 copies of it guarantees
+drift, so the file is generated and this script is the source.
+
+    python3 tools/build_prompts.py
+
+Edit PREAMBLE, NEGATIVE or PLATES here, never docs/PROMPTS.txt directly.
+"""
+import textwrap
+
+PREAMBLE = (
+    "Chinese ink and colour painting on xuan paper, 水墨設色, in the manner "
+    "of a late Qing Jiangnan water town. Brush and wash: soft graded ink, "
+    "wet blooming edges, visible brush direction, the paper showing through. "
+    "Large areas of the paper left completely unpainted to stand for mist, "
+    "water and sky. Muted and drained palette - ink black, warm grey, pale "
+    "ochre, washed-out green. One small area of vermilion red and no other "
+    "saturated colour. Flat frontal composition, no camera perspective, no "
+    "photographic realism. Quiet, plain, unspectacular."
+)
+
+NEGATIVE = (
+    "Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold leaf, "
+    "stone lantern, pagoda, cherry blossom, koi, zen garden, raked gravel, "
+    "mountains, karst peaks, cliffs, airbrush, digital painting, concept art, "
+    "3D render, anime, oversaturated, neon, HDR, glow, bloom, lens flare, "
+    "photorealistic, painted to the edges, no white space, busy, ornate, "
+    "dragons, red paper lanterns everywhere, large mass of red foliage, red "
+    "canopy, text, characters, calligraphy, inscription, seal, signature, "
+    "watermark, frame, border."
+)
+
+# (id, title, note shown above the block, body)
+PLATES = [
+    ("01", "THE LIVING-WORLD KEY",
+     "GENERATE THIS FIRST. Nothing else until it is right. Every reference\n"
+     "we have is already the dead world; this sets the warm end that the\n"
+     "colour drains FROM. See DECISIONS 99.",
+     "A row of whitewashed water town houses at night with their walls going "
+     "straight down into a canal, black tile roofs, warm lamplight in two of "
+     "the windows, a flat wooden boat moored below. The lower third is calm "
+     "water. Large areas of bare paper for mist. One small scrap of vermilion "
+     "on a door."),
+
+    ("02", "CANAL BANK - FAR PLANE", "Aspect 21:9. One depth plane only.",
+     "A long low row of whitewashed water town houses with black tile roofs "
+     "seen from across a canal, receding gently into mist, small square "
+     "windows, no people. The top half is bare unpainted paper. Isolated on "
+     "bare paper with nothing above or below."),
+
+    ("03", "CANAL BANK - MID PLANE", "Aspect 21:9.",
+     "A stone embankment along a canal with worn steps descending into the "
+     "water, mooring posts, one flat wooden boat tied up and empty. No people. "
+     "Isolated on bare paper."),
+
+    ("04", "CANAL BANK - NEAR PLANE", "Aspect 21:9. Silhouette only.",
+     "A few bare winter willow branches and a low stone kerb as dark "
+     "silhouette shapes along the bottom edge, brushed in wet ink. Nothing "
+     "else. Isolated on bare paper."),
+
+    ("05", "BRIDGE ONE", "Generate 05, 06 and 07 in one session, same seed family.",
+     "A modest low single arch stone footbridge, worn and plain and "
+     "unornamented, seen from the side, its reflection in still water below. "
+     "Isolated on bare paper."),
+
+    ("06", "BRIDGE TWO", "",
+     "A taller humpbacked stone arch bridge with stepped sides and a plain "
+     "stone post at each end, seen from the side, reflected in still water. "
+     "Isolated on bare paper."),
+
+    ("07", "BRIDGE THREE - THE COVERED BRIDGE",
+     "Where she sees her body. It must be the only bridge in the game you\n"
+     "cannot see through.",
+     "A long covered bridge with a low tiled roof over its walkway, dark and "
+     "enclosed, the far end lost in mist and not visible, seen from the side. "
+     "Isolated on bare paper."),
+
+    ("08", "THE CITY GATE", "The 摸釘 site. First five minutes of the game.",
+     "A heavy closed wooden city gate with rows of large round bronze studs in "
+     "a grid across it, framed by plain stone, seen straight on. No "
+     "inscription, no plaque. Isolated on bare paper."),
+
+    ("09", "HER DOOR", "The last image in the game. The wards on it hold.",
+     "A plain wooden double door in a whitewashed wall at night, closed, a "
+     "paper door god print freshly pasted on each leaf, crisp and new and "
+     "uncreased. Warm lamplight falling from a small window beside it. One "
+     "scrap of vermilion. Isolated on bare paper."),
+
+    ("10", "DOOR GODS - NEW",
+     "The lock system, DECISIONS 60. Generate this one FIRST, then make 11,\n"
+     "12 and 13 as edits of it so it is recognisably one print decaying.\n"
+     "This is the pair on her own door and the only perfect one in the game.",
+     "A pair of Chinese door god warrior figures printed on paper and pasted "
+     "on a wooden door, one facing left and one facing right, armoured, stern, "
+     "symmetrical, seen straight on, freshly pasted, crisp and bright and "
+     "uncreased. No text anywhere. Isolated on bare paper."),
+
+    ("11", "DOOR GODS - INTACT", "Edit of 10.",
+     "A pair of Chinese door god warrior figures printed on paper and pasted "
+     "on a wooden door, one facing left and one facing right, armoured, stern, "
+     "symmetrical, seen straight on, pasted up some time ago, slightly dulled "
+     "but whole. No text anywhere. Isolated on bare paper."),
+
+    ("12", "DOOR GODS - FADED", "Edit of 10. Her way in.",
+     "A pair of Chinese door god warrior figures printed on paper and pasted "
+     "on a wooden door, one facing left and one facing right, armoured, stern, "
+     "symmetrical, seen straight on, sun bleached and washed pale, colours "
+     "weak, edges lifting from the wood. No text anywhere. Isolated on bare "
+     "paper."),
+
+    ("13", "DOOR GODS - TORN", "Edit of 10.",
+     "A pair of Chinese door god warrior figures printed on paper and pasted "
+     "on a wooden door, torn and hanging in strips, most of the print missing, "
+     "only fragments still stuck to the wood. No text anywhere. Isolated on "
+     "bare paper."),
+
+    ("14", "水鬼 - THE DROWNED",
+     "Cannot leave the water until it finds a substitute. Its whole existence\n"
+     "is one obligation aimed at the player.",
+     "A human figure standing waist deep in still water seen from the front, "
+     "wet hair hanging flat over the face, arms at its sides, completely "
+     "motionless, brushed in wet ink. Not gory. Bare paper above and around."),
+
+    ("15", "姑獲鳥 - THE NIGHT BIRD WOMAN",
+     "This one is her. Keep it dignified - the ending is ruined if the player\n"
+     "spent eight hours looking at a gargoyle.",
+     "A large bird with a woman's face and long hair, wings spread, seen "
+     "frontally and symmetrically like an emblem, calm expression, not "
+     "snarling. Brushed in ink. Isolated on bare paper."),
+
+    ("16", "畫皮 - THE PAINTED SKIN", "",
+     "An empty human skin held up flat and spread like a garment on a line, a "
+     "face painted on it, hollow and limp. Stylised and flat, not bloody. "
+     "Isolated on bare paper."),
+
+    ("17", "石敢當 - THE STONE", "A locked door with three thousand years of documentation.",
+     "A short upright weathered stone slab set into the ground at the end of a "
+     "lane, plain and blank with no inscription, leaning slightly. Isolated on "
+     "bare paper."),
+
+    ("18", "五通神 - THE LOCAL GOD", "The god you bargain with, who is not good.",
+     "A small seated enshrined folk deity figure, robed, frontal and "
+     "symmetrical, with an expression that is pleasant but not kind. A crude "
+     "village shrine idol. No text. Isolated on bare paper."),
+
+    ("19", "打更人 - THE NIGHTWATCHMAN",
+     "He must never look sinister. He is a cold man doing a tedious job, and\n"
+     "the moment he reads as an omen he stops working. DECISIONS 89.",
+     "An old man in a padded winter coat walking alone at night carrying a "
+     "small paper lantern and a bamboo clapper, seen from the side, ordinary "
+     "and tired, not sinister. Isolated on bare paper."),
+
+    ("20", "LAUNDRY ON A LINE",
+     "姑獲鳥 marks children by touching clothing left out overnight. The\n"
+     "player must handle this at their own initiative. DECISIONS 79.",
+     "Small children's clothes hanging still on a pole over water, seen flat "
+     "from the front. Isolated on bare paper."),
+
+    ("21", "買路錢 - ROAD MONEY", "Scattered to clear a route for the dead. It is hers.",
+     "Round paper spirit money coins scattered loose on wet flagstones seen "
+     "from above. No text or markings on the coins. Isolated on bare paper."),
+
+    ("22", "擲筊 - THE DIVINATION BLOCKS", "The game's only way to ask a question.",
+     "Two small crescent shaped wooden blocks, one flat face and one curved "
+     "face each, lying on stone. Isolated on bare paper."),
+
+    ("23", "THE LAMP IN HER WINDOW",
+     "Visible from the first watch onward, in every scene it could plausibly\n"
+     "appear in, and NEVER remarked on by anyone. If it is mentioned once,\n"
+     "the ending is spoiled.",
+     "A small oil lamp burning behind a paper window at night, seen from "
+     "outside, warm. Nothing else in frame. Isolated on bare paper."),
+]
+
+W = 68
+RULE = "-" * 62
+
+
+def wrap(t):
+    return "\n".join(textwrap.wrap(t, W))
+
+
+def block(pid, title, note, body):
+    out = [f"[{pid}] {title}"]
+    if note:
+        out += ["      " + ln for ln in note.split("\n")]
+    out += [
+        "",
+        f"{RULE}  copy from here",
+        wrap(PREAMBLE),
+        "",
+        wrap(body),
+        "",
+        wrap(NEGATIVE),
+        f"{RULE}  to here",
+        "", "",
+    ]
+    return "\n".join(out)
+
+
+HEAD = """HUNDRED ILLS - IMAGE PROMPTS
+Rewritten 2026-08-19 for the INK medium. The woodblock version is dead;
+see DECISIONS 58.
+
+GENERATED FILE. Edit tools/build_prompts.py and re-run it, never this
+file directly - the style preamble has to stay byte-identical across all
+23 prompts and hand-editing guarantees drift.
+
+EVERY PROMPT BELOW IS COMPLETE. Copy one block between its rules and
+paste it. Nothing needs assembling.
+
+
+=============================================================
+BEFORE YOU START
+=============================================================
+
+1. ATTACH THE STYLE REFERENCE to every single generation:
+   docs/proof/STYLE-KEY.jpg. Chosen from six candidates by measurement -
+   26.6% bare paper, wash texture, no Japanese cues, and its bridge is
+   our bridge. ITS RED IS WRONG: 27.58% of the frame where we want
+   about 3%. Use it for touch and palette, never for how much red.
+
+2. 留白 IS NOT OPTIONAL. At least a quarter of every plate is bare
+   paper standing for mist, water and sky. This is the one measurable
+   thing separating a Chinese painting from a generic "oriental"
+   render - two candidate references were rejected purely for having
+   0.8% and 3.9% white. Painted to all four edges is a reject however
+   pretty it is.
+
+3. RED IS A SLIVER, NOT A MASS. One small area of vermilion and no
+   other saturated colour anywhere. A door couplet, a scrap of cloth,
+   one lantern. Never a canopy of red maple. Red is being saved for the
+   last twenty minutes of the game and it does not work if the player
+   has been soaking in it for eight hours.
+
+4. NOT JAPAN. The most damaging drift available. No vermilion lacquer
+   bridges, no torii, no gold leaf, no stone lanterns, no pagodas, no
+   cherry blossom, no koi, no raked gravel. One Japanese cue in a
+   reference propagates into every plate after it.
+
+5. NO TEXT, EVER. No characters, no couplets, no seals, no signature.
+   Models produce garbage characters and a nonsense inscription would
+   destroy this game's central claim. All type is set live in the app.
+
+6. ONE ELEMENT PER PLATE, on bare paper. A scene is assembled in the
+   engine from three to five separately generated planes. Do not ask
+   for a finished composed scene.
+
+
+=============================================================
+WHAT JIANGNAN ACTUALLY LOOKS LIKE - read once before starting
+=============================================================
+
+Every reference we looked at was a garden, a temple or a mountain
+beauty spot. Ours is none of those. It is a WORKING TOWN.
+
+  whitewashed walls going straight down into the canal, no bank
+  black tile roofs, low, close together, sagging
+  stone steps descending into the water at intervals
+  flat wooden boats moored and empty
+  low arched stone footbridges, plain, worn, unornamented
+  willows, bare in the first lunar month
+  laundry on poles over the water
+  narrow lanes between houses, stone flagged, wet
+  NO MOUNTAINS. Jiangnan is flat. The horizon is roofs and mist.
+
+Get a photograph of Zhouzhuang, Wuzhen or Tongli in front of you before
+you start, or the architecture will drift scenic.
+
+
+=============================================================
+THE PROMPTS
+=============================================================
+
+"""
+
+TAIL = """=============================================================
+QA - reject a plate if ANY of these are true
+=============================================================
+
+  Less than a quarter of it is bare unpainted paper.
+  It is painted to all four edges.
+  Red covers more than a small area.
+  There is any saturated colour other than that red.
+  There is a mountain in it.
+  Anything about it reads Japanese.
+  There is text, a character, a seal or a signature.
+  It looks rendered, airbrushed or 3D rather than brushed.
+  It is a composed scene rather than one isolated element.
+  It looks like a beauty spot rather than a place people live.
+
+The last two are the ones you will be tempted to let through.
+
+Run tools/inkstate_test.py on any plate you are unsure about. If the
+four panels look nearly identical, the plate is already the dead world
+and has no colour left to lose.
+"""
+
+
+def main():
+    body = "".join(block(*p) for p in PLATES)
+    open("docs/PROMPTS.txt", "w", encoding="utf-8").write(HEAD + body + TAIL)
+    print(f"docs/PROMPTS.txt written: {len(PLATES)} complete prompts")
+
+
+if __name__ == "__main__":
+    main()
