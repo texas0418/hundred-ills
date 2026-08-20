@@ -1,7 +1,9 @@
 import {
   beginFirstWatch, step, pointIndex, chapter, currentCall, watchmanCalling,
-  reflection, drainAmount, lookBack, setLooking, DEMO_TIME_SCALE,
+  reflection, drainAmount, lookBack, setLooking, applyCrossing,
+  DEMO_TIME_SCALE,
 } from './src/engine/walk';
+import { TOWN } from './src/engine/town';
 
 let n = 0;
 function ok(c: boolean, m: string) { n++; if (!c) throw new Error(`FAIL: ${m}`); }
@@ -57,5 +59,21 @@ ok(!atStart, 'never at the very start of a point - she is walking when it comes'
 ok(!watchmanCalling(s0), 'and not before the night has begun');
 
 ok(chapter(s0).watch === 1, 'the first watch');
+
+// Crossings, as ONE transition rather than three racing setStates.
+ok(s0.pos.strip === 'north', 'she starts on the north bank');
+ok(applyCrossing(s0, 50) === s0, 'nothing in reach leaves the state untouched');
+
+const at = TOWN.links[0].a.x;
+const over = applyCrossing(s0, at);
+ok(over.pos.strip === 'south', 'walking onto a bridge crosses it');
+ok(over.x === TOWN.links[0].b.x, 'and lands her at the far end of it');
+ok(over.fires === 3, 'a fresh bridge costs nothing');
+ok(over.pos.crossed.length === 1, 'and counts toward the rite');
+
+const back = applyCrossing(over, TOWN.links[0].b.x);
+ok(back.pos.strip === 'north', 'she can always go back - never blocked');
+ok(back.fires === 2, 'but doubling back over a spent bridge costs a flame');
+ok(back.pos.crossed.length === 1, 'and never counts twice');
 
 console.log(`test-walk: ${n} assertions passed`);

@@ -22,7 +22,6 @@ import {
 
 import { PAPER, PEACH_RED, SOOT } from '../palette';
 import {
-  DISTRICT_START,
   PLANES,
   planeRect,
   scaledWidth,
@@ -30,7 +29,9 @@ import {
   slotX,
   type Plane,
 } from '../engine/parallax';
+import { BANK_LENGTH, clampToStrip, linksOn } from '../engine/town';
 import {
+  applyCrossing,
   beginFirstWatch,
   currentCall,
   drainAmount,
@@ -171,11 +172,54 @@ function Reflection({ state, screenH }: { state: WalkState; screenH: number }) {
   );
 }
 
-const Scene = memo(function Scene({
-  walkX, width, height, drain,
+const BRIDGES = {
+  'bridge-one': require('../../assets/plates-alpha/bridge-one.png'),
+  'bridge-two': require('../../assets/plates-alpha/bridge-two.png'),
+} as const;
+
+/**
+ * A crossing, standing in the world where it actually is. She walks up
+ * to a bridge and it is simply there - no marker, no prompt. DECISIONS
+ * 41: the game withholds help, and a bridge is already the most legible
+ * object in a water town.
+ */
+function BridgeObject({
+  plate, worldX, walkX, screenH,
 }: {
-  walkX: SharedValue<number>; width: number; height: number; drain: number;
+  plate: keyof typeof BRIDGES; worldX: number;
+  walkX: SharedValue<number>; screenH: number;
 }) {
+  const image = useImage(BRIDGES[plate]);
+  const mid = PLANES[1];
+  const band = planeRect(mid, screenH);
+  const h = band.height * 1.5;
+  const w = image ? (h * image.width()) / image.height() : 0;
+  const transform = useDerivedValue(
+    () => [{ translateX: worldX - walkX.value * mid.speed - w / 2 }],
+    [worldX, w],
+  );
+  if (!image) return null;
+  return (
+    <Group transform={transform}>
+      <SkImage
+        image={image}
+        x={0}
+        y={band.y + band.height - h * 0.72}
+        width={w}
+        height={h}
+        fit="fill"
+      />
+    </Group>
+  );
+}
+
+const Scene = memo(function Scene({
+  walkX, width, height, drain, stripId,
+}: {
+  walkX: SharedValue<number>; width: number; height: number;
+  drain: number; stripId: string;
+}) {
+  const crossings = linksOn(stripId);
   return (
     <Canvas style={StyleSheet.absoluteFill}>
       <Rect x={0} y={0} width={width} height={height} color={PAPER} />
@@ -189,6 +233,17 @@ const Scene = memo(function Scene({
           drain={drain}
         />
       ))}
+      {crossings.map(({ link, x }) =>
+        link.bridgePlate && link.bridgePlate in BRIDGES ? (
+          <BridgeObject
+            key={link.id}
+            plate={link.bridgePlate as keyof typeof BRIDGES}
+            worldX={x}
+            walkX={walkX}
+            screenH={height}
+          />
+        ) : null,
+      )}
     </Canvas>
   );
 });
@@ -205,6 +260,13 @@ export function Walk() {
     return () => clearInterval(id);
   }, []);
 
+  // One pure transition, tested in Node. Stable - no deps - so the
+  // gesture built once at mount never goes stale.
+  const takeCrossing = useCallback(
+    (atX: number) => setState((s) => applyCrossing(s, atX)),
+    [],
+  );
+
   const setLook = useCallback(
     (on: boolean) => setState((s) => (s.looking === on ? s : setLooking(s, on))),
     [],
@@ -217,12 +279,16 @@ export function Walk() {
     Gesture.Pan()
       .onChange((e) => {
         'worklet';
-        if (Math.abs(e.translationY) > 40
-            && Math.abs(e.translationY) > Math.abs(e.translationX)) {
+        // Down over the water to count; up onto a crossing.
+        if (e.translationY > 40 && e.translationY > Math.abs(e.translationX)) {
           runOnJS(setLook)(true);
           return;
         }
-        walkX.value = Math.max(DISTRICT_START, walkX.value - e.changeX);
+        if (e.translationY < -60 && -e.translationY > Math.abs(e.translationX)) {
+          runOnJS(takeCrossing)(walkX.value);
+          return;
+        }
+        walkX.value = clampToStrip('north', walkX.value - e.changeX);
       })
       .onFinalize((e) => {
         'worklet';
@@ -233,10 +299,27 @@ export function Walk() {
         walkX.value = withDecay({
           velocity: -e.velocityX,
           deceleration: 0.996,
-          clamp: [DISTRICT_START, Number.MAX_SAFE_INTEGER],
+          // The district has two ends now. Walking into one stops her,
+          // rather than the endless belt the first build had.
+          clamp: [0, BANK_LENGTH],
         });
       }),
   );
+
+  // A crossing moves her somewhere else on another strip, so the shared
+  // value has to be told. Keyed on the crossing count, not on x, so
+  // ordinary walking never fights the gesture for control of walkX.
+  const crossings = state.pos.crossed.length;
+  useEffect(() => {
+    // react-hooks/immutability mis-reads useSharedValue as useState. A
+    // shared value is a mutable box by design - assigning to .value is
+    // the whole API - so this is a false positive, not a shortcut.
+    // eslint-disable-next-line react-hooks/immutability
+    walkX.value = state.x;
+    // Deliberately keyed on the crossing, not on x - listing state.x
+    // would fire this on every step and fight the gesture for walkX.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [crossings, state.pos.strip]);
 
   const onLookBack = useCallback(() => setState(lookBack), []);
   const call = currentCall(state);
@@ -246,7 +329,13 @@ export function Walk() {
     <GestureHandlerRootView style={styles.fill}>
       <GestureDetector gesture={pan}>
         <View style={styles.fill}>
-          <Scene walkX={walkX} width={width} height={height} drain={drain} />
+          <Scene
+            walkX={walkX}
+            width={width}
+            height={height}
+            drain={drain}
+            stripId={state.pos.strip}
+          />
         </View>
       </GestureDetector>
 

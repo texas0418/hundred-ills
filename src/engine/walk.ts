@@ -7,6 +7,13 @@
 
 import { MAX_FIRES, readingOf, type FireCount, type Reading } from './fires';
 import {
+  cross,
+  linkInReach,
+  payForDoublingBack,
+  type Position,
+  beginAt,
+} from './town';
+import {
   TOTAL_POINTS,
   chapterAt,
   label as chapterLabel,
@@ -34,10 +41,39 @@ export interface WalkState {
   readonly elapsedMs: number;
   /** True while she is leaning over the water, counting. */
   readonly looking: boolean;
+  /**
+   * Where in the town she is, and which bridges the rite has spent.
+   * Folded in here rather than kept alongside so that a crossing is ONE
+   * pure transition Node can test, instead of three setState calls
+   * racing each other in a callback.
+   */
+  readonly pos: Position;
 }
 
 export function beginFirstWatch(): WalkState {
-  return { x: 0, fires: MAX_FIRES, elapsedMs: 0, looking: false };
+  return {
+    x: 0, fires: MAX_FIRES, elapsedMs: 0, looking: false,
+    pos: beginAt('north'),
+  };
+}
+
+/**
+ * Step onto whatever crossing she is standing at. DECISIONS 102.
+ *
+ * Returns the state unchanged if nothing is in reach, so the caller can
+ * fire this at any gesture without checking first.
+ */
+export function applyCrossing(s: WalkState, atX: number): WalkState {
+  const link = linkInReach(s.pos.strip, atX);
+  if (!link) return s;
+  const c = cross({ ...s.pos, x: atX }, link);
+  return {
+    ...s,
+    pos: c.position,
+    x: c.position.x,
+    // She is never blocked. She crosses either way, and pays.
+    fires: c.costsAFlame ? payForDoublingBack(s.fires) : s.fires,
+  };
 }
 
 /** She cannot walk off the left end of the district. */
