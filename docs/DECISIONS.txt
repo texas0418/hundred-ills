@@ -341,11 +341,17 @@ TECH
     The near-monochrome water-town bridge is the ZERO-FIRES target - at
     0.076 saturation it is already the dead world.
 
-99. THE LIVING END IS UNSOLVED AND BLOCKS PLATE PRODUCTION. Every
-    reference we have is already drained. Before any scene plates get
-    made, generate a warm, populated, coloured Jiangnan night - lamplit
-    windows, ochre wall, boats - or the colour drain at 59 has nowhere
-    to fall from and the whole two-state system is invisible.
+99. CLEARED 2026-08-20. The living end is solved and scene plates are
+    unblocked. docs/proof/LIVING-KEY.jpg - 留白 36.3%, red 0.13%,
+    saturation 0.180, drain 14.21 against a floor of 12. The drain
+    strip at docs/proof/living-key-drain.png is the two-state system
+    working on a real plate: warm ochre town to cold monochrome, one
+    vermilion door still burning at zero fires.
+
+    Took three attempts and every failure was the prompt's, not the
+    model's - it did exactly what it was told each time. Kept in
+    docs/proof/README.txt because the next plate will need the same
+    discipline.
 
 59. THE THREE-FIRES METER, REWRITTEN FOR INK. Registration drift is
     DEAD - it needs a keyline and flat colour, and no wash medium can
