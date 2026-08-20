@@ -20,7 +20,35 @@ import os
 import sys
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
+
+
+# Plates whose enclosed empty areas must NOT become see-through. The
+# arch of a bridge is drawn as bare paper, and bare paper becomes
+# transparent - so the embankment BEHIND the bridge showed through its
+# own arch, as if she could see the wall she was walking along through
+# the hole in the bridge. What belongs under an arch is the side canal
+# it spans, and the plate says so by leaving it empty.
+SEAL = {"bridge-walkover"}
+
+
+def seal_holes(alpha):
+    """Make enclosed transparent regions opaque.
+
+    Enclosed means: transparent, and not reachable from outside the
+    picture. Flood the OUTSIDE from a one-pixel transparent border and
+    whatever transparency is left over is a hole in the object rather
+    than space around it.
+    """
+    h, w = alpha.shape
+    mask = Image.new("L", (w + 2, h + 2), 255)
+    mask.paste(Image.fromarray(((alpha < 0.5) * 255).astype(np.uint8)), (1, 1))
+    ImageDraw.floodfill(mask, (0, 0), 128)
+    inner = np.asarray(mask)[1:-1, 1:-1]
+    enclosed = inner == 255
+    out = alpha.copy()
+    out[enclosed] = 1.0
+    return out, int(enclosed.sum())
 
 
 def to_alpha(path):
@@ -33,23 +61,28 @@ def to_alpha(path):
     paper = np.percentile(lum, 98)
     alpha = np.clip((paper - lum) / max(paper * 0.55, 1.0), 0.0, 1.0)
 
+    sealed = 0
+    if os.path.basename(path)[:-4] in SEAL:
+        alpha, sealed = seal_holes(alpha)
+
     out = np.dstack([a, alpha * 255.0]).astype(np.uint8)
-    return Image.fromarray(out, "RGBA"), float(paper), float(alpha.mean())
+    return Image.fromarray(out, "RGBA"), float(paper), float(alpha.mean()), sealed
 
 
 def main():
     if "--all" in sys.argv:
         os.makedirs("assets/plates-alpha", exist_ok=True)
         for f in sorted(glob.glob("assets/plates/*.png")):
-            im, paper, cover = to_alpha(f)
+            im, paper, cover, sealed = to_alpha(f)
             dst = "assets/plates-alpha/" + os.path.basename(f)
             im.save(dst)
+            note = f"  sealed {sealed} px" if sealed else ""
             print(f"  {os.path.basename(f)[:-4]:24} paper {paper:5.1f}  "
-                  f"mean alpha {cover:.3f}")
+                  f"mean alpha {cover:.3f}{note}")
         return
-    im, paper, cover = to_alpha(sys.argv[1])
+    im, paper, cover, sealed = to_alpha(sys.argv[1])
     im.save(sys.argv[2])
-    print(f"paper {paper:.1f}  mean alpha {cover:.3f}  -> {sys.argv[2]}")
+    print(f"paper {paper:.1f}  mean alpha {cover:.3f}  sealed {sealed} -> {sys.argv[2]}")
 
 
 if __name__ == "__main__":
