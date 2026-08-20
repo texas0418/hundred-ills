@@ -330,7 +330,7 @@ PLATES = [
      "carp in both arms - the classic auspicious New Year subject. "
      "Cheerful, round, warm, benign. The print itself is flat and "
      "graphic and slightly coarse, pasted crooked, its edges lifting. No "
-     "text anywhere"),
+     "text anywhere."),
     ("24", "WILLOW BRANCHES - NEAR OVERLAY",
      "overlay",
      "Not part of the kerb strip. This hangs over the near plane\n"
