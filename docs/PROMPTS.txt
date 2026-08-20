@@ -101,6 +101,8 @@ ALREADY DONE - not repeated below
         her-door.png
   [10] DOOR GODS - NEW
         door-gods-new.png
+  [11] DOOR GODS - INTACT
+        door-gods-intact.png
   [12] DOOR GODS - FADED
         door-gods-faded.png
   [13] DOOR GODS - TORN
@@ -123,6 +125,8 @@ ALREADY DONE - not repeated below
         road-money.png
   [22] 擲筊 - THE DIVINATION BLOCKS
         jiaobei.png
+  [23] THE LAMP IN HER WINDOW
+        lamp-in-window.png
   [24] WILLOW BRANCHES - NEAR OVERLAY
         willow.png
 
@@ -132,80 +136,6 @@ If one needs redoing, remove its id from LANDED and re-run.
 =============================================================
 STILL TO MAKE
 =============================================================
-
-[11] DOOR GODS - INTACT
-      Edit of 10.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A pair of Chinese door god warrior figures printed on paper and
-pasted on a wooden door, one facing left and one facing right,
-armoured, stern, symmetrical, seen straight on, pasted up some time
-ago, slightly dulled but whole. No text anywhere. Drawn LARGE,
-filling most of the frame, with only a narrow margin of empty paper
-around it - it must not be a small object floating in a big empty
-field. Centred, touching none of the edges. Seen flat and straight
-on with no perspective. Nothing else in the frame, no ground, no
-background. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[23] THE LAMP IN HER WINDOW
-      Visible from the first watch onward, in every scene it could plausibly
-      appear in, and NEVER remarked on by anyone. If it is mentioned once,
-      the ending is spoiled.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A small oil lamp burning behind a paper window at night, seen from
-outside, warm. Nothing else in frame. Drawn LARGE, filling most of
-the frame, with only a narrow margin of empty paper around it - it
-must not be a small object floating in a big empty field. Centred,
-touching none of the edges. Seen flat and straight on with no
-perspective. Nothing else in the frame, no ground, no background.
-Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
 
 =============================================================
 QA - reject a plate if ANY of these are true

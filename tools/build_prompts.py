@@ -109,6 +109,8 @@ LANDED = {
     "21": "road-money.png",
     "22": "jiaobei.png",
     "24": "willow.png",
+    "11": "door-gods-intact.png",
+    "23": "lamp-in-window.png",
 }
 
 # (id, title, kind, note shown above the block, body)

@@ -11,6 +11,9 @@ there are ~150 plates and drift is invisible one image at a time.
     --mid      the mid depth plane: drain >= 10. Lower than --living
                because a plane is one band of a scene, not a scene
     --far      the far plane: must be PALE, 留白 >= 50 and drain <= 9
+    --object   a cut-out: size and palette only. The 留白 and drain
+               gates are scene rules and do not apply to something
+               trimmed to its own subject.
     --near     the near plane: a silhouette, so judged on ink DARKNESS
                rather than ink coverage - the prompt requires three
                quarters of it to be empty paper
@@ -41,7 +44,11 @@ def check(path, mode, tile):
     fails = []
     notes = []
 
-    if m["bare paper 留白"] < 25:
+    # 留白 is a property of a COMPOSED plate - a scene or a depth plane
+    # standing for mist, water and sky. An object plate is trimmed to its
+    # subject, so by construction it has almost no bare paper left, and
+    # applying the scene rule to it fails every cut-out for being cut out.
+    if mode != "object" and m["bare paper 留白"] < 25:
         fails.append(f"留白 {m['bare paper 留白']:.1f}% - under the 25% floor, "
                      "this is painted too close to the edges")
     if m["reserved red"] > 6:
@@ -70,6 +77,14 @@ def check(path, mode, tile):
         if m["saturation"] > 0.09:
             fails.append(f"saturation {m['saturation']:.3f} - a near plane carries "
                          "no colour at all")
+    elif mode == "object":
+        # Judged on size and palette only. How much colour a cut-out
+        # carries is up to what it is - a lamp is warm, a stone is not.
+        from PIL import Image
+        long = max(Image.open(path).size)
+        if long < 700:
+            fails.append(f"{long}px on the long edge once trimmed - under 700. "
+                         "Drawn too small in the frame; regenerate asking for LARGE.")
     else:
         # 12 was derived from LIVING-KEY, which is a whole scene - sky,
         # walls, water, lamplight. A depth PLANE is one band cropped out
@@ -122,7 +137,7 @@ def check(path, mode, tile):
 def main():
     args = sys.argv[1:]
     mode = "default"
-    for flag in ("living", "far", "near", "mid"):
+    for flag in ("living", "far", "near", "mid", "object"):
         if f"--{flag}" in args:
             mode = flag
     tile = "--tile" in args
