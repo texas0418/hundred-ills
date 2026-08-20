@@ -73,3 +73,26 @@ def measure(a):
         "drain (painted)": float(dist[painted].mean()) if painted.any() else 0.0,
         "drain (whole frame)": float(dist.mean()),
     }
+
+
+def seam(a):
+    """How badly the left edge disagrees with the right edge.
+
+    A plane that slides has to repeat, so its two vertical edges must be
+    continuous with each other. Returns (mismatch, falloff):
+
+      mismatch  difference in mean luminance between the edge columns.
+                Under about 8 it tiles without a visible seam.
+      falloff   ratio of content density in the last quarter to the
+                first. Near 1.0 is even; a plate that drifts to empty on
+                one side - which is what perspective recession does -
+                comes back far below 1.
+    """
+    lum = luminance(a)
+    h, w = lum.shape
+    k = max(2, w // 64)
+    mismatch = abs(lum[:, :k].mean() - lum[:, -k:].mean())
+    density = 255 - lum
+    first = density[:, : w // 4].mean()
+    last = density[:, -w // 4:].mean()
+    return float(mismatch), float(last / first) if first > 0 else 0.0

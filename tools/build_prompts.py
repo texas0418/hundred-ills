@@ -29,16 +29,48 @@ NEGATIVE = (
     "stone lantern, pagoda, cherry blossom, koi, zen garden, raked gravel, "
     "mountains, karst peaks, cliffs, airbrush, digital painting, concept art, "
     "3D render, anime, oversaturated, neon, HDR, glow, bloom, lens flare, "
-    "photorealistic, painted to the edges, no white space, busy, ornate, "
+    "photorealistic, perspective, vanishing point, receding row, diagonal recession, foreshortening, three-quarter view, converging lines, "
+    "painted to the edges, no white space, busy, ornate, "
     "dragons, red paper lanterns everywhere, large mass of red foliage, red "
     "canopy, fleet of boats, many boats, crowded boats, harbour, festival, "
     "market, market stalls, string lights, bunting, crowd, text, characters, "
     "calligraphy, inscription, seal, signature, watermark, frame, border."
 )
 
-# (id, title, note shown above the block, body)
+# Constraints that apply to a WHOLE CLASS of plate, appended automatically
+# so they cannot drift between prompts. Hard-won:
+#
+#   perspective   the first far plane came back in one-point perspective
+#                 with the houses receding to a vanishing point. A plane
+#                 with a vanishing point cannot slide, and a plate that
+#                 empties out on one side cannot repeat.
+#   margin        objects get composited, and a shape touching the frame
+#                 edge cannot be cut out cleanly.
+#   tiling        the three canal planes repeat as she walks.
+KIND_CLAUSE = {
+    "plane": (
+        " Seen straight on from directly across the water, as flat as a stage "
+        "backdrop, with no perspective and no vanishing point, everything at "
+        "the same distance. Cut off at both the left and right edges at the "
+        "same height so the image could be repeated end to end without a join "
+        "showing. Isolated on bare paper."
+    ),
+    "scene": (
+        " Seen straight on and flat, with no perspective and no vanishing "
+        "point. Isolated on bare paper."
+    ),
+    "object": (
+        " Drawn small and centred with clear empty paper on all four sides so "
+        "it can be cut out, touching none of the edges. Seen flat and straight "
+        "on with no perspective. Nothing else in the frame, no ground, no "
+        "background. Isolated on bare paper."
+    ),
+}
+
+# (id, title, kind, note shown above the block, body)
 PLATES = [
     ("01", "THE LIVING-WORLD KEY",
+     "scene",
      "GENERATE THIS FIRST. Nothing else until it is right. Every reference\n"
      "we have is already the dead world; this sets the warm end that the\n"
      "colour drains FROM. See DECISIONS 99.",
@@ -54,134 +86,178 @@ PLATES = [
      "vermilion on a door. The lane is deserted, every other door shut, "
      "nobody outside."),
 
-    ("02", "CANAL BANK - FAR PLANE", "Aspect 21:9. One depth plane only.",
-     "A long low row of whitewashed water town houses with black tile roofs "
-     "seen from across a canal, receding gently into mist, small square "
-     "windows, no people. The top half is bare unpainted paper. Isolated on "
-     "bare paper with nothing above or below."),
+    ("02", "CANAL BANK - FAR PLANE",
+     "plane",
+     "Aspect 21:9. ATTACH BOTH STYLE-KEY.jpg AND LIVING-KEY.jpg - 02, 03 and\n"
+     "04 must look like the same town on the same night, and the key is now\n"
+     "what that town looks like. Generate all three in ONE session.\n"
+     "\n"
+     "This is the PALEST of the three. Depth in this medium comes from\n"
+     "atmospheric perspective, not from scale tricks: far is washed out and\n"
+     "mostly mist, near is almost solid ink. Target: 留白 above 50%, ink\n"
+     "below 5%, drain under 8. A far plane SHOULD fail the living gate.",
+     "A long low row of whitewashed water town houses with black tile roofs, "
+     "seen straight on from directly across the water, as flat as a stage "
+     "backdrop. Every house is the same size and stands at the same "
+     "distance - none larger, none smaller, no row running away into the "
+     "distance. The roofline is level all the way across. Small square "
+     "windows, two of them faintly lit. Very pale and washed out, the ink "
+     "used only for the roof lines, the walls barely tinted with the "
+     "faintest ochre. The top two thirds is bare unpainted paper. No boat, "
+     "no lane, no embankment, no figures. The row fills the full width and "
+     "is cut through the middle of a house at both edges."),
 
-    ("03", "CANAL BANK - MID PLANE", "Aspect 21:9.",
-     "A stone embankment along a canal with worn steps descending into the "
-     "water, mooring posts, one flat wooden boat tied up and empty. No people. "
-     "Isolated on bare paper."),
+    ("03", "CANAL BANK - MID PLANE",
+     "plane",
+     "Aspect 21:9. This is the plane she walks on, so it carries the colour.\n"
+     "Match LIVING-KEY.jpg for warmth - target drain 12 or better, 留白\n"
+     "around 30%. Run plate_check with --living on this one.",
+     "A narrow stone embankment running the full width of the image with a "
+     "flagged lane along the top of it, the lane level all the way across. "
+     "Worn steps "
+     "descending into the water at two points, plain mooring posts. Exactly "
+     "ONE small empty wooden boat tied up and no other boats anywhere. The "
+     "stone washed with warm ochre and pale green across most of its "
+     "surface so it reads warm and lived in, not white. Deserted, nobody "
+     "outside. "),
 
-    ("04", "CANAL BANK - NEAR PLANE", "Aspect 21:9. Silhouette only.",
-     "A few bare winter willow branches and a low stone kerb as dark "
-     "silhouette shapes along the bottom edge, brushed in wet ink. Nothing "
-     "else. Isolated on bare paper."),
+    ("04", "CANAL BANK - NEAR PLANE",
+     "plane",
+     "Aspect 21:9. The DARKEST of the three and the only one with no colour\n"
+     "at all. It sits closest to the player, so it reads as shape rather\n"
+     "than as detail. Target: ink above 25%, saturation under 0.05.\n"
+     "It occupies only the bottom band - most of the plate is empty so the\n"
+     "planes behind it show through.",
+     "A few bare winter willow branches and a low stone kerb along the very "
+     "bottom edge, as near-black silhouette shapes in solid wet ink, no "
+     "colour anywhere, no detail inside the shapes. The branches hang down "
+     "from the top edge at one side only. The upper three quarters of the "
+     "image is completely empty bare paper."),
 
-    ("05", "BRIDGE ONE", "Generate 05, 06 and 07 in one session, same seed family.",
+    ("05", "BRIDGE ONE",
+     "object", "Generate 05, 06 and 07 in one session, same seed family.",
      "A modest low single arch stone footbridge, worn and plain and "
-     "unornamented, seen from the side, its reflection in still water below. "
-     "Isolated on bare paper."),
+     "unornamented, seen from the side, its reflection in still water below. "),
 
-    ("06", "BRIDGE TWO", "",
+    ("06", "BRIDGE TWO",
+     "object", "",
      "A taller humpbacked stone arch bridge with stepped sides and a plain "
-     "stone post at each end, seen from the side, reflected in still water. "
-     "Isolated on bare paper."),
+     "stone post at each end, seen from the side, reflected in still water. "),
 
     ("07", "BRIDGE THREE - THE COVERED BRIDGE",
+     "object",
      "Where she sees her body. It must be the only bridge in the game you\n"
      "cannot see through.",
      "A long covered bridge with a low tiled roof over its walkway, dark and "
-     "enclosed, the far end lost in mist and not visible, seen from the side. "
-     "Isolated on bare paper."),
+     "enclosed, the far end lost in mist and not visible, seen from the side. "),
 
-    ("08", "THE CITY GATE", "The 摸釘 site. First five minutes of the game.",
+    ("08", "THE CITY GATE",
+     "scene", "The 摸釘 site. First five minutes of the game.",
      "A heavy closed wooden city gate with rows of large round bronze studs in "
      "a grid across it, framed by plain stone, seen straight on. No "
-     "inscription, no plaque. Isolated on bare paper."),
+     "inscription, no plaque."),
 
-    ("09", "HER DOOR", "The last image in the game. The wards on it hold.",
+    ("09", "HER DOOR",
+     "scene", "The last image in the game. The wards on it hold.",
      "A plain wooden double door in a whitewashed wall at night, closed, a "
      "paper door god print freshly pasted on each leaf, crisp and new and "
      "uncreased. Warm lamplight falling from a small window beside it. One "
-     "scrap of vermilion. Isolated on bare paper."),
+     "scrap of vermilion."),
 
     ("10", "DOOR GODS - NEW",
+     "object",
      "The lock system, DECISIONS 60. Generate this one FIRST, then make 11,\n"
      "12 and 13 as edits of it so it is recognisably one print decaying.\n"
      "This is the pair on her own door and the only perfect one in the game.",
      "A pair of Chinese door god warrior figures printed on paper and pasted "
      "on a wooden door, one facing left and one facing right, armoured, stern, "
      "symmetrical, seen straight on, freshly pasted, crisp and bright and "
-     "uncreased. No text anywhere. Isolated on bare paper."),
+     "uncreased. No text anywhere."),
 
-    ("11", "DOOR GODS - INTACT", "Edit of 10.",
+    ("11", "DOOR GODS - INTACT",
+     "object", "Edit of 10.",
      "A pair of Chinese door god warrior figures printed on paper and pasted "
      "on a wooden door, one facing left and one facing right, armoured, stern, "
      "symmetrical, seen straight on, pasted up some time ago, slightly dulled "
-     "but whole. No text anywhere. Isolated on bare paper."),
+     "but whole. No text anywhere."),
 
-    ("12", "DOOR GODS - FADED", "Edit of 10. Her way in.",
+    ("12", "DOOR GODS - FADED",
+     "object", "Edit of 10. Her way in.",
      "A pair of Chinese door god warrior figures printed on paper and pasted "
      "on a wooden door, one facing left and one facing right, armoured, stern, "
      "symmetrical, seen straight on, sun bleached and washed pale, colours "
-     "weak, edges lifting from the wood. No text anywhere. Isolated on bare "
-     "paper."),
+     "weak, edges lifting from the wood. No text anywhere."),
 
-    ("13", "DOOR GODS - TORN", "Edit of 10.",
+    ("13", "DOOR GODS - TORN",
+     "object", "Edit of 10.",
      "A pair of Chinese door god warrior figures printed on paper and pasted "
      "on a wooden door, torn and hanging in strips, most of the print missing, "
-     "only fragments still stuck to the wood. No text anywhere. Isolated on "
-     "bare paper."),
+     "only fragments still stuck to the wood. No text anywhere."),
 
     ("14", "水鬼 - THE DROWNED",
+     "object",
      "Cannot leave the water until it finds a substitute. Its whole existence\n"
      "is one obligation aimed at the player.",
      "A human figure standing waist deep in still water seen from the front, "
      "wet hair hanging flat over the face, arms at its sides, completely "
-     "motionless, brushed in wet ink. Not gory. Bare paper above and around."),
+     "motionless, brushed in wet ink. Not gory."),
 
     ("15", "姑獲鳥 - THE NIGHT BIRD WOMAN",
+     "object",
      "This one is her. Keep it dignified - the ending is ruined if the player\n"
      "spent eight hours looking at a gargoyle.",
      "A large bird with a woman's face and long hair, wings spread, seen "
      "frontally and symmetrically like an emblem, calm expression, not "
-     "snarling. Brushed in ink. Isolated on bare paper."),
+     "snarling. Brushed in ink."),
 
-    ("16", "畫皮 - THE PAINTED SKIN", "",
+    ("16", "畫皮 - THE PAINTED SKIN",
+     "object", "",
      "An empty human skin held up flat and spread like a garment on a line, a "
-     "face painted on it, hollow and limp. Stylised and flat, not bloody. "
-     "Isolated on bare paper."),
+     "face painted on it, hollow and limp. Stylised and flat, not bloody. "),
 
-    ("17", "石敢當 - THE STONE", "A locked door with three thousand years of documentation.",
+    ("17", "石敢當 - THE STONE",
+     "object", "A locked door with three thousand years of documentation.",
      "A short upright weathered stone slab set into the ground at the end of a "
-     "lane, plain and blank with no inscription, leaning slightly. Isolated on "
-     "bare paper."),
+     "lane, plain and blank with no inscription, leaning slightly."),
 
-    ("18", "五通神 - THE LOCAL GOD", "The god you bargain with, who is not good.",
+    ("18", "五通神 - THE LOCAL GOD",
+     "object", "The god you bargain with, who is not good.",
      "A small seated enshrined folk deity figure, robed, frontal and "
      "symmetrical, with an expression that is pleasant but not kind. A crude "
-     "village shrine idol. No text. Isolated on bare paper."),
+     "village shrine idol. No text."),
 
     ("19", "打更人 - THE NIGHTWATCHMAN",
+     "object",
      "He must never look sinister. He is a cold man doing a tedious job, and\n"
      "the moment he reads as an omen he stops working. DECISIONS 89.",
      "An old man in a padded winter coat walking alone at night carrying a "
      "small paper lantern and a bamboo clapper, seen from the side, ordinary "
-     "and tired, not sinister. Isolated on bare paper."),
+     "and tired, not sinister."),
 
     ("20", "LAUNDRY ON A LINE",
+     "object",
      "姑獲鳥 marks children by touching clothing left out overnight. The\n"
      "player must handle this at their own initiative. DECISIONS 79.",
      "Small children's clothes hanging still on a pole over water, seen flat "
-     "from the front. Isolated on bare paper."),
+     "from the front."),
 
-    ("21", "買路錢 - ROAD MONEY", "Scattered to clear a route for the dead. It is hers.",
+    ("21", "買路錢 - ROAD MONEY",
+     "object", "Scattered to clear a route for the dead. It is hers.",
      "Round paper spirit money coins scattered loose on wet flagstones seen "
-     "from above. No text or markings on the coins. Isolated on bare paper."),
+     "from above. No text or markings on the coins."),
 
-    ("22", "擲筊 - THE DIVINATION BLOCKS", "The game's only way to ask a question.",
+    ("22", "擲筊 - THE DIVINATION BLOCKS",
+     "object", "The game's only way to ask a question.",
      "Two small crescent shaped wooden blocks, one flat face and one curved "
-     "face each, lying on stone. Isolated on bare paper."),
+     "face each, lying on stone."),
 
     ("23", "THE LAMP IN HER WINDOW",
+     "object",
      "Visible from the first watch onward, in every scene it could plausibly\n"
      "appear in, and NEVER remarked on by anyone. If it is mentioned once,\n"
      "the ending is spoiled.",
      "A small oil lamp burning behind a paper window at night, seen from "
-     "outside, warm. Nothing else in frame. Isolated on bare paper."),
+     "outside, warm. Nothing else in frame."),
 ]
 
 W = 68
@@ -192,7 +268,7 @@ def wrap(t):
     return "\n".join(textwrap.wrap(t, W))
 
 
-def block(pid, title, note, body):
+def block(pid, title, kind, note, body):
     out = [f"[{pid}] {title}"]
     if note:
         out += ["      " + ln for ln in note.split("\n")]
@@ -201,7 +277,7 @@ def block(pid, title, note, body):
         f"{RULE}  copy from here",
         wrap(PREAMBLE),
         "",
-        wrap(body),
+        wrap(body.rstrip() + KIND_CLAUSE[kind]),
         "",
         wrap(NEGATIVE),
         f"{RULE}  to here",
@@ -302,6 +378,34 @@ QA - reject a plate if ANY of these are true
   It looks like a beauty spot rather than a place people live.
 
 The last two are the ones you will be tempted to let through.
+
+=============================================================
+THE THREE CANAL PLANES ARE A SET
+=============================================================
+
+02, 03 and 04 stack on top of each other and slide at different speeds
+to make the walk. They are the first real test of whether separately
+generated plates will parallax, so treat them as one job:
+
+  Generate all three in ONE session, same seed family.
+  Attach BOTH STYLE-KEY.jpg and LIVING-KEY.jpg to each.
+  SET 21:9 IN GEMINI'S ASPECT CONTROL. Asking for it in the prompt does
+  not work - the first far-plane attempt came back square.
+  Keep the horizon at the same height in 02 and 03 or they will not sit
+  together. If they disagree, regenerate rather than trying to fix it
+  in the engine.
+
+DEPTH COMES FROM ATMOSPHERE, NOT SCALE. In this medium the far plane is
+pale and mostly mist and the near plane is almost solid ink. Expected
+numbers, and they are deliberately different from each other:
+
+              留白      ink       drain      note
+  02 far     >50%      <5%       <8         pale, should FAIL --living
+  03 mid     ~30%      ~8%       >12        run it WITH --living
+  04 near    low       >25%      <2         near-black, no colour
+
+A far plane that measures like the mid plane will flatten the walk.
+
 
 =============================================================
 CHECK EVERY PLATE BEFORE YOU KEEP IT
