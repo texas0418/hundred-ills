@@ -29,9 +29,15 @@ import {
   slotX,
   type Plane,
 } from '../engine/parallax';
-import { BANK_LENGTH, clampToStrip, linksOn } from '../engine/town';
+import {
+  BANK_LENGTH,
+  BRIDGE_SPAN,
+  bridgesOn,
+  clampToStrip,
+} from '../engine/town';
 import {
   applyCrossing,
+  arriveAt,
   beginFirstWatch,
   currentCall,
   drainAmount,
@@ -178,10 +184,19 @@ const BRIDGES = {
 } as const;
 
 /**
- * A crossing, standing in the world where it actually is. She walks up
- * to a bridge and it is simply there - no marker, no prompt. DECISIONS
- * 41: the game withholds help, and a bridge is already the most legible
- * object in a water town.
+ * A bridge standing in the world where it actually is. No marker and no
+ * prompt - DECISIONS 41 withholds help, and a bridge is already the most
+ * legible object in a water town.
+ *
+ * SIZED IN WORLD PIXELS, not as a fraction of the screen. The first
+ * version scaled by band height, so a wide plate rendered two screens
+ * across and a tall one filled the view - the same code producing two
+ * completely different objects.
+ *
+ * These are still the LANDMARK plates, a whole arch seen across water.
+ * The bridge she actually walks over is prompt [26] and does not exist
+ * yet; until it does, this reads as a bridge further along the canal
+ * rather than one underfoot. See DECISIONS 105.
  */
 function BridgeObject({
   plate, worldX, walkX, screenH,
@@ -192,19 +207,23 @@ function BridgeObject({
   const image = useImage(BRIDGES[plate]);
   const mid = PLANES[1];
   const band = planeRect(mid, screenH);
-  const h = band.height * 1.5;
-  const w = image ? (h * image.width()) / image.height() : 0;
+  const w = BRIDGE_SPAN * 0.42;
+  const h = image ? (w * image.height()) / image.width() : 0;
   const transform = useDerivedValue(
     () => [{ translateX: worldX - walkX.value * mid.speed - w / 2 }],
     [worldX, w],
   );
   if (!image) return null;
+  // Anchor by the plate's waterline (its mirror axis, measured at 0.485
+  // for bridge-one and 0.736 for bridge-two) rather than by its box, so
+  // both sit on the water instead of one floating and one sinking.
+  const waterline = band.y + band.height * 0.82;
   return (
     <Group transform={transform}>
       <SkImage
         image={image}
         x={0}
-        y={band.y + band.height - h * 0.72}
+        y={waterline - h * 0.5}
         width={w}
         height={h}
         fit="fill"
@@ -219,7 +238,7 @@ const Scene = memo(function Scene({
   walkX: SharedValue<number>; width: number; height: number;
   drain: number; stripId: string;
 }) {
-  const crossings = linksOn(stripId);
+  const bridges = bridgesOn(stripId);
   return (
     <Canvas style={StyleSheet.absoluteFill}>
       <Rect x={0} y={0} width={width} height={height} color={PAPER} />
@@ -233,12 +252,12 @@ const Scene = memo(function Scene({
           drain={drain}
         />
       ))}
-      {crossings.map(({ link, x }) =>
-        link.bridgePlate && link.bridgePlate in BRIDGES ? (
+      {bridges.map((b) =>
+        b.plate in BRIDGES ? (
           <BridgeObject
-            key={link.id}
-            plate={link.bridgePlate as keyof typeof BRIDGES}
-            worldX={x}
+            key={b.id}
+            plate={b.plate as keyof typeof BRIDGES}
+            worldX={b.x}
             walkX={walkX}
             screenH={height}
           />
@@ -253,11 +272,17 @@ export function Walk() {
   const walkX = useSharedValue(0);
   const [state, setState] = useState<WalkState>(beginFirstWatch);
 
-  // The night runs whether or not she moves. Once every 100ms, not
-  // once a frame - the watch is the only thing here that needs React.
+  // The night runs whether or not she moves, and this is also where the
+  // walk is reported back to React - ten times a second, not once a
+  // frame. arriveAt takes the whole span since the last sample, so a
+  // fast fling cannot skip over a bridge between two reads.
   useEffect(() => {
-    const id = setInterval(() => setState((s) => tick(s, 100)), 100);
+    const id = setInterval(
+      () => setState((s) => arriveAt(tick(s, 100), walkX.value)),
+      100,
+    );
     return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // One pure transition, tested in Node. Stable - no deps - so the

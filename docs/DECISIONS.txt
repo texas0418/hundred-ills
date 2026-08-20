@@ -595,11 +595,12 @@ THE TOWN IS A NETWORK  (100-104, added 2026-08-20)
      岸  BANK   a horizontal strip you walk along. Every canal has two
                 of them, facing each other across the water. This is
                 what is already built.
-     橋  BRIDGE crosses to the OTHER BANK of the same canal. Lateral.
-     弄  LANE   a narrow alley running away from the water, connecting
-                a bank of one canal to a bank of the NEXT. This is the
-                move that takes you deeper, and it takes over that job
-                from the bridge.
+     橋  BRIDGE a landmark ON her path, not a way off it. CORRECTED BY
+                105 - the first version of this line had bridges
+                crossing to the far bank, which a flat side-on view
+                cannot draw.
+     弄  LANE   a narrow alley running away from the water. THE ONLY
+                BRANCHING IN THE GAME. A gap in the wall you turn into.
 
      Movement never leaves the horizontal. A lane or a bridge is a
      transition between strips, not a new axis to steer on. The player
@@ -630,13 +631,45 @@ THE TOWN IS A NETWORK  (100-104, added 2026-08-20)
      two to four lanes. Small enough to learn, tangled enough that
      learning it takes a pencil.
 
-104. WHAT THIS MAKES NECESSARY RATHER THAN DECORATIVE.
+105. BRIDGES ARE LANDMARKS, LANES ARE THE BRANCHING.
+     Corrected 2026-08-20, same day, after Simon looked at a bridge on
+     the phone and asked why one was standing in the middle of a
+     walkway. He was right and the reason is geometric.
+
+     A FLAT SIDE-ON VIEW CANNOT SHOW A CROSSING TOWARD THE CAMERA. She
+     walks along a bank looking across the canal. A bridge over THAT
+     canal comes toward the viewer and would have to be foreshortened,
+     which the whole art direction forbids. What can honestly be drawn
+     side-on is a bridge over a SIDE CANAL - a smaller waterway joining
+     the main one, where the lane humps up and over it.
+
+     So a bridge is something she walks OVER, on her way along the
+     bank. It is scenery and it is ritual. It is not a way to somewhere
+     else.
+
+     THE ONLY WAY TO ANOTHER STRIP IS A 弄 LANE - an opening in the
+     wall she turns into. That also happens to be the one transition a
+     flat view can draw honestly, because a gap needs no perspective.
+
+     走三桥 IS UNHARMED. The rite says cross three bridges. It never
+     said they change which side of anything you are on. Three
+     side-canal bridges walked over is a complete 走三桥, and the
+     no-doubling-back rule at 102 works exactly as written.
+
+     ART CONSEQUENCE: the existing bridge plates are LANDMARK views -
+     a bridge seen across water, with its reflection. Those stay, for
+     seeing a bridge at a distance. A bridge she walks over needs a
+     different picture: the parapet beside her at lane level, the deck
+     humping up and down, no reflection and no full arch.
+
+106. WHAT THIS MAKES NECESSARY RATHER THAN DECORATIVE.
 
      Three systems were sitting in the design doing nothing, because a
      corridor gives them nothing to do:
 
        石敢當 blocks a lane - which only means something when there is
-              another lane.
+              another lane, and which is now the single most important
+              obstacle in the game, because lanes are the only branching.
        門神   gate houses - which only matters when there is a choice
               of door.
        THE FIRE STATE opens and closes different routes, per 84 - so

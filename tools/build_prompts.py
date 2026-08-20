@@ -332,6 +332,80 @@ PLATES = [
      "Cheerful, round, warm, benign. The print itself is flat and "
      "graphic and slightly coarse, pasted crooked, its edges lifting. No "
      "text anywhere."),
+    ("26", "橋 - A BRIDGE SHE WALKS OVER",
+     "object",
+     "REPLACES the way the existing bridge plates were being used. Those\n"
+     "are LANDMARK views - a whole arch seen across water, with its\n"
+     "reflection - and they stay, for seeing a bridge at a distance.\n"
+     "\n"
+     "This is the other thing entirely: the bridge she is ON. Per\n"
+     "DECISIONS 105 a flat side-on view cannot show a crossing toward\n"
+     "the camera, so the bridges she walks over span SIDE CANALS - a\n"
+     "smaller waterway joining the main one, where the lane humps up\n"
+     "and over it.\n"
+     "\n"
+     "It has to sit at the same height as the lane in canal-mid.png and\n"
+     "carry a little embankment at each end so it blends into it.\n"
+     "Attach canal-mid.png as a second reference for the stonework.",
+     "A short humpbacked stone footbridge carrying a flagged lane up and "
+     "over a narrow side canal, seen from the side at the level of the "
+     "lane itself. A low stone parapet runs along the near edge and rises "
+     "with the deck. Only the top of the arch shows below the deck; the "
+     "water is a narrow dark gap. NO reflection and no full circular "
+     "arch. A stretch of ordinary embankment continues at both the left "
+     "and right ends so it joins the lane on either side. Deserted."),
+
+    ("27", "弄口 - THE MOUTH OF A LANE",
+     "object",
+     "THE ONLY BRANCHING IN THE GAME, per DECISIONS 105. This is what an\n"
+     "opening off the bank looks like, and the player has to be able to\n"
+     "read it as somewhere she can go without a single word of UI.\n"
+     "\n"
+     "It must be UNMISTAKABLY a way through and NOT a doorway - a door\n"
+     "is the lock system at 60 and the two cannot be confused.",
+     "A narrow gap between two whitewashed buildings where an alley leads "
+     "away from the canal, seen straight on. The gap is tall and very "
+     "narrow, dark inside, with worn stone flagging running into it and "
+     "no door and no gate of any kind. The buildings on either side are "
+     "plain whitewashed wall with black tile above. Deserted."),
+
+    ("28", "弄 - THE LANE WALL",
+     "plane",
+     "Aspect 21:9. The far plane of a LANE strip - the wall on the other\n"
+     "side of the alley. A lane is narrow, so this is CLOSE and TALL and\n"
+     "fills much more of the frame than the far bank does.\n"
+     "Run plate_check with --mid --tile: it is close, so it carries\n"
+     "colour like the mid plane rather than being drained by distance.",
+     "A long whitewashed wall running the full width of the image, close "
+     "to the viewer, the other side of a narrow alley. Damp and stained "
+     "near the ground, a few shuttered windows set high, one plain closed "
+     "door. Black tile eaves along the top edge. The upper quarter is "
+     "bare paper. Deserted, nobody about."),
+
+    ("29", "弄 - THE LANE GROUND",
+     "plane",
+     "Aspect 21:9. The mid plane of a LANE strip: what she walks on\n"
+     "between the walls. Check with --mid --tile.",
+     "Wet stone flagging running the full width of the image, worn "
+     "smooth and uneven, a shallow drainage channel down the middle "
+     "catching a little light. Seen from slightly above so the ground "
+     "reads flat. No steps, no objects, nothing standing on it."),
+
+    ("30", "THE SECOND BANK",
+     "plane",
+     "Aspect 21:9. A far bank that is NOT the one already built, so that\n"
+     "moving to another strip changes what she sees and not only where\n"
+     "she is. Check with --far --tile.\n"
+     "Attach canal-far.png so it is recognisably the same town, and then\n"
+     "make it a DIFFERENT part of it.",
+     "A long low row of whitewashed water town houses with black tile "
+     "roofs seen from across a canal, all at the same distance with a "
+     "level roofline and no recession. Taller and narrower buildings than "
+     "an even terrace - two of them stand a storey higher than the rest, "
+     "and one has a small covered landing at the water. Very pale and "
+     "washed out, ink only in the roof lines. The top two thirds is bare "
+     "paper. No boat, no lane, no figures."),
+
     ("24", "WILLOW BRANCHES - NEAR OVERLAY",
      "overlay",
      "Not part of the kerb strip. This hangs over the near plane\n"
