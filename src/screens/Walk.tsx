@@ -1,5 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
-import { PanResponder, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { memo, useCallback, useEffect, useState } from 'react';
+import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler';
 import {
   Canvas,
   Group,
@@ -8,6 +13,7 @@ import {
   useImage,
 } from '@shopify/react-native-skia';
 import {
+  runOnJS,
   useDerivedValue,
   useSharedValue,
   withDecay,
@@ -39,12 +45,20 @@ import {
 /**
  * 一更 - one walkable minute of the first watch.
  *
- * THE WALK NEVER TOUCHES REACT. walkX is a reanimated shared value that
- * the gesture writes and Skia reads on the UI thread; a first version
- * kept it in useState and re-rendered the whole tree every frame, which
- * is exactly as smooth as it sounds. React state here holds only things
- * that change a few times a minute - the fires, the watch, whether she
- * is leaning over the water.
+ * THE WALK NEVER TOUCHES THE JS THREAD. Three versions of this got
+ * progressively less wrong and the reasons are worth keeping:
+ *
+ *  1. walkX in useState        - re-rendered the whole tree every frame.
+ *  2. shared value + PanResponder - better, but PanResponder is a JS
+ *     handler, so every touch event still had to cross the bridge
+ *     before anything could move.
+ *  3. shared value + a gesture-handler worklet - the finger and the
+ *     picture are now on the same thread and never involve JS at all.
+ *
+ * The remaining trap is React: the watch ticks ten times a second, and
+ * if that re-rendered the canvas it would undo all of the above. Scene
+ * is memoised on values that change a few times a MINUTE, so the ticks
+ * touch only the overlay.
  *
  * Each plane owns a FIXED set of tile nodes (slotCount) whose x is a
  * derived value. Nothing is created or destroyed while she walks.
@@ -157,6 +171,28 @@ function Reflection({ state, screenH }: { state: WalkState; screenH: number }) {
   );
 }
 
+const Scene = memo(function Scene({
+  walkX, width, height, drain,
+}: {
+  walkX: SharedValue<number>; width: number; height: number; drain: number;
+}) {
+  return (
+    <Canvas style={StyleSheet.absoluteFill}>
+      <Rect x={0} y={0} width={width} height={height} color={PAPER} />
+      {PLANES.map((p) => (
+        <PlaneLayer
+          key={p.id}
+          plane={p}
+          walkX={walkX}
+          screenW={width}
+          screenH={height}
+          drain={drain}
+        />
+      ))}
+    </Canvas>
+  );
+});
+
 export function Walk() {
   const { width, height } = useWindowDimensions();
   const walkX = useSharedValue(0);
@@ -169,41 +205,37 @@ export function Walk() {
     return () => clearInterval(id);
   }, []);
 
-  // Where the walk was when the thumb went down. A shared value rather
-  // than a closure variable so the gesture can read and write it without
-  // reassigning across renders.
-  const from = useSharedValue(0);
+  const setLook = useCallback(
+    (on: boolean) => setState((s) => (s.looking === on ? s : setLooking(s, on))),
+    [],
+  );
 
-  // Built once, via a state initializer rather than useMemo: the shared
-  // values are captured from the closure instead of being passed into a
-  // hook, which is what lets the handlers write to them.
+  // Runs entirely on the UI thread. onChange gives the delta since the
+  // last event, so there is no start-position to track and nothing to
+  // reassign across renders.
   const [pan] = useState(() =>
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: (_e, g) => Math.abs(g.dx) > 2 || Math.abs(g.dy) > 2,
-      onPanResponderGrant: () => {
-        from.value = walkX.value;
-      },
-      onPanResponderMove: (_e, g) => {
-        if (g.dy > 40 && Math.abs(g.dy) > Math.abs(g.dx)) {
-          setState((s) => (s.looking ? s : setLooking(s, true)));
+    Gesture.Pan()
+      .onChange((e) => {
+        'worklet';
+        if (Math.abs(e.translationY) > 40
+            && Math.abs(e.translationY) > Math.abs(e.translationX)) {
+          runOnJS(setLook)(true);
           return;
         }
-        walkX.value = Math.max(DISTRICT_START, from.value - g.dx);
-      },
-      onPanResponderRelease: (_e, g) => {
-        setState((s) => (s.looking ? setLooking(s, false) : s));
-        // Let go and she keeps going, slowing down. Without this the
-        // walk stops dead the instant your thumb lifts, which is what
+        walkX.value = Math.max(DISTRICT_START, walkX.value - e.changeX);
+      })
+      .onFinalize((e) => {
+        'worklet';
+        runOnJS(setLook)(false);
+        // Let go and she keeps going, slowing down. Without this the walk
+        // stops dead the instant your thumb lifts, which is most of what
         // made it feel like dragging a picture rather than walking.
         walkX.value = withDecay({
-          velocity: -g.vx * 1000,
-          deceleration: 0.997,
+          velocity: -e.velocityX,
+          deceleration: 0.996,
           clamp: [DISTRICT_START, Number.MAX_SAFE_INTEGER],
         });
-      },
-      onPanResponderTerminate: () => setState((s) => setLooking(s, false)),
-    }),
+      }),
   );
 
   const onLookBack = useCallback(() => setState(lookBack), []);
@@ -211,20 +243,12 @@ export function Walk() {
   const drain = drainAmount(state);
 
   return (
-    <View style={styles.fill} {...pan.panHandlers}>
-      <Canvas style={StyleSheet.absoluteFill}>
-        <Rect x={0} y={0} width={width} height={height} color={PAPER} />
-        {PLANES.map((p) => (
-          <PlaneLayer
-            key={p.id}
-            plane={p}
-            walkX={walkX}
-            screenW={width}
-            screenH={height}
-            drain={drain}
-          />
-        ))}
-      </Canvas>
+    <GestureHandlerRootView style={styles.fill}>
+      <GestureDetector gesture={pan}>
+        <View style={styles.fill}>
+          <Scene walkX={walkX} width={width} height={height} drain={drain} />
+        </View>
+      </GestureDetector>
 
       <Reflection state={state} screenH={height} />
 
@@ -246,7 +270,7 @@ export function Walk() {
       <Text style={styles.lookBack} onPress={onLookBack}>
         look back
       </Text>
-    </View>
+    </GestureHandlerRootView>
   );
 }
 
