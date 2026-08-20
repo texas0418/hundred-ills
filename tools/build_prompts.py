@@ -31,8 +31,9 @@ NEGATIVE = (
     "3D render, anime, oversaturated, neon, HDR, glow, bloom, lens flare, "
     "photorealistic, painted to the edges, no white space, busy, ornate, "
     "dragons, red paper lanterns everywhere, large mass of red foliage, red "
-    "canopy, text, characters, calligraphy, inscription, seal, signature, "
-    "watermark, frame, border."
+    "canopy, fleet of boats, many boats, crowded boats, harbour, festival, "
+    "market, market stalls, string lights, bunting, crowd, text, characters, "
+    "calligraphy, inscription, seal, signature, watermark, frame, border."
 )
 
 # (id, title, note shown above the block, body)
@@ -41,11 +42,15 @@ PLATES = [
      "GENERATE THIS FIRST. Nothing else until it is right. Every reference\n"
      "we have is already the dead world; this sets the warm end that the\n"
      "colour drains FROM. See DECISIONS 99.",
-     "A row of whitewashed water town houses at night with their walls going "
-     "straight down into a canal, black tile roofs, warm lamplight in two of "
-     "the windows, a flat wooden boat moored below. The lower third is calm "
-     "water. Large areas of bare paper for mist. One small scrap of vermilion "
-     "on a door."),
+     "A row of whitewashed water town houses at night, their walls going "
+     "straight down into a canal, black tile roofs. Strong warm lamplight "
+     "burning in five or six windows, and the walls washed with warm ochre "
+     "and pale green so the whole row reads warm and lived in. Exactly ONE "
+     "small empty wooden boat moored below and no other boats anywhere. The "
+     "lower third is calm water holding the reflection of the lit windows. "
+     "The top third is bare unpainted paper for mist. One small scrap of "
+     "vermilion on a door. The lane is deserted, every other door shut, "
+     "nobody outside."),
 
     ("02", "CANAL BANK - FAR PLANE", "Aspect 21:9. One depth plane only.",
      "A long low row of whitewashed water town houses with black tile roofs "
@@ -296,9 +301,32 @@ QA - reject a plate if ANY of these are true
 
 The last two are the ones you will be tempted to let through.
 
-Run tools/inkstate_test.py on any plate you are unsure about. If the
-four panels look nearly identical, the plate is already the dead world
-and has no colour left to lose.
+=============================================================
+CHECK EVERY PLATE BEFORE YOU KEEP IT
+=============================================================
+
+    python3 tools/plate_check.py <plate>
+    python3 tools/plate_check.py --living <plate>     for [01]
+
+It measures what the eye cannot judge one image at a time:
+
+    留白            at least 25%
+    reserved red    6% hard cap, aim for about 3
+    saturation      0.30 hard cap
+    drain distance  at least 6, and at least 10 for [01]
+
+DRAIN DISTANCE is the one that will bite. It is how far the plate
+travels when the colour is pulled out of it, which is exactly how
+visible the three fires are on it. A beautiful plate with a drain of 5
+is already the dead world and the player will never see the fires go
+out on it.
+
+For reference: the style key measures 14.93, the dead-world target
+measures 3.97.
+
+    python3 tools/inkstate_test.py <plate>
+
+renders 3 / 2 / 1 / 0 fires so you can look at the journey yourself.
 """
 
 
