@@ -87,11 +87,15 @@ grey, pale ochre, washed-out green. One small area of vermilion red
 and no other saturated colour. Flat frontal composition, no camera
 perspective, no photographic realism. Quiet, plain, unspectacular.
 
-A row of whitewashed water town houses at night with their walls
-going straight down into a canal, black tile roofs, warm lamplight
-in two of the windows, a flat wooden boat moored below. The lower
-third is calm water. Large areas of bare paper for mist. One small
-scrap of vermilion on a door.
+A row of whitewashed water town houses at night, their walls going
+straight down into a canal, black tile roofs. Strong warm lamplight
+burning in five or six windows, and the walls washed with warm ochre
+and pale green so the whole row reads warm and lived in. Exactly ONE
+small empty wooden boat moored below and no other boats anywhere.
+The lower third is calm water holding the reflection of the lit
+windows. The top third is bare unpainted paper for mist. One small
+scrap of vermilion on a door. The lane is deserted, every other door
+shut, nobody outside.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
@@ -99,8 +103,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [02] CANAL BANK - FAR PLANE
@@ -127,8 +133,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [03] CANAL BANK - MID PLANE
@@ -154,8 +162,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [04] CANAL BANK - NEAR PLANE
@@ -181,8 +191,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [05] BRIDGE ONE
@@ -208,8 +220,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [06] BRIDGE TWO
@@ -234,8 +248,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [07] BRIDGE THREE - THE COVERED BRIDGE
@@ -262,8 +278,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [08] THE CITY GATE
@@ -289,8 +307,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [09] HER DOOR
@@ -317,8 +337,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [10] DOOR GODS - NEW
@@ -348,8 +370,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [11] DOOR GODS - INTACT
@@ -377,8 +401,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [12] DOOR GODS - FADED
@@ -406,8 +432,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [13] DOOR GODS - TORN
@@ -434,8 +462,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [14] 水鬼 - THE DROWNED
@@ -463,8 +493,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [15] 姑獲鳥 - THE NIGHT BIRD WOMAN
@@ -491,8 +523,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [16] 畫皮 - THE PAINTED SKIN
@@ -517,8 +551,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [17] 石敢當 - THE STONE
@@ -544,8 +580,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [18] 五通神 - THE LOCAL GOD
@@ -571,8 +609,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [19] 打更人 - THE NIGHTWATCHMAN
@@ -599,8 +639,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [20] LAUNDRY ON A LINE
@@ -626,8 +668,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [21] 買路錢 - ROAD MONEY
@@ -653,8 +697,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [22] 擲筊 - THE DIVINATION BLOCKS
@@ -679,8 +725,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [23] THE LAMP IN HER WINDOW
@@ -707,8 +755,10 @@ gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
 bloom, lens flare, photorealistic, painted to the edges, no white
 space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, text, characters, calligraphy,
-inscription, seal, signature, watermark, frame, border.
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
 =============================================================
@@ -728,6 +778,29 @@ QA - reject a plate if ANY of these are true
 
 The last two are the ones you will be tempted to let through.
 
-Run tools/inkstate_test.py on any plate you are unsure about. If the
-four panels look nearly identical, the plate is already the dead world
-and has no colour left to lose.
+=============================================================
+CHECK EVERY PLATE BEFORE YOU KEEP IT
+=============================================================
+
+    python3 tools/plate_check.py <plate>
+    python3 tools/plate_check.py --living <plate>     for [01]
+
+It measures what the eye cannot judge one image at a time:
+
+    留白            at least 25%
+    reserved red    6% hard cap, aim for about 3
+    saturation      0.30 hard cap
+    drain distance  at least 6, and at least 10 for [01]
+
+DRAIN DISTANCE is the one that will bite. It is how far the plate
+travels when the colour is pulled out of it, which is exactly how
+visible the three fires are on it. A beautiful plate with a drain of 5
+is already the dead world and the player will never see the fires go
+out on it.
+
+For reference: the style key measures 14.93, the dead-world target
+measures 3.97.
+
+    python3 tools/inkstate_test.py <plate>
+
+renders 3 / 2 / 1 / 0 fires so you can look at the journey yourself.
