@@ -121,6 +121,19 @@ def main():
         if f"--{flag}" in args:
             mode = flag
     tile = "--tile" in args
+    if "--size" in args:
+        from PIL import Image
+        ok = True
+        for path in [a for a in args if not a.startswith("--")]:
+            w, h = Image.open(path).size
+            long = max(w, h)
+            verdict = "usable" if long >= 700 else "TOO SMALL"
+            print(f"{path}\n  {w}x{h}  long edge {long}  {verdict}")
+            if long < 700:
+                print("    - under 700px once trimmed to content. The plate was "
+                      "drawn too small in the frame; regenerate asking for LARGE.")
+                ok = False
+        sys.exit(0 if ok else 1)
     paths = [a for a in args if not a.startswith("--")]
     ok = all([check(p, mode, tile) for p in paths])
     sys.exit(0 if ok else 1)

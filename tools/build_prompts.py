@@ -46,6 +46,11 @@ NEGATIVE = (
 #                 empties out on one side cannot repeat.
 #   margin        objects get composited, and a shape touching the frame
 #                 edge cannot be cut out cleanly.
+#   size          "drawn small and centred" was the first wording and it
+#                 cost a whole batch: 10 of 19 came back under 700px on
+#                 the long edge once trimmed to content, one of them 87px.
+#                 A phone at 3x needs about 1000px for a creature. Ask
+#                 for LARGE with a narrow margin, never "small".
 #   tiling        the three canal planes repeat as she walks.
 KIND_CLAUSE = {
     "plane": (
@@ -60,18 +65,20 @@ KIND_CLAUSE = {
         "point. Isolated on bare paper."
     ),
     "object": (
-        " Drawn small and centred with clear empty paper on all four sides so "
-        "it can be cut out, touching none of the edges. Seen flat and straight "
-        "on with no perspective. Nothing else in the frame, no ground, no "
-        "background. Isolated on bare paper."
+        " Drawn LARGE, filling most of the frame, with only a narrow margin of "
+        "empty paper around it - it must not be a small object floating in a "
+        "big empty field. Centred, touching none of the edges. Seen flat and "
+        "straight on with no perspective. Nothing else in the frame, no "
+        "ground, no background. Isolated on bare paper."
     ),
     # Things that hang into frame from an edge - they cannot be centred
     # with clear paper all round, because the anchoring edge is the point.
     "overlay": (
-        " Drawn against completely empty paper so it can be cut out, entering "
-        "from one edge only and touching none of the other three. Seen flat "
-        "and straight on with no perspective. Nothing else in the frame, no "
-        "ground, no background. Isolated on bare paper."
+        " Drawn LARGE, filling most of the frame, against completely empty "
+        "paper so it can be cut out, entering from one edge only and touching "
+        "none of the other three. Seen flat and straight on with no "
+        "perspective. Nothing else in the frame, no ground, no background. "
+        "Isolated on bare paper."
     ),
 }
 
@@ -400,6 +407,10 @@ QA - reject a plate if ANY of these are true
   It looks rendered, airbrushed or 3D rather than brushed.
   It is a composed scene rather than one isolated element.
   It looks like a beauty spot rather than a place people live.
+  The subject is small in the frame with a lot of empty paper around
+  it - trimmed to content it must be at least 700px on the long edge,
+  and about 1000px for a creature. Check with:
+      python3 tools/plate_check.py --size <plate>
 
 The last two are the ones you will be tempted to let through.
 
