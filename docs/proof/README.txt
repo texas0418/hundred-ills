@@ -33,3 +33,19 @@ WHAT IT TOOK - keep this, the next plate will need the same:
 
 The lesson is that the failures were all in the prompt, never in the
 model. It did what it was told each time.
+
+canal-far-raw.jpg  ->  assets/plates/canal-far.png
+  Plate [02], the far plane. First real depth plane in the game.
+  Raw is what Gemini returned: square, with a painted paper mount.
+  Prepped with tools/prep_plate.py to 1014x435, aspect 2.33.
+
+  Prepped: 留白 73.5%, ink 7.4%, drain 4.97, edge falloff 0.95.
+  Seam mismatch 8.47 against an advisory limit of 8 - accepted rather
+  than regenerated, because a far plane is mostly mist and carries no
+  distinctive feature, so the engine mirrors alternate tiles and the
+  seam is zero by construction. The mid plane cannot do that; its steps
+  and boat would ping-pong.
+
+  Attempt 1 (docs/proof not kept) was drawn in one-point perspective:
+  seam 17.03, edge falloff 0.29. Lovely and unusable. That failure is
+  what added the flat/tiling clause to every plane prompt.

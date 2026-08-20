@@ -389,8 +389,14 @@ generated plates will parallax, so treat them as one job:
 
   Generate all three in ONE session, same seed family.
   Attach BOTH STYLE-KEY.jpg and LIVING-KEY.jpg to each.
-  SET 21:9 IN GEMINI'S ASPECT CONTROL. Asking for it in the prompt does
-  not work - the first far-plane attempt came back square.
+  DO NOT FIGHT THE ASPECT CONTROL. Gemini returns a square with a
+  painted paper mount around it whatever you ask for. Generate square,
+  compose the band low in the frame with mist above, and crop after:
+
+      python3 tools/prep_plate.py <in.jpg> <out.png>
+
+  It finds and drops the mount, then crops to 21:9 anchored at the
+  bottom so the ground is kept and the empty sky goes.
   Keep the horizon at the same height in 02 and 03 or they will not sit
   together. If they disagree, regenerate rather than trying to fix it
   in the engine.
