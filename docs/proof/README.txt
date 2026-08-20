@@ -158,3 +158,33 @@ ALL 24 PLATES LANDED - 2026-08-20
   one print aging, and if the player is meant to notice the SAME print
   decaying, [10]-[13] need redoing as a chain of edits from one image.
   Simon's call.
+
+PARALLAX PROVEN - 2026-08-20
+  parallax-test.png is the three canal plates composited at five walk
+  positions 260px apart. Displacement per frame:
+
+    far   speed 0.25 ->  65px
+    mid   speed 1.00 -> 260px    she walks on this, so it is the reference
+    kerb  speed 1.45 -> 377px    in front of her, so faster than she is
+
+  IT READS AS DEPTH. The far bank barely shifts, the lane moves at her
+  pace, the kerb rips past. The walk structure at DECISIONS 14 works.
+
+  ONE REAL PROBLEM FOUND AND FIXED: the first composite stacked three
+  OPAQUE rectangles and the screen came out in horizontal bands,
+  because each plane's own paper tone darkened the one behind it.
+  Plates need alpha.
+
+  tools/alpha_plate.py derives it from the picture itself: a pixel's
+  opacity is how much darker it is than bare paper. That is not a trick,
+  it is what the medium already does - watercolour on paper IS
+  translucent, so solid ink comes out opaque, a pale wash comes out
+  faint, and untouched paper disappears. Soft wash edges stay soft
+  instead of being cut out by a threshold. Written to
+  assets/plates-alpha/, which is what the engine loads.
+
+  STILL VISIBLE: the mid plane's repeat. Its boat and steps recur every
+  plate width and the wrap shows as a soft vertical edge. It cannot
+  mirror - the boat would ping-pong - so the fix is either a second mid
+  plate to alternate with, or accept it and let the districts be short
+  enough that it is not seen twice. Not blocking; noted.
