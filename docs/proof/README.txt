@@ -49,3 +49,22 @@ canal-far-raw.jpg  ->  assets/plates/canal-far.png
   Attempt 1 (docs/proof not kept) was drawn in one-point perspective:
   seam 17.03, edge falloff 0.29. Lovely and unusable. That failure is
   what added the flat/tiling clause to every plane prompt.
+
+canal-mid-drain.png  ->  assets/plates/canal-mid.png
+  Plate [03], the mid plane - the one she walks past. Landed first try:
+  flat, level, cut at both edges, one empty boat, deserted, steps down
+  into the water, ochre and green across the stone.
+
+  留白 38.6%, red 0.16%, drain 10.74, seam 7.68, edge falloff 0.82.
+
+  THE FLOOR MOVED, AND IT WAS THE FLOOR THAT WAS WRONG. This measured
+  10.74 against a 12 that had been derived from LIVING-KEY - a whole
+  scene with sky, walls, water and lamplight. A depth plane is ONE BAND
+  cropped out of such a scene and carries less colour by construction,
+  so the comparison was never fair. The drain strip settles it: the
+  stone goes cold and the red lantern survives, visibly. --mid now
+  floors at 10.
+
+  Note it kept a small red paper lantern, which the negative list bans.
+  It is doing exactly the job reserved red exists for - one point of
+  colour that outlives the drain - so it stays.

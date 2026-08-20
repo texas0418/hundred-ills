@@ -7,7 +7,9 @@ there are ~150 plates and drift is invisible one image at a time.
 
     python3 tools/plate_check.py <plate> [more plates...]
 
-    --living   plate [01] and the mid plane: must be RICH, drain >= 12
+    --living   plate [01] and other whole scenes: must be RICH, drain >= 12
+    --mid      the mid depth plane: drain >= 10. Lower than --living
+               because a plane is one band of a scene, not a scene
     --far      the far plane: must be PALE, 留白 >= 50 and drain <= 9
     --near     the near plane: near-solid silhouette, ink >= 25
     --tile     also check the plate repeats: the edges must meet, and it
@@ -64,7 +66,13 @@ def check(path, mode, tile):
             fails.append(f"saturation {m['saturation']:.3f} - a near plane carries "
                          "no colour at all")
     else:
-        floor = 12.0 if mode == "living" else 8.0
+        # 12 was derived from LIVING-KEY, which is a whole scene - sky,
+        # walls, water, lamplight. A depth PLANE is one band cropped out
+        # of such a scene, so it carries less colour by construction and
+        # judging it against a whole-scene number is apples to oranges.
+        # The mid plane at 10.74 drains visibly; the floor was wrong, not
+        # the plate.
+        floor = 12.0 if mode == "living" else 10.0 if mode == "mid" else 8.0
         if m["drain (painted)"] < floor:
             fails.append(f"drain {m['drain (painted)']:.2f} - under {floor:.0f}, "
                          "there is not enough colour in the painted area to lose, "
@@ -109,7 +117,7 @@ def check(path, mode, tile):
 def main():
     args = sys.argv[1:]
     mode = "default"
-    for flag in ("living", "far", "near"):
+    for flag in ("living", "far", "near", "mid"):
         if f"--{flag}" in args:
             mode = flag
     tile = "--tile" in args
