@@ -214,3 +214,33 @@ PARALLAX PROVEN - 2026-08-20
   mid plane measures 10.74 painted-drain, the least colourful of the
   three. It is also the plane that fills the middle of the screen. If
   the effect wants more punch, that is the plate to redo warmer.
+
+LANES AND THE WALK-OVER BRIDGE - 2026-08-20
+  Four of the five new plates landed. All measured, all usable at size:
+
+    bridge-walkover  2048x1048   the one that was blocking
+    lane-mouth       1009x1983
+    lane-wall        2048x878    seam 1.72, falloff 0.89
+    canal-far-b      2048x878    seam 2.61, falloff 1.05
+
+  [29] THE LANE GROUND WAS NOT USED, and the fault is in the prompt I
+  wrote rather than the plate. I asked for flagstones "seen from
+  slightly above so the ground reads flat", which is a contradiction: a
+  side-on game never draws the ground she walks on. Look at the canal
+  strip - far bank, embankment seen from across, near kerb. The surface
+  under her feet is not a plate and never was. A lane is the same: the
+  wall opposite and the kerb, and nothing between. The plate that came
+  back is a handsome receding pavement and there is nowhere to put it.
+
+  [28] THE LANE WALL FAILS --mid AT 5.87 AND IS KEPT ANYWAY. The floor
+  of 10 came from the canal embankment, which is stone washed in ochre
+  and green. This is whitewashed plaster. It is pale because whitewash
+  is pale, and the drain will be subtler in a lane than on the bank -
+  which is correct rather than a defect: a lane is a colder place, and
+  the fires are counted in canal reflections, which are out on the
+  bank. Recorded as a knowing exception, not a silently moved gate.
+
+  [27] THE LANE MOUTH USES PERSPECTIVE, deliberately and by exception.
+  A gap has to show depth or it does not read as a way through. This is
+  the one place the flat rule bends, and it bends for the one object
+  whose whole job is to say "you can go in here".

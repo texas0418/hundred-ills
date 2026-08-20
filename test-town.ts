@@ -13,11 +13,18 @@ ok(clampToStrip('north', -500) === 0, 'she cannot walk off the left end');
 ok(clampToStrip('north', BANK_LENGTH + 5000) === BANK_LENGTH, 'nor off the right');
 ok(clampToStrip('north', 1234) === 1234, 'and moves freely in between');
 
-// LANES are the only branching (DECISIONS 105). None exist yet - the
-// art does not - so the model is asserted empty rather than pretended.
-ok(TOWN.links.length === 0, 'no lanes yet, and the code says so plainly');
-ok(linksOn('north').length === 0, 'so nothing to turn into');
-ok(linkInReach('north', 900) === null, 'and nothing in reach');
+// LANES are the only branching (DECISIONS 105).
+ok(TOWN.links.length >= 1, 'there is somewhere to turn off to');
+const lm = TOWN.links[0];
+ok(linksOn('north').length === 1, 'the bank has a lane mouth on it');
+ok(linkInReach('north', lm.a.x)?.id === lm.id, 'and she can reach it');
+ok(linkInReach('north', lm.a.x + REACH + 80) === null, 'but not from far off');
+ok(strip('lane-a').kind === 'lane', 'the lane is a lane');
+ok(strip('lane-a').length < BANK_LENGTH, 'and is much shorter than a bank');
+ok(strip('lane-a').plates.mid === '',
+   'a lane has no mid plane - wall and kerb and nothing between');
+ok(strip('north').plates.far !== strip('south').plates.far,
+   'the two banks no longer look identical');
 
 // BRIDGES are landmarks ON a strip, not ways off it.
 ok(TOWN.bridges.length >= 2, 'the north bank has bridges standing on it');
@@ -59,13 +66,13 @@ ok(bridgesRemaining(beginAt('north')) === 3, 'the rite wants three');
 ok(!riteComplete(sweep.position), 'two bridges is not three');
 ok(riteComplete({ ...p, crossed: ['a', 'b', 'c'] }), 'three distinct completes it');
 
-// A lane, once one exists, is free and not part of the rite.
-const lane = { id: 'l', a: { strip: 'north', x: 100 }, b: { strip: 'south', x: 100 } };
-const turned = cross(beginAt('north'), lane);
-ok(turned.position.strip === 'south', 'a lane leads to another strip');
+// Turning into a lane is free and not part of the rite.
+const turned = cross(beginAt('north'), lm);
+ok(turned.position.strip === 'lane-a', 'a lane leads off the bank');
+ok(cross(turned.position, lm).position.strip === 'north', 'and back again');
 ok(turned.costsAFlame === false, 'lanes are free');
 ok(turned.position.crossed.length === 0, 'and are not part of 走三桥');
-ok(otherEnd(lane, 'south').strip === 'north', 'and lead back');
+ok(otherEnd(lm, 'lane-a').strip === 'north', 'and leads back');
 ok(REACH > 0, 'reach is a real distance');
 
 console.log(`test-town: ${n} assertions passed`);
