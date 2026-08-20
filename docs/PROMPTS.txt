@@ -96,22 +96,32 @@ white. Exactly ONE small empty wooden boat moored below and no other
 boats anywhere. The lower third is calm water holding the reflection
 of the lit windows. The top third is bare unpainted paper for mist.
 One small scrap of vermilion on a door. The lane is deserted, every
-other door shut, nobody outside.
+other door shut, nobody outside. Seen straight on and flat, with no
+perspective and no vanishing point. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [02] CANAL BANK - FAR PLANE
-      Aspect 21:9. One depth plane only.
+      Aspect 21:9. ATTACH BOTH STYLE-KEY.jpg AND LIVING-KEY.jpg - 02, 03 and
+      04 must look like the same town on the same night, and the key is now
+      what that town looks like. Generate all three in ONE session.
+      
+      This is the PALEST of the three. Depth in this medium comes from
+      atmospheric perspective, not from scale tricks: far is washed out and
+      mostly mist, near is almost solid ink. Target: 留白 above 50%, ink
+      below 5%, drain under 8. A far plane SHOULD fail the living gate.
 
 --------------------------------------------------------------  copy from here
 Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
@@ -124,24 +134,39 @@ and no other saturated colour. Flat frontal composition, no camera
 perspective, no photographic realism. Quiet, plain, unspectacular.
 
 A long low row of whitewashed water town houses with black tile
-roofs seen from across a canal, receding gently into mist, small
-square windows, no people. The top half is bare unpainted paper.
-Isolated on bare paper with nothing above or below.
+roofs, seen straight on from directly across the water, as flat as a
+stage backdrop. Every house is the same size and stands at the same
+distance - none larger, none smaller, no row running away into the
+distance. The roofline is level all the way across. Small square
+windows, two of them faintly lit. Very pale and washed out, the ink
+used only for the roof lines, the walls barely tinted with the
+faintest ochre. The top two thirds is bare unpainted paper. No boat,
+no lane, no embankment, no figures. The row fills the full width and
+is cut through the middle of a house at both edges. Seen straight on
+from directly across the water, as flat as a stage backdrop, with no
+perspective and no vanishing point, everything at the same distance.
+Cut off at both the left and right edges at the same height so the
+image could be repeated end to end without a join showing. Isolated
+on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [03] CANAL BANK - MID PLANE
-      Aspect 21:9.
+      Aspect 21:9. This is the plane she walks on, so it carries the colour.
+      Match LIVING-KEY.jpg for warmth - target drain 12 or better, 留白
+      around 30%. Run plate_check with --living on this one.
 
 --------------------------------------------------------------  copy from here
 Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
@@ -153,24 +178,38 @@ grey, pale ochre, washed-out green. One small area of vermilion red
 and no other saturated colour. Flat frontal composition, no camera
 perspective, no photographic realism. Quiet, plain, unspectacular.
 
-A stone embankment along a canal with worn steps descending into the
-water, mooring posts, one flat wooden boat tied up and empty. No
-people. Isolated on bare paper.
+A narrow stone embankment running the full width of the image with a
+flagged lane along the top of it, the lane level all the way across.
+Worn steps descending into the water at two points, plain mooring
+posts. Exactly ONE small empty wooden boat tied up and no other
+boats anywhere. The stone washed with warm ochre and pale green
+across most of its surface so it reads warm and lived in, not white.
+Deserted, nobody outside. Seen straight on from directly across the
+water, as flat as a stage backdrop, with no perspective and no
+vanishing point, everything at the same distance. Cut off at both
+the left and right edges at the same height so the image could be
+repeated end to end without a join showing. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [04] CANAL BANK - NEAR PLANE
-      Aspect 21:9. Silhouette only.
+      Aspect 21:9. The DARKEST of the three and the only one with no colour
+      at all. It sits closest to the player, so it reads as shape rather
+      than as detail. Target: ink above 25%, saturation under 0.05.
+      It occupies only the bottom band - most of the plate is empty so the
+      planes behind it show through.
 
 --------------------------------------------------------------  copy from here
 Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
@@ -182,20 +221,29 @@ grey, pale ochre, washed-out green. One small area of vermilion red
 and no other saturated colour. Flat frontal composition, no camera
 perspective, no photographic realism. Quiet, plain, unspectacular.
 
-A few bare winter willow branches and a low stone kerb as dark
-silhouette shapes along the bottom edge, brushed in wet ink. Nothing
-else. Isolated on bare paper.
+A few bare winter willow branches and a low stone kerb along the
+very bottom edge, as near-black silhouette shapes in solid wet ink,
+no colour anywhere, no detail inside the shapes. The branches hang
+down from the top edge at one side only. The upper three quarters of
+the image is completely empty bare paper. Seen straight on from
+directly across the water, as flat as a stage backdrop, with no
+perspective and no vanishing point, everything at the same distance.
+Cut off at both the left and right edges at the same height so the
+image could be repeated end to end without a join showing. Isolated
+on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [05] BRIDGE ONE
@@ -213,18 +261,23 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 
 A modest low single arch stone footbridge, worn and plain and
 unornamented, seen from the side, its reflection in still water
-below. Isolated on bare paper.
+below. Drawn small and centred with clear empty paper on all four
+sides so it can be cut out, touching none of the edges. Seen flat
+and straight on with no perspective. Nothing else in the frame, no
+ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [06] BRIDGE TWO
@@ -241,18 +294,23 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 
 A taller humpbacked stone arch bridge with stepped sides and a plain
 stone post at each end, seen from the side, reflected in still
-water. Isolated on bare paper.
+water. Drawn small and centred with clear empty paper on all four
+sides so it can be cut out, touching none of the edges. Seen flat
+and straight on with no perspective. Nothing else in the frame, no
+ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [07] BRIDGE THREE - THE COVERED BRIDGE
@@ -271,18 +329,23 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 
 A long covered bridge with a low tiled roof over its walkway, dark
 and enclosed, the far end lost in mist and not visible, seen from
-the side. Isolated on bare paper.
+the side. Drawn small and centred with clear empty paper on all four
+sides so it can be cut out, touching none of the edges. Seen flat
+and straight on with no perspective. Nothing else in the frame, no
+ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [08] THE CITY GATE
@@ -300,18 +363,21 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 
 A heavy closed wooden city gate with rows of large round bronze
 studs in a grid across it, framed by plain stone, seen straight on.
-No inscription, no plaque. Isolated on bare paper.
+No inscription, no plaque. Seen straight on and flat, with no
+perspective and no vanishing point. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [09] HER DOOR
@@ -330,18 +396,21 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 A plain wooden double door in a whitewashed wall at night, closed, a
 paper door god print freshly pasted on each leaf, crisp and new and
 uncreased. Warm lamplight falling from a small window beside it. One
-scrap of vermilion. Isolated on bare paper.
+scrap of vermilion. Seen straight on and flat, with no perspective
+and no vanishing point. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [10] DOOR GODS - NEW
@@ -362,19 +431,24 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 A pair of Chinese door god warrior figures printed on paper and
 pasted on a wooden door, one facing left and one facing right,
 armoured, stern, symmetrical, seen straight on, freshly pasted,
-crisp and bright and uncreased. No text anywhere. Isolated on bare
-paper.
+crisp and bright and uncreased. No text anywhere. Drawn small and
+centred with clear empty paper on all four sides so it can be cut
+out, touching none of the edges. Seen flat and straight on with no
+perspective. Nothing else in the frame, no ground, no background.
+Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [11] DOOR GODS - INTACT
@@ -393,19 +467,24 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 A pair of Chinese door god warrior figures printed on paper and
 pasted on a wooden door, one facing left and one facing right,
 armoured, stern, symmetrical, seen straight on, pasted up some time
-ago, slightly dulled but whole. No text anywhere. Isolated on bare
-paper.
+ago, slightly dulled but whole. No text anywhere. Drawn small and
+centred with clear empty paper on all four sides so it can be cut
+out, touching none of the edges. Seen flat and straight on with no
+perspective. Nothing else in the frame, no ground, no background.
+Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [12] DOOR GODS - FADED
@@ -425,18 +504,23 @@ A pair of Chinese door god warrior figures printed on paper and
 pasted on a wooden door, one facing left and one facing right,
 armoured, stern, symmetrical, seen straight on, sun bleached and
 washed pale, colours weak, edges lifting from the wood. No text
-anywhere. Isolated on bare paper.
+anywhere. Drawn small and centred with clear empty paper on all four
+sides so it can be cut out, touching none of the edges. Seen flat
+and straight on with no perspective. Nothing else in the frame, no
+ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [13] DOOR GODS - TORN
@@ -455,18 +539,23 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 A pair of Chinese door god warrior figures printed on paper and
 pasted on a wooden door, torn and hanging in strips, most of the
 print missing, only fragments still stuck to the wood. No text
-anywhere. Isolated on bare paper.
+anywhere. Drawn small and centred with clear empty paper on all four
+sides so it can be cut out, touching none of the edges. Seen flat
+and straight on with no perspective. Nothing else in the frame, no
+ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [14] 水鬼 - THE DROWNED
@@ -485,19 +574,24 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 
 A human figure standing waist deep in still water seen from the
 front, wet hair hanging flat over the face, arms at its sides,
-completely motionless, brushed in wet ink. Not gory. Bare paper
-above and around.
+completely motionless, brushed in wet ink. Not gory. Drawn small and
+centred with clear empty paper on all four sides so it can be cut
+out, touching none of the edges. Seen flat and straight on with no
+perspective. Nothing else in the frame, no ground, no background.
+Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [15] 姑獲鳥 - THE NIGHT BIRD WOMAN
@@ -516,18 +610,23 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 
 A large bird with a woman's face and long hair, wings spread, seen
 frontally and symmetrically like an emblem, calm expression, not
-snarling. Brushed in ink. Isolated on bare paper.
+snarling. Brushed in ink. Drawn small and centred with clear empty
+paper on all four sides so it can be cut out, touching none of the
+edges. Seen flat and straight on with no perspective. Nothing else
+in the frame, no ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [16] 畫皮 - THE PAINTED SKIN
@@ -544,18 +643,23 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 
 An empty human skin held up flat and spread like a garment on a
 line, a face painted on it, hollow and limp. Stylised and flat, not
-bloody. Isolated on bare paper.
+bloody. Drawn small and centred with clear empty paper on all four
+sides so it can be cut out, touching none of the edges. Seen flat
+and straight on with no perspective. Nothing else in the frame, no
+ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [17] 石敢當 - THE STONE
@@ -573,18 +677,23 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 
 A short upright weathered stone slab set into the ground at the end
 of a lane, plain and blank with no inscription, leaning slightly.
-Isolated on bare paper.
+Drawn small and centred with clear empty paper on all four sides so
+it can be cut out, touching none of the edges. Seen flat and
+straight on with no perspective. Nothing else in the frame, no
+ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [18] 五通神 - THE LOCAL GOD
@@ -602,18 +711,24 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 
 A small seated enshrined folk deity figure, robed, frontal and
 symmetrical, with an expression that is pleasant but not kind. A
-crude village shrine idol. No text. Isolated on bare paper.
+crude village shrine idol. No text. Drawn small and centred with
+clear empty paper on all four sides so it can be cut out, touching
+none of the edges. Seen flat and straight on with no perspective.
+Nothing else in the frame, no ground, no background. Isolated on
+bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [19] 打更人 - THE NIGHTWATCHMAN
@@ -632,18 +747,23 @@ perspective, no photographic realism. Quiet, plain, unspectacular.
 
 An old man in a padded winter coat walking alone at night carrying a
 small paper lantern and a bamboo clapper, seen from the side,
-ordinary and tired, not sinister. Isolated on bare paper.
+ordinary and tired, not sinister. Drawn small and centred with clear
+empty paper on all four sides so it can be cut out, touching none of
+the edges. Seen flat and straight on with no perspective. Nothing
+else in the frame, no ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [20] LAUNDRY ON A LINE
@@ -661,18 +781,23 @@ and no other saturated colour. Flat frontal composition, no camera
 perspective, no photographic realism. Quiet, plain, unspectacular.
 
 Small children's clothes hanging still on a pole over water, seen
-flat from the front. Isolated on bare paper.
+flat from the front. Drawn small and centred with clear empty paper
+on all four sides so it can be cut out, touching none of the edges.
+Seen flat and straight on with no perspective. Nothing else in the
+frame, no ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [21] 買路錢 - ROAD MONEY
@@ -689,19 +814,24 @@ and no other saturated colour. Flat frontal composition, no camera
 perspective, no photographic realism. Quiet, plain, unspectacular.
 
 Round paper spirit money coins scattered loose on wet flagstones
-seen from above. No text or markings on the coins. Isolated on bare
-paper.
+seen from above. No text or markings on the coins. Drawn small and
+centred with clear empty paper on all four sides so it can be cut
+out, touching none of the edges. Seen flat and straight on with no
+perspective. Nothing else in the frame, no ground, no background.
+Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [22] 擲筊 - THE DIVINATION BLOCKS
@@ -718,18 +848,23 @@ and no other saturated colour. Flat frontal composition, no camera
 perspective, no photographic realism. Quiet, plain, unspectacular.
 
 Two small crescent shaped wooden blocks, one flat face and one
-curved face each, lying on stone. Isolated on bare paper.
+curved face each, lying on stone. Drawn small and centred with clear
+empty paper on all four sides so it can be cut out, touching none of
+the edges. Seen flat and straight on with no perspective. Nothing
+else in the frame, no ground, no background. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 [23] THE LAMP IN HER WINDOW
@@ -748,18 +883,24 @@ and no other saturated colour. Flat frontal composition, no camera
 perspective, no photographic realism. Quiet, plain, unspectacular.
 
 A small oil lamp burning behind a paper window at night, seen from
-outside, warm. Nothing else in frame. Isolated on bare paper.
+outside, warm. Nothing else in frame. Drawn small and centred with
+clear empty paper on all four sides so it can be cut out, touching
+none of the edges. Seen flat and straight on with no perspective.
+Nothing else in the frame, no ground, no background. Isolated on
+bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
 gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
 concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
 --------------------------------------------------------------  to here
 
 =============================================================
@@ -778,6 +919,34 @@ QA - reject a plate if ANY of these are true
   It looks like a beauty spot rather than a place people live.
 
 The last two are the ones you will be tempted to let through.
+
+=============================================================
+THE THREE CANAL PLANES ARE A SET
+=============================================================
+
+02, 03 and 04 stack on top of each other and slide at different speeds
+to make the walk. They are the first real test of whether separately
+generated plates will parallax, so treat them as one job:
+
+  Generate all three in ONE session, same seed family.
+  Attach BOTH STYLE-KEY.jpg and LIVING-KEY.jpg to each.
+  SET 21:9 IN GEMINI'S ASPECT CONTROL. Asking for it in the prompt does
+  not work - the first far-plane attempt came back square.
+  Keep the horizon at the same height in 02 and 03 or they will not sit
+  together. If they disagree, regenerate rather than trying to fix it
+  in the engine.
+
+DEPTH COMES FROM ATMOSPHERE, NOT SCALE. In this medium the far plane is
+pale and mostly mist and the near plane is almost solid ink. Expected
+numbers, and they are deliberately different from each other:
+
+              留白      ink       drain      note
+  02 far     >50%      <5%       <8         pale, should FAIL --living
+  03 mid     ~30%      ~8%       >12        run it WITH --living
+  04 near    low       >25%      <2         near-black, no colour
+
+A far plane that measures like the mid plane will flatten the walk.
+
 
 =============================================================
 CHECK EVERY PLATE BEFORE YOU KEEP IT
