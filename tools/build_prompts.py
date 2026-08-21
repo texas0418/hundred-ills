@@ -377,6 +377,27 @@ PLATES = [
      "piers are filled with deep near-black ink shadow; nothing is visible "
      "through them. Deserted, no boat in this stretch."),
 
+    ("33", "THE NIGHT WATER",
+     "plane",
+     "New with DECISIONS 108. The outermost depth strip: her last step\n"
+     "toward the water, where she leans and counts her flames. Until now\n"
+     "the reflection rendered over the ordinary scene; with the depth\n"
+     "field it becomes a PLACE, and this is its ground.\n"
+     "\n"
+     "It must tile - check with --tile - and it must be DARK: the flames\n"
+     "render on top of it in vermilion, and they only read against near-\n"
+     "black. This is the one plate in the game where 留白 does not apply:\n"
+     "night water holds ink, not paper. Expect plate_check to complain\n"
+     "about 留白; that complaint is wrong here and is overridden.",
+     "A wide band of still canal water at night, nearly black, seen "
+     "flat from just above its surface, running the full width of the "
+     "image and cut off by both the left and right edges at the same "
+     "height so it repeats without a join. Deep ink wash, almost solid, "
+     "with the faintest horizontal breathing of lighter grey where the "
+     "surface moves, and one soft smudge of reflected lamplight far off. "
+     "No shore, no boat, no object, no reflection of any figure. The top "
+     "quarter fades into pale mist."),
+
     ("27", "弄口 - THE MOUTH OF A LANE  (SECOND ATTEMPT)",
      "plane",
      "THE ONLY BRANCHING IN THE GAME, per DECISIONS 105, and the first\n"

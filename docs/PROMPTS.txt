@@ -240,6 +240,55 @@ crowd, text, characters, calligraphy, inscription, seal, signature,
 watermark, frame, border.
 --------------------------------------------------------------  to here
 
+[33] THE NIGHT WATER
+      New with DECISIONS 108. The outermost depth strip: her last step
+      toward the water, where she leans and counts her flames. Until now
+      the reflection rendered over the ordinary scene; with the depth
+      field it becomes a PLACE, and this is its ground.
+      
+      It must tile - check with --tile - and it must be DARK: the flames
+      render on top of it in vermilion, and they only read against near-
+      black. This is the one plate in the game where 留白 does not apply:
+      night water holds ink, not paper. Expect plate_check to complain
+      about 留白; that complaint is wrong here and is overridden.
+
+--------------------------------------------------------------  copy from here
+Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
+of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
+wet blooming edges, visible brush direction, the paper showing
+through. Large areas of the paper left completely unpainted to stand
+for mist, water and sky. Muted and drained palette - ink black, warm
+grey, pale ochre, washed-out green. One small area of vermilion red
+and no other saturated colour. Flat frontal composition, no camera
+perspective, no photographic realism. Quiet, plain, unspectacular.
+
+A wide band of still canal water at night, nearly black, seen flat
+from just above its surface, running the full width of the image and
+cut off by both the left and right edges at the same height so it
+repeats without a join. Deep ink wash, almost solid, with the
+faintest horizontal breathing of lighter grey where the surface
+moves, and one soft smudge of reflected lamplight far off. No shore,
+no boat, no object, no reflection of any figure. The top quarter
+fades into pale mist. Seen straight on from directly across the
+water, as flat as a stage backdrop, with no perspective and no
+vanishing point, everything at the same distance. Cut off at both
+the left and right edges at the same height so the image could be
+repeated end to end without a join showing. Isolated on bare paper.
+
+Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
+leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
+gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
+concept art, 3D render, anime, oversaturated, neon, HDR, glow,
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
+--------------------------------------------------------------  to here
+
 [29] 弄 - THE LANE GROUND  ** DO NOT GENERATE **
       THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.
       
