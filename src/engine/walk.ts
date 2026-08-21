@@ -9,6 +9,7 @@ import { MAX_FIRES, readingOf, type FireCount, type Reading } from './fires';
 import {
   cross,
   linkInReach,
+  nearRelight,
   payForDoublingBack,
   stepDepth,
   walkTo,
@@ -43,6 +44,8 @@ export interface WalkState {
   readonly elapsedMs: number;
   /** True while she is leaning over the water, counting. */
   readonly looking: boolean;
+  /** Milliseconds spent standing in a relight's warmth. */
+  readonly warmMs: number;
   /**
    * Where in the town she is, and which bridges the rite has spent.
    * Folded in here rather than kept alongside so that a crossing is ONE
@@ -55,6 +58,7 @@ export interface WalkState {
 export function beginFirstWatch(): WalkState {
   return {
     x: 0, fires: MAX_FIRES, elapsedMs: 0, looking: false,
+    warmMs: 0,
     pos: beginAt('north'),
   };
 }
@@ -118,6 +122,27 @@ export function step(s: WalkState, dx: number, dtMs: number): WalkState {
 /** Advance only the night. The walk itself is animated elsewhere. */
 export function tick(s: WalkState, dtMs: number): WalkState {
   return { ...s, elapsedMs: s.elapsedMs + dtMs * DEMO_TIME_SCALE };
+}
+
+/**
+ * DECISIONS 84: warmth relights. Standing in a relight's reach - the
+ * lantern painted by bridge A - accumulates warmth in REAL time, and at
+ * the threshold a flame comes back. Walking away lets the warmth go.
+ * There is no prompt and no meter: she stands by the fire, and after a
+ * moment she is more alive.
+ */
+export const RELIGHT_MS = 2200;
+
+export function applyWarmth(s: WalkState, dtMs: number, bandH?: number): WalkState {
+  if (!nearRelight(s.pos.strip, s.x, bandH)) {
+    return s.warmMs === 0 ? s : { ...s, warmMs: 0 };
+  }
+  if (s.fires >= MAX_FIRES) return s.warmMs === 0 ? s : { ...s, warmMs: 0 };
+  const warm = s.warmMs + dtMs;
+  if (warm >= RELIGHT_MS) {
+    return { ...s, warmMs: 0, fires: (s.fires + 1) as FireCount };
+  }
+  return { ...s, warmMs: warm };
 }
 
 export function pointIndex(s: WalkState): number {

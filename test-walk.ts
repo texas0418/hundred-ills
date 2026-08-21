@@ -1,9 +1,10 @@
 import {
   beginFirstWatch, step, pointIndex, chapter, currentCall, watchmanCalling,
   reflection, drainAmount, lookBack, setLooking, applyCrossing, arriveAt,
-  applyDepth, atWater, DEMO_TIME_SCALE,
+  applyDepth, applyWarmth, atWater, DEMO_TIME_SCALE, RELIGHT_MS,
 } from './src/engine/walk';
-import { layoutFor, DEFAULT_BAND_H } from './src/engine/town';
+import { layoutFor, relightXs, DEFAULT_BAND_H } from './src/engine/town';
+import type { WalkState } from './src/engine/walk';
 
 let n = 0;
 function ok(c: boolean, m: string) { n++; if (!c) throw new Error(`FAIL: ${m}`); }
@@ -92,5 +93,20 @@ ok(!reflection(drowned).visible, 'THE THIRD BRIDGE: at zero, nothing in the wate
 ok(!atWater(applyDepth(down, 'inward')), 'inward steps back to the bank');
 ok(applyDepth(applyDepth(down, 'outward'), 'outward') === applyDepth(down, 'outward')
    || applyDepth(down, 'outward') === down, 'nothing beyond the water');
+
+// WARMTH (DECISIONS 84). Standing by the lantern relights, slowly.
+const rx = relightXs('north', DEFAULT_BAND_H);
+ok(rx.length === 1, 'one warmth on the bank - the lantern by bridge A');
+const cold: WalkState = { ...arriveAt(s0, rx[0], DEFAULT_BAND_H), fires: 1 };
+let w: WalkState = cold;
+for (let i = 0; i < RELIGHT_MS / 100 - 1; i++) w = applyWarmth(w, 100, DEFAULT_BAND_H);
+ok(w.fires === 1, 'not yet - warming takes real time');
+w = applyWarmth(w, 100, DEFAULT_BAND_H);
+ok(w.fires === 2, 'a moment by the fire and she is more alive');
+ok(w.warmMs === 0, 'and the warmth starts again for the next');
+const away = applyWarmth({ ...cold, x: rx[0] + 500, warmMs: 1800 }, 100, DEFAULT_BAND_H);
+ok(away.warmMs === 0, 'walking away lets the warmth go');
+const full = applyWarmth({ ...cold, fires: 3 as const, warmMs: 900 }, 100, DEFAULT_BAND_H);
+ok(full.fires === 3 && full.warmMs === 0, 'three is all there is');
 
 console.log(`test-walk: ${n} assertions passed`);

@@ -19,6 +19,7 @@ export const LIVE = {
   'seg-bridge-a': require('../assets/plates-alpha/seg-bridge-a.png'),
   'seg-bridge-b': require('../assets/plates-alpha/seg-bridge-b.png'),
   'night-water': require('../assets/plates-alpha/night-water.png'),
+  'shuigui': require('../assets/plates-alpha/shuigui.png'),
 } as const;
 
 export const DEAD = {
@@ -31,6 +32,7 @@ export const DEAD = {
   'seg-bridge-a': require('../assets/plates-drained/seg-bridge-a.png'),
   'seg-bridge-b': require('../assets/plates-drained/seg-bridge-b.png'),
   'night-water': require('../assets/plates-drained/night-water.png'),
+  'shuigui': require('../assets/plates-drained/shuigui.png'),
 } as const;
 
 export type PlateName = keyof typeof LIVE;
