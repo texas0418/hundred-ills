@@ -42,13 +42,18 @@ export const NODES: Record<string, TownNode> = {
   },
   gatelane: {
     id: 'gatelane',
-    // The lane recedes along the wall INTO the picture - that is the
-    // way to the gate. Swiping up walks it.
-    exits: { up: 'gate', right: 'mooring' },
+    // A corridor screen: the lane recedes along the wall INTO the
+    // picture (up, to the gate) and exits the foreground (down, to
+    // the mooring). The painting has no sideways path, so it has no
+    // sideways exits.
+    exits: { up: 'gate', down: 'mooring' },
   },
   mooring: {
     id: 'mooring',
-    exits: { left: 'gatelane', right: 'bridge', down: 'water' },
+    // The central alley rising between the houses is the visible way
+    // up toward the gate lane; the bank walks right; the water is
+    // below.
+    exits: { up: 'gatelane', right: 'bridge', down: 'water' },
   },
   water: {
     id: 'water',
@@ -57,15 +62,19 @@ export const NODES: Record<string, TownNode> = {
   },
   bridge: {
     id: 'bridge',
-    // down: crossing to the far bank - the other side, the town
-    // not-hers. TEMPORARY direction until [42] bank east lands and
-    // the map settles how the crossing reads.
-    exits: { left: 'mooring', up: 'alley', down: 'farbank' },
+    // The deck visibly rises over the arch toward the right - that is
+    // the crossing, and it arrives on the far bank. TEMPORARY
+    // placement: the map wants [42] bank east on this side of the
+    // chain; when it lands, Simon settles which of the two the deck
+    // leads to.
+    exits: { left: 'mooring', up: 'alley', right: 'farbank' },
     bridge: true,
   },
   farbank: {
     id: 'farbank',
-    exits: { up: 'bridge' },
+    // The embankment lane runs along the frame; back left is the way
+    // she came, over the bridge.
+    exits: { left: 'bridge' },
   },
   alley: {
     id: 'alley',
@@ -77,14 +86,17 @@ export const NODES: Record<string, TownNode> = {
   },
   junction: {
     id: 'junction',
-    // up leads toward canal two. TEMPORARY: it reaches the lantern
-    // corner directly until [47]-[49] land; the map hangs [38] off
-    // second-canal bank east.
-    exits: { down: 'alley-deep', up: 'lantern' },
+    // A Y-split: two lane mouths, left and right. The left branch has
+    // a faint lamp glow down it - walk toward it and arrive under the
+    // lantern. TEMPORARY: the map hangs [38] off second-canal bank
+    // east [49]; the right branch waits for canal two.
+    exits: { down: 'alley-deep', left: 'lantern' },
   },
   lantern: {
     id: 'lantern',
-    exits: { down: 'junction' },
+    // The lane continues into darkness both ways; right is back to
+    // the junction. Left waits for canal two.
+    exits: { right: 'junction' },
     warm: true,
   },
 };
