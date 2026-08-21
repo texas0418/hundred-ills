@@ -1,4 +1,8 @@
+import { existsSync } from 'node:fs';
 import { LINES, holdMs, linesFor, revealMs } from './src/content/lines';
+import {
+  FILES, MIX, strikePattern, takeFor,
+} from './src/content/soundscape';
 import { NODES } from './src/engine/nodes';
 
 let n = 0;
@@ -61,5 +65,35 @@ for (const l of LINES) {
   ok(holdMs(l) >= 2600 && holdMs(l) <= 10000, `${l.id} holds a readable while`);
   ok(revealMs(l) < holdMs(l) - 1000, `${l.id} prints, then leaves time to read`);
 }
+
+// The soundscape: every declared file exists, every node has a mix,
+// every mix belongs to a node.
+for (const id of Object.keys(FILES)) {
+  ok(existsSync(`assets/audio/${id}.wav`), `${id}.wav exists`);
+}
+for (const nodeId of Object.keys(NODES)) {
+  ok(!!MIX[nodeId], `${nodeId} has an ambience mix`);
+}
+for (const nodeId of Object.keys(MIX)) {
+  ok(!!NODES[nodeId], `mix "${nodeId}" belongs to a real node`);
+}
+for (const [nodeId, m] of Object.entries(MIX)) {
+  ok(m.water >= 0 && m.water <= 1 && m.wind >= 0 && m.wind <= 1,
+    `${nodeId} mix stays in range`);
+  if (NODES[nodeId].water) ok(m.water === 1, `${nodeId} is loud water`);
+}
+
+// The clapper strikes the call: slow strikes, a breath, quick ones,
+// in order, spaced like a man and not a metronome burst.
+const pat = strikePattern(3, 2);
+ok(pat.length === 5, 'three slow and two quick');
+ok(pat.filter((s) => s.kind === 'slow').length === 3, 'the watch counted slow');
+ok(pat.every((s, i) => i === 0 || s.atMs > pat[i - 1].atMs), 'strikes in order');
+ok(pat[3].atMs - pat[2].atMs > 700, 'a breath between the counts');
+
+// Takes rotate and never leave the set.
+const seen4 = new Set([0, 1, 2, 3].map((i) => takeFor('clapper-slow', i)));
+ok(seen4.size === 4, 'four slow takes rotate');
+ok(takeFor('studs', 3) === 'studs-1', 'studs wrap at three');
 
 console.log(`test-content: ${n} assertions passed`);
