@@ -719,6 +719,53 @@ THE TOWN IS A NETWORK  (100-104, added 2026-08-20)
      OPAQUE/SEAL alpha special-casing) comes out when the first bridge
      segment lands.
 
+108. THE TOWN IS A DEPTH FIELD. FORWARD IS A VERB.
+     Simon, 2026-08-21, choosing the fuller Year Walk model over
+     doorway-only transitions. Amends 101 and 105.
+
+     Year Walk's forward motion is the fact this is built on: swiping
+     into the screen moves between DEPTH LAYERS, and every layer is
+     still flat, side-on art. Nothing recedes. The layers part like
+     stage flats. So this changes traversal and feel, and does not
+     change one rule of the art doctrine.
+
+     THE MODEL:
+       The town is a stack of parallel strips, ordered by depth:
+       water's edge, bank, back lane, inner yards, the next canal's
+       bank, and so on. Swipe UP steps deeper (inland, away from the
+       water). Swipe DOWN steps outward (back toward the water).
+
+       Stepping is possible in PASSAGE ZONES - stretches where the art
+       shows a way through: a gap in the terrace, a break in a wall.
+       More generous than the single lane mouth of 105, but not
+       everywhere; a town has walls. Where the swipe is refused she
+       leans toward the gap that is not there, and nothing else
+       happens. 石敢當 blocks a zone - its whole job, per 104/106.
+
+     THE UNIFICATION, and the best consequence of the change:
+       On the outermost strip - the bank - stepping DOWN means going to
+       the water itself, and that IS the reflection. Counting her
+       flames stops being a separate gesture and becomes the last
+       outward step of the depth verb. One verb: toward the water or
+       away from it. The rite walks the line between.
+
+     WHAT THIS COSTS, stated rather than discovered later:
+       The lane-mouth as sole legible branch point is gone; legibility
+       must now come from the art of each passage zone.
+       Every inland layer needs strip art. The demo pair (bank +
+       back lane) exists; a second canal does not, yet.
+       The transition must be BUILT AND FELT - layers sliding apart,
+       Year Walk fashion - or the whole change is a teleport with
+       extra steps. This is engine work and it is the next milestone.
+
+     走三桥 IS UNTOUCHED. Bridges stay landmarks on bank strips,
+     crossed by walking past, per 105/107.
+
+     101's "movement never leaves the horizontal" is amended: her BODY
+     still only walks left and right along each strip; the depth step
+     is a discrete transition between strips, never a steerable axis.
+     The art stays flat forever.
+
 =============================================================
 DEAD
 =============================================================
