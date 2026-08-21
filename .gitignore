@@ -15,3 +15,6 @@ web-build/
 *.mobileprovision
 .env
 .env.local
+
+# python tool bytecode
+__pycache__/
