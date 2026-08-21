@@ -7,11 +7,16 @@ let n = 0;
 function ok(c: boolean, m: string) { n++; if (!c) throw new Error(`FAIL: ${m}`); }
 
 // The graph is coherent: every exit leads to a real node, and every
-// exit is visible-in-the-painting by decree - here we can only check
-// the edges exist both ways where the design says they do.
+// edge is RECIPROCAL - walking through it, the way back is the
+// opposite swipe. An edge she cannot walk back the way she came is a
+// wiring bug, not a design choice; one-way passages would be their
+// own mechanic and there isn't one.
+const OPP = { left: 'right', right: 'left', up: 'down', down: 'up' } as const;
 for (const t of Object.values(NODES)) {
-  for (const [, to] of Object.entries(t.exits)) {
+  for (const [way, to] of Object.entries(t.exits)) {
     ok(!!NODES[to as string], `${t.id} exits to a real node`);
+    ok(NODES[to as string]?.exits[OPP[way as keyof typeof OPP]] === t.id,
+      `${t.id} -${way}-> ${to} returns by the opposite swipe`);
   }
 }
 ok(node('bridge').bridge === true, 'the bridge is a bridge');
