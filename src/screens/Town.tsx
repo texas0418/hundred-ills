@@ -37,7 +37,40 @@ import {
   type TownState,
   type Way,
 } from '../engine/nodes';
-import { holdMs, linesFor, type Line, type Trigger } from '../content/lines';
+import { CHAR_MS, holdMs, linesFor, type Line, type Trigger } from '../content/lines';
+
+/** A spoken line: the characters settle one by one like a brush
+ *  laying them down, then the English breathes in beneath. A soft
+ *  paper halo keeps the ink legible on any painting without a box. */
+function LineView({ line, top }: { line: Line; top: number }) {
+  const chars = line.zh.split('');
+  return (
+    <Animated.View
+      key={line.id}
+      exiting={FadeOut.duration(400)}
+      style={[styles.line, { top }]}
+      pointerEvents="none"
+    >
+      <View style={styles.lineZhRow}>
+        {chars.map((ch, i) => (
+          <Animated.Text
+            key={`${line.id}-${i}`}
+            entering={FadeIn.delay(i * CHAR_MS).duration(560)}
+            style={styles.lineZh}
+          >
+            {ch}
+          </Animated.Text>
+        ))}
+      </View>
+      <Animated.Text
+        entering={FadeIn.delay(chars.length * CHAR_MS + 320).duration(800)}
+        style={styles.lineEn}
+      >
+        {line.en}
+      </Animated.Text>
+    </Animated.View>
+  );
+}
 
 /**
  * DECISIONS 109, the proof. The world is discrete screens: each place
@@ -472,15 +505,7 @@ export function Town() {
       ) : null}
 
       {line ? (
-        <Animated.View
-          key={line.id}
-          entering={FadeIn.duration(450)}
-          exiting={FadeOut.duration(350)}
-          style={[styles.line, { top: height * (line.at ?? 0.78) }]}
-          pointerEvents="none"
-        >
-          <Text style={styles.lineText}>{line.en}</Text>
-        </Animated.View>
+        <LineView key={line.id} line={line} top={height * (line.at ?? 0.76)} />
       ) : null}
 
       {watchmanCalling(state) ? (
@@ -498,7 +523,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b49</Text>
+      <Text style={styles.stamp}>b50</Text>
     </GestureHandlerRootView>
   );
 }
@@ -511,10 +536,21 @@ const styles = StyleSheet.create({
     width: 7, height: 14, borderRadius: 4,
     backgroundColor: PEACH_RED, opacity: 0.8,
   },
-  line: { position: 'absolute', left: 30, right: 30, alignItems: 'center' },
-  lineText: {
-    color: SOOT, fontSize: 17, lineHeight: 26, textAlign: 'center',
-    opacity: 0.88, maxWidth: 330,
+  line: { position: 'absolute', left: 26, right: 26, alignItems: 'center' },
+  lineZhRow: {
+    flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center',
+    maxWidth: 340,
+  },
+  lineZh: {
+    color: SOOT, fontSize: 23, lineHeight: 34, letterSpacing: 3,
+    textShadowColor: 'rgba(243,237,224,0.95)',
+    textShadowOffset: { width: 0, height: 0 }, textShadowRadius: 9,
+  },
+  lineEn: {
+    color: SOOT, fontSize: 14, lineHeight: 21, textAlign: 'center',
+    opacity: 0.82, maxWidth: 330, marginTop: 7,
+    textShadowColor: 'rgba(243,237,224,0.9)',
+    textShadowOffset: { width: 0, height: 0 }, textShadowRadius: 7,
   },
   call: { position: 'absolute', top: 54, left: 0, right: 0, alignItems: 'center' },
   callLabel: { color: SOOT, fontSize: 26, letterSpacing: 6, opacity: 0.75 },
