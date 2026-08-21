@@ -161,6 +161,10 @@ ALREADY DONE - not repeated below
         screens/junction.png
   [48] SCREEN - THE HOUSE WITH THE LAMP
         screens/house-lamp.png  (asset landed, not yet wired - needs canal two's banks)
+  [51] SCREEN - THE NEIGHBOUR'S WALL
+        screens/neighbours-wall.png  (asset landed, placement in the graph pending)
+  [52] SCREEN - THE COVERED BRIDGE  (LATER SET PIECE)
+        screens/covered-bridge.png  (asset landed early; wired when its watch comes)
   [30] THE SECOND BANK
         canal-far-b.png
   [24] WILLOW BRANCHES - NEAR OVERLAY
@@ -319,6 +323,48 @@ crowd, text, characters, calligraphy, inscription, seal, signature,
 watermark, frame, border.
 --------------------------------------------------------------  to here
 
+[45] SCREEN - THE EAST WATER
+      The water's edge below [42] bank east - the near bank's second
+      water screen, decided NEW rather than a [37] reuse (Simon,
+      2026-08-21). Flames render here too, so the lower half must be
+      near-black still water. Same canal as [37], one stretch east:
+      same night, same water, DIFFERENT furniture - no steps, no
+      mooring post.
+
+--------------------------------------------------------------  copy from here
+Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
+of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
+wet blooming edges, visible brush direction, the paper showing
+through. Large areas of the paper left completely unpainted to stand
+for mist, water and sky. Muted and drained palette - ink black, warm
+grey, pale ochre, washed-out green. One small area of vermilion red
+and no other saturated colour. Flat frontal composition, no camera
+perspective, no photographic realism. Quiet, plain, unspectacular.
+
+Looking down a stone embankment edge to dark still canal water that
+fills the lower half of the frame, composed as one complete vertical
+painting. A flat stone washing slab juts over the water at one side,
+worn smooth, with a wooden beating paddle left lying on it. The
+water is deep near-black ink, calm, holding one faint smudge of
+distant lamplight. Above, the stone edge and the lowest courses of a
+whitewashed wall fading up into mist. Deserted, no boat, no figure
+and no reflection of any figure. Seen straight on and flat, with no
+perspective and no vanishing point. Isolated on bare paper.
+
+Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
+leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
+gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
+concept art, 3D render, anime, oversaturated, neon, HDR, glow,
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
+--------------------------------------------------------------  to here
+
 [50] SCREEN - THE SECOND WATER
       The inland canal's water's edge - like [37] but meaner: closer
       walls, darker water. Flames render here too. Lower half near-
@@ -342,86 +388,6 @@ utterly still and near-black, walls of the leaning houses rising
 close on the far side into mist. No boat, no figure, no reflection
 of any figure. Seen straight on and flat, with no perspective and no
 vanishing point. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[51] SCREEN - THE NEIGHBOUR'S WALL
-      STORY SCREEN, ENDING-SITE item 4: the auspicious baby print seen
-      plainly and warmly, with no music cue, in the first watch. The
-      happiest object in Chinese popular art, pasted on an ordinary
-      wall. Play it completely straight.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night view of a stretch of whitewashed Jiangnan wall beside a
-lane, composed as one complete vertical painting. Pasted on the
-wall, slightly crooked with edges lifting, a cheap New Year
-woodblock print of a plump smiling baby boy in a red jacket holding
-a large carp - cheerful, round, benign, its colours the brightest
-thing in the frame. Below it a stone bench and a broom leant against
-the wall. The lane runs left and right into mist. Deserted. Seen
-straight on and flat, with no perspective and no vanishing point.
-Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[52] SCREEN - THE COVERED BRIDGE  (LATER SET PIECE)
-      BRIDGE THREE. Do not generate until the night's late screens are
-      being made - it belongs to the hour she crosses it dead. The only
-      bridge you cannot see through: a roofed corridor, the far end
-      lost. Midway there is a gap in the boards where people look down
-      at the water. ENDING-SEQUENCE movement one happens here.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-The mouth of a long covered wooden bridge at night, seen from just
-before its entrance, composed as one complete vertical painting. A
-low tiled roof over a plank corridor, timber posts, the far end
-swallowed in darkness - nothing visible through it. Black water
-under the entrance planks. The lane arrives from both sides. One
-cold unlit lantern frame hanging at the mouth. Deserted. Seen
-straight on and flat, with no perspective and no vanishing point.
-Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
