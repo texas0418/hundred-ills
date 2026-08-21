@@ -151,6 +151,98 @@ If one needs redoing, remove its id from LANDED and re-run.
 STILL TO MAKE
 =============================================================
 
+[34] SCREEN - THE BRIDGE AT NIGHT  (PROOF 1 of 2)
+      DECISIONS 109: the unit of art is now the whole SCREEN, judged as
+      a picture someone would hang. This is not a plate and not a strip:
+      it is the entire view, composed - water, bank, bridge, houses,
+      mist, sky - in ONE painting. Fill the frame edge to edge; the 留白
+      lives INSIDE the composition as mist and water, not as empty
+      margin around a band of art.
+      
+      PORTRAIT. Set the aspect control to 9:16 if it exists; otherwise
+      generate square and compose for a tall centre.
+      
+      Generate [34] and [35] in ONE session so they are the same night.
+
+--------------------------------------------------------------  copy from here
+Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
+of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
+wet blooming edges, visible brush direction, the paper showing
+through. Large areas of the paper left completely unpainted to stand
+for mist, water and sky. Muted and drained palette - ink black, warm
+grey, pale ochre, washed-out green. One small area of vermilion red
+and no other saturated colour. Flat frontal composition, no camera
+perspective, no photographic realism. Quiet, plain, unspectacular.
+
+A night view of a Jiangnan water town canal, composed as one
+complete vertical painting. In the foreground the dark still canal
+water crosses the bottom of the frame, holding broken reflections.
+Above it a stone embankment with a flagged lane, and a low arched
+stone footbridge crossing a side channel, the space beneath its arch
+filled with deep near-black shadow. One small red paper lantern on a
+post beside the bridge, its light smudged in the water. Behind, a
+row of whitewashed houses with black tile roofs, softening into mist
+toward the top of the frame. Deep winter, deserted, one empty moored
+boat. The whole frame is painted: mist and night fill what stone and
+water do not. Seen straight on and flat, with no perspective and no
+vanishing point. Isolated on bare paper.
+
+Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
+leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
+gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
+concept art, 3D render, anime, oversaturated, neon, HDR, glow,
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
+--------------------------------------------------------------  to here
+
+[35] SCREEN - ALONG THE BANK  (PROOF 2 of 2)
+      The screen one step along the bank from [34] - same night, same
+      palette, same session. DIFFERENT composition: no bridge here. The
+      two must feel like neighbouring pages of one book, not tiles of
+      one image - nothing needs to line up between them, they are joined
+      by a phase transition, never by an edge.
+
+--------------------------------------------------------------  copy from here
+Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
+of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
+wet blooming edges, visible brush direction, the paper showing
+through. Large areas of the paper left completely unpainted to stand
+for mist, water and sky. Muted and drained palette - ink black, warm
+grey, pale ochre, washed-out green. One small area of vermilion red
+and no other saturated colour. Flat frontal composition, no camera
+perspective, no photographic realism. Quiet, plain, unspectacular.
+
+A night view of a Jiangnan water town canal, composed as one
+complete vertical painting. Dark still water low in the frame, a
+stone embankment with worn steps descending to a small mooring, a
+single empty flat boat tied up. Above, whitewashed houses with black
+tile roofs close over a narrow gap where an alley leads away into
+darkness, one warm lamplit window high in a wall. Mist takes the
+rooflines toward the top of the frame. Deep winter, deserted. The
+whole frame is painted: mist and night fill what stone and water do
+not. Seen straight on and flat, with no perspective and no vanishing
+point. Isolated on bare paper.
+
+Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
+leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
+gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
+concept art, 3D render, anime, oversaturated, neon, HDR, glow,
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
+--------------------------------------------------------------  to here
+
 [29] 弄 - THE LANE GROUND  ** DO NOT GENERATE **
       THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.
       

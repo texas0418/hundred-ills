@@ -766,6 +766,51 @@ THE TOWN IS A NETWORK  (100-104, added 2026-08-20)
      is a discrete transition between strips, never a steerable axis.
      The art stays flat forever.
 
+109. THE WORLD IS DISCRETE SCREENS. NOTHING TILES, EVER.
+     Simon, 2026-08-21, after playing the fires loop: "none of it is
+     fun, engaging, beautiful - it feels pieced together and you can
+     tell where there are seams and pieces missing." He is right, and
+     his diagnosis of Year Walk is the fix: you move, and the view
+     PHASES to a new screen. It looks like movement without piecing
+     scenes together or repeating a drawing.
+
+     THE UNIT OF ART IS THE SCREEN. Each place in the town is ONE
+     complete, full-frame painting - bank, water, mist, reflections,
+     bridge, all composed together in a single generation, judged as a
+     picture someone would hang. Screens never abut on-screen, so there
+     is nothing to align and nothing to seam. Nothing repeats because
+     every screen is unique art.
+
+     TRAVERSAL IS THE TOWN GRAPH, NODE BY NODE. A screen has exits -
+     left, right, inward, outward - which are the depth field of 108
+     made discrete. Swiping phases to the neighbouring screen: the
+     leaving screen parts and the arriving one settles, the layers-part
+     choreography reused at screen scale. Within a screen there is no
+     scrolling and no walking; the screen IS the place.
+
+     WHAT DIES: tiling, pairing, walkway band alignment, segments.json,
+     slot rendering, the continuous drag-walk and its momentum. The
+     smooth drag was praised and is knowingly given up - it was smooth
+     motion through assembled art, and assembled is the thing that
+     failed. What is felt now is the phase between authored pictures.
+
+     WHAT SURVIVES UNTOUCHED: every pure system. Fires, warmth,
+     watches and points, 走三桥 accounting (bridge screens spend the
+     rite as you pass through them), wards, the drain (a cross-fade of
+     whole screens now, which will look BETTER), the depth verb as exit
+     directions, the town graph itself - a node map is what 100-104
+     always described, and players drawing maps of nodes is the 33
+     promise at full strength.
+
+     SCOPE HONESTY: every screen is bespoke art. The demo bank becomes
+     roughly six to eight screens instead of one strip plus plates. The
+     game total is on the order of a hundred-plus screens across five
+     watches - which is exactly Year Walk's shape, and the reason its
+     two hours feel dense.
+
+     PROOF BEFORE MIGRATION: two screens and one phase transition on
+     the device, judged by Simon, before any machinery is deleted.
+
 =============================================================
 DEAD
 =============================================================
