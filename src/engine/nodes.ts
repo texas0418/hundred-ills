@@ -62,19 +62,37 @@ export const NODES: Record<string, TownNode> = {
   },
   bridge: {
     id: 'bridge',
-    // The deck visibly rises over the arch toward the right - that is
-    // the crossing, and it arrives on the far bank. TEMPORARY
-    // placement: the map wants [42] bank east on this side of the
-    // chain; when it lands, Simon settles which of the two the deck
-    // leads to.
-    exits: { left: 'mooring', up: 'alley', right: 'farbank' },
+    // The deck rises over the arch and carries the bank walk onward -
+    // right continues her bank to the east stretch, spending the
+    // bridge as she passes (the map's chain, DECISIONS 102/105). The
+    // far bank - the town not-hers - is down, past the arch and
+    // across. If walking it says the deck should cross to the far
+    // bank instead, swap right and down here.
+    exits: { left: 'mooring', up: 'alley', right: 'bank-east', down: 'farbank' },
     bridge: true,
   },
   farbank: {
     id: 'farbank',
-    // The embankment lane runs along the frame; back left is the way
-    // she came, over the bridge.
-    exits: { left: 'bridge' },
+    exits: { up: 'bridge' },
+  },
+  'bank-east': {
+    id: 'bank-east',
+    // [42], the plain breathing stretch: laundry poles over the
+    // water, one lantern door. down is reserved for [45] the east
+    // water once it is generated.
+    exits: { left: 'bridge', right: 'bridge-b' },
+  },
+  'bridge-b': {
+    id: 'bridge-b',
+    // [43]: the flat beam bridge, second of the night's three.
+    exits: { left: 'bank-east', right: 'bank-end' },
+    bridge: true,
+  },
+  'bank-end': {
+    id: 'bank-end',
+    // [44]: where her bank runs out. A dead end that says the town
+    // continues where she cannot yet go.
+    exits: { left: 'bridge-b' },
   },
   alley: {
     id: 'alley',
@@ -86,28 +104,46 @@ export const NODES: Record<string, TownNode> = {
   },
   junction: {
     id: 'junction',
-    // A Y-split, and a split must SPLIT: two lane mouths, two choices.
-    // The left branch has a faint lamp glow down it - walk toward it
-    // and arrive under the lantern. The right branch climbs to canal
-    // two and reaches the house with the lamp. TEMPORARY on both
-    // sides: when [47]-[49] land, the map hangs [38] off bank east
-    // and [48] sits mid-chain; the junction's attachments get
-    // re-decided then.
-    exits: { down: 'alley-deep', left: 'lantern', right: 'house-lamp' },
+    // The Y-split, both mouths real: left walks toward the visible
+    // glow and reaches the lantern; right climbs to canal two at its
+    // west bank. Canal two closes into a ring - junction, lantern,
+    // inland east, the house with the lamp, inland west, junction -
+    // the first loop players will draw on their maps.
+    exits: { down: 'alley-deep', left: 'lantern', right: 'inland-west' },
   },
   lantern: {
     id: 'lantern',
-    // The lane continues into darkness both ways; right is back to
-    // the junction. Left waits for canal two.
-    exits: { right: 'junction' },
+    // [38], the warm place. Its lane runs into darkness both ways and
+    // both ways are now real: right to the junction, left onto canal
+    // two's east bank.
+    exits: { left: 'inland-east', right: 'junction' },
     warm: true,
+  },
+  'inland-west': {
+    id: 'inland-west',
+    // [47]: the town behind the town, houses leaning close.
+    exits: { left: 'junction', right: 'house-lamp', down: 'inland-water' },
+  },
+  'inland-water': {
+    id: 'inland-water',
+    // [50]: the meaner water. Flames render here too.
+    exits: { up: 'inland-west' },
+    water: true,
   },
   'house-lamp': {
     id: 'house-lamp',
-    // [48], the story screen: the lamp lit in the window all night,
-    // and nobody remarks on it. She passes and does not go in - the
-    // door is art, not an exit, until the wards say otherwise.
-    exits: { left: 'junction' },
+    // [48], the story screen, mid-chain on canal two as the map
+    // wants: the lamp lit in the window all night, and nobody remarks
+    // on it. She passes and does not go in - the door is art, not an
+    // exit, until the wards say otherwise.
+    exits: { left: 'inland-west', right: 'inland-east' },
+  },
+  'inland-east': {
+    id: 'inland-east',
+    // [49]: the shrine niche hints at what lives inland. The map
+    // hangs the lantern off this bank; its steps to the water stay
+    // art-only for now.
+    exits: { left: 'house-lamp', right: 'lantern' },
   },
 };
 

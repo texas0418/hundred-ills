@@ -135,6 +135,11 @@ LANDED = {
     "48": "screens/house-lamp.png  (asset landed, not yet wired - needs canal two's banks)",
     "51": "screens/neighbours-wall.png  (asset landed, placement in the graph pending)",
     "52": "screens/covered-bridge.png  (asset landed early; wired when its watch comes)",
+    "42": "screens/bank-east.png",
+    "44": "screens/bank-end.png",
+    "47": "screens/inland-west.png",
+    "49": "screens/inland-east.png",
+    "50": "screens/inland-water.png",
 }
 
 # (id, title, kind, note shown above the block, body)

@@ -84,6 +84,21 @@ const SCREENS = [
     dead: require('../../assets/screens-drained/farbank.png'),
   },
   {
+    id: 'bank-east',
+    live: require('../../assets/screens/bank-east.png'),
+    dead: require('../../assets/screens-drained/bank-east.png'),
+  },
+  {
+    id: 'bridge-b',
+    live: require('../../assets/screens/bridge-b.png'),
+    dead: require('../../assets/screens-drained/bridge-b.png'),
+  },
+  {
+    id: 'bank-end',
+    live: require('../../assets/screens/bank-end.png'),
+    dead: require('../../assets/screens-drained/bank-end.png'),
+  },
+  {
     id: 'alley',
     live: require('../../assets/screens/alley.png'),
     dead: require('../../assets/screens-drained/alley.png'),
@@ -107,6 +122,21 @@ const SCREENS = [
     id: 'house-lamp',
     live: require('../../assets/screens/house-lamp.png'),
     dead: require('../../assets/screens-drained/house-lamp.png'),
+  },
+  {
+    id: 'inland-west',
+    live: require('../../assets/screens/inland-west.png'),
+    dead: require('../../assets/screens-drained/inland-west.png'),
+  },
+  {
+    id: 'inland-east',
+    live: require('../../assets/screens/inland-east.png'),
+    dead: require('../../assets/screens-drained/inland-east.png'),
+  },
+  {
+    id: 'inland-water',
+    live: require('../../assets/screens/inland-water.png'),
+    dead: require('../../assets/screens-drained/inland-water.png'),
   },
 ] as const;
 
@@ -372,7 +402,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b46</Text>
+      <Text style={styles.stamp}>b47</Text>
     </GestureHandlerRootView>
   );
 }
