@@ -1,0 +1,294 @@
+HUNDRED ILLS - THE FIRST FIVE MINUTES
+Draft 1, 2026-08-21. The fiction pass begins here. Nothing in this
+file is in the app; it is written to be torn apart. Where a line of
+player-facing text is proposed, it is quoted and marked [C] like any
+other invention (LORE.txt rules apply to fiction too - the almanac
+layer stays [A]/[B], but we should know what we made up).
+
+The unit covered is 一更一點, the night's first point - the twenty-odd
+minutes from launch to the first strike of the clapper - with the five
+minutes to the mooring written beat by beat, and the rest of the point
+sketched. ENDING-SITE's six plants are placed; four of the six land
+inside the first point.
+
+
+=============================================================
+THE VOICE - the decision everything else waits on
+=============================================================
+
+DECISIONS 37 fixes the register: period-plain, no chinoiserie, reads
+like a translated primary source. 35 fixes the layout: 繁體 first,
+English beneath, smaller. What is not yet fixed is WHOSE English it is.
+
+PROPOSED: two voices only, and the game never explains the difference.
+
+  THE WORLD'S VOICE. Everything the town itself says: the watchman's
+  call, the almanac, the fortune poems, a shop sign. Always bilingual,
+  characters first. This voice is quotation - half of it literally is.
+
+  HER VOICE. First person, present tense, never more than two short
+  sentences at a time, and rare - most screens say nothing. She talks
+  the way a tired practical woman talks to herself on an errand. She
+  never describes what the player can see. She only says things the
+  painting cannot: what she intends, what she remembers, what she
+  refuses to think about. English only - it is interior, not text.
+
+  There is NO third voice. No narrator, no "you feel", no stage
+  directions. If neither the world nor she would say it, it is not
+  said.
+
+The test for every line of hers, per 65: it must read two ways. First
+walk: an ordinary woman's ordinary thought. Second walk: the dead
+denying what they are. Sample, at the gate (see beat 2):
+
+    "The nail-heads first. Then the walk. Do it properly
+     and it counts."
+
+First reading: rite instructions, a practical mind. Second: the exact
+voice of someone performing being alive, which is what the fires are
+(66). Every line ships only if it survives both readings.
+
+
+=============================================================
+THE FIRST FIVE MINUTES, BEAT BY BEAT
+=============================================================
+
+BEAT 0 - COLD OPEN (0:00)
+
+Black. Water sounds, close. One clapper strike, far away, then the
+watch card per 36:
+
+    一更
+    the first watch
+
+Nothing else. No studio card, no menu - the title screen exists
+outside the night (unchanged from current build); this is what NEW
+GAME opens into. The card holds while the water grows, then the gate
+screen fades in from the mist top-down, the way ink settles.
+
+BEAT 1 - THE GATE, SHUT (0:20)
+
+The gate painting. She stands before the shut studded gate. No text
+yet. The player has a still, beautiful, closed image and no
+instruction. Whatever they try first - tap, swipe up, swipe left -
+either does nothing or refuses with the small haptic. This is
+deliberate and it is the game teaching its first lesson: the world
+answers, it does not explain.
+
+BEAT 2 - 摸釘 (0:40)
+
+The bronze studs are a touch target - the game's first working input
+is a TOUCH on the painting, before movement is ever discovered.
+Touching them: a soft metal-cold sound, the faintest warm bloom under
+her hand (Skia), and her first line:
+
+    "The nail-heads first. Then the walk. Do it properly
+     and it counts."
+
+Then, only after the touch, a second line - the tell at 30, planted
+sincerely, the cruelest object per 70:
+
+    "釘 for 丁. A son. Everyone asks for a son."
+
+She already has him. He is why she is dead. The line is warm, hopeful
+and unremarkable on first reading, and it is the whole game on the
+second. NOTE: whether she should ask for a son AT ALL given she has
+one is a real question - see OPEN QUESTION 4 for the alternative
+reading where the line is habit, not request.
+
+Touching the studs again does nothing. The rite counts once.
+
+BEAT 3 - THE TURN (1:20)
+
+The only exit is down - she turns from the gate and walks back down
+the lane. The player finds this by trying; nothing prompts them. The
+first successful swipe is the phase transition itself, which is its
+own reward. No text. (The opening move of the game is turning away
+from a shut door. Per 18, later, turning BACK has a price - the rite
+charges for looking behind. The symmetry is deliberate and never
+pointed at.)
+
+BEAT 4 - THE GATE LANE (1:40)
+
+The corridor under the wall. As she enters, far down the lane, the
+watchman's clapper again - closer than the cold open. No text. The
+screen's job is scale: the wall says the town is large and she is
+small and it is late.
+
+BEAT 5 - THE MOORING, AND HER NAME (2:30)
+
+Down the lane's foreground to the mooring. THE WATCHMAN IS HERE -
+this is 89's free beat, moved to minute three because it also solves
+ENDING-SITE plant 6: her name spoken by someone living, learned the
+ordinary way. He is bored, cold, middle-aged. He does not stop
+walking.
+
+    WATCHMAN: "Out for the walk, 【NAME】? Bridges are slick."
+    HER:      "I'll mind them."
+
+Two lines, the entire exchange. He exits the way she came, clapper
+fading. His greeting is the only time tonight a living person speaks
+to her - though neither reading of the scene flags it. On the second
+walk the player knows why his greeting is impossible and the
+exchange becomes the saddest thing in the first watch. (He does not
+strike the hour here; his sounding walk pattern belongs to the audio
+pass.)
+
+Her name: see OPEN QUESTION 2. Everything else in this file works
+around the placeholder.
+
+BEAT 6 - THE WATER (3:30)
+
+The mooring's down-exit to the water's edge is visibly there - dark
+steps, black water. Players will try it now or soon; the fires are
+taught whenever they do, so the timing is theirs (41: no tutorial).
+At the water's edge, the flames render in the reflection per 67 -
+three small vermilion points on the black water, the screen's only
+red. Her line, the only fires text in the game:
+
+    "Three. Good. Steady the whole way, that's the trick
+     of it."
+
+Counting them is HER habit, so it becomes the player's. The game
+never says fires, never says three, never says what they are for.
+(66: never the word health, never a bar.) If the player never comes
+down here, the fires are simply never explained - the almanac's
+三把火 entry is the only other source. That is accepted and correct.
+
+BEAT 7 - THE BANK OPENS (4:30)
+
+Back up, and the walk proper: mooring, right, toward bridge A. The
+first watch's business begins. Five minutes in, the player knows how
+to move, has touched the rite, has heard her name, has maybe seen
+the fires, and has been told nothing.
+
+
+=============================================================
+THE REST OF 一更一點 - sketch
+=============================================================
+
+The point runs long (CHAPTERS: points are not uniform; make the
+first one generous - twenty-five minutes plus). Its business: walk
+the near bank end to end, cross bridges A and B in the ordinary
+course of it, and place three more plants. The point ends with the
+watchman's first full strike (一更二點 - slow strike, two quick),
+which is also the first autosave the player might notice.
+
+PLANT 1+2 - THE HOUSE AND THE LAMP (ENDING-SITE 1, 2)
+
+Canal two is reachable from the junction inside the first point, and
+the ring makes passing the house natural rather than staged. Passing
+house-lamp, its window lit (the painting already keeps the lamp lit
+in both ink states - the drain bake preserved it):
+
+    "Lamp's burning at ours. Wasteful. I'll be back
+     before it matters."
+
+The mundane reason, delivered as thrift. [C], and see OPEN QUESTION
+5 - "ours" does a lot of quiet work here and Simon should decide how
+early the house is claimed as hers. She does not stop. Nothing stops
+her. The lamp is lit in every later pass and no one ever mentions it
+again.
+
+PLANT 4 - THE NEIGHBOUR'S WALL (ENDING-SITE 4)
+
+The wall screen wires in next to the house - graph change proposed
+below. First pass line, warm, no music cue, per the brief:
+
+    "The Zhous' new-year print. A fat boy and a carp.
+     Theirs came in autumn - a girl, but healthy."
+
+One neighbour, one detail, gone. On the second walk the print of a
+thriving baby boy next door to HER house is unbearable, which is the
+assignment. ([C]; the surname is set dressing and can change.)
+
+PLANT 5 - THE ALMANAC (ENDING-SITE 5)
+
+Present from minute one by existing (47's companion layer). Nothing
+in the first point references it. Its 姑獲鳥 and 血湖 entries are
+simply there, dry, per 77. No action in this file; noted so the
+plant list reconciles.
+
+PLANT 3 - THE VOICE, ONCE (ENDING-SITE 3)
+
+NOT in the first point. It belongs at the very edge of the first
+watch (一更五點, the last minutes before the 二更 card), from behind
+her, distant, once:
+
+    【NAME】——
+
+No sting, no fire cost, nothing to answer yet. She does not turn.
+One line from her, and this one is load-bearing:
+
+    "No one calls me on the walk. Everyone knows the rule."
+
+Which is 19 taught diegetically - answering has a cost - and is also
+false comfort: someone IS calling her, and it is the person who
+loves her most (73). Both readings, one line.
+
+
+=============================================================
+WHAT THIS FORCES ON THE BUILD (nothing done yet)
+=============================================================
+
+  1. src/content/ is born: a lines table keyed by (node, trigger,
+     visit-count), pure data, testable - the slop-check's content
+     rules get their home. Triggers needed so far: on-enter,
+     on-touch-target, on-flames-shown, scripted (watchman, voice).
+  2. A touch-target layer on screens (the studs are the first; door
+     gods and laundry come later and reuse it).
+  3. The watchman as a placed, walking figure on the mooring screen
+     for the greeting beat (his plate [19] exists), exit choreography
+     reusing the phase system.
+  4. Graph change: neighbours-wall wires between house-lamp and
+     inland-east (house-lamp right -> wall, wall right -> inland-east).
+     The wall painting's lane runs along it; both exits are honest.
+  5. Her-voice text rendering: English only, lower third, on the
+     painting, no box. World-voice keeps 繁體-first bilingual layout.
+  6. The 一更 card gains nothing. Watch cards stay bare (36).
+
+
+=============================================================
+OPEN QUESTIONS - answer with numbers
+=============================================================
+
+1. THE VOICE. Two-voice scheme as proposed (world + her interior,
+   no narrator)? The alternative is Year Walk's near-wordlessness -
+   cut her voice entirely, keep only world text. That is purer and
+   colder; the two-voice version buys the 65 double-readings and the
+   ending's "answer to your name" needs her to have had a voice all
+   night. Recommend: two voices.
+
+2. HER NAME. Needed before any line records. Three candidates, all
+   plausible for a late-Qing Jiangnan woman of her standing:
+     a. 阿秀  A-Xiu   - plain, warm, common; "the pretty one" worn
+                        soft by use. Recommended.
+     b. 玉娘  Yuniang - a touch more formal; "niang" lands harder
+                        when the voice calls it (it also means
+                        mother, which 叫魂 will exploit).
+     c. 招娣  Zhaodi  - "beckoning a little brother"; a girl named
+                        as a wish for a son. On-theme to the point
+                        of cruelty - possibly past it.
+   Recommend a, with b's 娘-resonance noted as a real argument for b.
+
+3. THE RITE'S RULES - where does the player learn don't-look-back /
+   don't-answer? Proposed above: nowhere explicit in the first point;
+   her line at plant 3 carries don't-answer, the almanac carries the
+   rest, and the first look-back costs a fire whenever the player
+   tries it (18: a price, never a wall). The alternative: an epigraph
+   on the 一更 card quoting a real 走百病 source ([A] wording pending
+   the 帝京景物略 research in LORE). Recommend: no epigraph, rules
+   stay diegetic; revisit only if testers flounder.
+
+4. THE 摸釘 LINE. As drafted she asks for a son sincerely (70's
+   reading). Alternative: she touches the studs out of habit and
+   almost-names the child - "釘 for 丁. Well. I needn't ask this
+   year." - which plants the child harder but risks giving the game
+   away in minute one. Recommend: as drafted; save the nearness for
+   the second walk.
+
+5. "OURS" - the house-lamp line claims the house as hers on first
+   pass. Alternative is a neutral "Someone's left a lamp burning all
+   night" - colder, hides more, but wastes plant 1's requirement
+   that she PASSES HER OWN HOUSE with a mundane reason. Recommend:
+   "ours", said once, never again.
