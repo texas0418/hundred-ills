@@ -4,6 +4,7 @@ import {
   applyDepth, applyWarmth, atWater, DEMO_TIME_SCALE, RELIGHT_MS,
 } from './src/engine/walk';
 import { layoutFor, relightXs, DEFAULT_BAND_H } from './src/engine/town';
+import type { WalkState } from './src/engine/walk';
 
 let n = 0;
 function ok(c: boolean, m: string) { n++; if (!c) throw new Error(`FAIL: ${m}`); }
@@ -96,8 +97,8 @@ ok(applyDepth(applyDepth(down, 'outward'), 'outward') === applyDepth(down, 'outw
 // WARMTH (DECISIONS 84). Standing by the lantern relights, slowly.
 const rx = relightXs('north', DEFAULT_BAND_H);
 ok(rx.length === 1, 'one warmth on the bank - the lantern by bridge A');
-const cold = { ...arriveAt(s0, rx[0], DEFAULT_BAND_H), fires: 1 as const };
-let w = cold;
+const cold: WalkState = { ...arriveAt(s0, rx[0], DEFAULT_BAND_H), fires: 1 };
+let w: WalkState = cold;
 for (let i = 0; i < RELIGHT_MS / 100 - 1; i++) w = applyWarmth(w, 100, DEFAULT_BAND_H);
 ok(w.fires === 1, 'not yet - warming takes real time');
 w = applyWarmth(w, 100, DEFAULT_BAND_H);
