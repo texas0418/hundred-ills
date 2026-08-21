@@ -113,7 +113,6 @@ LANDED = {
     "23": "lamp-in-window.png",
     "27": "lane-mouth.png",
     "31": "seg-bridge-a.png",
-    "32": "seg-bridge-b.png  (right opening darkened at bake - reroll if it reads as a repair)",
     "33": "night-water.png",
     "25": "baby-print.png",
     # [29] deliberately NOT here. The plate exists and is unused - the
@@ -366,19 +365,26 @@ PLATES = [
      "hangs from a post near the bridge. Deserted, one empty moored boat "
      "far from the bridge."),
 
-    ("32", "SEGMENT - THE WALKWAY WITH BRIDGE B",
+    ("32", "SEGMENT - THE WALKWAY WITH BRIDGE B  (REROLL)",
      "plane",
-     "Same rules as [31], same session, same seed family - but a\n"
-     "DIFFERENT bridge, so the two read as landmarks apart. 走三桥 needs\n"
-     "bridges the player can tell apart and name on paper.",
+     "Same rules as [31] - a DIFFERENT bridge, so the two read as\n"
+     "landmarks apart; 走三桥 needs bridges the player can tell apart and\n"
+     "name on paper.\n"
+     "\n"
+     "WHY THE REROLL: the first attempt painted the LEFT opening dark\n"
+     "and left the RIGHT one bare paper. It shipped with a bake-time\n"
+     "patch, which reads as a repair. The rejection rule is per opening:\n"
+     "look at EACH opening separately, and if any one of them is not\n"
+     "near-black, reject the image and generate again.",
      "A long stone canal embankment with a flagged lane along its top, "
      "running the full width of the image and cut off by both the left and "
      "right edges at the same height. In the middle, the lane rises over a "
      "low flat-decked stone bridge carried on two short square piers, with "
      "a plain stone parapet - an older, squatter bridge than an arched one, "
      "all painted as one continuous scene. The narrow openings between the "
-     "piers are filled with deep near-black ink shadow; nothing is visible "
-     "through them. Deserted, no boat in this stretch."),
+     "piers are filled with deep near-black ink shadow - EVERY opening, "
+     "all of them equally dark; nothing is visible through any of them. "
+     "Deserted, no boat in this stretch."),
 
     ("33", "THE NIGHT WATER",
      "plane",
