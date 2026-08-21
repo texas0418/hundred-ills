@@ -556,6 +556,144 @@ PLATES = [
      "faint, the roofline of the side she came from dissolving into mist. "
      "One red scrap on a doorpost. Deserted, one moored boat."),
 
+    ("41", "SCREEN - THE GATE LANE",
+     "scene",
+     "Between the city gate [36] and the mooring: the first walking\n"
+     "screen of the game. Exits visible: the gate one way, the open\n"
+     "bank the other.",
+     "A night view along a flagged lane just inside a Jiangnau town "
+     "wall, composed as one complete vertical painting. The lane runs "
+     "from the foreground away to both sides, the stone wall high on one "
+     "hand with mist taking its top, low house-backs on the other. A "
+     "single bare willow. Wet stone catching faint light. Deserted."),
+
+    ("42", "SCREEN - THE BANK, EAST STRETCH",
+     "scene",
+     "The stretch of her bank past bridge A, before bridge B. A plain\n"
+     "breathing screen - most of a district is ordinary night, and the\n"
+     "ordinary screens are what make the strange ones land.",
+     "A night view along a Jiangnan canal bank, composed as one complete "
+     "vertical painting. The flagged lane runs left and right, the dark "
+     "canal below it, a row of shuttered house fronts above with one "
+     "narrow gap between two houses showing deeper darkness. A stack of "
+     "crab pots by a doorway, a coiled rope. Mist over the water and "
+     "eaves. Deserted."),
+
+    ("43", "SCREEN - BRIDGE B, THE FLAT BRIDGE",
+     "scene",
+     "The second of the three rite bridges, AS A SCREEN. Distinct from\n"
+     "bridge A's arch: squat, flat-decked, older. The space under the\n"
+     "deck near-black - nothing visible through it. Exits: the lane\n"
+     "continuing both ways over it.",
+     "A night view of a low flat-decked stone slab bridge carrying a "
+     "flagged lane over a narrow side channel of a Jiangnan canal, "
+     "composed as one complete vertical painting. A plain stone parapet, "
+     "one short square pier, the single opening beneath the deck filled "
+     "with deep near-black shadow. Dark water below holding a faint "
+     "reflection. Houses rising into mist behind. Deserted."),
+
+    ("44", "SCREEN - THE BANK'S FAR END",
+     "scene",
+     "Where her bank runs out: the district's eastern edge, and the turn\n"
+     "of the canal. A quiet dead-end that says the town continues where\n"
+     "she cannot yet go.",
+     "A night view of a Jiangnan canal bank ending at a turn of the "
+     "water, composed as one complete vertical painting. The flagged "
+     "lane narrows and stops at a low stone rail above the black canal, "
+     "which bends away out of sight between house walls. A mooring ring, "
+     "no boat. One distant lit window across the turn. Heavy mist "
+     "closing the view. Deserted."),
+
+    ("46", "SCREEN - THE ALLEY JUNCTION",
+     "scene",
+     "Where the deep alley [39] opens toward the second canal: the first\n"
+     "true CHOICE in the inland dark. Exits visible three ways - back\n"
+     "down the alley, and onward left and right along a cross-lane.",
+     "The meeting of two narrow Jiangnan alleys at night, composed as "
+     "one complete vertical painting. The near alley opens into a "
+     "slightly wider cross-lane running left and right, walls close and "
+     "high, wet flagstones, a stone corner post worn round. One paper "
+     "charm pasted at the corner, pale not red. Thin mist between the "
+     "eaves, a strip of night sky. Deserted."),
+
+    ("47", "SCREEN - SECOND CANAL, WEST",
+     "scene",
+     "The inland canal's bank - the town behind the town. Meaner and\n"
+     "closer than her own bank; the houses lean.",
+     "A night view along a narrower inland Jiangnan canal, composed as "
+     "one complete vertical painting. The bank lane is tighter, the "
+     "houses lean closer over the black water, their plaster more "
+     "stained, laundry poles crossing overhead with nothing on them. A "
+     "stone edge with no rail. Mist low over the water. Deserted."),
+
+    ("48", "SCREEN - THE HOUSE WITH THE LAMP",
+     "scene",
+     "STORY SCREEN, planted in the first watch and never remarked on:\n"
+     "her own house, though the game never says so. ONE window lamplit -\n"
+     "warm, steady, the only true warmth in the district that is not\n"
+     "the lantern. She passes; the player can never enter here. The\n"
+     "composition should make the lit window impossible to miss and\n"
+     "impossible to read as important.",
+     "A night view of a modest Jiangnan house front on an inland canal "
+     "lane, composed as one complete vertical painting. Whitewashed "
+     "wall, a plain closed double door with a fresh pair of door god "
+     "prints pasted bright and uncreased, and ONE small window above "
+     "glowing warm lamplight into the mist. The lane passes left and "
+     "right. A bare tree beside the door. Everything else cold, dark, "
+     "shuttered. Deserted."),
+
+    ("49", "SCREEN - SECOND CANAL, EAST",
+     "scene",
+     "The inland bank's other stretch, completing the second canal's\n"
+     "walk. A shrine niche hints at what lives inland.",
+     "A night view along a narrow inland Jiangnan canal bank, composed "
+     "as one complete vertical painting. Close leaning houses, a small "
+     "stone shrine niche set into a wall with a dark opening and cold "
+     "ash before it, steps down to the black water. A narrow gap between "
+     "houses leading away from the canal. Low mist. Deserted."),
+
+    ("50", "SCREEN - THE SECOND WATER",
+     "scene",
+     "The inland canal's water's edge - like [37] but meaner: closer\n"
+     "walls, darker water. Flames render here too. Lower half near-\n"
+     "black.",
+     "Looking down a tight stone edge to the black water of a narrow "
+     "inland Jiangnan canal at night, water filling the lower half of "
+     "the frame, composed as one complete vertical painting. No steps "
+     "here - just the sheer stone edge and an iron mooring ring. The "
+     "water utterly still and near-black, walls of the leaning houses "
+     "rising close on the far side into mist. No boat, no figure, no "
+     "reflection of any figure."),
+
+    ("51", "SCREEN - THE NEIGHBOUR'S WALL",
+     "scene",
+     "STORY SCREEN, ENDING-SITE item 4: the auspicious baby print seen\n"
+     "plainly and warmly, with no music cue, in the first watch. The\n"
+     "happiest object in Chinese popular art, pasted on an ordinary\n"
+     "wall. Play it completely straight.",
+     "A night view of a stretch of whitewashed Jiangnan wall beside a "
+     "lane, composed as one complete vertical painting. Pasted on the "
+     "wall, slightly crooked with edges lifting, a cheap New Year "
+     "woodblock print of a plump smiling baby boy in a red jacket "
+     "holding a large carp - cheerful, round, benign, its colours the "
+     "brightest thing in the frame. Below it a stone bench and a broom "
+     "leant against the wall. The lane runs left and right into mist. "
+     "Deserted."),
+
+    ("52", "SCREEN - THE COVERED BRIDGE  (LATER SET PIECE)",
+     "scene",
+     "BRIDGE THREE. Do not generate until the night's late screens are\n"
+     "being made - it belongs to the hour she crosses it dead. The only\n"
+     "bridge you cannot see through: a roofed corridor, the far end\n"
+     "lost. Midway there is a gap in the boards where people look down\n"
+     "at the water. ENDING-SEQUENCE movement one happens here.",
+     "The mouth of a long covered wooden bridge at night, seen from just "
+     "before its entrance, composed as one complete vertical painting. "
+     "A low tiled roof over a plank corridor, timber posts, the far end "
+     "swallowed in darkness - nothing visible through it. Black water "
+     "under the entrance planks. The lane arrives from both sides. One "
+     "cold unlit lantern frame hanging at the mouth. Deserted."),
+
     ("29", "弄 - THE LANE GROUND  ** DO NOT GENERATE **",
      "plane",
      "THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.\n"

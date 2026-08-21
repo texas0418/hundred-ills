@@ -1,0 +1,48 @@
+HUNDRED ILLS - FIRST DISTRICT SCREEN MAP
+Written 2026-08-22. The node graph for 一更/二更's district, per
+DECISIONS 103 (two or three canals, four to six banks, three to five
+bridges, two to four lanes) and 109 (each node = one painted screen,
+exits visible in the painting).
+
+Legend:  <->  left/right walk      ^ v  inward/outward (depth)
+         HAVE = screen landed      [nn] = prompt number
+
+CANAL ONE, near bank (hers)
+  [36] city gate --- [41] gate lane --- mooring HAVE --- bridge-A HAVE --- [42] bank east --- [43] bridge B --- [44] bank far end
+                                              v                 ^                  v
+                                        [37] water's edge   alley HAVE       [37-reuse or 45]
+                                                                 ^
+                                                           [39] deeper alley
+                                                                 ^
+                                                          [46] alley junction
+                                                                 ^
+CANAL TWO (inland)
+  [47] second-canal bank west --- [48] the house with the lamp --- [49] second-canal bank east
+              v                                                            |
+  [50] second water's edge                                          [38] under the lantern
+                                                                    (warm node, off the bank)
+
+STORY SCREENS woven into the district (planted in 一更, unremarked):
+  [48] the house with the lamp   - lamp lit in the window ALL NIGHT,
+                                   nobody remarks on it. She passes and
+                                   does not go in. ENDING-SITE item 1-2.
+  [51] the neighbour's wall      - the auspicious baby print, pasted
+                                   crooked, seen warmly, no music.
+                                   ENDING-SITE item 4.
+  [40] far bank (across bridge A) - the other side, first taste of the
+                                   town not-hers.
+
+LATER SET PIECES (generate when their watch comes, same doctrine):
+  [52] the covered bridge        - bridge three. The only bridge you
+                                   cannot see through. She crosses it
+                                   dead, and sees the body. NOT part of
+                                   the first district's rite count until
+                                   the night reaches it.
+
+RITE ACCOUNTING: bridges A, B are two of the three. The third is the
+covered bridge, late. 走三桥 across the whole night, not one district.
+
+GENERATION DOCTRINE: batches of 4-5 screens per Gemini session so a
+night's palette holds; every screen vertical, whole frame painted,
+EXITS VISIBLE - a gap, steps, a bridge deck, a lane mouth. A screen
+with no visible way onward gets no exit in the graph.
