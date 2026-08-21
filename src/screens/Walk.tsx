@@ -52,53 +52,78 @@ import {
 /**
  * 一更, walked. DECISIONS 107 and 108.
  *
- * THE DEPTH TRANSITION IS LAYERS PARTING, Year Walk fashion. During a
- * step, BOTH strips render: the scene she is leaving slides apart -
- * each plane at a rate set by its depth, kerb sweeping fastest, far
- * bank barely moving - while the scene she is entering settles in
- * from the opposite direction. Nothing recedes and nothing scales;
- * flat layers move apart like stage flats, which is all Year Walk
- * ever did. The paper veil this replaces was a crossfade with a
- * costume on.
+ * THE DEPTH TRANSITION IS LAYERS PARTING, Year Walk fashion - and the
+ * whole town is MOUNTED ONCE. All three strips live in the canvas from
+ * launch; which one is visible, which is parting, and how far, is
+ * decided per-frame on the UI thread from four shared values (curIdx,
+ * fromIdx, prog, dir). A depth swipe touches React only for gameplay
+ * state. The first version mounted the incoming strip AT the swipe -
+ * image decode and scene build landed exactly where the animation
+ * started, which is why it hitched.
  *
- * Phase plumbing: 'settled' scenes ignore the progress value entirely;
- * an 'out' scene reads it forward, an 'in' scene reads it inverted.
- * The out scene's walk position is FROZEN at the moment the step began
- * (outX), because gameplay has already switched strips and the live
+ * The departing strip's walk position is FROZEN at the moment the step
+ * begins (outX): gameplay has already switched strips and the live
  * walkX belongs to the destination.
  */
 
-type Phase = 'settled' | 'in' | 'out';
+/** Every strip in the scene graph, in a fixed order. Index is identity
+ *  for the shared values. */
+const STRIPS = ['water-north', 'north', 'lane-a'] as const;
+
+function stripIdx(id: string): number {
+  return STRIPS.indexOf(id as (typeof STRIPS)[number]);
+}
 
 /** How far each plane travels in a transition, as a fraction of screen
  *  height. Depth-ordered: the near layer parts first and furthest. */
 const PART = { far: 0.10, mid: 0.34, kerb: 0.62 } as const;
 
-function partOffset(
-  phase: Phase,
+/**
+ * Per-frame phase for a strip: settled current, arriving, departing, or
+ * hidden - all read from shared values, never from React.
+ */
+function stripPart(
+  idx: number,
+  cur: number,
+  from: number,
   prog: number,
   dir: number,
   factor: number,
   screenH: number,
-): number {
+): { dy: number; opacity: number } {
   'worklet';
-  if (phase === 'out') return prog * dir * factor * screenH;
-  if (phase === 'in') return -(1 - prog) * dir * factor * screenH * 0.35;
-  return 0;
+  if (idx === cur) {
+    if (from < 0) return { dy: 0, opacity: 1 };
+    return {
+      dy: -(1 - prog) * dir * factor * screenH * 0.35,
+      opacity: prog,
+    };
+  }
+  if (idx === from) {
+    return { dy: prog * dir * factor * screenH, opacity: 1 - prog };
+  }
+  return { dy: 0, opacity: 0 };
+}
+
+interface Depth {
+  idx: number;
+  curIdx: SharedValue<number>;
+  fromIdx: SharedValue<number>;
+  prog: SharedValue<number>;
+  dir: SharedValue<number>;
+  walkX: SharedValue<number>;
+  outX: SharedValue<number>;
 }
 
 function PlaneLayer({
-  plane, plate, xSrc, screenW, screenH, drain, phase, prog, dir,
+  plane, plate, screenW, screenH, drain, depth,
 }: {
   plane: Plane;
   plate: PlateName;
-  xSrc: SharedValue<number>;
   screenW: number;
   screenH: number;
   drain: number;
-  phase: Phase;
-  prog: SharedValue<number>;
-  dir: number;
+  depth: Depth;
 }) {
   const live = useImage(LIVE[plate]);
   const dead = useImage(DEAD[plate]);
@@ -116,15 +141,12 @@ function PlaneLayer({
           key={`${plate}:${plane.id}:${k}`}
           plane={plane}
           slot={k}
-          xSrc={xSrc}
           tileW={tileW}
           band={band}
           live={live}
           dead={dead}
           drain={drain}
-          phase={phase}
-          prog={prog}
-          dir={dir}
+          depth={depth}
           factor={factor}
           screenH={screenH}
         />
@@ -134,33 +156,36 @@ function PlaneLayer({
 }
 
 function Slot({
-  plane, slot, xSrc, tileW, band, live, dead, drain,
-  phase, prog, dir, factor, screenH,
+  plane, slot, tileW, band, live, dead, drain, depth, factor, screenH,
 }: {
   plane: Plane;
   slot: number;
-  xSrc: SharedValue<number>;
   tileW: number;
   band: { y: number; height: number };
   live: NonNullable<ReturnType<typeof useImage>>;
   dead: ReturnType<typeof useImage>;
   drain: number;
-  phase: Phase;
-  prog: SharedValue<number>;
-  dir: number;
+  depth: Depth;
   factor: number;
   screenH: number;
 }) {
-  const transform = useDerivedValue(
-    () => [
-      { translateX: slotX(plane, xSrc.value, tileW, slot) },
-      { translateY: partOffset(phase, prog.value, dir, factor, screenH) },
-    ],
-    [plane, tileW, slot, phase, dir, factor, screenH],
-  );
+  const transform = useDerivedValue(() => {
+    const x = depth.idx === depth.curIdx.value ? depth.walkX.value : depth.outX.value;
+    const part = stripPart(
+      depth.idx, depth.curIdx.value, depth.fromIdx.value,
+      depth.prog.value, depth.dir.value, factor, screenH,
+    );
+    return [
+      { translateX: slotX(plane, x, tileW, slot) },
+      { translateY: part.dy },
+    ];
+  }, [plane, tileW, slot, factor, screenH, depth]);
   const opLive = useDerivedValue(
-    () => (phase === 'out' ? 1 - prog.value : phase === 'in' ? prog.value : 1),
-    [phase],
+    () => stripPart(
+      depth.idx, depth.curIdx.value, depth.fromIdx.value,
+      depth.prog.value, depth.dir.value, factor, screenH,
+    ).opacity,
+    [factor, screenH, depth],
   );
   const opDead = useDerivedValue(() => opLive.value * drain, [drain]);
   return (
@@ -190,15 +215,12 @@ function Slot({
 }
 
 function Walkway({
-  stripId, xSrc, screenH, drain, phase, prog, dir,
+  stripId, screenH, drain, depth,
 }: {
   stripId: string;
-  xSrc: SharedValue<number>;
   screenH: number;
   drain: number;
-  phase: Phase;
-  prog: SharedValue<number>;
-  dir: number;
+  depth: Depth;
 }) {
   const bandH = WALKWAY_BAND.height * screenH;
   const bandY = WALKWAY_BAND.top * screenH;
@@ -214,11 +236,8 @@ function Walkway({
           y={bandY + p.drawTopOffset}
           w={p.width}
           h={p.drawH}
-          xSrc={xSrc}
           drain={drain}
-          phase={phase}
-          prog={prog}
-          dir={dir}
+          depth={depth}
           screenH={screenH}
         />
       ))}
@@ -227,24 +246,27 @@ function Walkway({
 }
 
 function WalkwayPlate({
-  plate, x, y, w, h, xSrc, drain, phase, prog, dir, screenH,
+  plate, x, y, w, h, drain, depth, screenH,
 }: {
   plate: PlateName; x: number; y: number; w: number; h: number;
-  xSrc: SharedValue<number>; drain: number;
-  phase: Phase; prog: SharedValue<number>; dir: number; screenH: number;
+  drain: number; depth: Depth; screenH: number;
 }) {
   const live = useImage(LIVE[plate]);
   const dead = useImage(DEAD[plate]);
-  const transform = useDerivedValue(
-    () => [
-      { translateX: x - xSrc.value },
-      { translateY: partOffset(phase, prog.value, dir, PART.mid, screenH) },
-    ],
-    [x, phase, dir, screenH],
-  );
+  const transform = useDerivedValue(() => {
+    const xv = depth.idx === depth.curIdx.value ? depth.walkX.value : depth.outX.value;
+    const part = stripPart(
+      depth.idx, depth.curIdx.value, depth.fromIdx.value,
+      depth.prog.value, depth.dir.value, PART.mid, screenH,
+    );
+    return [{ translateX: x - xv }, { translateY: part.dy }];
+  }, [x, screenH, depth]);
   const opLive = useDerivedValue(
-    () => (phase === 'out' ? 1 - prog.value : phase === 'in' ? prog.value : 1),
-    [phase],
+    () => stripPart(
+      depth.idx, depth.curIdx.value, depth.fromIdx.value,
+      depth.prog.value, depth.dir.value, PART.mid, screenH,
+    ).opacity,
+    [screenH, depth],
   );
   const opDead = useDerivedValue(() => opLive.value * drain, [drain]);
   if (!live) return null;
@@ -259,16 +281,13 @@ function WalkwayPlate({
 }
 
 function StripLayers({
-  stripId, xSrc, width, height, drain, phase, prog, dir,
+  stripId, width, height, drain, depth,
 }: {
   stripId: string;
-  xSrc: SharedValue<number>;
   width: number;
   height: number;
   drain: number;
-  phase: Phase;
-  prog: SharedValue<number>;
-  dir: number;
+  depth: Depth;
 }) {
   const here = stripById(stripId);
   const planes = planesFor(here.kind);
@@ -281,75 +300,44 @@ function StripLayers({
             key={p.id}
             plane={p}
             plate={name}
-            xSrc={xSrc}
             screenW={width}
             screenH={height}
             drain={drain}
-            phase={phase}
-            prog={prog}
-            dir={dir}
+            depth={depth}
           />
         ) : null;
       })}
       {here.kind === 'bank' ? (
-        <Walkway
-          stripId={stripId}
-          xSrc={xSrc}
-          screenH={height}
-          drain={drain}
-          phase={phase}
-          prog={prog}
-          dir={dir}
-        />
+        <Walkway stripId={stripId} screenH={height} drain={drain} depth={depth} />
       ) : null}
     </Group>
   );
 }
 
 const Scene = memo(function Scene({
-  walkX, outX, width, height, drain, stripId, fromStrip, dir, prog,
+  width, height, drain, depthBase,
 }: {
-  walkX: SharedValue<number>;
-  outX: SharedValue<number>;
   width: number;
   height: number;
   drain: number;
-  stripId: string;
-  fromStrip: string | null;
-  dir: number;
-  prog: SharedValue<number>;
+  depthBase: Omit<Depth, 'idx'>;
 }) {
-  const inScene = (
-    <StripLayers
-      stripId={stripId}
-      xSrc={walkX}
-      width={width}
-      height={height}
-      drain={drain}
-      phase={fromStrip ? 'in' : 'settled'}
-      prog={prog}
-      dir={dir}
-    />
-  );
-  const outScene = fromStrip ? (
-    <StripLayers
-      stripId={fromStrip}
-      xSrc={outX}
-      width={width}
-      height={height}
-      drain={drain}
-      phase="out"
-      prog={prog}
-      dir={dir}
-    />
-  ) : null;
-  // Going deeper she passes THROUGH the old scene, so it parts on top;
-  // stepping outward the new scene arrives from the viewer's side.
+  // Every strip, mounted once, for the app's whole life. Which is
+  // visible is a per-frame decision on the UI thread - a depth swipe
+  // never mounts, never decodes, never re-renders this tree.
   return (
     <Canvas style={StyleSheet.absoluteFill}>
       <Rect x={0} y={0} width={width} height={height} color={PAPER} />
-      {dir >= 0 ? inScene : outScene}
-      {dir >= 0 ? outScene : inScene}
+      {STRIPS.map((id, i) => (
+        <StripLayers
+          key={id}
+          stripId={id}
+          width={width}
+          height={height}
+          drain={drain}
+          depth={{ ...depthBase, idx: i }}
+        />
+      ))}
     </Canvas>
   );
 });
@@ -360,6 +348,9 @@ export function Walk() {
   const outX = useSharedValue(0);
   const stripMax = useSharedValue(0);
   const prog = useSharedValue(1);
+  const curIdx = useSharedValue(stripIdx('north'));
+  const fromIdx = useSharedValue(-1);
+  const dirSv = useSharedValue(1);
   const [state, setState] = useState<WalkState>(beginFirstWatch);
   const [trans, setTrans] = useState<{ from: string; dir: number } | null>(null);
   const bandH = WALKWAY_BAND.height * height;
@@ -397,8 +388,13 @@ export function Walk() {
       if (next === s || next.pos.strip === s.pos.strip) return;
 
       // Freeze the departing scene where it stood; gameplay moves on.
+      // Everything the canvas needs is in shared values - React state
+      // below is gameplay and overlay gating only.
       outX.value = walkX.value;
       const dir = dirWord === 'inward' ? 1 : -1;
+      dirSv.value = dir;
+      fromIdx.value = stripIdx(s.pos.strip);
+      curIdx.value = stripIdx(next.pos.strip);
       setTrans({ from: s.pos.strip, dir });
       setState(next);
       prog.value = 0;
@@ -407,7 +403,10 @@ export function Walk() {
         { duration: 520, easing: Easing.inOut(Easing.cubic) },
         (done) => {
           'worklet';
-          if (done) runOnJS(clearTrans)();
+          if (done) {
+            fromIdx.value = -1;
+            runOnJS(clearTrans)();
+          }
         },
       );
     },
@@ -467,15 +466,10 @@ export function Walk() {
       <GestureDetector gesture={pan}>
         <View style={styles.fill}>
           <Scene
-            walkX={walkX}
-            outX={outX}
             width={width}
             height={height}
             drain={drain}
-            stripId={state.pos.strip}
-            fromStrip={trans?.from ?? null}
-            dir={trans?.dir ?? 1}
-            prog={prog}
+            depthBase={{ curIdx, fromIdx, prog, dir: dirSv, walkX, outX }}
           />
         </View>
       </GestureDetector>
@@ -508,7 +502,7 @@ export function Walk() {
       <Text style={styles.lookBack} onPress={onLookBack}>
         look back
       </Text>
-      <Text style={styles.stamp}>b37</Text>
+      <Text style={styles.stamp}>b38</Text>
     </GestureHandlerRootView>
   );
 }
