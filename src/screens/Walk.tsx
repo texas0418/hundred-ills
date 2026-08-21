@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import {
   Gesture,
@@ -12,9 +12,9 @@ import {
   Rect,
   useImage,
 } from '@shopify/react-native-skia';
-import Animated, {
+import {
+  Easing,
   runOnJS,
-  useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
   withDecay,
@@ -52,28 +52,53 @@ import {
 /**
  * 一更, walked. DECISIONS 107 and 108.
  *
- * THE WALKWAY IS AUTHORED SEGMENTS: a sequence of plates, each scaled so
- * its measured embankment band lands on WALKWAY_BAND. A bridge is a
- * segment with a bridge in it - runtime object compositing died at 97b.
+ * THE DEPTH TRANSITION IS LAYERS PARTING, Year Walk fashion. During a
+ * step, BOTH strips render: the scene she is leaving slides apart -
+ * each plane at a rate set by its depth, kerb sweeping fastest, far
+ * bank barely moving - while the scene she is entering settles in
+ * from the opposite direction. Nothing recedes and nothing scales;
+ * flat layers move apart like stage flats, which is all Year Walk
+ * ever did. The paper veil this replaces was a crossfade with a
+ * costume on.
  *
- * THE DEPTH VERB: swipe down steps toward the water - the outermost
- * step IS the reflection, where the flames show. Swipe up steps inland
- * (a lane, where the art shows a mouth). The transition dips through
- * paper rather than cutting - a first, deliberately simple version of
- * the layers-parting feel 108 requires.
- *
- * The walk itself never touches the JS thread.
+ * Phase plumbing: 'settled' scenes ignore the progress value entirely;
+ * an 'out' scene reads it forward, an 'in' scene reads it inverted.
+ * The out scene's walk position is FROZEN at the moment the step began
+ * (outX), because gameplay has already switched strips and the live
+ * walkX belongs to the destination.
  */
 
+type Phase = 'settled' | 'in' | 'out';
+
+/** How far each plane travels in a transition, as a fraction of screen
+ *  height. Depth-ordered: the near layer parts first and furthest. */
+const PART = { far: 0.10, mid: 0.34, kerb: 0.62 } as const;
+
+function partOffset(
+  phase: Phase,
+  prog: number,
+  dir: number,
+  factor: number,
+  screenH: number,
+): number {
+  'worklet';
+  if (phase === 'out') return prog * dir * factor * screenH;
+  if (phase === 'in') return -(1 - prog) * dir * factor * screenH * 0.35;
+  return 0;
+}
+
 function PlaneLayer({
-  plane, plate, walkX, screenW, screenH, drain,
+  plane, plate, xSrc, screenW, screenH, drain, phase, prog, dir,
 }: {
   plane: Plane;
   plate: PlateName;
-  walkX: SharedValue<number>;
+  xSrc: SharedValue<number>;
   screenW: number;
   screenH: number;
   drain: number;
+  phase: Phase;
+  prog: SharedValue<number>;
+  dir: number;
 }) {
   const live = useImage(LIVE[plate]);
   const dead = useImage(DEAD[plate]);
@@ -83,6 +108,7 @@ function PlaneLayer({
     : 0;
   const slots = slotCount(tileW, screenW);
   if (!live || slots === 0) return null;
+  const factor = PART[plane.id];
   return (
     <Group>
       {Array.from({ length: slots }, (_, k) => (
@@ -90,12 +116,17 @@ function PlaneLayer({
           key={`${plate}:${plane.id}:${k}`}
           plane={plane}
           slot={k}
-          walkX={walkX}
+          xSrc={xSrc}
           tileW={tileW}
           band={band}
           live={live}
           dead={dead}
           drain={drain}
+          phase={phase}
+          prog={prog}
+          dir={dir}
+          factor={factor}
+          screenH={screenH}
         />
       ))}
     </Group>
@@ -103,43 +134,71 @@ function PlaneLayer({
 }
 
 function Slot({
-  plane, slot, walkX, tileW, band, live, dead, drain,
+  plane, slot, xSrc, tileW, band, live, dead, drain,
+  phase, prog, dir, factor, screenH,
 }: {
   plane: Plane;
   slot: number;
-  walkX: SharedValue<number>;
+  xSrc: SharedValue<number>;
   tileW: number;
   band: { y: number; height: number };
   live: NonNullable<ReturnType<typeof useImage>>;
   dead: ReturnType<typeof useImage>;
   drain: number;
+  phase: Phase;
+  prog: SharedValue<number>;
+  dir: number;
+  factor: number;
+  screenH: number;
 }) {
   const transform = useDerivedValue(
-    () => [{ translateX: slotX(plane, walkX.value, tileW, slot) }],
-    [plane, tileW, slot],
+    () => [
+      { translateX: slotX(plane, xSrc.value, tileW, slot) },
+      { translateY: partOffset(phase, prog.value, dir, factor, screenH) },
+    ],
+    [plane, tileW, slot, phase, dir, factor, screenH],
   );
+  const opLive = useDerivedValue(
+    () => (phase === 'out' ? 1 - prog.value : phase === 'in' ? prog.value : 1),
+    [phase],
+  );
+  const opDead = useDerivedValue(() => opLive.value * drain, [drain]);
   return (
     <Group transform={transform}>
-      <SkImage image={live} x={0} y={band.y} width={tileW} height={band.height} fit="fill" />
+      <SkImage
+        image={live}
+        x={0}
+        y={band.y}
+        width={tileW}
+        height={band.height}
+        fit="fill"
+        opacity={opLive}
+      />
       {dead && drain > 0 ? (
-        <SkImage image={dead} x={0} y={band.y} width={tileW} height={band.height} fit="fill" opacity={drain} />
+        <SkImage
+          image={dead}
+          x={0}
+          y={band.y}
+          width={tileW}
+          height={band.height}
+          fit="fill"
+          opacity={opDead}
+        />
       ) : null}
     </Group>
   );
 }
 
-/**
- * The walkway: each plate drawn once at its laid-out position, at
- * speed 1 - she walks ON this. Fixed nodes, animated x, nothing
- * created or destroyed mid-walk.
- */
 function Walkway({
-  stripId, walkX, screenH, drain,
+  stripId, xSrc, screenH, drain, phase, prog, dir,
 }: {
   stripId: string;
-  walkX: SharedValue<number>;
+  xSrc: SharedValue<number>;
   screenH: number;
   drain: number;
+  phase: Phase;
+  prog: SharedValue<number>;
+  dir: number;
 }) {
   const bandH = WALKWAY_BAND.height * screenH;
   const bandY = WALKWAY_BAND.top * screenH;
@@ -155,8 +214,12 @@ function Walkway({
           y={bandY + p.drawTopOffset}
           w={p.width}
           h={p.drawH}
-          walkX={walkX}
+          xSrc={xSrc}
           drain={drain}
+          phase={phase}
+          prog={prog}
+          dir={dir}
+          screenH={screenH}
         />
       ))}
     </Group>
@@ -164,54 +227,53 @@ function Walkway({
 }
 
 function WalkwayPlate({
-  plate, x, y, w, h, walkX, drain,
+  plate, x, y, w, h, xSrc, drain, phase, prog, dir, screenH,
 }: {
   plate: PlateName; x: number; y: number; w: number; h: number;
-  walkX: SharedValue<number>; drain: number;
+  xSrc: SharedValue<number>; drain: number;
+  phase: Phase; prog: SharedValue<number>; dir: number; screenH: number;
 }) {
   const live = useImage(LIVE[plate]);
   const dead = useImage(DEAD[plate]);
   const transform = useDerivedValue(
-    () => [{ translateX: x - walkX.value }],
-    [x],
+    () => [
+      { translateX: x - xSrc.value },
+      { translateY: partOffset(phase, prog.value, dir, PART.mid, screenH) },
+    ],
+    [x, phase, dir, screenH],
   );
+  const opLive = useDerivedValue(
+    () => (phase === 'out' ? 1 - prog.value : phase === 'in' ? prog.value : 1),
+    [phase],
+  );
+  const opDead = useDerivedValue(() => opLive.value * drain, [drain]);
   if (!live) return null;
   return (
     <Group transform={transform}>
-      <SkImage image={live} x={0} y={y} width={w} height={h} fit="fill" />
+      <SkImage image={live} x={0} y={y} width={w} height={h} fit="fill" opacity={opLive} />
       {dead && drain > 0 ? (
-        <SkImage image={dead} x={0} y={y} width={w} height={h} fit="fill" opacity={drain} />
+        <SkImage image={dead} x={0} y={y} width={w} height={h} fit="fill" opacity={opDead} />
       ) : null}
     </Group>
   );
 }
 
-/** DECISIONS 67/108: flames in the water, nothing at zero. */
-function Flames({ state, screenH }: { state: WalkState; screenH: number }) {
-  const r = reflection(state);
-  if (!atWater(state) || !r.visible) return null;
-  return (
-    <View style={[styles.water, { top: screenH * 0.62 }]} pointerEvents="none">
-      <View style={styles.flames}>
-        {Array.from({ length: r.flames }).map((_, i) => (
-          <View key={i} style={styles.flame} />
-        ))}
-      </View>
-    </View>
-  );
-}
-
-const Scene = memo(function Scene({
-  walkX, width, height, drain, stripId,
+function StripLayers({
+  stripId, xSrc, width, height, drain, phase, prog, dir,
 }: {
-  walkX: SharedValue<number>; width: number; height: number;
-  drain: number; stripId: string;
+  stripId: string;
+  xSrc: SharedValue<number>;
+  width: number;
+  height: number;
+  drain: number;
+  phase: Phase;
+  prog: SharedValue<number>;
+  dir: number;
 }) {
   const here = stripById(stripId);
   const planes = planesFor(here.kind);
   return (
-    <Canvas style={StyleSheet.absoluteFill}>
-      <Rect x={0} y={0} width={width} height={height} color={PAPER} />
+    <Group>
       {planes.map((p) => {
         const name = here.plates[p.id === 'kerb' ? 'kerb' : p.id];
         return isPlate(name) ? (
@@ -219,16 +281,75 @@ const Scene = memo(function Scene({
             key={p.id}
             plane={p}
             plate={name}
-            walkX={walkX}
+            xSrc={xSrc}
             screenW={width}
             screenH={height}
             drain={drain}
+            phase={phase}
+            prog={prog}
+            dir={dir}
           />
         ) : null;
       })}
       {here.kind === 'bank' ? (
-        <Walkway stripId={stripId} walkX={walkX} screenH={height} drain={drain} />
+        <Walkway
+          stripId={stripId}
+          xSrc={xSrc}
+          screenH={height}
+          drain={drain}
+          phase={phase}
+          prog={prog}
+          dir={dir}
+        />
       ) : null}
+    </Group>
+  );
+}
+
+const Scene = memo(function Scene({
+  walkX, outX, width, height, drain, stripId, fromStrip, dir, prog,
+}: {
+  walkX: SharedValue<number>;
+  outX: SharedValue<number>;
+  width: number;
+  height: number;
+  drain: number;
+  stripId: string;
+  fromStrip: string | null;
+  dir: number;
+  prog: SharedValue<number>;
+}) {
+  const inScene = (
+    <StripLayers
+      stripId={stripId}
+      xSrc={walkX}
+      width={width}
+      height={height}
+      drain={drain}
+      phase={fromStrip ? 'in' : 'settled'}
+      prog={prog}
+      dir={dir}
+    />
+  );
+  const outScene = fromStrip ? (
+    <StripLayers
+      stripId={fromStrip}
+      xSrc={outX}
+      width={width}
+      height={height}
+      drain={drain}
+      phase="out"
+      prog={prog}
+      dir={dir}
+    />
+  ) : null;
+  // Going deeper she passes THROUGH the old scene, so it parts on top;
+  // stepping outward the new scene arrives from the viewer's side.
+  return (
+    <Canvas style={StyleSheet.absoluteFill}>
+      <Rect x={0} y={0} width={width} height={height} color={PAPER} />
+      {dir >= 0 ? inScene : outScene}
+      {dir >= 0 ? outScene : inScene}
     </Canvas>
   );
 });
@@ -236,12 +357,19 @@ const Scene = memo(function Scene({
 export function Walk() {
   const { width, height } = useWindowDimensions();
   const walkX = useSharedValue(0);
+  const outX = useSharedValue(0);
   const stripMax = useSharedValue(0);
-  // 1 = fully visible. The depth step dips this to 0 and back - the
-  // simple first version of the layers-parting transition 108 requires.
-  const veil = useSharedValue(1);
+  const prog = useSharedValue(1);
   const [state, setState] = useState<WalkState>(beginFirstWatch);
+  const [trans, setTrans] = useState<{ from: string; dir: number } | null>(null);
   const bandH = WALKWAY_BAND.height * height;
+
+  const stateRef = useRef(state);
+  const transRef = useRef(trans);
+  useEffect(() => {
+    stateRef.current = state;
+    transRef.current = trans;
+  }, [state, trans]);
 
   useEffect(() => {
     const id = setInterval(
@@ -252,47 +380,53 @@ export function Walk() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bandH]);
 
-  const depth = useCallback(
-    (dir: 'outward' | 'inward') => {
-      setState((s) => {
-        // A mouth is a two-way door: inward from the bank, outward from
-        // inside the lane. Try the link first in whichever direction
-        // makes sense for the strip she is on; fall back to the depth
-        // map (bank -> water, water -> bank).
-        const kind = stripById(s.pos.strip).kind;
-        const linkWay = dir === 'inward' ? kind === 'bank' : kind === 'lane';
-        if (linkWay) {
-          const throughMouth = applyCrossing(s, s.x);
-          if (throughMouth !== s) return throughMouth;
-        }
-        return applyDepth(s, dir);
-      });
-    },
-    [],
-  );
+  const clearTrans = useCallback(() => setTrans(null), []);
 
-  const depthFromGesture = useCallback(
-    (ty: number) => {
-      // Dip through paper; switch strips at the bottom of the dip.
-      veil.value = withTiming(0, { duration: 220 }, (done) => {
-        'worklet';
-        if (done) {
-          runOnJS(depth)(ty > 0 ? 'outward' : 'inward');
-          veil.value = withTiming(1, { duration: 260 });
-        }
-      });
+  const depth = useCallback(
+    (dirWord: 'outward' | 'inward') => {
+      if (transRef.current) return; // one step at a time
+      const s = stateRef.current;
+      const kind = stripById(s.pos.strip).kind;
+      const linkWay = dirWord === 'inward' ? kind === 'bank' : kind === 'lane';
+      let next = s;
+      if (linkWay) {
+        const m = applyCrossing({ ...s, x: walkX.value }, walkX.value);
+        if (m !== s) next = m;
+      }
+      if (next === s) next = applyDepth(s, dirWord);
+      if (next === s || next.pos.strip === s.pos.strip) return;
+
+      // Freeze the departing scene where it stood; gameplay moves on.
+      outX.value = walkX.value;
+      const dir = dirWord === 'inward' ? 1 : -1;
+      setTrans({ from: s.pos.strip, dir });
+      setState(next);
+      prog.value = 0;
+      prog.value = withTiming(
+        1,
+        { duration: 520, easing: Easing.inOut(Easing.cubic) },
+        (done) => {
+          'worklet';
+          if (done) runOnJS(clearTrans)();
+        },
+      );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [depth],
+    [clearTrans],
   );
 
+  // The initializer runs during render but the handlers it builds run
+  // only on touches, long after - the refs `depth` reads through this
+  // closure are never read during a render. Same false-positive class
+  // as useSharedValue writes.
+  // eslint-disable-next-line react-hooks/refs
   const [pan] = useState(() =>
     Gesture.Pan()
       .onChange((e) => {
         'worklet';
         if (Math.abs(e.translationY) > 56
             && Math.abs(e.translationY) > Math.abs(e.translationX) * 1.4) {
-          return; // vertical intent - handled at release
+          return;
         }
         walkX.value = clampTo(walkX.value - e.changeX, stripMax.value);
       })
@@ -300,7 +434,7 @@ export function Walk() {
         'worklet';
         if (Math.abs(e.translationY) > 56
             && Math.abs(e.translationY) > Math.abs(e.translationX) * 1.4) {
-          runOnJS(depthFromGesture)(e.translationY);
+          runOnJS(depth)(e.translationY > 0 ? 'outward' : 'inward');
           return;
         }
         walkX.value = withDecay({
@@ -311,8 +445,6 @@ export function Walk() {
       }),
   );
 
-  const veilOpacity = useDerivedValue(() => 1 - veil.value, []);
-
   const crossings = state.pos.crossed.length;
   useEffect(() => {
     // eslint-disable-next-line react-hooks/immutability
@@ -322,7 +454,7 @@ export function Walk() {
     })();
     // eslint-disable-next-line react-hooks/immutability
     walkX.value = state.x;
-    // Deliberately keyed on the crossing and the strip, not on x.
+    // Keyed on the crossing and the strip, never on x.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [crossings, state.pos.strip, bandH]);
 
@@ -336,16 +468,27 @@ export function Walk() {
         <View style={styles.fill}>
           <Scene
             walkX={walkX}
+            outX={outX}
             width={width}
             height={height}
             drain={drain}
             stripId={state.pos.strip}
+            fromStrip={trans?.from ?? null}
+            dir={trans?.dir ?? 1}
+            prog={prog}
           />
-          <VeilOverlay opacity={veilOpacity} />
         </View>
       </GestureDetector>
 
-      <Flames state={state} screenH={height} />
+      {!trans && atWater(state) && reflection(state).visible ? (
+        <View style={[styles.water, { top: height * 0.62 }]} pointerEvents="none">
+          <View style={styles.flames}>
+            {Array.from({ length: reflection(state).flames }).map((_, i) => (
+              <View key={i} style={styles.flame} />
+            ))}
+          </View>
+        </View>
+      ) : null}
 
       {watchmanCalling(state) ? (
         <View style={styles.call} pointerEvents="none">
@@ -365,18 +508,8 @@ export function Walk() {
       <Text style={styles.lookBack} onPress={onLookBack}>
         look back
       </Text>
-      <Text style={styles.stamp}>b36</Text>
+      <Text style={styles.stamp}>b37</Text>
     </GestureHandlerRootView>
-  );
-}
-
-function VeilOverlay({ opacity }: { opacity: SharedValue<number> }) {
-  const style = useAnimatedStyle(() => ({ opacity: opacity.value }));
-  return (
-    <Animated.View
-      pointerEvents="none"
-      style={[StyleSheet.absoluteFill, { backgroundColor: PAPER }, style]}
-    />
   );
 }
 
