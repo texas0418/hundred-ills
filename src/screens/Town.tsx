@@ -38,6 +38,7 @@ import {
   type Way,
 } from '../engine/nodes';
 import { CHAR_MS, holdMs, linesFor, revealMs, type Line, type Trigger } from '../content/lines';
+import { useSoundscape } from './useSoundscape';
 
 /** Ink with a glowing paper outline: a wide soft halo underneath,
  *  four offset paper copies forming a true outline, and the soot
@@ -346,6 +347,9 @@ export function Town() {
   const dir = useSharedValue(1);
   const axis = useSharedValue(0);
   const [state, setState] = useState<TownState>(() => beginNight('gate'));
+  const soundscape = useSoundscape(state);
+  const soundscapeRef = useRef(soundscape);
+  soundscapeRef.current = soundscape;
   const busy = useRef(false);
   const stateRef = useRef(state);
   useEffect(() => {
@@ -493,6 +497,7 @@ export function Town() {
         y > h * 0.28 && y < h * 0.65
       ) {
         Haptics.selectionAsync().catch(() => {});
+        soundscapeRef.current.touch();
         speak('gate', 'touch');
       }
     },
@@ -578,7 +583,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b53</Text>
+      <Text style={styles.stamp}>b54</Text>
     </GestureHandlerRootView>
   );
 }
