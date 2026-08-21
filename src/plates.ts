@@ -15,8 +15,10 @@ export const LIVE = {
   'canal-mid': require('../assets/plates-alpha/canal-mid.png'),
   'canal-near-kerb': require('../assets/plates-alpha/canal-near-kerb.png'),
   'lane-wall-pair': require('../assets/plates-alpha/lane-wall-pair.png'),
-  'bridge-walkover': require('../assets/plates-alpha/bridge-walkover.png'),
   'lane-mouth': require('../assets/plates-alpha/lane-mouth.png'),
+  'seg-bridge-a': require('../assets/plates-alpha/seg-bridge-a.png'),
+  'seg-bridge-b': require('../assets/plates-alpha/seg-bridge-b.png'),
+  'night-water': require('../assets/plates-alpha/night-water.png'),
 } as const;
 
 export const DEAD = {
@@ -25,8 +27,10 @@ export const DEAD = {
   'canal-mid': require('../assets/plates-drained/canal-mid.png'),
   'canal-near-kerb': require('../assets/plates-drained/canal-near-kerb.png'),
   'lane-wall-pair': require('../assets/plates-drained/lane-wall-pair.png'),
-  'bridge-walkover': require('../assets/plates-drained/bridge-walkover.png'),
   'lane-mouth': require('../assets/plates-drained/lane-mouth.png'),
+  'seg-bridge-a': require('../assets/plates-drained/seg-bridge-a.png'),
+  'seg-bridge-b': require('../assets/plates-drained/seg-bridge-b.png'),
+  'night-water': require('../assets/plates-drained/night-water.png'),
 } as const;
 
 export type PlateName = keyof typeof LIVE;

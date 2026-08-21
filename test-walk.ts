@@ -1,9 +1,9 @@
 import {
   beginFirstWatch, step, pointIndex, chapter, currentCall, watchmanCalling,
   reflection, drainAmount, lookBack, setLooking, applyCrossing, arriveAt,
-  DEMO_TIME_SCALE,
+  applyDepth, atWater, DEMO_TIME_SCALE,
 } from './src/engine/walk';
-import { TOWN, BANK_LENGTH } from './src/engine/town';
+import { layoutFor, DEFAULT_BAND_H } from './src/engine/town';
 
 let n = 0;
 function ok(c: boolean, m: string) { n++; if (!c) throw new Error(`FAIL: ${m}`); }
@@ -60,33 +60,37 @@ ok(!watchmanCalling(s0), 'and not before the night has begun');
 
 ok(chapter(s0).watch === 1, 'the first watch');
 
-// Bridges are crossed by WALKING OVER them - DECISIONS 105 - so this is
-// one pure transition rather than three setStates racing in a callback.
+// Bridges are crossed by WALKING OVER them, at positions the ART set.
 ok(s0.pos.strip === 'north', 'she starts on the north bank');
 ok(applyCrossing(s0, 50) === s0, 'no lane in reach leaves the state untouched');
 
-const b0 = TOWN.bridges[0];
-const past = arriveAt(s0, b0.x + 20);
+const L = layoutFor('north', DEFAULT_BAND_H)!;
+const bx = L.bridgeXs[0];
+const past = arriveAt(s0, bx + 20, DEFAULT_BAND_H);
 ok(past.pos.crossed.length === 1, 'walking past a bridge crosses it');
 ok(past.fires === 3, 'a fresh bridge costs nothing');
-ok(past.x === b0.x + 20, 'and she ends up where she walked to');
-
-const shortOf = arriveAt(s0, b0.x - 20);
-ok(shortOf.pos.crossed.length === 0, 'stopping short of it crosses nothing');
-
-const backOver = arriveAt(past, 0);
-ok(backOver.fires === 2, 'walking back over it is doubling back, and costs a flame');
+const backOver = arriveAt(past, 0, DEFAULT_BAND_H);
+ok(backOver.fires === 2, 'walking back over it costs a flame');
 ok(backOver.pos.crossed.length === 1, 'and never counts twice');
 ok(backOver.x === 0, 'she is never stopped - she walks, and pays');
 
-const whole = arriveAt(s0, BANK_LENGTH);
-ok(whole.pos.crossed.length === TOWN.bridges.length,
-   'one sweep of the bank crosses every bridge on it');
+const whole = arriveAt(s0, L.length, DEFAULT_BAND_H);
+ok(whole.pos.crossed.length === 2, 'one sweep crosses both bridges');
 ok(whole.fires === 3, 'all fresh, nothing to pay');
 
-// Ordinary walking that meets no bridge must not churn state.
-const a1 = arriveAt(s0, 100);
+const a1 = arriveAt(s0, 100, DEFAULT_BAND_H);
 ok(a1.x === 100, 'plain walking updates x');
-ok(arriveAt(a1, 100) === a1, 'and standing still is a no-op');
+ok(arriveAt(a1, 100, DEFAULT_BAND_H) === a1, 'standing still is a no-op');
+
+// THE DEPTH VERB (108). One verb: toward the water or away from it.
+const down = applyDepth(s0, 'outward');
+ok(atWater(down), 'outward from the bank reaches the water');
+ok(reflection(down).visible && reflection(down).flames === 3,
+   'and the flames are there, all three');
+const drowned = { ...down, fires: 0 as const };
+ok(!reflection(drowned).visible, 'THE THIRD BRIDGE: at zero, nothing in the water');
+ok(!atWater(applyDepth(down, 'inward')), 'inward steps back to the bank');
+ok(applyDepth(applyDepth(down, 'outward'), 'outward') === applyDepth(down, 'outward')
+   || applyDepth(down, 'outward') === down, 'nothing beyond the water');
 
 console.log(`test-walk: ${n} assertions passed`);

@@ -51,9 +51,29 @@ export const LANE_PLANES: readonly Plane[] = [
   { id: 'kerb', speed: 1.45, top: 0.78, height: 0.2, paired: false },
 ];
 
-export function planesFor(kind: 'bank' | 'lane'): readonly Plane[] {
+/**
+ * The water strip (DECISIONS 108): her last step toward the canal. The
+ * bank she just left becomes the backdrop, and the water itself fills
+ * the near field - where the flames render.
+ */
+export const WATER_PLANES: readonly Plane[] = [
+  { id: 'far', speed: 0.25, top: 0.20, height: 0.18, paired: true },
+  { id: 'mid', speed: 0.8, top: 0.34, height: 0.18, paired: false },
+  { id: 'kerb', speed: 1.0, top: 0.54, height: 0.42, paired: false },
+];
+
+export function planesFor(kind: 'bank' | 'lane' | 'water'): readonly Plane[] {
+  if (kind === 'water') return WATER_PLANES;
   return kind === 'lane' ? LANE_PLANES : PLANES;
 }
+
+/**
+ * The screen band the WALKWAY occupies - the embankment itself, not the
+ * whole mid plate. Every walkway plate is scaled so its measured band
+ * lands exactly here (see walkway.ts), which is what lets a tall bridge
+ * segment and a plain tile run level.
+ */
+export const WALKWAY_BAND = { top: 0.5155, height: 0.1438 };
 
 export interface Tile {
   /** Which repeat this is. Negative to the left of the origin. */
