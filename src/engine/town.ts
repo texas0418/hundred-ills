@@ -10,8 +10,15 @@
  */
 
 import { MAX_FIRES, type FireCount } from './fires';
+import {
+  NORTH_WALKWAY,
+  SOUTH_WALKWAY,
+  bridgesPassed,
+  layoutWalkway,
+  type Layout,
+} from './walkway';
 
-export type StripKind = 'bank' | 'lane';
+export type StripKind = 'bank' | 'lane' | 'water';
 
 export interface Strip {
   readonly id: string;
@@ -69,6 +76,23 @@ export const BANK_LENGTH = 3600;
  */
 export const LANE_LENGTH = 900;
 
+/**
+ * DECISIONS 108: the depth order of strips. Swipe down steps toward the
+ * water, swipe up steps inland. On the bank the last outward step IS
+ * the water - where she counts her flames.
+ */
+export const OUTWARD: Record<string, string | undefined> = {
+  north: 'water-north',
+  // A lane has NO depth mapping outward: an alley exits at its MOUTH,
+  // through the link, or not at all. A blanket mapping teleported her
+  // from anywhere in the lane to the same x on the bank - 1650px from
+  // where the mouth actually is.
+};
+export const INWARD: Record<string, string | undefined> = {
+  'water-north': 'north',
+  // north -> lane-a only at the lane mouth, via links.
+};
+
 export const TOWN: { strips: Strip[]; links: Link[]; bridges: Landmark[] } = {
   strips: [
     {
@@ -78,6 +102,11 @@ export const TOWN: { strips: Strip[]; links: Link[]; bridges: Landmark[] } = {
     {
       id: 'south', kind: 'bank', length: BANK_LENGTH,
       plates: { far: 'canal-far-b-pair', mid: 'canal-mid', kerb: 'canal-near-kerb' },
+    },
+    {
+      // Her last step toward the water. The reflection lives here.
+      id: 'water-north', kind: 'water', length: BANK_LENGTH,
+      plates: { far: 'canal-far-pair', mid: 'canal-mid', kerb: 'night-water' },
     },
     {
       /**
@@ -100,11 +129,24 @@ export const TOWN: { strips: Strip[]; links: Link[]; bridges: Landmark[] } = {
       b: { strip: 'lane-a', x: 0 },
     },
   ],
-  bridges: [
-    { id: 'bridge-a', strip: 'north', x: 900, plate: 'bridge-one' },
-    { id: 'bridge-b', strip: 'north', x: 2400, plate: 'bridge-two' },
-  ],
+  // Positions are DERIVED from the walkway layout - the art decides
+  // where a bridge stands, never the other way round (DECISIONS 107).
+  bridges: [],
 };
+
+export function walkwayFor(stripId: string) {
+  if (stripId === 'north') return NORTH_WALKWAY;
+  if (stripId === 'south') return SOUTH_WALKWAY;
+  return null;
+}
+
+/** Test-friendly default: the band height used when none is given. */
+export const DEFAULT_BAND_H = 126;
+
+export function layoutFor(stripId: string, bandH: number = DEFAULT_BAND_H): Layout | null {
+  const w = walkwayFor(stripId);
+  return w ? layoutWalkway(w, bandH) : null;
+}
 
 export function strip(id: string): Strip {
   const s = TOWN.strips.find((t) => t.id === id);
@@ -112,7 +154,9 @@ export function strip(id: string): Strip {
   return s;
 }
 
-export function clampToStrip(stripId: string, x: number): number {
+export function clampToStrip(stripId: string, x: number, bandH?: number): number {
+  const lay = layoutFor(stripId, bandH);
+  if (lay) return clampTo(x, lay.length);
   const s = TOWN.strips.find((t) => t.id === stripId);
   return clampTo(x, s ? s.length : 0);
 }
@@ -154,10 +198,13 @@ export function bridgesCrossed(
   stripId: string,
   fromX: number,
   toX: number,
-): Landmark[] {
-  const lo = Math.min(fromX, toX);
-  const hi = Math.max(fromX, toX);
-  return bridgesOn(stripId).filter((b) => b.x > lo && b.x <= hi);
+  bandH?: number,
+): { id: string }[] {
+  const lay = layoutFor(stripId, bandH);
+  if (!lay) return [];
+  return bridgesPassed(lay, fromX, toX).map((i) => ({
+    id: `${stripId}:bridge:${i}`,
+  }));
 }
 
 /** The one crossing she is close enough to take, if any. */
@@ -216,8 +263,8 @@ export function cross(pos: Position, link: Link): Crossing {
  * spent is doubling back - DECISIONS 102 - and costs a flame per bridge.
  * She is never stopped; she crosses and pays.
  */
-export function walkTo(pos: Position, toX: number): Crossing {
-  const met = bridgesCrossed(pos.strip, pos.x, toX);
+export function walkTo(pos: Position, toX: number, bandH?: number): Crossing {
+  const met = bridgesCrossed(pos.strip, pos.x, toX, bandH);
   let crossed = pos.crossed;
   let flames = 0;
   for (const b of met) {
@@ -237,6 +284,19 @@ export function bridgesRemaining(pos: Position): number {
 
 export function riteComplete(pos: Position): boolean {
   return pos.crossed.length >= 3;
+}
+
+/**
+ * DECISIONS 108. The depth step: outward (toward the water) or inward.
+ * Returns null when the town has no strip that way.
+ */
+export function stepDepth(
+  pos: Position,
+  dir: 'outward' | 'inward',
+): Position | null {
+  const to = dir === 'outward' ? OUTWARD[pos.strip] : INWARD[pos.strip];
+  if (!to) return null;
+  return { ...pos, strip: to };
 }
 
 export function payForDoublingBack(fires: FireCount): FireCount {

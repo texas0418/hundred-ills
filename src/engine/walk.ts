@@ -10,6 +10,7 @@ import {
   cross,
   linkInReach,
   payForDoublingBack,
+  stepDepth,
   walkTo,
   type Position,
   beginAt,
@@ -71,13 +72,29 @@ export function applyCrossing(s: WalkState, atX: number): WalkState {
 }
 
 /**
+ * DECISIONS 108: one verb, toward the water or away from it. On the
+ * bank, outward reaches the water itself - the reflection. Unchanged
+ * state when the town has no strip that way.
+ */
+export function applyDepth(s: WalkState, dir: 'outward' | 'inward'): WalkState {
+  const p = stepDepth({ ...s.pos, x: s.x }, dir);
+  if (!p) return s;
+  return { ...s, pos: p };
+}
+
+/** She is at the water when the strip itself is water. */
+export function atWater(s: WalkState): boolean {
+  return s.pos.strip.startsWith('water');
+}
+
+/**
  * Report where the walk has got to, crossing any bridges passed on the
  * way. DECISIONS 105: a bridge is crossed by WALKING OVER IT, not by a
  * gesture - which is what makes "do not turn back" literal. Walking back
  * over a bridge already spent costs a flame, and never stops her.
  */
-export function arriveAt(s: WalkState, toX: number): WalkState {
-  const c = walkTo(s.pos, toX);
+export function arriveAt(s: WalkState, toX: number, bandH?: number): WalkState {
+  const c = walkTo(s.pos, toX, bandH);
   if (c.position.crossed.length === s.pos.crossed.length && !c.costsAFlame) {
     return s.x === toX ? s : { ...s, x: toX, pos: c.position };
   }
@@ -148,7 +165,9 @@ export interface Reflection {
 }
 
 export function reflection(s: WalkState): Reflection {
-  if (!s.looking) return { visible: false, flames: 0 };
+  // The reflection lives at the water now (108). 'looking' survives as
+  // the legacy lean gesture until every screen migrates.
+  if (!s.looking && !atWater(s)) return { visible: false, flames: 0 };
   return { visible: s.fires > 0, flames: s.fires };
 }
 

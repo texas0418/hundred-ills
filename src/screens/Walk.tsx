@@ -12,16 +12,19 @@ import {
   Rect,
   useImage,
 } from '@shopify/react-native-skia';
-import {
+import Animated, {
   runOnJS,
+  useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
   withDecay,
+  withTiming,
   type SharedValue,
 } from 'react-native-reanimated';
 
 import { PAPER, PEACH_RED, SOOT } from '../palette';
 import {
+  WALKWAY_BAND,
   planeRect,
   planesFor,
   scaledWidth,
@@ -29,47 +32,37 @@ import {
   slotX,
   type Plane,
 } from '../engine/parallax';
-import {
-  bridgesOn,
-  clampTo,
-  linksOn,
-  strip as stripById,
-} from '../engine/town';
+import { layoutFor, clampTo, strip as stripById } from '../engine/town';
 import { LIVE, DEAD, isPlate, type PlateName } from '../plates';
 import {
   applyCrossing,
+  applyDepth,
   arriveAt,
+  atWater,
   beginFirstWatch,
   currentCall,
   drainAmount,
   lookBack,
   reflection,
-  setLooking,
   tick,
   watchmanCalling,
   type WalkState,
 } from '../engine/walk';
 
 /**
- * 一更 - one walkable minute of the first watch.
+ * 一更, walked. DECISIONS 107 and 108.
  *
- * THE WALK NEVER TOUCHES THE JS THREAD. Three versions of this got
- * progressively less wrong and the reasons are worth keeping:
+ * THE WALKWAY IS AUTHORED SEGMENTS: a sequence of plates, each scaled so
+ * its measured embankment band lands on WALKWAY_BAND. A bridge is a
+ * segment with a bridge in it - runtime object compositing died at 97b.
  *
- *  1. walkX in useState        - re-rendered the whole tree every frame.
- *  2. shared value + PanResponder - better, but PanResponder is a JS
- *     handler, so every touch event still had to cross the bridge
- *     before anything could move.
- *  3. shared value + a gesture-handler worklet - the finger and the
- *     picture are now on the same thread and never involve JS at all.
+ * THE DEPTH VERB: swipe down steps toward the water - the outermost
+ * step IS the reflection, where the flames show. Swipe up steps inland
+ * (a lane, where the art shows a mouth). The transition dips through
+ * paper rather than cutting - a first, deliberately simple version of
+ * the layers-parting feel 108 requires.
  *
- * The remaining trap is React: the watch ticks ten times a second, and
- * if that re-rendered the canvas it would undo all of the above. Scene
- * is memoised on values that change a few times a MINUTE, so the ticks
- * touch only the overlay.
- *
- * Each plane owns a FIXED set of tile nodes (slotCount) whose x is a
- * derived value. Nothing is created or destroyed while she walks.
+ * The walk itself never touches the JS thread.
  */
 
 function PlaneLayer({
@@ -85,14 +78,11 @@ function PlaneLayer({
   const live = useImage(LIVE[plate]);
   const dead = useImage(DEAD[plate]);
   const band = planeRect(plane, screenH);
-
   const tileW = live
     ? scaledWidth(plane, live.width(), live.height(), screenH)
     : 0;
   const slots = slotCount(tileW, screenW);
-
   if (!live || slots === 0) return null;
-
   return (
     <Group>
       {Array.from({ length: slots }, (_, k) => (
@@ -120,7 +110,7 @@ function Slot({
   walkX: SharedValue<number>;
   tileW: number;
   band: { y: number; height: number };
-  live: ReturnType<typeof useImage>;
+  live: NonNullable<ReturnType<typeof useImage>>;
   dead: ReturnType<typeof useImage>;
   drain: number;
 }) {
@@ -128,129 +118,86 @@ function Slot({
     () => [{ translateX: slotX(plane, walkX.value, tileW, slot) }],
     [plane, tileW, slot],
   );
-  if (!live) return null;
   return (
     <Group transform={transform}>
       <SkImage image={live} x={0} y={band.y} width={tileW} height={band.height} fit="fill" />
       {dead && drain > 0 ? (
-        <SkImage
-          image={dead}
-          x={0}
-          y={band.y}
-          width={tileW}
-          height={band.height}
-          fit="fill"
-          opacity={drain}
-        />
+        <SkImage image={dead} x={0} y={band.y} width={tileW} height={band.height} fit="fill" opacity={drain} />
       ) : null}
     </Group>
   );
 }
 
 /**
- * DECISIONS 67. The flames are counted in the canal, never in a HUD.
- * At zero fires there is no reflection at all - the screen shows the
- * water and nothing in it, and says nothing about why.
+ * The walkway: each plate drawn once at its laid-out position, at
+ * speed 1 - she walks ON this. Fixed nodes, animated x, nothing
+ * created or destroyed mid-walk.
  */
-function Reflection({ state, screenH }: { state: WalkState; screenH: number }) {
-  const r = reflection(state);
-  if (!state.looking) return null;
+function Walkway({
+  stripId, walkX, screenH, drain,
+}: {
+  stripId: string;
+  walkX: SharedValue<number>;
+  screenH: number;
+  drain: number;
+}) {
+  const bandH = WALKWAY_BAND.height * screenH;
+  const bandY = WALKWAY_BAND.top * screenH;
+  const layout = layoutFor(stripId, bandH);
+  if (!layout) return null;
   return (
-    <View style={[styles.water, { top: screenH * 0.66 }]} pointerEvents="none">
-      {r.visible ? (
-        <View style={styles.flames}>
-          {Array.from({ length: r.flames }).map((_, i) => (
-            <View key={i} style={styles.flame} />
-          ))}
-        </View>
-      ) : null}
-    </View>
+    <Group>
+      {layout.plates.map((p, i) => (
+        <WalkwayPlate
+          key={`${p.plate}:${i}`}
+          plate={p.plate as PlateName}
+          x={p.x}
+          y={bandY + p.drawTopOffset}
+          w={p.width}
+          h={p.drawH}
+          walkX={walkX}
+          drain={drain}
+        />
+      ))}
+    </Group>
   );
 }
 
-/**
- * NOTHING IS DRAWN FOR A BRIDGE YET, AND THAT IS DELIBERATE.
- *
- * The plates that exist - bridge-one, bridge-two, bridge-three - are
- * LANDMARK views: a whole arch with its own reflection, seen across
- * water from a distance. Two attempts to place one in the world both
- * failed, and for the same reason rather than two:
- *
- *   in the near canal   it is a bridge floating in the water, because
- *                       that is literally what an arch-plus-reflection
- *                       dropped into a canal is
- *   on the far plane    it slides away from her path, because a bridge
- *                       standing at a world x on the BANK cannot be
- *                       drawn on a plane that scrolls at another speed
- *
- * There is no correct placement for these plates, so there is no
- * placeholder. The bridge she walks over is prompt [26] and does not
- * exist yet; a bridge in the wrong place teaches the player something
- * false about the town, which is worse than an empty bank.
- *
- * The crossings still WORK - she spends them by walking past, per
- * DECISIONS 105 - they are simply invisible until the art lands.
- */
-
-/**
- * Something standing in the world at a fixed place on the strip - the
- * bridge she walks over, or the mouth of a lane. No marker and no
- * prompt: DECISIONS 41 withholds help, and both of these are already
- * the most legible things a water town has.
- *
- * Sized in WORLD pixels and anchored to the ground the strip is walked
- * on, so a wide plate and a tall one come out the same size of object.
- */
-function WorldObject({
-  plate, worldX, band, walkX, drain, speed = 1, scale = 1.31, anchor = 0.247,
-  align = 0.314,
+function WalkwayPlate({
+  plate, x, y, w, h, walkX, drain,
 }: {
-  plate: PlateName; worldX: number;
-  band: { y: number; height: number };
+  plate: PlateName; x: number; y: number; w: number; h: number;
   walkX: SharedValue<number>; drain: number;
-  /** Parallax rate of the plane this thing belongs to. */
-  speed?: number;
-  scale?: number; anchor?: number; align?: number;
 }) {
   const live = useImage(LIVE[plate]);
   const dead = useImage(DEAD[plate]);
-
-  // MEASURED, not guessed - AND REMEASURED WHEN THE PLATE CHANGED,
-  // which is the lesson of the second wrong-looking bridge: these
-  // constants describe one particular image, not bridges in general.
-  // The regenerated plate had different geometry and the old numbers
-  // hung its reflection wash below the walkway as a grey blob.
-  //
-  // Current plate, cropped of its below-deck reflection at 0.84h:
-  // wing band 0.410..0.957 of the plate; strip embankment 0.599 of its
-  // own, top at 0.314. scale = 0.599/0.547 = 1.095, anchored at tops.
-  //
-  // If [26] is ever regenerated again, re-run the wing measurement in
-  // docs/proof/README.txt and update these three numbers together.
-  const h = band.height * scale;
-  const w = live ? (h * live.width()) / live.height() : 0;
-  const y = band.y + align * band.height - anchor * h;
-
   const transform = useDerivedValue(
-    () => [{ translateX: worldX - walkX.value * speed - w / 2 }],
-    [worldX, w, speed],
+    () => [{ translateX: x - walkX.value }],
+    [x],
   );
   if (!live) return null;
   return (
     <Group transform={transform}>
       <SkImage image={live} x={0} y={y} width={w} height={h} fit="fill" />
       {dead && drain > 0 ? (
-        <SkImage
-          image={dead}
-          x={0}
-          y={y}
-          width={w}
-          height={h}
-          fit="fill"
-          opacity={drain}
-        />
+        <SkImage image={dead} x={0} y={y} width={w} height={h} fit="fill" opacity={drain} />
       ) : null}
     </Group>
+  );
+}
+
+/** DECISIONS 67/108: flames in the water, nothing at zero. */
+function Flames({ state, screenH }: { state: WalkState; screenH: number }) {
+  const r = reflection(state);
+  if (!atWater(state) || !r.visible) return null;
+  return (
+    <View style={[styles.water, { top: screenH * 0.62 }]} pointerEvents="none">
+      <View style={styles.flames}>
+        {Array.from({ length: r.flames }).map((_, i) => (
+          <View key={i} style={styles.flame} />
+        ))}
+      </View>
+    </View>
   );
 }
 
@@ -262,10 +209,6 @@ const Scene = memo(function Scene({
 }) {
   const here = stripById(stripId);
   const planes = planesFor(here.kind);
-  // Objects that stand in the walkway belong to the plane the walkway
-  // is drawn on, and are aligned to that band rather than to the screen.
-  const ground = planes.find((p) => p.id === 'mid') ?? planes[0];
-  const groundBand = planeRect(ground, height);
   return (
     <Canvas style={StyleSheet.absoluteFill}>
       <Rect x={0} y={0} width={width} height={height} color={PAPER} />
@@ -283,44 +226,9 @@ const Scene = memo(function Scene({
           />
         ) : null;
       })}
-      {bridgesOn(stripId).map((b) => (
-        <WorldObject
-          key={b.id}
-          plate="bridge-walkover"
-          worldX={b.x}
-          band={groundBand}
-          walkX={walkX}
-          drain={drain}
-        />
-      ))}
-      {/* A lane mouth is a GAP IN THE TERRACE, not an object in the
-          walkway - DECISIONS 105 and a plate that failed once for
-          being at the wrong depth. It is the same row of houses as the
-          far plane, with a gap in it, laid over the far plane at the
-          far plane's own rate so it stays put among the houses.
-          Positioned at linkX * far.speed so the gap is in front of her
-          when her walk reaches the link. */}
-      {linksOn(stripId).map(({ link, x }) => (
-        <WorldObject
-          key={link.id}
-          plate="lane-mouth"
-          worldX={x * planes[0].speed}
-          band={planeRect(planes[0], height)}
-          walkX={walkX}
-          drain={drain}
-          speed={planes[0].speed}
-          scale={1}
-          anchor={0}
-          align={0}
-        />
-      ))}
-      {/* OLD NOTE, kept because it is why the plate was redrawn. The plate that exists is a standalone
-          alley - two whole buildings, their roofs and sky - and laying
-          it over the bank gives two sets of architecture at two depths.
-          It is also at the wrong depth entirely: she walks the
-          embankment with the houses BEHIND her, so a lane off her bank
-          is a gap in the FAR terrace, not an object in the walkway.
-          Re-prompted as [27] and now drawn above. */}
+      {here.kind === 'bank' ? (
+        <Walkway stripId={stripId} walkX={walkX} screenH={height} drain={drain} />
+      ) : null}
     </Canvas>
   );
 });
@@ -328,86 +236,95 @@ const Scene = memo(function Scene({
 export function Walk() {
   const { width, height } = useWindowDimensions();
   const walkX = useSharedValue(0);
-  // How far she can walk on the strip she is on. A shared value because
-  // the gesture is built once and must not capture a strip that changes.
   const stripMax = useSharedValue(0);
+  // 1 = fully visible. The depth step dips this to 0 and back - the
+  // simple first version of the layers-parting transition 108 requires.
+  const veil = useSharedValue(1);
   const [state, setState] = useState<WalkState>(beginFirstWatch);
+  const bandH = WALKWAY_BAND.height * height;
 
-  // The night runs whether or not she moves, and this is also where the
-  // walk is reported back to React - ten times a second, not once a
-  // frame. arriveAt takes the whole span since the last sample, so a
-  // fast fling cannot skip over a bridge between two reads.
   useEffect(() => {
     const id = setInterval(
-      () => setState((s) => arriveAt(tick(s, 100), walkX.value)),
+      () => setState((s) => arriveAt(tick(s, 100), walkX.value, bandH)),
       100,
     );
     return () => clearInterval(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [bandH]);
 
-  // One pure transition, tested in Node. Stable - no deps - so the
-  // gesture built once at mount never goes stale.
-  const takeCrossing = useCallback(
-    (atX: number) => setState((s) => applyCrossing(s, atX)),
+  const depth = useCallback(
+    (dir: 'outward' | 'inward') => {
+      setState((s) => {
+        // A mouth is a two-way door: inward from the bank, outward from
+        // inside the lane. Try the link first in whichever direction
+        // makes sense for the strip she is on; fall back to the depth
+        // map (bank -> water, water -> bank).
+        const kind = stripById(s.pos.strip).kind;
+        const linkWay = dir === 'inward' ? kind === 'bank' : kind === 'lane';
+        if (linkWay) {
+          const throughMouth = applyCrossing(s, s.x);
+          if (throughMouth !== s) return throughMouth;
+        }
+        return applyDepth(s, dir);
+      });
+    },
     [],
   );
 
-  const setLook = useCallback(
-    (on: boolean) => setState((s) => (s.looking === on ? s : setLooking(s, on))),
-    [],
+  const depthFromGesture = useCallback(
+    (ty: number) => {
+      // Dip through paper; switch strips at the bottom of the dip.
+      veil.value = withTiming(0, { duration: 220 }, (done) => {
+        'worklet';
+        if (done) {
+          runOnJS(depth)(ty > 0 ? 'outward' : 'inward');
+          veil.value = withTiming(1, { duration: 260 });
+        }
+      });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [depth],
   );
 
-  // Runs entirely on the UI thread. onChange gives the delta since the
-  // last event, so there is no start-position to track and nothing to
-  // reassign across renders.
   const [pan] = useState(() =>
     Gesture.Pan()
       .onChange((e) => {
         'worklet';
-        // Down over the water to count; up onto a crossing.
-        if (e.translationY > 40 && e.translationY > Math.abs(e.translationX)) {
-          runOnJS(setLook)(true);
-          return;
-        }
-        if (e.translationY < -60 && -e.translationY > Math.abs(e.translationX)) {
-          runOnJS(takeCrossing)(walkX.value);
-          return;
+        if (Math.abs(e.translationY) > 56
+            && Math.abs(e.translationY) > Math.abs(e.translationX) * 1.4) {
+          return; // vertical intent - handled at release
         }
         walkX.value = clampTo(walkX.value - e.changeX, stripMax.value);
       })
       .onFinalize((e) => {
         'worklet';
-        runOnJS(setLook)(false);
-        // Let go and she keeps going, slowing down. Without this the walk
-        // stops dead the instant your thumb lifts, which is most of what
-        // made it feel like dragging a picture rather than walking.
+        if (Math.abs(e.translationY) > 56
+            && Math.abs(e.translationY) > Math.abs(e.translationX) * 1.4) {
+          runOnJS(depthFromGesture)(e.translationY);
+          return;
+        }
         walkX.value = withDecay({
           velocity: -e.velocityX,
           deceleration: 0.996,
-          // The district has two ends now. Walking into one stops her,
-          // rather than the endless belt the first build had.
           clamp: [0, stripMax.value],
         });
       }),
   );
 
-  // A crossing moves her somewhere else on another strip, so the shared
-  // value has to be told. Keyed on the crossing count, not on x, so
-  // ordinary walking never fights the gesture for control of walkX.
+  const veilOpacity = useDerivedValue(() => 1 - veil.value, []);
+
   const crossings = state.pos.crossed.length;
   useEffect(() => {
     // eslint-disable-next-line react-hooks/immutability
-    stripMax.value = stripById(state.pos.strip).length;
-    // react-hooks/immutability mis-reads useSharedValue as useState. A
-    // shared value is a mutable box by design - assigning to .value is
-    // the whole API - so this is a false positive, not a shortcut.
+    stripMax.value = (() => {
+      const lay = layoutFor(state.pos.strip, bandH);
+      return lay ? lay.length : stripById(state.pos.strip).length;
+    })();
     // eslint-disable-next-line react-hooks/immutability
     walkX.value = state.x;
-    // Deliberately keyed on the crossing, not on x - listing state.x
-    // would fire this on every step and fight the gesture for walkX.
+    // Deliberately keyed on the crossing and the strip, not on x.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [crossings, state.pos.strip]);
+  }, [crossings, state.pos.strip, bandH]);
 
   const onLookBack = useCallback(() => setState(lookBack), []);
   const call = currentCall(state);
@@ -424,10 +341,11 @@ export function Walk() {
             drain={drain}
             stripId={state.pos.strip}
           />
+          <VeilOverlay opacity={veilOpacity} />
         </View>
       </GestureDetector>
 
-      <Reflection state={state} screenH={height} />
+      <Flames state={state} screenH={height} />
 
       {watchmanCalling(state) ? (
         <View style={styles.call} pointerEvents="none">
@@ -447,12 +365,18 @@ export function Walk() {
       <Text style={styles.lookBack} onPress={onLookBack}>
         look back
       </Text>
-      {/* DEV ONLY. Two rounds of "nothing has changed" against three
-          passing install probes proved that neither of us can tell from
-          the screen which build is running. This settles it: the stamp
-          names the build, and it comes out before ship. */}
-      <Text style={styles.stamp}>b34</Text>
+      <Text style={styles.stamp}>b35</Text>
     </GestureHandlerRootView>
+  );
+}
+
+function VeilOverlay({ opacity }: { opacity: SharedValue<number> }) {
+  const style = useAnimatedStyle(() => ({ opacity: opacity.value }));
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={[StyleSheet.absoluteFill, { backgroundColor: PAPER }, style]}
+    />
   );
 }
 
@@ -461,8 +385,8 @@ const styles = StyleSheet.create({
   water: { position: 'absolute', left: 0, right: 0, height: 90, alignItems: 'center' },
   flames: { flexDirection: 'row', gap: 26 },
   flame: {
-    width: 7, height: 12, borderRadius: 4,
-    backgroundColor: PEACH_RED, opacity: 0.75,
+    width: 7, height: 14, borderRadius: 4,
+    backgroundColor: PEACH_RED, opacity: 0.8,
   },
   call: { position: 'absolute', top: 54, left: 0, right: 0, alignItems: 'center' },
   callLabel: { color: SOOT, fontSize: 26, letterSpacing: 6, opacity: 0.75 },

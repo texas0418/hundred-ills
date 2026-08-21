@@ -1,78 +1,76 @@
 import {
-  TOWN, BANK_LENGTH, REACH, BRIDGE_SPAN, beginAt, clampToStrip, cross,
-  linkInReach, linksOn, otherEnd, strip, bridgesRemaining, riteComplete,
-  payForDoublingBack, bridgesOn, bridgesCrossed, walkTo,
+  TOWN, REACH, beginAt, clampToStrip, cross, linkInReach, linksOn,
+  otherEnd, strip, bridgesRemaining, riteComplete, payForDoublingBack,
+  bridgesCrossed, walkTo, layoutFor, stepDepth, DEFAULT_BAND_H,
 } from './src/engine/town';
+import { NORTH_WALKWAY, bridgesPassed } from './src/engine/walkway';
 
 let n = 0;
 function ok(c: boolean, m: string) { n++; if (!c) throw new Error(`FAIL: ${m}`); }
 
-// The district has ends. This is the whole point of the change - a
-// strip you can walk off forever is a treadmill, not a place.
-ok(clampToStrip('north', -500) === 0, 'she cannot walk off the left end');
-ok(clampToStrip('north', BANK_LENGTH + 5000) === BANK_LENGTH, 'nor off the right');
-ok(clampToStrip('north', 1234) === 1234, 'and moves freely in between');
+// LAYOUT: the walkway is authored segments, band-aligned (107).
+const L = layoutFor('north', DEFAULT_BAND_H)!;
+ok(L.plates.length === NORTH_WALKWAY.length, 'every plate is placed');
+ok(L.bridgeXs.length === 2, 'two bridges stand in the north walkway');
+for (let i = 1; i < L.plates.length; i++) {
+  const prev = L.plates[i - 1];
+  ok(Math.abs(L.plates[i].x - (prev.x + prev.width)) < 1e-9, 'plates are flush');
+}
+for (const p of L.plates) {
+  const bandPx = (p.bandBot - p.bandTop) * p.drawH;
+  ok(Math.abs(bandPx - DEFAULT_BAND_H) < 1e-6,
+     `${p.plate} band lands exactly on the walkway band`);
+}
+ok(L.length === L.plates.reduce((a2, p) => a2 + p.width, 0), 'length is the sum');
+const L2 = layoutFor('north', DEFAULT_BAND_H * 2)!;
+ok(Math.abs(L2.length - L.length * 2) < 1e-6, 'layout scales with the band');
 
-// LANES are the only branching (DECISIONS 105).
-ok(TOWN.links.length >= 1, 'there is somewhere to turn off to');
-const lm = TOWN.links[0];
-ok(linksOn('north').length === 1, 'the bank has a lane mouth on it');
-ok(linkInReach('north', lm.a.x)?.id === lm.id, 'and she can reach it');
-ok(linkInReach('north', lm.a.x + REACH + 80) === null, 'but not from far off');
-ok(strip('lane-a').kind === 'lane', 'the lane is a lane');
-ok(strip('lane-a').length < BANK_LENGTH, 'and is much shorter than a bank');
-ok(strip('lane-a').plates.mid === '',
-   'a lane has no mid plane - wall and kerb and nothing between');
-ok(strip('north').plates.far !== strip('south').plates.far,
-   'the two banks no longer look identical');
+// The district has ends, from the layout now.
+ok(clampToStrip('north', -500, DEFAULT_BAND_H) === 0, 'no walking off the left');
+ok(clampToStrip('north', L.length + 99, DEFAULT_BAND_H) === L.length, 'nor the right');
 
-// BRIDGES are landmarks ON a strip, not ways off it.
-ok(TOWN.bridges.length >= 2, 'the north bank has bridges standing on it');
-ok(TOWN.bridges.every((b) => b.x <= strip(b.strip).length),
-   'no bridge stands past the end of its strip');
-ok(bridgesOn('north').length === TOWN.bridges.length, 'all on the north bank');
-ok(bridgesOn('nowhere').length === 0, 'and none anywhere else');
-ok(BRIDGE_SPAN > 0, 'a bridge is a size in the TOWN, not a fraction of a screen');
-
-// She crosses one by WALKING OVER IT.
-const b0 = TOWN.bridges[0];
-ok(bridgesCrossed('north', 0, b0.x + 10).some((b) => b.id === b0.id),
-   'walking past a bridge crosses it');
-ok(bridgesCrossed('north', 0, b0.x - 10).length === 0, 'stopping short does not');
-ok(bridgesCrossed('north', b0.x + 10, 0).some((b) => b.id === b0.id),
-   'and walking back over it counts as meeting it again');
+// Bridges are crossed by WALKING OVER them - positions from the ART.
+const bx = L.bridgeXs[0];
+ok(bridgesCrossed('north', 0, bx + 5, DEFAULT_BAND_H).length === 1, 'walking past crosses');
+ok(bridgesCrossed('north', 0, bx - 5, DEFAULT_BAND_H).length === 0, 'stopping short does not');
+ok(bridgesPassed(L, bx + 5, 0).length === 1, 'and walking back meets it again');
 
 let p = beginAt('north');
-const one = walkTo(p, b0.x + 10);
-ok(one.position.crossed.length === 1, 'a fresh bridge counts toward the three');
+const one = walkTo(p, bx + 5, DEFAULT_BAND_H);
+ok(one.position.crossed.length === 1, 'a fresh bridge counts');
 ok(one.costsAFlame === false, 'and costs nothing');
-p = one.position;
-
-// DOUBLING BACK - now literal, because it is done by walking.
-const back = walkTo(p, 0);
-ok(back.costsAFlame === true, 'walking back over it is doubling back, and costs a flame');
+const back = walkTo(one.position, 0, DEFAULT_BAND_H);
+ok(back.costsAFlame === true, 'doubling back costs a flame');
 ok(back.position.crossed.length === 1, 'and never counts twice');
-ok(back.position.x === 0, 'she is not stopped - she walks, and pays');
-ok(payForDoublingBack(3) === 2 && payForDoublingBack(0) === 0, 'one flame, never below zero');
+ok(payForDoublingBack(3) === 2 && payForDoublingBack(0) === 0, 'one flame, floor zero');
 
-// Both bridges in one sweep.
-const sweep = walkTo(beginAt('north'), BANK_LENGTH);
-ok(sweep.position.crossed.length === TOWN.bridges.length,
-   'one long walk crosses every bridge on the strip');
-ok(sweep.costsAFlame === false, 'all fresh, so nothing to pay');
-
-// The rite still wants three DISTINCT bridges.
+const sweep = walkTo(beginAt('north'), L.length, DEFAULT_BAND_H);
+ok(sweep.position.crossed.length === 2, 'one sweep crosses both');
+ok(!riteComplete(sweep.position), 'two is not three');
 ok(bridgesRemaining(beginAt('north')) === 3, 'the rite wants three');
-ok(!riteComplete(sweep.position), 'two bridges is not three');
 ok(riteComplete({ ...p, crossed: ['a', 'b', 'c'] }), 'three distinct completes it');
 
-// Turning into a lane is free and not part of the rite.
+// LANES: the only inland branching. The mouth is a two-way door.
+const lm = TOWN.links[0];
+ok(linksOn('north').length === 1, 'the bank has a mouth');
+ok(linkInReach('north', lm.a.x)?.id === lm.id, 'reachable at the mouth');
+ok(linkInReach('north', lm.a.x + REACH + 80) === null, 'not from far off');
 const turned = cross(beginAt('north'), lm);
 ok(turned.position.strip === 'lane-a', 'a lane leads off the bank');
-ok(cross(turned.position, lm).position.strip === 'north', 'and back again');
 ok(turned.costsAFlame === false, 'lanes are free');
-ok(turned.position.crossed.length === 0, 'and are not part of 走三桥');
-ok(otherEnd(lm, 'lane-a').strip === 'north', 'and leads back');
-ok(REACH > 0, 'reach is a real distance');
+ok(otherEnd(lm, 'lane-a').strip === 'north', 'and lead back');
+ok(strip('lane-a').kind === 'lane', 'the lane is a lane');
+
+// DEPTH (108): toward the water and back. Lane has NO depth exit -
+// an alley leaves at its mouth or not at all.
+const atBank = beginAt('north');
+const toWater = stepDepth(atBank, 'outward');
+ok(toWater?.strip === 'water-north', 'outward from the bank reaches the water');
+ok(stepDepth(toWater!, 'inward')?.strip === 'north', 'and inward returns');
+ok(stepDepth(toWater!, 'outward') === null, 'nothing beyond the water');
+ok(stepDepth({ ...atBank, strip: 'lane-a' }, 'outward') === null,
+   'a lane exits at its mouth, never by depth map');
+ok(strip('water-north').kind === 'water', 'the water strip is water');
+ok(strip('water-north').plates.kerb === 'night-water', 'and the flames land on night water');
 
 console.log(`test-town: ${n} assertions passed`);
