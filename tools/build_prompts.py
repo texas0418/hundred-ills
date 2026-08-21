@@ -124,6 +124,15 @@ LANDED = {
     # delete the prompt instead.
     "28": "lane-wall.png",
     "30": "canal-far-b.png",
+    "36": "screens/gate.png  (text panels flanked the raw; cropped out by column)",
+    "37": "screens/water.png",
+    "38": "screens/lantern.png",
+    "39": "screens/alley-deep.png",
+    "40": "screens/farbank.png",
+    "41": "screens/gatelane.png",
+    "43": "screens/bridge-b.png  (asset landed, not yet wired - needs [42] first)",
+    "46": "screens/junction.png",
+    "48": "screens/house-lamp.png  (asset landed, not yet wired - needs canal two's banks)",
 }
 
 # (id, title, kind, note shown above the block, body)

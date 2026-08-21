@@ -15,16 +15,28 @@ for (const t of Object.values(NODES)) {
   }
 }
 ok(node('bridge').bridge === true, 'the bridge is a bridge');
+ok(node('water').water === true, 'the water\'s edge is water');
+ok(node('lantern').warm === true, 'the lantern corner is the warm place');
+ok(!node('bridge').warm, 'warmth has moved off the bridge');
 
 const s0 = beginNight();
-ok(s0.nodeId === 'mooring' && s0.fires === 3, 'she begins at the mooring, alive');
+ok(s0.nodeId === 'gate' && s0.fires === 3, 'the night begins at the gate, alive');
 
 // Refusal is not movement.
 const refuse = move(s0, 'left');
 ok(!refuse.moved && refuse.state === s0, 'an edge with no exit refuses');
 
+// The walk in: gate, the lane under the wall, the mooring.
+const atMooring = move(move(s0, 'right').state, 'right').state;
+ok(atMooring.nodeId === 'mooring', 'the gate lane leads to the mooring');
+
+// Down by the water, and back up.
+const atWater = move(atMooring, 'down').state;
+ok(atWater.nodeId === 'water', 'down from the bank is the water\'s edge');
+ok(move(atWater, 'up').state.nodeId === 'mooring', 'and up is back');
+
 // TRAVERSAL spends the bridge: in one side, out the other.
-const onBridge = move(s0, 'right').state;
+const onBridge = move(atMooring, 'right').state;
 ok(onBridge.nodeId === 'bridge' && onBridge.enteredFrom === 'left', 'entered from the left');
 const throughUp = move(onBridge, 'up');
 ok(throughUp.state.crossed.includes('bridge'), 'leaving the other way is a traversal');
@@ -47,12 +59,17 @@ ok(again.state.crossed.length === 1, 'it never counts twice');
 ok(lookBack(s0).fires === 2, 'turning to look behind costs one');
 ok(lookBack({ ...s0, fires: 0 }).fires === 0, 'never below zero');
 
-// Warmth: the bridge lantern relights, in real time, only when short.
-let w: TownState = { ...onBridge, fires: 1 };
+// Crossing down to the far bank is also a traversal.
+const overToFar = move(onBridge, 'down');
+ok(overToFar.state.nodeId === 'farbank', 'down from the bridge is the far bank');
+ok(overToFar.state.crossed.includes('bridge'), 'and the crossing spends the bridge');
+
+// Warmth: the lantern corner relights, in real time, only when short.
+let w: TownState = { ...s0, nodeId: 'lantern', fires: 1 };
 for (let i = 0; i < RELIGHT_MS / 100 - 1; i++) w = tick(w, 100, 60);
 ok(w.fires === 1, 'not yet');
 w = tick(w, 100, 60);
-ok(w.fires === 2, 'a moment by the lantern and she is more alive');
+ok(w.fires === 2, 'a moment under the lantern and she is more alive');
 const cold = tick({ ...s0, nodeId: 'mooring', fires: 1 as const, warmMs: 900 }, 100, 60);
 ok(cold.warmMs === 0, 'no lantern here - the warmth goes');
 

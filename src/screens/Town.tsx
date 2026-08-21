@@ -54,9 +54,24 @@ import {
  *  values use. */
 const SCREENS = [
   {
+    id: 'gate',
+    live: require('../../assets/screens/gate.png'),
+    dead: require('../../assets/screens-drained/gate.png'),
+  },
+  {
+    id: 'gatelane',
+    live: require('../../assets/screens/gatelane.png'),
+    dead: require('../../assets/screens-drained/gatelane.png'),
+  },
+  {
     id: 'mooring',
     live: require('../../assets/screens/mooring.png'),
     dead: require('../../assets/screens-drained/mooring.png'),
+  },
+  {
+    id: 'water',
+    live: require('../../assets/screens/water.png'),
+    dead: require('../../assets/screens-drained/water.png'),
   },
   {
     id: 'bridge',
@@ -64,9 +79,29 @@ const SCREENS = [
     dead: require('../../assets/screens-drained/bridge.png'),
   },
   {
+    id: 'farbank',
+    live: require('../../assets/screens/farbank.png'),
+    dead: require('../../assets/screens-drained/farbank.png'),
+  },
+  {
     id: 'alley',
     live: require('../../assets/screens/alley.png'),
     dead: require('../../assets/screens-drained/alley.png'),
+  },
+  {
+    id: 'alley-deep',
+    live: require('../../assets/screens/alley-deep.png'),
+    dead: require('../../assets/screens-drained/alley-deep.png'),
+  },
+  {
+    id: 'junction',
+    live: require('../../assets/screens/junction.png'),
+    dead: require('../../assets/screens-drained/junction.png'),
+  },
+  {
+    id: 'lantern',
+    live: require('../../assets/screens/lantern.png'),
+    dead: require('../../assets/screens-drained/lantern.png'),
   },
 ] as const;
 
@@ -200,7 +235,7 @@ export function Town() {
   const prog = useSharedValue(1);
   const dir = useSharedValue(1);
   const axis = useSharedValue(0);
-  const [state, setState] = useState<TownState>(() => beginNight('mooring'));
+  const [state, setState] = useState<TownState>(() => beginNight('gate'));
   const busy = useRef(false);
   const stateRef = useRef(state);
   useEffect(() => {
@@ -332,7 +367,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b42</Text>
+      <Text style={styles.stamp}>b43</Text>
     </GestureHandlerRootView>
   );
 }

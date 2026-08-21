@@ -24,20 +24,61 @@ export interface TownNode {
   readonly water?: boolean;
 }
 
+/**
+ * The first district, per docs/TOWN-MAP.txt. Two edges are TEMPORARY
+ * until the rest of the map's screens land, and are marked so:
+ * canal two's banks ([47]-[49]) will carry the lantern corner, and
+ * bank east ([42]) continues the near-bank chain past the bridge.
+ */
 export const NODES: Record<string, TownNode> = {
+  gate: {
+    id: 'gate',
+    exits: { right: 'gatelane' },
+  },
+  gatelane: {
+    id: 'gatelane',
+    exits: { left: 'gate', right: 'mooring' },
+  },
   mooring: {
     id: 'mooring',
-    exits: { right: 'bridge' },
+    exits: { left: 'gatelane', right: 'bridge', down: 'water' },
+  },
+  water: {
+    id: 'water',
+    exits: { up: 'mooring' },
+    water: true,
   },
   bridge: {
     id: 'bridge',
-    exits: { left: 'mooring', up: 'alley' },
+    // down: crossing to the far bank - the other side, the town
+    // not-hers. TEMPORARY direction until [42] bank east lands and
+    // the map settles how the crossing reads.
+    exits: { left: 'mooring', up: 'alley', down: 'farbank' },
     bridge: true,
-    warm: true,
+  },
+  farbank: {
+    id: 'farbank',
+    exits: { up: 'bridge' },
   },
   alley: {
     id: 'alley',
-    exits: { down: 'bridge' },
+    exits: { down: 'bridge', up: 'alley-deep' },
+  },
+  'alley-deep': {
+    id: 'alley-deep',
+    exits: { down: 'alley', up: 'junction' },
+  },
+  junction: {
+    id: 'junction',
+    // up leads toward canal two. TEMPORARY: it reaches the lantern
+    // corner directly until [47]-[49] land; the map hangs [38] off
+    // second-canal bank east.
+    exits: { down: 'alley-deep', up: 'lantern' },
+  },
+  lantern: {
+    id: 'lantern',
+    exits: { down: 'junction' },
+    warm: true,
   },
 };
 
@@ -64,7 +105,7 @@ export interface TownState {
   readonly warmMs: number;
 }
 
-export function beginNight(at: string = 'mooring'): TownState {
+export function beginNight(at: string = 'gate'): TownState {
   return {
     nodeId: at, fires: MAX_FIRES, enteredFrom: null,
     crossed: [], elapsedMs: 0, warmMs: 0,
