@@ -111,6 +111,7 @@ LANDED = {
     "24": "willow.png",
     "11": "door-gods-intact.png",
     "23": "lamp-in-window.png",
+    "27": "lane-mouth.png",
     "25": "baby-print.png",
     # [29] deliberately NOT here. The plate exists and is unused - the
     # prompt asked for something a side-on game cannot show. Left out of
@@ -338,39 +339,43 @@ PLATES = [
      "Cheerful, round, warm, benign. The print itself is flat and "
      "graphic and slightly coarse, pasted crooked, its edges lifting. No "
      "text anywhere."),
-    ("26", "橋 - A BRIDGE SHE WALKS OVER",
-     "object",
-     "REPLACES the way the existing bridge plates were being used. Those\n"
-     "are LANDMARK views - a whole arch seen across water, with its\n"
-     "reflection - and they stay, for seeing a bridge at a distance.\n"
+    ("31", "SEGMENT - THE WALKWAY WITH BRIDGE A",
+     "plane",
+     "DECISIONS 107: a bridge is not an object placed on the walkway, it\n"
+     "is a stretch of walkway WITH A BRIDGE IN IT, painted as one scene.\n"
+     "This replaces every attempt to composite a bridge at runtime.\n"
      "\n"
-     "This is the other thing entirely: the bridge she is ON. Per\n"
-     "DECISIONS 105 a flat side-on view cannot show a crossing toward\n"
-     "the camera, so the bridges she walks over span SIDE CANALS - a\n"
-     "smaller waterway joining the main one, where the lane humps up\n"
-     "and over it.\n"
+     "ATTACH canal-mid.png. This segment must read as the SAME\n"
+     "embankment: same stone, same height, same waterline, and its left\n"
+     "and right edges must match canal-mid's edges so the segments join.\n"
      "\n"
-     "It has to sit at the same height as the lane in canal-mid.png and\n"
-     "carry a little embankment at each end so it blends into it.\n"
-     "Attach canal-mid.png as a second reference for the stonework.\n"
-     "\n"
-     "SECOND ATTEMPT, AND THE CHANGE IS ONE THING: the first plate left\n"
-     "the space under the arch as bare paper. Bare paper becomes\n"
-     "TRANSPARENT in the pipeline, so the embankment behind the bridge\n"
-     "showed through its own arch - she could see the wall she was\n"
-     "walking along through the hole in the bridge. Two attempts to seal\n"
-     "that in code both looked worse than the bug. Paint the shadow and\n"
-     "the water in, and there is nothing to seal.",
-     "A short humpbacked stone footbridge carrying a flagged lane up and "
-     "over a narrow side canal, seen from the side at the level of the "
-     "lane itself. A low stone parapet runs along the near edge and rises "
-     "with the deck. NO reflection and no full circular arch. A stretch "
-     "of ordinary embankment continues at both the left and right ends "
-     "so it joins the lane on either side. Deserted. "
-     "IMPORTANT: the opening under the arch is NOT left blank - it is "
-     "filled with deep shadow washing down into dark still water, so "
-     "that nothing can be seen through the bridge. Every part of the "
-     "picture inside the bridge's outline is painted."),
+     "THE ONE INSTRUCTION THE LAST PLATE IGNORED, now unmissable: the\n"
+     "space under the arch is NEAR-BLACK. Nothing is visible through the\n"
+     "bridge. If any wall, steps or water can be seen through the arch,\n"
+     "the image is wrong.",
+     "A long stone canal embankment with a flagged lane along its top, "
+     "running the full width of the image and cut off by both the left and "
+     "right edges at the same height. In the middle, the lane rises and "
+     "crosses a short humpbacked stone footbridge over a narrow side "
+     "channel, with a low parapet - all painted as one continuous scene. "
+     "The opening beneath the bridge is filled with deep near-black ink "
+     "shadow; nothing is visible through it. One small red paper lantern "
+     "hangs from a post near the bridge. Deserted, one empty moored boat "
+     "far from the bridge."),
+
+    ("32", "SEGMENT - THE WALKWAY WITH BRIDGE B",
+     "plane",
+     "Same rules as [31], same session, same seed family - but a\n"
+     "DIFFERENT bridge, so the two read as landmarks apart. 走三桥 needs\n"
+     "bridges the player can tell apart and name on paper.",
+     "A long stone canal embankment with a flagged lane along its top, "
+     "running the full width of the image and cut off by both the left and "
+     "right edges at the same height. In the middle, the lane rises over a "
+     "low flat-decked stone bridge carried on two short square piers, with "
+     "a plain stone parapet - an older, squatter bridge than an arched one, "
+     "all painted as one continuous scene. The narrow openings between the "
+     "piers are filled with deep near-black ink shadow; nothing is visible "
+     "through them. Deserted, no boat in this stretch."),
 
     ("27", "弄口 - THE MOUTH OF A LANE  (SECOND ATTEMPT)",
      "plane",
