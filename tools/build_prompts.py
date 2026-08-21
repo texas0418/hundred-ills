@@ -371,19 +371,20 @@ PLATES = [
      "landmarks apart; 走三桥 needs bridges the player can tell apart and\n"
      "name on paper.\n"
      "\n"
-     "WHY THE REROLL: the first attempt painted the LEFT opening dark\n"
-     "and left the RIGHT one bare paper. It shipped with a bake-time\n"
-     "patch, which reads as a repair. The rejection rule is per opening:\n"
-     "look at EACH opening separately, and if any one of them is not\n"
-     "near-black, reject the image and generate again.",
+     "THIRD ATTEMPT, AND THE SHAPE CHANGED FOR A REASON: both earlier\n"
+     "tries had two openings, and both times Gemini painted one dark and\n"
+     "left the other bare paper. Two failures the same way is a pattern,\n"
+     "so the failure surface is removed - bridge B now has EXACTLY ONE\n"
+     "opening. One opening, near-black, or reject. Also reject any red\n"
+     "seal stamps on the stonework - the last try grew two.",
      "A long stone canal embankment with a flagged lane along its top, "
      "running the full width of the image and cut off by both the left and "
      "right edges at the same height. In the middle, the lane rises over a "
-     "low flat-decked stone bridge carried on two short square piers, with "
-     "a plain stone parapet - an older, squatter bridge than an arched one, "
-     "all painted as one continuous scene. The narrow openings between the "
-     "piers are filled with deep near-black ink shadow - EVERY opening, "
-     "all of them equally dark; nothing is visible through any of them. "
+     "low flat-decked stone slab bridge with a plain stone parapet - an "
+     "older, squatter bridge than an arched one, all painted as one "
+     "continuous scene. Beneath the deck there is EXACTLY ONE rectangular "
+     "opening, and it is filled with deep near-black ink shadow; nothing "
+     "is visible through it. No red marks or stamps anywhere on the stone. "
      "Deserted, no boat in this stretch."),
 
     ("33", "THE NIGHT WATER",
