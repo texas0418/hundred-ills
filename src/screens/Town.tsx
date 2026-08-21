@@ -367,7 +367,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b43</Text>
+      <Text style={styles.stamp}>b44</Text>
     </GestureHandlerRootView>
   );
 }
