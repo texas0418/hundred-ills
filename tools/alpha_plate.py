@@ -46,7 +46,27 @@ from PIL import Image, ImageDraw
 #
 # The machinery is kept because it is correct for a plate that really
 # does have an enclosed hole; nothing needs it yet.
-SEAL: set[str] = set()
+# bridge-walkover is BACK in SEAL, and the earlier note below explains
+# why it once failed: with the OLD plate the arch interior was bare
+# paper, so the footprint fill showed as a box of wrong-white. The
+# regenerated plate PAINTS the interior (shadow, water, the wall seen
+# through the arch), so the fill now backs real art instead of blank
+# paper - it makes the painting solid rather than inventing pixels.
+SEAL = {"bridge-walkover"}
+
+# Plates whose PAINT must be solid even where the wash is pale.
+#
+# The default curve maps darkness to opacity smoothly, which is right
+# for scenery that layers - but on the walk-over bridge it turned the
+# painted arch shadow (a mid-grey wash) into ~50% alpha, and the
+# embankment BOAT showed through the bridge. Seen on the simulator,
+# build b33.
+#
+# For plates listed here the ramp is much steeper: anything more than
+# faintly painted is fully opaque, and only the outermost edge of a
+# stroke keeps its softness. The value is the fraction of paper
+# darkness at which opacity saturates (the default curve uses 0.55).
+OPAQUE = {"bridge-walkover": 0.16}
 
 
 def seal_holes(alpha):
@@ -107,7 +127,18 @@ def to_alpha(path):
     # come back on slightly different whites, so a fixed threshold would
     # punch holes in some and leave a grey film on others.
     paper = np.percentile(lum, 98)
-    alpha = np.clip((paper - lum) / max(paper * 0.55, 1.0), 0.0, 1.0)
+    name = os.path.basename(path)[:-4]
+    if name in OPAQUE:
+        # Steep ramp WITH a noise floor. The steep ramp alone amplified
+        # the plate's own paper fibre into a faint mottled rectangle
+        # around the object - so below the floor is fully transparent
+        # (fibre, grain), above the ramp is fully opaque (real paint),
+        # and only the narrow band between keeps a soft edge.
+        d = paper - lum
+        alpha = np.clip((d - paper * 0.06) / max(paper * OPAQUE[name], 1.0),
+                        0.0, 1.0)
+    else:
+        alpha = np.clip((paper - lum) / max(paper * 0.55, 1.0), 0.0, 1.0)
 
     sealed = 0
     if os.path.basename(path)[:-4] in SEAL:

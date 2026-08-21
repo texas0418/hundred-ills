@@ -447,6 +447,11 @@ export function Walk() {
       <Text style={styles.lookBack} onPress={onLookBack}>
         look back
       </Text>
+      {/* DEV ONLY. Two rounds of "nothing has changed" against three
+          passing install probes proved that neither of us can tell from
+          the screen which build is running. This settles it: the stamp
+          names the build, and it comes out before ship. */}
+      <Text style={styles.stamp}>b34</Text>
     </GestureHandlerRootView>
   );
 }
@@ -468,5 +473,9 @@ const styles = StyleSheet.create({
   lookBack: {
     position: 'absolute', bottom: 34, right: 22,
     color: SOOT, opacity: 0.3, fontSize: 12, letterSpacing: 2,
+  },
+  stamp: {
+    position: 'absolute', bottom: 34, left: 22,
+    color: SOOT, opacity: 0.25, fontSize: 11, letterSpacing: 1,
   },
 });
