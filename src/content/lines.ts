@@ -111,6 +111,14 @@ export function linesFor(
 /** The characters settle one by one, like a brush laying them down. */
 export const CHAR_MS = 80;
 
+/** How long a line spends PRINTING: the characters' reveal plus the
+ *  English fading in beneath. While a line prints, she does not walk
+ *  (Simon, b52) - the player never has a line swept mid-reveal. Once
+ *  printed, moving on is the player's choice. */
+export function revealMs(line: Line): number {
+  return line.zh.length * CHAR_MS + 1120;
+}
+
 /** How long a line holds on screen: the characters' reveal, reading
  *  pace for the English, and a breath. */
 export function holdMs(line: Line): number {
