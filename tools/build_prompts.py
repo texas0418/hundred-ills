@@ -113,6 +113,7 @@ LANDED = {
     "23": "lamp-in-window.png",
     "27": "lane-mouth.png",
     "31": "seg-bridge-a.png",
+    "32": "seg-bridge-b.png  (third generation, single opening - the two-opening form failed twice)",
     "33": "night-water.png",
     "25": "baby-print.png",
     # [29] deliberately NOT here. The plate exists and is unused - the

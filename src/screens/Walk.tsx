@@ -365,7 +365,7 @@ export function Walk() {
       <Text style={styles.lookBack} onPress={onLookBack}>
         look back
       </Text>
-      <Text style={styles.stamp}>b35</Text>
+      <Text style={styles.stamp}>b36</Text>
     </GestureHandlerRootView>
   );
 }
