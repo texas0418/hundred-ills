@@ -112,6 +112,9 @@ LANDED = {
     "11": "door-gods-intact.png",
     "23": "lamp-in-window.png",
     "27": "lane-mouth.png",
+    "31": "seg-bridge-a.png",
+    "32": "seg-bridge-b.png  (right opening darkened at bake - reroll if it reads as a repair)",
+    "33": "night-water.png",
     "25": "baby-print.png",
     # [29] deliberately NOT here. The plate exists and is unused - the
     # prompt asked for something a side-on game cannot show. Left out of
