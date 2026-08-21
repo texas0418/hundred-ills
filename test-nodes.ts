@@ -21,6 +21,8 @@ for (const t of Object.values(NODES)) {
 }
 ok(node('bridge').bridge === true, 'the bridge is a bridge');
 ok(node('water').water === true, 'the water\'s edge is water');
+ok(node('east-water').water === true, 'the east water is water');
+ok(node('inland-water').water === true, 'the inland water is water');
 ok(node('lantern').warm === true, 'the lantern corner is the warm place');
 ok(!node('bridge').warm, 'warmth has moved off the bridge');
 

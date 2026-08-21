@@ -78,9 +78,18 @@ export const NODES: Record<string, TownNode> = {
   'bank-east': {
     id: 'bank-east',
     // [42], the plain breathing stretch: laundry poles over the
-    // water, one lantern door. down is reserved for [45] the east
-    // water once it is generated.
-    exits: { left: 'bridge', right: 'bridge-b' },
+    // water, one lantern door.
+    exits: { left: 'bridge', right: 'bridge-b', down: 'east-water' },
+  },
+  'east-water': {
+    id: 'east-water',
+    // [45]: the washing slab and the paddle someone set down and
+    // never came back for. The generation put two red seals on the
+    // stones - rule 5 - so the window ends at x875 and the painting
+    // ships with no red at all; on a water screen her flames are the
+    // vermilion.
+    exits: { up: 'bank-east' },
+    water: true,
   },
   'bridge-b': {
     id: 'bridge-b',

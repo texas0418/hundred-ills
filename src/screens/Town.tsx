@@ -89,6 +89,11 @@ const SCREENS = [
     dead: require('../../assets/screens-drained/bank-east.png'),
   },
   {
+    id: 'east-water',
+    live: require('../../assets/screens/east-water.png'),
+    dead: require('../../assets/screens-drained/east-water.png'),
+  },
+  {
     id: 'bridge-b',
     live: require('../../assets/screens/bridge-b.png'),
     dead: require('../../assets/screens-drained/bridge-b.png'),
@@ -402,7 +407,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b47</Text>
+      <Text style={styles.stamp}>b48</Text>
     </GestureHandlerRootView>
   );
 }
