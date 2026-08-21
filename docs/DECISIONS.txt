@@ -811,6 +811,17 @@ THE TOWN IS A NETWORK  (100-104, added 2026-08-20)
      PROOF BEFORE MIGRATION: two screens and one phase transition on
      the device, judged by Simon, before any machinery is deleted.
 
+     PROOF ACCEPTED 2026-08-22. Three screens, four-way phase, on the
+     device. Simon: "that's more like it - this is more what I remember
+     and want", then "it works well and it looks great." The discrete-
+     screen model is the game's architecture from here.
+
+     RULE LEARNED FROM THE PROOF, and it is binding on every future
+     screen: AN EXIT MUST BE VISIBLE IN THE PAINTING. Simon could not
+     find the third screen because nothing in the bridge painting
+     showed that forward existed. A gap, a passage, steps, a bridge
+     deck - the art declares the exits, or the node does not get one.
+
 =============================================================
 DEAD
 =============================================================
