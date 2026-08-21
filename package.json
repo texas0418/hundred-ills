@@ -35,7 +35,7 @@
     "start": "expo start",
     "ios": "expo run:ios",
     "android": "expo run:android",
-    "test": "npx tsx test-fires.ts && npx tsx test-watches.ts && npx tsx test-wards.ts && npx tsx test-nodes.ts && npx tsx test-db.ts",
+    "test": "npx tsx test-fires.ts && npx tsx test-watches.ts && npx tsx test-wards.ts && npx tsx test-nodes.ts && npx tsx test-content.ts && npx tsx test-db.ts",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },

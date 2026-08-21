@@ -145,14 +145,21 @@ export const NODES: Record<string, TownNode> = {
     // wants: the lamp lit in the window all night, and nobody remarks
     // on it. She passes and does not go in - the door is art, not an
     // exit, until the wards say otherwise.
-    exits: { left: 'inland-west', right: 'inland-east' },
+    exits: { left: 'inland-west', right: 'neighbours-wall' },
+  },
+  'neighbours-wall': {
+    id: 'neighbours-wall',
+    // [51], ENDING-SITE plant 4, placed per OPENING (ratified
+    // 2026-08-21): the neighbour's wall stands beside her house. The
+    // print is seen plainly and warmly and never remarked on again.
+    exits: { left: 'house-lamp', right: 'inland-east' },
   },
   'inland-east': {
     id: 'inland-east',
     // [49]: the shrine niche hints at what lives inland. The map
     // hangs the lantern off this bank; its steps to the water stay
     // art-only for now.
-    exits: { left: 'house-lamp', right: 'lantern' },
+    exits: { left: 'neighbours-wall', right: 'lantern' },
   },
 };
 
