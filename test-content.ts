@@ -1,4 +1,4 @@
-import { LINES, holdMs, linesFor } from './src/content/lines';
+import { LINES, holdMs, linesFor, revealMs } from './src/content/lines';
 import { NODES } from './src/engine/nodes';
 
 let n = 0;
@@ -54,9 +54,12 @@ ok(gateTouch.length === 2 && gateTouch[0].id === 'mo-ding-1',
 ok(linesFor('gate', 'touch', new Set(['mo-ding-1', 'mo-ding-2'])).length === 0,
   'the rite counts once');
 
-// Hold times scale with length and stay humane.
+// Hold times scale with length and stay humane, and a line always
+// finishes printing well before its hold ends - the walk-hold during
+// printing must never last the whole display.
 for (const l of LINES) {
   ok(holdMs(l) >= 2600 && holdMs(l) <= 10000, `${l.id} holds a readable while`);
+  ok(revealMs(l) < holdMs(l) - 1000, `${l.id} prints, then leaves time to read`);
 }
 
 console.log(`test-content: ${n} assertions passed`);

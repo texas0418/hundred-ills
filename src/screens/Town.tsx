@@ -37,7 +37,7 @@ import {
   type TownState,
   type Way,
 } from '../engine/nodes';
-import { CHAR_MS, holdMs, linesFor, type Line, type Trigger } from '../content/lines';
+import { CHAR_MS, holdMs, linesFor, revealMs, type Line, type Trigger } from '../content/lines';
 
 /** Ink with a glowing paper outline: a wide soft halo underneath,
  *  four offset paper copies forming a true outline, and the soot
@@ -370,6 +370,8 @@ export function Town() {
   const speaking = useRef(false);
   const lineTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const printingUntil = useRef(0);
+
   const showNext = useCallback(function show() {
     const next = lineQueue.current.shift() ?? null;
     setLine(next);
@@ -377,6 +379,8 @@ export function Town() {
       // A once-line counts as heard when it is SHOWN, not when it is
       // queued - a line swept away by a move can still play later.
       if (next.once) seen.current.add(next.id);
+      // While the line prints, she does not walk (Simon, b52).
+      printingUntil.current = Date.now() + revealMs(next);
       lineTimer.current = setTimeout(show, holdMs(next));
     } else {
       speaking.current = false;
@@ -406,6 +410,7 @@ export function Town() {
     if (lineTimer.current) clearTimeout(lineTimer.current);
     lineQueue.current = [];
     speaking.current = false;
+    printingUntil.current = 0;
     setLine(null);
   }, []);
 
@@ -426,6 +431,11 @@ export function Town() {
   const move = useCallback(
     (way: Way) => {
       if (busy.current) return;
+      // A printing line holds her still; the refusal haptic says wait.
+      if (Date.now() < printingUntil.current) {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+        return;
+      }
       const m = moveNode(stateRef.current, way);
       if (!m.moved) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
@@ -568,7 +578,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b52</Text>
+      <Text style={styles.stamp}>b53</Text>
     </GestureHandlerRootView>
   );
 }
