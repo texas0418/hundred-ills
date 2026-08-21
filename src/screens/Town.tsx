@@ -103,6 +103,11 @@ const SCREENS = [
     live: require('../../assets/screens/lantern.png'),
     dead: require('../../assets/screens-drained/lantern.png'),
   },
+  {
+    id: 'house-lamp',
+    live: require('../../assets/screens/house-lamp.png'),
+    dead: require('../../assets/screens-drained/house-lamp.png'),
+  },
 ] as const;
 
 const IDX: Record<string, number> = Object.fromEntries(
@@ -367,7 +372,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b45</Text>
+      <Text style={styles.stamp}>b46</Text>
     </GestureHandlerRootView>
   );
 }

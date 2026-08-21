@@ -86,11 +86,14 @@ export const NODES: Record<string, TownNode> = {
   },
   junction: {
     id: 'junction',
-    // A Y-split: two lane mouths, left and right. The left branch has
-    // a faint lamp glow down it - walk toward it and arrive under the
-    // lantern. TEMPORARY: the map hangs [38] off second-canal bank
-    // east [49]; the right branch waits for canal two.
-    exits: { down: 'alley-deep', left: 'lantern' },
+    // A Y-split, and a split must SPLIT: two lane mouths, two choices.
+    // The left branch has a faint lamp glow down it - walk toward it
+    // and arrive under the lantern. The right branch climbs to canal
+    // two and reaches the house with the lamp. TEMPORARY on both
+    // sides: when [47]-[49] land, the map hangs [38] off bank east
+    // and [48] sits mid-chain; the junction's attachments get
+    // re-decided then.
+    exits: { down: 'alley-deep', left: 'lantern', right: 'house-lamp' },
   },
   lantern: {
     id: 'lantern',
@@ -98,6 +101,13 @@ export const NODES: Record<string, TownNode> = {
     // the junction. Left waits for canal two.
     exits: { right: 'junction' },
     warm: true,
+  },
+  'house-lamp': {
+    id: 'house-lamp',
+    // [48], the story screen: the lamp lit in the window all night,
+    // and nobody remarks on it. She passes and does not go in - the
+    // door is art, not an exit, until the wards say otherwise.
+    exits: { left: 'junction' },
   },
 };
 
