@@ -1,0 +1,174 @@
+HUNDRED ILLS - AUDIO
+Started 2026-08-21. DECISIONS 39: audio is a major budget line and
+Simon's unfair advantage. This file is the sound plan: what the game
+needs, what Simon is sourcing (open source), what gets recorded later,
+and what the engine does with it all.
+
+PRINCIPLES
+
+  Diegetic first. Every sound in the night is a sound of the night -
+  no UI sounds, no stings, no musical score in this pass. Refusals
+  stay haptic-only. If the world would not make the sound, the game
+  does not make it.
+
+  Deep winter. First lunar month, the longest nights. NO insects, no
+  cicadas, no crickets, no frogs, no birdsong, no rain. A winter
+  night in a shuttered town is nearly silent - the quiet is the bed
+  everything else sits on. A summer ambience would be as wrong here
+  as a mountain in a painting.
+
+  Nothing modern. No traffic bleed, no electrical hum, no aircraft,
+  no distant machinery. Recordings with modern noise floor are
+  rejects however good the foreground.
+
+  The drain reaches the ears. As the fires go out the world loses
+  colour; it loses sound the same way. The engine cross-fades each
+  ambience toward a processed "drained" twin - muffled, distant,
+  wrong - built from the same file, same as the paintings' baked
+  drained copies. At zero fires the water still moves but sounds a
+  room away.
+
+LICENSING - HARD RULES
+
+  The game is PAID (DECISIONS 53). Only these licenses are usable:
+    CC0 / public domain    best, no strings
+    CC-BY                  fine, attribution goes in the credits
+  NEVER CC-BY-NC (non-commercial - we are commercial), never
+  ND-anything, never "free for personal use". On freesound.org,
+  filter license to "Creative Commons 0" and "Attribution".
+  Keep the source URL and author for every file taken - the credits
+  list is built from this file.
+
+DELIVERY
+
+  Drop files in ~/Downloads (the usual flow) or a folder anywhere,
+  named or not - Claude sorts, trims, loops, levels, converts and
+  lands them in assets/audio/, and builds the drained twins. WAV or
+  FLAC preferred, MP3/OGG acceptable if that is what exists. 44.1kHz
+  or better. Mono is fine for one-shots; stereo preferred for
+  ambience. Long is better than short - loops want 45+ seconds of
+  raw material; one-shots want several takes in one file or several
+  files (repetition is the enemy: a single clapper strike reused
+  four times a minute reads as a sample, five takes read as a man).
+
+
+=============================================================
+TIER 1 - THE CLAPPER AND THE OPENING (source these first)
+=============================================================
+
+[S1] THE WATCHMAN'S CLAPPER  梆子
+     The most important sound in the game: clock, chapter mark, save
+     point (DECISIONS 88/89). A dry wooden strike, outdoors, no
+     room. Two weights needed:
+       - slow strike: deeper, heavier (the watch count)
+       - quick strike: lighter, higher (the point count)
+     One good dry close recording of each is enough - the distant
+     and echoed versions are processed from it. 3-5 takes per weight.
+     Search: bangzi, wooden clapper, wood block strike, temple block,
+     muyu (too round but workable), claves (too bright, last resort).
+
+[S2] STILL CANAL WATER (ambience loop)
+     Near-still water against stone: slow, irregular, small. NOT
+     waves, NOT a babbling stream, NOT ocean. The sound of water
+     that is barely moving on a windless night. 60s+ raw.
+     Plays at: water, east-water, inland-water (loud), mooring,
+     farbank, bank screens (faint).
+     Search: lake lapping gentle, harbour water quiet, canal water
+     lapping, water against dock night.
+
+[S3] WINTER WIND (ambience loop)
+     Low, hollow, intermittent - wind finding lanes and eaves, not
+     a storm, not whistling. Should be able to sit quietly for long
+     stretches. 60s+ raw.
+     Plays at: alley, alley-deep, junction, gatelane, gate (with
+     nothing else, the gate is wind and silence).
+     Search: cold wind ambience, wind through buildings distant,
+     winter wind low howl soft.
+
+[S4] THE NIGHT BED (ambience loop)
+     The quietest thing in the game and always on: outdoor night
+     room-tone, low air, the sense of a sleeping town. No events in
+     it (no dogs, no voices, no wildlife). 60s+.
+     Search: night ambience quiet, outdoor room tone night, silent
+     village night atmosphere.
+
+[S5] THE BRONZE STUDS  摸釘
+     Fingertips on cold bronze: a soft damped metal touch, almost a
+     thud, absolutely not a clang or ring. 2-3 takes.
+     Plays: the gate touch target, with her first line.
+     Search: damped metal tap, metal thud soft, muted bronze touch,
+     hand on metal door.
+
+
+=============================================================
+TIER 2 - THE WALK (source when convenient)
+=============================================================
+
+[S6] FOOTSTEPS ON WET FLAGSTONE
+     Single steps, unhurried, a woman's soft shoe or cloth shoe on
+     stone, slightly wet. 6-8 distinct takes. Used 2-3 per phase
+     transition, randomized.
+     Search: footsteps stone single, slow footsteps flagstone wet,
+     footstep cobblestone soft.
+
+[S7] THE BRAZIER (warmth loop)
+     Small charcoal fire: soft ember crackle, low, contained. NOT a
+     campfire roar. 30s+. Plays at the lantern corner while warmth
+     relights her; its presence IS the relight feedback.
+     Search: charcoal brazier, embers soft crackle, small coal fire.
+
+[S8] LANTERN PAPER (one-shot, sparse)
+     A paper lantern shifting in wind: faint paper flex/rustle with
+     perhaps a wooden creak of the bracket. 2-3 takes. Colour for
+     lantern and house-lamp screens, rare.
+     Search: paper lantern, paper rustle slow, wood bracket creak.
+
+
+=============================================================
+TIER 3 - BANKED FOR LATER WATCHES (grab if seen, no hunt)
+=============================================================
+
+[S9]  Two small hardwood blocks dropped on stone (the 擲筊 ask verb,
+      when it is built): clatter-settle, many takes.
+[S10] Big wingbeats, slow, heavy - a large bird passing once (姑獲鳥
+      is heard long before she is anything else). No cawing.
+[S11] A single water disturbance: one soft slip of something entering
+      still water without splash (水鬼). Not a fish jump.
+[S12] Wood creak, structural, slow - the covered bridge underfoot.
+[S13] Paper scraps in wind on stone (買路錢, the road money).
+
+
+=============================================================
+RECORDED LATER - NOT OPEN SOURCE (noted so nothing waits on it)
+=============================================================
+
+  The watchman's VOICE: the watch calls (一更二點...) and the one
+  greeting. A cold bored middle-aged man, Chinese. This is direction
+  and casting - Simon's lane - and blocks the mooring greeting beat.
+
+  The distant call of her name (阿秀——), 叫魂, once at the first
+  watch's edge and again at the end. The most important voice in the
+  game; cast with care. Text renders it until then.
+
+
+=============================================================
+ENGINE (Claude's side, built against placeholders if needed)
+=============================================================
+
+  Per-node ambience mix: each node declares levels for water / wind
+  / bed (the graph already knows which screens touch water). Cross-
+  fade on phase, ~1s, so walking toward the canal brings the water
+  up before the screen arrives.
+
+  The clapper scheduler reads the same watch/point engine as the
+  visual call and strikes the pattern (slow x watch, quick x point);
+  the greeting/save moment stays visual until the voice exists.
+
+  Strike variants rotate; nothing plays the same take twice running.
+
+  Drained twins: each ambience gets a processed muffled copy
+  (lowpass + level + slight detune), cross-faded by drainAmount()
+  exactly as the paintings cross-fade to their drained versions.
+
+  Files land in assets/audio/ with a manifest in src/content/ so
+  test-content can assert every referenced sound exists.
