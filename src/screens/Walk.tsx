@@ -215,15 +215,18 @@ function WorldObject({
   const live = useImage(LIVE[plate]);
   const dead = useImage(DEAD[plate]);
 
-  // MEASURED, not guessed. The bridge plate carries its own embankment
-  // at each end, and the only way it reads as part of the walkway is if
-  // that embankment lands exactly on the strip's. Its wing occupies
-  // 0.456 of the plate; the strip's embankment occupies 0.599 of its
-  // own - hence 1.31x - and the two bands are then aligned by their
-  // tops, 0.247 into the bridge and 0.314 into the strip.
+  // MEASURED, not guessed - AND REMEASURED WHEN THE PLATE CHANGED,
+  // which is the lesson of the second wrong-looking bridge: these
+  // constants describe one particular image, not bridges in general.
+  // The regenerated plate had different geometry and the old numbers
+  // hung its reflection wash below the walkway as a grey blob.
   //
-  // The first version sized this by a flat world width and stood it on
-  // a "footing", which put a bridge in the canal twice.
+  // Current plate, cropped of its below-deck reflection at 0.84h:
+  // wing band 0.410..0.957 of the plate; strip embankment 0.599 of its
+  // own, top at 0.314. scale = 0.599/0.547 = 1.095, anchored at tops.
+  //
+  // If [26] is ever regenerated again, re-run the wing measurement in
+  // docs/proof/README.txt and update these three numbers together.
   const h = band.height * scale;
   const w = live ? (h * live.width()) / live.height() : 0;
   const y = band.y + align * band.height - anchor * h;
