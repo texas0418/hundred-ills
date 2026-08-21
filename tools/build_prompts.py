@@ -133,6 +133,8 @@ LANDED = {
     "43": "screens/bridge-b.png  (asset landed, not yet wired - needs [42] first)",
     "46": "screens/junction.png",
     "48": "screens/house-lamp.png  (asset landed, not yet wired - needs canal two's banks)",
+    "51": "screens/neighbours-wall.png  (asset landed, placement in the graph pending)",
+    "52": "screens/covered-bridge.png  (asset landed early; wired when its watch comes)",
 }
 
 # (id, title, kind, note shown above the block, body)
@@ -660,6 +662,23 @@ PLATES = [
      "stone shrine niche set into a wall with a dark opening and cold "
      "ash before it, steps down to the black water. A narrow gap between "
      "houses leading away from the canal. Low mist. Deserted."),
+
+    ("45", "SCREEN - THE EAST WATER",
+     "scene",
+     "The water's edge below [42] bank east - the near bank's second\n"
+     "water screen, decided NEW rather than a [37] reuse (Simon,\n"
+     "2026-08-21). Flames render here too, so the lower half must be\n"
+     "near-black still water. Same canal as [37], one stretch east:\n"
+     "same night, same water, DIFFERENT furniture - no steps, no\n"
+     "mooring post.",
+     "Looking down a stone embankment edge to dark still canal water "
+     "that fills the lower half of the frame, composed as one complete "
+     "vertical painting. A flat stone washing slab juts over the water "
+     "at one side, worn smooth, with a wooden beating paddle left "
+     "lying on it. The water is deep near-black ink, calm, holding one "
+     "faint smudge of distant lamplight. Above, the stone edge and the "
+     "lowest courses of a whitewashed wall fading up into mist. "
+     "Deserted, no boat, no figure and no reflection of any figure."),
 
     ("50", "SCREEN - THE SECOND WATER",
      "scene",
