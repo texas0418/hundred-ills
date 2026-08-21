@@ -27,11 +27,17 @@ const refuse = move(s0, 'up');
 ok(!refuse.moved && refuse.state === s0, 'an edge with no exit refuses');
 ok(!move(s0, 'right').moved, 'no side lane at the gate - the art has none');
 
-// The walk in: turn from the gate, down the lane, along to the mooring.
-const atMooring = move(move(s0, 'down').state, 'right').state;
-ok(atMooring.nodeId === 'mooring', 'the gate lane leads to the mooring');
-ok(move(move(s0, 'down').state, 'up').state.nodeId === 'gate',
+// The walk in: turn from the gate, down the lane's foreground, and
+// out onto the mooring. The lane is a corridor - no sideways exits.
+const onLane = move(s0, 'down').state;
+ok(!move(onLane, 'right').moved && !move(onLane, 'left').moved,
+  'the gate lane has no sideways path');
+const atMooring = move(onLane, 'down').state;
+ok(atMooring.nodeId === 'mooring', 'the gate lane leads down to the mooring');
+ok(move(onLane, 'up').state.nodeId === 'gate',
   'the receding lane walks back up to the gate');
+ok(move(atMooring, 'up').state.nodeId === 'gatelane',
+  'the rising alley at the mooring returns to the lane');
 
 // Down by the water, and back up.
 const atWater = move(atMooring, 'down').state;
@@ -62,9 +68,9 @@ ok(again.state.crossed.length === 1, 'it never counts twice');
 ok(lookBack(s0).fires === 2, 'turning to look behind costs one');
 ok(lookBack({ ...s0, fires: 0 }).fires === 0, 'never below zero');
 
-// Crossing down to the far bank is also a traversal.
-const overToFar = move(onBridge, 'down');
-ok(overToFar.state.nodeId === 'farbank', 'down from the bridge is the far bank');
+// Walking the deck over the arch is also a traversal.
+const overToFar = move(onBridge, 'right');
+ok(overToFar.state.nodeId === 'farbank', 'over the deck is the far bank');
 ok(overToFar.state.crossed.includes('bridge'), 'and the crossing spends the bridge');
 
 // Warmth: the lantern corner relights, in real time, only when short.
