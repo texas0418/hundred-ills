@@ -131,8 +131,6 @@ ALREADY DONE - not repeated below
         baby-print.png
   [31] SEGMENT - THE WALKWAY WITH BRIDGE A
         seg-bridge-a.png
-  [32] SEGMENT - THE WALKWAY WITH BRIDGE B
-        seg-bridge-b.png  (right opening darkened at bake - reroll if it reads as a repair)
   [33] THE NIGHT WATER
         night-water.png
   [27] 弄口 - THE MOUTH OF A LANE  (SECOND ATTEMPT)
@@ -150,6 +148,56 @@ If one needs redoing, remove its id from LANDED and re-run.
 =============================================================
 STILL TO MAKE
 =============================================================
+
+[32] SEGMENT - THE WALKWAY WITH BRIDGE B  (REROLL)
+      Same rules as [31] - a DIFFERENT bridge, so the two read as
+      landmarks apart; 走三桥 needs bridges the player can tell apart and
+      name on paper.
+      
+      WHY THE REROLL: the first attempt painted the LEFT opening dark
+      and left the RIGHT one bare paper. It shipped with a bake-time
+      patch, which reads as a repair. The rejection rule is per opening:
+      look at EACH opening separately, and if any one of them is not
+      near-black, reject the image and generate again.
+
+--------------------------------------------------------------  copy from here
+Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
+of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
+wet blooming edges, visible brush direction, the paper showing
+through. Large areas of the paper left completely unpainted to stand
+for mist, water and sky. Muted and drained palette - ink black, warm
+grey, pale ochre, washed-out green. One small area of vermilion red
+and no other saturated colour. Flat frontal composition, no camera
+perspective, no photographic realism. Quiet, plain, unspectacular.
+
+A long stone canal embankment with a flagged lane along its top,
+running the full width of the image and cut off by both the left and
+right edges at the same height. In the middle, the lane rises over a
+low flat-decked stone bridge carried on two short square piers, with
+a plain stone parapet - an older, squatter bridge than an arched
+one, all painted as one continuous scene. The narrow openings
+between the piers are filled with deep near-black ink shadow - EVERY
+opening, all of them equally dark; nothing is visible through any of
+them. Deserted, no boat in this stretch. Seen straight on from
+directly across the water, as flat as a stage backdrop, with no
+perspective and no vanishing point, everything at the same distance.
+Cut off at both the left and right edges at the same height so the
+image could be repeated end to end without a join showing. Isolated
+on bare paper.
+
+Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
+leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
+gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
+concept art, 3D render, anime, oversaturated, neon, HDR, glow,
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
+--------------------------------------------------------------  to here
 
 [29] 弄 - THE LANE GROUND  ** DO NOT GENERATE **
       THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.
