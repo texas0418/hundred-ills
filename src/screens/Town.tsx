@@ -38,23 +38,34 @@ import { PAPER, SOOT } from '../palette';
  * after the verdict.
  */
 
-const SCREENS = [
+type Exit = number | null;
+interface Node {
+  id: string;
+  src: number;
+  /** left/right walk the bank; up steps INTO the town, down steps back
+   *  toward the water - the depth verb of 108, made discrete. */
+  exits: { left: Exit; right: Exit; up: Exit; down: Exit };
+}
+
+const SCREENS: Node[] = [
   {
     id: 'mooring',
     src: require('../../assets/screens/mooring.png'),
-    exits: { left: null as number | null, right: 1 },
+    exits: { left: null, right: 1, up: null, down: null },
   },
   {
     id: 'bridge',
     src: require('../../assets/screens/bridge.png'),
-    exits: { left: 0 as number | null, right: 2 as number | null },
+    exits: { left: 0, right: null, up: 2, down: null },
   },
   {
+    // The dark passage in this painting is where 'up' leads: she steps
+    // INTO the picture she was looking at.
     id: 'alley',
     src: require('../../assets/screens/alley.png'),
-    exits: { left: 1 as number | null, right: null },
+    exits: { left: null, right: null, up: null, down: 1 },
   },
-] as const;
+];
 
 /** The phase: leaving drifts a quarter-screen and thins; arriving
  *  comes the last sixth of the way and solidifies. Both directions on
@@ -62,7 +73,7 @@ const SCREENS = [
 const PHASE_MS = 640;
 
 function ScreenLayer({
-  idx, src, curIdx, fromIdx, prog, dir, width, height,
+  idx, src, curIdx, fromIdx, prog, dir, axis, width, height,
 }: {
   idx: number;
   src: number;
@@ -70,6 +81,8 @@ function ScreenLayer({
   fromIdx: SharedValue<number>;
   prog: SharedValue<number>;
   dir: SharedValue<number>;
+  /** 0 = horizontal phase, 1 = vertical (the depth step). */
+  axis: SharedValue<number>;
   width: number;
   height: number;
 }) {
@@ -85,13 +98,13 @@ function ScreenLayer({
     : null;
 
   const transform = useDerivedValue(() => {
-    let dx = 0;
+    let d = 0;
     if (idx === curIdx.value && fromIdx.value >= 0) {
-      dx = dir.value * (1 - prog.value) * width * 0.16;
+      d = dir.value * (1 - prog.value) * width * 0.16;
     } else if (idx === fromIdx.value) {
-      dx = -dir.value * prog.value * width * 0.28;
+      d = -dir.value * prog.value * width * 0.28;
     }
-    return [{ translateX: dx }];
+    return axis.value === 1 ? [{ translateY: d }] : [{ translateX: d }];
   }, [idx, width]);
 
   const opacity = useDerivedValue(() => {
@@ -128,6 +141,7 @@ const TownCanvas = memo(function TownCanvas({
     fromIdx: SharedValue<number>;
     prog: SharedValue<number>;
     dir: SharedValue<number>;
+    axis: SharedValue<number>;
   };
 }) {
   return (
@@ -142,6 +156,7 @@ const TownCanvas = memo(function TownCanvas({
           fromIdx={shared.fromIdx}
           prog={shared.prog}
           dir={shared.dir}
+          axis={shared.axis}
           width={width}
           height={height}
         />
@@ -156,6 +171,7 @@ export function Town() {
   const fromIdx = useSharedValue(-1);
   const prog = useSharedValue(1);
   const dir = useSharedValue(1);
+  const axis = useSharedValue(0);
   const [, setNode] = useState(0);
   const busy = useRef(false);
 
@@ -164,10 +180,10 @@ export function Town() {
   }, []);
 
   const move = useCallback(
-    (toRight: boolean) => {
+    (way: 'left' | 'right' | 'up' | 'down') => {
       if (busy.current) return;
       const cur = SCREENS[curIdx.value];
-      const to = toRight ? cur.exits.right : cur.exits.left;
+      const to = cur.exits[way];
       if (to === null) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
         return;
@@ -176,7 +192,10 @@ export function Town() {
       Haptics.selectionAsync().catch(() => {});
       fromIdx.value = curIdx.value;
       curIdx.value = to;
-      dir.value = toRight ? 1 : -1;
+      // Swiping up moves INTO the picture, so the leaving screen rises
+      // away; the arriving one comes up from beneath. Down mirrors.
+      axis.value = way === 'left' || way === 'right' ? 0 : 1;
+      dir.value = way === 'right' || way === 'down' ? 1 : -1;
       setNode(to);
       prog.value = 0;
       prog.value = withTiming(
@@ -201,8 +220,14 @@ export function Town() {
       .minDistance(24)
       .onEnd((e) => {
         'worklet';
-        if (Math.abs(e.translationX) < 48) return;
-        runOnJS(move)(e.translationX < 0);
+        const ax = Math.abs(e.translationX);
+        const ay = Math.abs(e.translationY);
+        if (Math.max(ax, ay) < 48) return;
+        if (ay > ax * 1.2) {
+          runOnJS(move)(e.translationY < 0 ? 'up' : 'down');
+        } else if (ax > ay * 1.2) {
+          runOnJS(move)(e.translationX < 0 ? 'right' : 'left');
+        }
       }),
   );
 
@@ -213,11 +238,11 @@ export function Town() {
           <TownCanvas
             width={width}
             height={height}
-            shared={{ curIdx, fromIdx, prog, dir }}
+            shared={{ curIdx, fromIdx, prog, dir, axis }}
           />
         </View>
       </GestureDetector>
-      <Text style={styles.stamp}>b40</Text>
+      <Text style={styles.stamp}>b41</Text>
     </GestureHandlerRootView>
   );
 }
