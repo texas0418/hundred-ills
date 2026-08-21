@@ -22,13 +22,16 @@ ok(!node('bridge').warm, 'warmth has moved off the bridge');
 const s0 = beginNight();
 ok(s0.nodeId === 'gate' && s0.fires === 3, 'the night begins at the gate, alive');
 
-// Refusal is not movement.
-const refuse = move(s0, 'left');
+// Refusal is not movement. The gate is shut: no forward, no sideways.
+const refuse = move(s0, 'up');
 ok(!refuse.moved && refuse.state === s0, 'an edge with no exit refuses');
+ok(!move(s0, 'right').moved, 'no side lane at the gate - the art has none');
 
-// The walk in: gate, the lane under the wall, the mooring.
-const atMooring = move(move(s0, 'right').state, 'right').state;
+// The walk in: turn from the gate, down the lane, along to the mooring.
+const atMooring = move(move(s0, 'down').state, 'right').state;
 ok(atMooring.nodeId === 'mooring', 'the gate lane leads to the mooring');
+ok(move(move(s0, 'down').state, 'up').state.nodeId === 'gate',
+  'the receding lane walks back up to the gate');
 
 // Down by the water, and back up.
 const atWater = move(atMooring, 'down').state;

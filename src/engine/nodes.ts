@@ -33,11 +33,18 @@ export interface TownNode {
 export const NODES: Record<string, TownNode> = {
   gate: {
     id: 'gate',
-    exits: { right: 'gatelane' },
+    // The painting licenses ONE exit: the flagged lane running from
+    // the gate to the foreground. The gate is shut; the only move is
+    // to turn from it and walk back down the lane. The map drew this
+    // edge left/right, but the art won (DECISIONS 109) - the
+    // generation gave no side lane.
+    exits: { down: 'gatelane' },
   },
   gatelane: {
     id: 'gatelane',
-    exits: { left: 'gate', right: 'mooring' },
+    // The lane recedes along the wall INTO the picture - that is the
+    // way to the gate. Swiping up walks it.
+    exits: { up: 'gate', right: 'mooring' },
   },
   mooring: {
     id: 'mooring',
