@@ -39,9 +39,22 @@ import {
 } from '../engine/nodes';
 import { CHAR_MS, holdMs, linesFor, type Line, type Trigger } from '../content/lines';
 
+/** Ink with a glowing paper outline: the same text stacked three
+ *  deep - a wide soft white glow, a tight white edge, and the soot
+ *  glyph on top. One textShadow alone was not enough against the
+ *  paintings (Simon, b50). */
+function GlowText({ text, base }: { text: string; base: object }) {
+  return (
+    <View>
+      <Text style={[base, styles.glowWide]}>{text}</Text>
+      <Text style={[base, styles.glowTight, styles.stacked]}>{text}</Text>
+      <Text style={[base, styles.inkTop, styles.stacked]}>{text}</Text>
+    </View>
+  );
+}
+
 /** A spoken line: the characters settle one by one like a brush
- *  laying them down, then the English breathes in beneath. A soft
- *  paper halo keeps the ink legible on any painting without a box. */
+ *  laying them down, then the English breathes in beneath. */
 function LineView({ line, top }: { line: Line; top: number }) {
   const chars = line.zh.split('');
   return (
@@ -53,21 +66,19 @@ function LineView({ line, top }: { line: Line; top: number }) {
     >
       <View style={styles.lineZhRow}>
         {chars.map((ch, i) => (
-          <Animated.Text
+          <Animated.View
             key={`${line.id}-${i}`}
             entering={FadeIn.delay(i * CHAR_MS).duration(560)}
-            style={styles.lineZh}
           >
-            {ch}
-          </Animated.Text>
+            <GlowText text={ch} base={styles.lineZh} />
+          </Animated.View>
         ))}
       </View>
-      <Animated.Text
+      <Animated.View
         entering={FadeIn.delay(chars.length * CHAR_MS + 320).duration(800)}
-        style={styles.lineEn}
       >
-        {line.en}
-      </Animated.Text>
+        <GlowText text={line.en} base={styles.lineEn} />
+      </Animated.View>
     </Animated.View>
   );
 }
@@ -523,7 +534,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b50</Text>
+      <Text style={styles.stamp}>b51</Text>
     </GestureHandlerRootView>
   );
 }
@@ -541,17 +552,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center',
     maxWidth: 340,
   },
-  lineZh: {
-    color: SOOT, fontSize: 23, lineHeight: 34, letterSpacing: 3,
-    textShadowColor: 'rgba(243,237,224,0.95)',
-    textShadowOffset: { width: 0, height: 0 }, textShadowRadius: 9,
-  },
+  lineZh: { fontSize: 23, lineHeight: 34, letterSpacing: 3 },
   lineEn: {
-    color: SOOT, fontSize: 14, lineHeight: 21, textAlign: 'center',
-    opacity: 0.82, maxWidth: 330, marginTop: 7,
-    textShadowColor: 'rgba(243,237,224,0.9)',
-    textShadowOffset: { width: 0, height: 0 }, textShadowRadius: 7,
+    fontSize: 14, lineHeight: 21, textAlign: 'center',
+    maxWidth: 330, marginTop: 7,
   },
+  stacked: { position: 'absolute', top: 0, left: 0, right: 0 },
+  glowWide: {
+    color: 'rgba(248,243,231,0.95)',
+    textShadowColor: 'rgba(248,243,231,0.9)',
+    textShadowOffset: { width: 0, height: 0 }, textShadowRadius: 12,
+  },
+  glowTight: {
+    color: 'rgba(248,243,231,1)',
+    textShadowColor: 'rgba(248,243,231,1)',
+    textShadowOffset: { width: 0, height: 0 }, textShadowRadius: 3,
+  },
+  inkTop: { color: SOOT },
   call: { position: 'absolute', top: 54, left: 0, right: 0, alignItems: 'center' },
   callLabel: { color: SOOT, fontSize: 26, letterSpacing: 6, opacity: 0.75 },
   strikes: { flexDirection: 'row', alignItems: 'center', marginTop: 12, gap: 7 },
