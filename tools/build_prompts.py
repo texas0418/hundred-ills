@@ -449,6 +449,48 @@ PLATES = [
      "door. Black tile eaves along the top edge. The upper quarter is "
      "bare paper. Deserted, nobody about."),
 
+    ("34", "SCREEN - THE BRIDGE AT NIGHT  (PROOF 1 of 2)",
+     "scene",
+     "DECISIONS 109: the unit of art is now the whole SCREEN, judged as\n"
+     "a picture someone would hang. This is not a plate and not a strip:\n"
+     "it is the entire view, composed - water, bank, bridge, houses,\n"
+     "mist, sky - in ONE painting. Fill the frame edge to edge; the 留白\n"
+     "lives INSIDE the composition as mist and water, not as empty\n"
+     "margin around a band of art.\n"
+     "\n"
+     "PORTRAIT. Set the aspect control to 9:16 if it exists; otherwise\n"
+     "generate square and compose for a tall centre.\n"
+     "\n"
+     "Generate [34] and [35] in ONE session so they are the same night.",
+     "A night view of a Jiangnan water town canal, composed as one "
+     "complete vertical painting. In the foreground the dark still canal "
+     "water crosses the bottom of the frame, holding broken reflections. "
+     "Above it a stone embankment with a flagged lane, and a low arched "
+     "stone footbridge crossing a side channel, the space beneath its arch "
+     "filled with deep near-black shadow. One small red paper lantern on a "
+     "post beside the bridge, its light smudged in the water. Behind, a "
+     "row of whitewashed houses with black tile roofs, softening into mist "
+     "toward the top of the frame. Deep winter, deserted, one empty moored "
+     "boat. The whole frame is painted: mist and night fill what stone and "
+     "water do not."),
+
+    ("35", "SCREEN - ALONG THE BANK  (PROOF 2 of 2)",
+     "scene",
+     "The screen one step along the bank from [34] - same night, same\n"
+     "palette, same session. DIFFERENT composition: no bridge here. The\n"
+     "two must feel like neighbouring pages of one book, not tiles of\n"
+     "one image - nothing needs to line up between them, they are joined\n"
+     "by a phase transition, never by an edge.",
+     "A night view of a Jiangnan water town canal, composed as one "
+     "complete vertical painting. Dark still water low in the frame, a "
+     "stone embankment with worn steps descending to a small mooring, a "
+     "single empty flat boat tied up. Above, whitewashed houses with black "
+     "tile roofs close over a narrow gap where an alley leads away into "
+     "darkness, one warm lamplit window high in a wall. Mist takes the "
+     "rooflines toward the top of the frame. Deep winter, deserted. The "
+     "whole frame is painted: mist and night fill what stone and water do "
+     "not."),
+
     ("29", "弄 - THE LANE GROUND  ** DO NOT GENERATE **",
      "plane",
      "THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.\n"
