@@ -143,6 +143,24 @@ ALREADY DONE - not repeated below
         screens/bridge.png  (the proof screen, accepted)
   [35] SCREEN - ALONG THE BANK  (PROOF 2 of 2)
         screens/mooring.png + screens/alley.png (bonus variant landed too)
+  [36] SCREEN - THE CITY GATE
+        screens/gate.png  (text panels flanked the raw; cropped out by column)
+  [37] SCREEN - THE WATER'S EDGE
+        screens/water.png
+  [38] SCREEN - UNDER THE LANTERN
+        screens/lantern.png
+  [39] SCREEN - DEEPER IN THE ALLEY
+        screens/alley-deep.png
+  [40] SCREEN - THE FAR BANK
+        screens/farbank.png
+  [41] SCREEN - THE GATE LANE
+        screens/gatelane.png
+  [43] SCREEN - BRIDGE B, THE FLAT BRIDGE
+        screens/bridge-b.png  (asset landed, not yet wired - needs [42] first)
+  [46] SCREEN - THE ALLEY JUNCTION
+        screens/junction.png
+  [48] SCREEN - THE HOUSE WITH THE LAMP
+        screens/house-lamp.png  (asset landed, not yet wired - needs canal two's banks)
   [30] THE SECOND BANK
         canal-far-b.png
   [24] WILLOW BRANCHES - NEAR OVERLAY
@@ -154,234 +172,6 @@ If one needs redoing, remove its id from LANDED and re-run.
 =============================================================
 STILL TO MAKE
 =============================================================
-
-[36] SCREEN - THE CITY GATE
-      The game's FIRST screen: where she touches the bronze studs (摸釘)
-      in the opening five minutes. Full-frame vertical painting, same
-      rules as the accepted screens: whole frame painted, mist and night
-      filling what stone does not.
-      EXITS RULE (DECISIONS 109): the way onward must be VISIBLE - the
-      lane leaving the gate to one side.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night view of a walled Jiangnan town gate seen from just outside,
-composed as one complete vertical painting. A heavy closed wooden
-gate studded with rows of round bronze nails, set in a plain stone
-gatehouse. A flagged lane runs from the foreground to the gate and
-away along the wall to the right, wet with mist. One small red
-lantern by the gate arch. Bare winter willow to one side. Mist takes
-the wall's top and the sky. Deserted. Seen straight on and flat,
-with no perspective and no vanishing point. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[37] SCREEN - THE WATER'S EDGE
-      The reflection screen: swiping down by the water arrives HERE, and
-      her flames render on this painting. The lower half must be near-
-      black still water for the vermilion to read.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-Looking down a stone embankment edge to dark still canal water that
-fills the lower half of the frame, composed as one complete vertical
-painting. Worn steps enter the water at one side. The water is deep
-near-black ink, calm, holding one faint smudge of distant lamplight.
-Above, the stone edge, a mooring post with rope, and the lowest
-courses of a whitewashed wall fading up into mist. Deserted, no
-boat, no figure and no reflection of any figure. Seen straight on
-and flat, with no perspective and no vanishing point. Isolated on
-bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[38] SCREEN - UNDER THE LANTERN
-      The relight screen - the warm place on the bank. Warmth must READ:
-      this is the one screen allowed to feel kind.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night corner of a Jiangnan lane where a red paper lantern hangs
-from a wooden post bracket, its warm light pooling on wet flagstones
-and up a whitewashed wall, composed as one complete vertical
-painting. A small shuttered stall counter under the lantern, a
-bench, a stack of baskets. The lane continues into darkness both
-left and right. Mist above the tiled eaves. Deserted. Seen straight
-on and flat, with no perspective and no vanishing point. Isolated on
-bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[39] SCREEN - DEEPER IN THE ALLEY
-      What the accepted alley screen leads UP to: the alley's far end.
-      Exits visible: the passage back (down) and a turn deeper (up or a
-      side). This is the screen where the town starts pressing in.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-The narrow end of a Jiangnan alley at night, walls close on both
-sides, composed as one complete vertical painting. Wet flagstones, a
-shallow drain channel, high shuttered windows, one door recessed in
-shadow. The alley bends out of sight ahead where the dark thickens.
-A thin strip of misted sky far above between the eaves. Deserted.
-Seen straight on and flat, with no perspective and no vanishing
-point. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[40] SCREEN - THE FAR BANK
-      Across the first bridge: the other side of the canal, for when the
-      rite pushes her over. Same night, one more red accent only.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night view along the far bank of a Jiangnan canal, composed as one
-complete vertical painting. The stone embankment runs into the frame
-with a flagged lane above it, a row of darker, meaner houses with
-sagging tile roofs, one lit window high up. Across the water, faint,
-the roofline of the side she came from dissolving into mist. One red
-scrap on a doorpost. Deserted, one moored boat. Seen straight on and
-flat, with no perspective and no vanishing point. Isolated on bare
-paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[41] SCREEN - THE GATE LANE
-      Between the city gate [36] and the mooring: the first walking
-      screen of the game. Exits visible: the gate one way, the open
-      bank the other.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night view along a flagged lane just inside a Jiangnau town wall,
-composed as one complete vertical painting. The lane runs from the
-foreground away to both sides, the stone wall high on one hand with
-mist taking its top, low house-backs on the other. A single bare
-willow. Wet stone catching faint light. Deserted. Seen straight on
-and flat, with no perspective and no vanishing point. Isolated on
-bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
 
 [42] SCREEN - THE BANK, EAST STRETCH
       The stretch of her bank past bridge A, before bridge B. A plain
@@ -405,45 +195,6 @@ narrow gap between two houses showing deeper darkness. A stack of
 crab pots by a doorway, a coiled rope. Mist over the water and
 eaves. Deserted. Seen straight on and flat, with no perspective and
 no vanishing point. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[43] SCREEN - BRIDGE B, THE FLAT BRIDGE
-      The second of the three rite bridges, AS A SCREEN. Distinct from
-      bridge A's arch: squat, flat-decked, older. The space under the
-      deck near-black - nothing visible through it. Exits: the lane
-      continuing both ways over it.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night view of a low flat-decked stone slab bridge carrying a
-flagged lane over a narrow side channel of a Jiangnan canal,
-composed as one complete vertical painting. A plain stone parapet,
-one short square pier, the single opening beneath the deck filled
-with deep near-black shadow. Dark water below holding a faint
-reflection. Houses rising into mist behind. Deserted. Seen straight
-on and flat, with no perspective and no vanishing point. Isolated on
-bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
@@ -496,43 +247,6 @@ crowd, text, characters, calligraphy, inscription, seal, signature,
 watermark, frame, border.
 --------------------------------------------------------------  to here
 
-[46] SCREEN - THE ALLEY JUNCTION
-      Where the deep alley [39] opens toward the second canal: the first
-      true CHOICE in the inland dark. Exits visible three ways - back
-      down the alley, and onward left and right along a cross-lane.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-The meeting of two narrow Jiangnan alleys at night, composed as one
-complete vertical painting. The near alley opens into a slightly
-wider cross-lane running left and right, walls close and high, wet
-flagstones, a stone corner post worn round. One paper charm pasted
-at the corner, pale not red. Thin mist between the eaves, a strip of
-night sky. Deserted. Seen straight on and flat, with no perspective
-and no vanishing point. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
 [47] SCREEN - SECOND CANAL, WEST
       The inland canal's bank - the town behind the town. Meaner and
       closer than her own bank; the houses lean.
@@ -554,47 +268,6 @@ laundry poles crossing overhead with nothing on them. A stone edge
 with no rail. Mist low over the water. Deserted. Seen straight on
 and flat, with no perspective and no vanishing point. Isolated on
 bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[48] SCREEN - THE HOUSE WITH THE LAMP
-      STORY SCREEN, planted in the first watch and never remarked on:
-      her own house, though the game never says so. ONE window lamplit -
-      warm, steady, the only true warmth in the district that is not
-      the lantern. She passes; the player can never enter here. The
-      composition should make the lit window impossible to miss and
-      impossible to read as important.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night view of a modest Jiangnan house front on an inland canal
-lane, composed as one complete vertical painting. Whitewashed wall,
-a plain closed double door with a fresh pair of door god prints
-pasted bright and uncreased, and ONE small window above glowing warm
-lamplight into the mist. The lane passes left and right. A bare tree
-beside the door. Everything else cold, dark, shuttered. Deserted.
-Seen straight on and flat, with no perspective and no vanishing
-point. Isolated on bare paper.
 
 Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
 leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
