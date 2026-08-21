@@ -115,6 +115,8 @@ LANDED = {
     "31": "seg-bridge-a.png",
     "32": "seg-bridge-b.png  (third generation, single opening - the two-opening form failed twice)",
     "33": "night-water.png",
+    "34": "screens/bridge.png  (the proof screen, accepted)",
+    "35": "screens/mooring.png + screens/alley.png (bonus variant landed too)",
     "25": "baby-print.png",
     # [29] deliberately NOT here. The plate exists and is unused - the
     # prompt asked for something a side-on game cannot show. Left out of
@@ -490,6 +492,69 @@ PLATES = [
      "rooflines toward the top of the frame. Deep winter, deserted. The "
      "whole frame is painted: mist and night fill what stone and water do "
      "not."),
+
+    ("36", "SCREEN - THE CITY GATE",
+     "scene",
+     "The game's FIRST screen: where she touches the bronze studs (摸釘)\n"
+     "in the opening five minutes. Full-frame vertical painting, same\n"
+     "rules as the accepted screens: whole frame painted, mist and night\n"
+     "filling what stone does not.\n"
+     "EXITS RULE (DECISIONS 109): the way onward must be VISIBLE - the\n"
+     "lane leaving the gate to one side.",
+     "A night view of a walled Jiangnan town gate seen from just outside, "
+     "composed as one complete vertical painting. A heavy closed wooden "
+     "gate studded with rows of round bronze nails, set in a plain stone "
+     "gatehouse. A flagged lane runs from the foreground to the gate and "
+     "away along the wall to the right, wet with mist. One small red "
+     "lantern by the gate arch. Bare winter willow to one side. Mist takes "
+     "the wall's top and the sky. Deserted."),
+
+    ("37", "SCREEN - THE WATER'S EDGE",
+     "scene",
+     "The reflection screen: swiping down by the water arrives HERE, and\n"
+     "her flames render on this painting. The lower half must be near-\n"
+     "black still water for the vermilion to read.",
+     "Looking down a stone embankment edge to dark still canal water that "
+     "fills the lower half of the frame, composed as one complete vertical "
+     "painting. Worn steps enter the water at one side. The water is deep "
+     "near-black ink, calm, holding one faint smudge of distant lamplight. "
+     "Above, the stone edge, a mooring post with rope, and the lowest "
+     "courses of a whitewashed wall fading up into mist. Deserted, no "
+     "boat, no figure and no reflection of any figure."),
+
+    ("38", "SCREEN - UNDER THE LANTERN",
+     "scene",
+     "The relight screen - the warm place on the bank. Warmth must READ:\n"
+     "this is the one screen allowed to feel kind.",
+     "A night corner of a Jiangnan lane where a red paper lantern hangs "
+     "from a wooden post bracket, its warm light pooling on wet flagstones "
+     "and up a whitewashed wall, composed as one complete vertical "
+     "painting. A small shuttered stall counter under the lantern, a "
+     "bench, a stack of baskets. The lane continues into darkness both "
+     "left and right. Mist above the tiled eaves. Deserted."),
+
+    ("39", "SCREEN - DEEPER IN THE ALLEY",
+     "scene",
+     "What the accepted alley screen leads UP to: the alley's far end.\n"
+     "Exits visible: the passage back (down) and a turn deeper (up or a\n"
+     "side). This is the screen where the town starts pressing in.",
+     "The narrow end of a Jiangnan alley at night, walls close on both "
+     "sides, composed as one complete vertical painting. Wet flagstones, "
+     "a shallow drain channel, high shuttered windows, one door recessed "
+     "in shadow. The alley bends out of sight ahead where the dark "
+     "thickens. A thin strip of misted sky far above between the eaves. "
+     "Deserted."),
+
+    ("40", "SCREEN - THE FAR BANK",
+     "scene",
+     "Across the first bridge: the other side of the canal, for when the\n"
+     "rite pushes her over. Same night, one more red accent only.",
+     "A night view along the far bank of a Jiangnan canal, composed as "
+     "one complete vertical painting. The stone embankment runs into the "
+     "frame with a flagged lane above it, a row of darker, meaner houses "
+     "with sagging tile roofs, one lit window high up. Across the water, "
+     "faint, the roofline of the side she came from dissolving into mist. "
+     "One red scrap on a doorpost. Deserted, one moored boat."),
 
     ("29", "弄 - THE LANE GROUND  ** DO NOT GENERATE **",
      "plane",
