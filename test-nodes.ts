@@ -73,10 +73,25 @@ ok(again.state.crossed.length === 1, 'it never counts twice');
 ok(lookBack(s0).fires === 2, 'turning to look behind costs one');
 ok(lookBack({ ...s0, fires: 0 }).fires === 0, 'never below zero');
 
-// Walking the deck over the arch is also a traversal.
-const overToFar = move(onBridge, 'right');
-ok(overToFar.state.nodeId === 'farbank', 'over the deck is the far bank');
-ok(overToFar.state.crossed.includes('bridge'), 'and the crossing spends the bridge');
+// Walking the deck onward or dropping to the far bank both traverse.
+const overEast = move(onBridge, 'right');
+ok(overEast.state.nodeId === 'bank-east', 'over the deck the bank continues east');
+ok(overEast.state.crossed.includes('bridge'), 'and passing over spends the bridge');
+const downToFar = move(onBridge, 'down');
+ok(downToFar.state.nodeId === 'farbank', 'down past the arch is the far bank');
+ok(downToFar.state.crossed.includes('bridge'), 'that way spends it too');
+
+// Bridge B is the second of the night's three.
+const pastB = move(move(overEast.state, 'right').state, 'right');
+ok(pastB.state.nodeId === 'bank-end', 'over bridge B the bank runs out');
+ok(pastB.state.crossed.length === 2, 'two of the three bridges spent');
+ok(bridgesRemaining(pastB.state) === 1, 'the covered bridge remains');
+
+// Canal two closes into a ring: junction, lantern, east, the house,
+// west, junction.
+let ring: TownState = { ...s0, nodeId: 'junction' };
+for (const way of ['left', 'left', 'left', 'left', 'left'] as const) ring = move(ring, way).state;
+ok(ring.nodeId === 'junction', 'canal two is a loop and it closes');
 
 // Warmth: the lantern corner relights, in real time, only when short.
 let w: TownState = { ...s0, nodeId: 'lantern', fires: 1 };
