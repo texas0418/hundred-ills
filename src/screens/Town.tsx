@@ -39,16 +39,34 @@ import {
 } from '../engine/nodes';
 import { CHAR_MS, holdMs, linesFor, type Line, type Trigger } from '../content/lines';
 
-/** Ink with a glowing paper outline: the same text stacked three
- *  deep - a wide soft white glow, a tight white edge, and the soot
- *  glyph on top. One textShadow alone was not enough against the
- *  paintings (Simon, b50). */
-function GlowText({ text, base }: { text: string; base: object }) {
+/** Ink with a glowing paper outline: a wide soft halo underneath,
+ *  four offset paper copies forming a true outline, and the soot
+ *  glyph on top. Shadows alone were not enough against the paintings
+ *  (Simon, b50 and b51). Font scaling is capped: at Simon's max text
+ *  size the uncapped lines ran off the page - these are painted
+ *  words on art, not body text, so they grow a little and no more. */
+const OUTLINE = [
+  { x: -1.5, y: 0 }, { x: 1.5, y: 0 }, { x: 0, y: -1.5 }, { x: 0, y: 1.5 },
+];
+function GlowText({ text, base, cap }: { text: string; base: object; cap: number }) {
   return (
     <View>
-      <Text style={[base, styles.glowWide]}>{text}</Text>
-      <Text style={[base, styles.glowTight, styles.stacked]}>{text}</Text>
-      <Text style={[base, styles.inkTop, styles.stacked]}>{text}</Text>
+      <Text style={[base, styles.glowWide]} maxFontSizeMultiplier={cap}>
+        {text}
+      </Text>
+      {OUTLINE.map((o) => (
+        <Text
+          key={`${o.x},${o.y}`}
+          style={[base, styles.outline, styles.stacked,
+            { transform: [{ translateX: o.x }, { translateY: o.y }] }]}
+          maxFontSizeMultiplier={cap}
+        >
+          {text}
+        </Text>
+      ))}
+      <Text style={[base, styles.inkTop, styles.stacked]} maxFontSizeMultiplier={cap}>
+        {text}
+      </Text>
     </View>
   );
 }
@@ -70,14 +88,14 @@ function LineView({ line, top }: { line: Line; top: number }) {
             key={`${line.id}-${i}`}
             entering={FadeIn.delay(i * CHAR_MS).duration(560)}
           >
-            <GlowText text={ch} base={styles.lineZh} />
+            <GlowText text={ch} base={styles.lineZh} cap={1.2} />
           </Animated.View>
         ))}
       </View>
       <Animated.View
         entering={FadeIn.delay(chars.length * CHAR_MS + 320).duration(800)}
       >
-        <GlowText text={line.en} base={styles.lineEn} />
+        <GlowText text={line.en} base={styles.lineEn} cap={1.35} />
       </Animated.View>
     </Animated.View>
   );
@@ -356,6 +374,9 @@ export function Town() {
     const next = lineQueue.current.shift() ?? null;
     setLine(next);
     if (next) {
+      // A once-line counts as heard when it is SHOWN, not when it is
+      // queued - a line swept away by a move can still play later.
+      if (next.once) seen.current.add(next.id);
       lineTimer.current = setTimeout(show, holdMs(next));
     } else {
       speaking.current = false;
@@ -364,9 +385,11 @@ export function Town() {
 
   const speak = useCallback(
     (nodeId: string, trigger: Trigger) => {
-      const due = linesFor(nodeId, trigger, seen.current);
+      const pending = new Set(lineQueue.current.map((l) => l.id));
+      const due = linesFor(nodeId, trigger, seen.current).filter(
+        (l) => !pending.has(l.id),
+      );
       if (!due.length) return;
-      for (const l of due) seen.current.add(l.id);
       lineQueue.current.push(...due);
       if (!speaking.current) {
         speaking.current = true;
@@ -375,6 +398,16 @@ export function Town() {
     },
     [showNext],
   );
+
+  // Her thoughts belong to the place she is standing. Moving sweeps
+  // the current line and everything queued - the wall's line must
+  // never play over the house (Simon, b51).
+  const hushOnMove = useCallback(() => {
+    if (lineTimer.current) clearTimeout(lineTimer.current);
+    lineQueue.current = [];
+    speaking.current = false;
+    setLine(null);
+  }, []);
 
   useEffect(
     () => () => {
@@ -399,6 +432,7 @@ export function Town() {
         return;
       }
       busy.current = true;
+      hushOnMove();
       if (m.costAFlame) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {});
       } else {
@@ -516,7 +550,7 @@ export function Town() {
       ) : null}
 
       {line ? (
-        <LineView key={line.id} line={line} top={height * (line.at ?? 0.76)} />
+        <LineView key={line.id} line={line} top={height * (line.at ?? 0.72)} />
       ) : null}
 
       {watchmanCalling(state) ? (
@@ -534,7 +568,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b51</Text>
+      <Text style={styles.stamp}>b52</Text>
     </GestureHandlerRootView>
   );
 }
@@ -560,13 +594,13 @@ const styles = StyleSheet.create({
   stacked: { position: 'absolute', top: 0, left: 0, right: 0 },
   glowWide: {
     color: 'rgba(248,243,231,0.95)',
-    textShadowColor: 'rgba(248,243,231,0.9)',
-    textShadowOffset: { width: 0, height: 0 }, textShadowRadius: 12,
+    textShadowColor: 'rgba(248,243,231,0.95)',
+    textShadowOffset: { width: 0, height: 0 }, textShadowRadius: 14,
   },
-  glowTight: {
+  outline: {
     color: 'rgba(248,243,231,1)',
-    textShadowColor: 'rgba(248,243,231,1)',
-    textShadowOffset: { width: 0, height: 0 }, textShadowRadius: 3,
+    textShadowColor: 'rgba(248,243,231,0.9)',
+    textShadowOffset: { width: 0, height: 0 }, textShadowRadius: 2,
   },
   inkTop: { color: SOOT },
   call: { position: 'absolute', top: 54, left: 0, right: 0, alignItems: 'center' },
