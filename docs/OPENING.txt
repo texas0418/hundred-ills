@@ -34,7 +34,13 @@ PROPOSED: two voices only, and the game never explains the difference.
   the way a tired practical woman talks to herself on an errand. She
   never describes what the player can see. She only says things the
   painting cannot: what she intends, what she remembers, what she
-  refuses to think about. English only - it is interior, not text.
+  refuses to think about. AMENDED after b49 on the device (Simon,
+  2026-08-21): her voice is ALSO set characters-first with the
+  English beneath, the 35 pattern everywhere - the original
+  English-only clause read poorly on the paintings and the
+  presentation now settles character by character, like a brush.
+  What still separates the voices is register, not script: the
+  world quotes, she thinks.
 
   There is NO third voice. No narrator, no "you feel", no stage
   directions. If neither the world nor she would say it, it is not

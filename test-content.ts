@@ -12,18 +12,21 @@ for (const l of LINES) {
 // Ids are unique - the once-tracking depends on it.
 ok(new Set(LINES.map((l) => l.id)).size === LINES.length, 'line ids are unique');
 
-// The two voices and no third (OPENING, ratified 2026-08-21):
-// her voice is interior English and carries no translation block;
-// the world's voice is quotation and must be bilingual.
+// Both voices are bilingual, characters first (DECISIONS 35; the
+// her-voice English-only clause was amended by Simon after b49).
+// 繁體 only - a simplified character would break the period claim.
 for (const l of LINES) {
-  if (l.voice === 'her') ok(l.zh === undefined, `${l.id}: her voice has no zh block`);
-  if (l.voice === 'world') ok(!!l.zh, `${l.id}: the world speaks characters first`);
+  ok(l.zh.length > 0, `${l.id} speaks characters first`);
+  ok(!/[们还点着条钉个国过对讲长张爱见叶写读]/.test(l.zh),
+    `${l.id} stays in 繁體`);
 }
 
-// Her voice stays terse: a few short sentences, never a paragraph.
+// Her voice stays terse in both scripts: a few short sentences,
+// never a paragraph.
 for (const l of LINES) {
   if (l.voice !== 'her') continue;
   ok(l.en.length <= 110, `${l.id} stays under 110 characters`);
+  ok(l.zh.length <= 32, `${l.id} stays terse in characters too`);
   const sentences = l.en.split(/[.!?]+\s|[.!?]+$/).filter(Boolean).length;
   ok(sentences <= 3, `${l.id} is at most three short sentences`);
 }
@@ -53,7 +56,7 @@ ok(linesFor('gate', 'touch', new Set(['mo-ding-1', 'mo-ding-2'])).length === 0,
 
 // Hold times scale with length and stay humane.
 for (const l of LINES) {
-  ok(holdMs(l) >= 2600 && holdMs(l) <= 8500, `${l.id} holds a readable while`);
+  ok(holdMs(l) >= 2600 && holdMs(l) <= 10000, `${l.id} holds a readable while`);
 }
 
 console.log(`test-content: ${n} assertions passed`);

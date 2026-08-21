@@ -4,9 +4,12 @@
  * readings - an ordinary woman's thought on the first walk, the dead
  * performing being alive on the second.
  *
- * Two voices and no third (OPENING, ratified): the world's voice is
- * bilingual, characters first; her voice is interior English, a few
- * short sentences, and never describes what the player can see.
+ * Two voices and no third (OPENING, ratified; presentation AMENDED by
+ * Simon after walking b49): BOTH voices are bilingual, characters
+ * first, English beneath - the DECISIONS 35 pattern everywhere. What
+ * still separates them: the world's voice is quotation; hers is
+ * interior, a few short sentences, and never describes what the
+ * player can see.
  *
  * Pure module - test-content.ts holds the prose rules.
  */
@@ -20,8 +23,8 @@ export interface Line {
   readonly node: string;
   readonly trigger: Trigger;
   readonly voice: 'her' | 'world';
-  /** World voice only: characters first, English beneath. */
-  readonly zh?: string;
+  /** Characters first, English beneath (DECISIONS 35), both voices. */
+  readonly zh: string;
   readonly en: string;
   /** A once-line never plays twice in a night. */
   readonly once?: boolean;
@@ -40,6 +43,7 @@ export const LINES: readonly Line[] = [
     node: 'gate',
     trigger: 'touch',
     voice: 'her',
+    zh: '先摸釘，再走路。做得周全才算數。',
     en: 'The nail-heads first. Then the walk. Do it properly and it counts.',
     once: true,
   },
@@ -48,7 +52,8 @@ export const LINES: readonly Line[] = [
     node: 'gate',
     trigger: 'touch',
     voice: 'her',
-    en: '釘 for 丁. A son. Everyone asks for a son.',
+    zh: '釘就是丁。求個兒子，誰家不求。',
+    en: 'A nail for a son. Everyone asks for a son.',
     once: true,
   },
 
@@ -60,6 +65,7 @@ export const LINES: readonly Line[] = [
     node: 'water',
     trigger: 'flames',
     voice: 'her',
+    zh: '三盞，好。一路穩穩的，就靠這個。',
     en: "Three. Good. Steady the whole way, that's the trick of it.",
     once: true,
     // Up in the mist - the lower half of this painting is black water.
@@ -73,6 +79,7 @@ export const LINES: readonly Line[] = [
     node: 'house-lamp',
     trigger: 'enter',
     voice: 'her',
+    zh: '我們家的燈還點著，費油。走完就回去。',
     en: "Lamp's burning at ours. Wasteful. I'll be back before it matters.",
     once: true,
   },
@@ -83,6 +90,7 @@ export const LINES: readonly Line[] = [
     node: 'neighbours-wall',
     trigger: 'enter',
     voice: 'her',
+    zh: '周家的年畫，胖娃娃抱鯉魚。秋天添的是個丫頭，好在結實。',
     en: "The Zhous' new-year print. A fat boy and a carp. Theirs came in autumn - a girl, but healthy.",
     once: true,
   },
@@ -100,7 +108,11 @@ export function linesFor(
   );
 }
 
-/** How long a line holds on screen: reading pace plus a breath. */
+/** The characters settle one by one, like a brush laying them down. */
+export const CHAR_MS = 80;
+
+/** How long a line holds on screen: the characters' reveal, reading
+ *  pace for the English, and a breath. */
 export function holdMs(line: Line): number {
-  return 2600 + line.en.length * 42;
+  return line.zh.length * CHAR_MS + 2600 + line.en.length * 42;
 }
