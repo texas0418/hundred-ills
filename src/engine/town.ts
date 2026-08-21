@@ -140,6 +140,33 @@ export function walkwayFor(stripId: string) {
   return null;
 }
 
+/**
+ * Warmth: where a flame can be relit (DECISIONS 84). Positions live in
+ * the ART - the lantern painted into bridge segment A - so they are
+ * fractions of a walkway plate, resolved through the layout.
+ */
+export const RELIGHTS: readonly {
+  strip: string;
+  plateIndex: number;
+  frac: number;
+}[] = [
+  // The red lantern on its post, left of bridge A.
+  { strip: 'north', plateIndex: 1, frac: 0.40 },
+];
+
+export function relightXs(stripId: string, bandH?: number): number[] {
+  const lay = layoutFor(stripId, bandH);
+  if (!lay) return [];
+  return RELIGHTS.filter((r) => r.strip === stripId).map((r) => {
+    const p = lay.plates[r.plateIndex];
+    return p.x + p.width * r.frac;
+  });
+}
+
+export function nearRelight(stripId: string, x: number, bandH?: number): boolean {
+  return relightXs(stripId, bandH).some((rx) => Math.abs(rx - x) <= REACH);
+}
+
 /** Test-friendly default: the band height used when none is given. */
 export const DEFAULT_BAND_H = 126;
 

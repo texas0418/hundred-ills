@@ -18,6 +18,7 @@ import {
   useDerivedValue,
   useSharedValue,
   withDecay,
+  withSequence,
   withTiming,
   type SharedValue,
 } from 'react-native-reanimated';
@@ -34,9 +35,12 @@ import {
 } from '../engine/parallax';
 import { layoutFor, clampTo, strip as stripById } from '../engine/town';
 import { LIVE, DEAD, isPlate, type PlateName } from '../plates';
+import * as Haptics from 'expo-haptics';
+
 import {
   applyCrossing,
   applyDepth,
+  applyWarmth,
   arriveAt,
   atWater,
   beginFirstWatch,
@@ -280,14 +284,57 @@ function WalkwayPlate({
   );
 }
 
+/**
+ * 水鬼. DECISIONS 84: at zero fires the dead stop hiding. The drowned
+ * stands in the water - always mounted, per this file's one rule, and
+ * visible only when she is fully out. No sting, no text: step to the
+ * water with no flames left, and someone is there.
+ */
+function Drowned({
+  depth, screenH, visible,
+}: {
+  depth: Depth; screenH: number; visible: boolean;
+}) {
+  const image = useImage(LIVE['shuigui']);
+  const h = screenH * 0.22;
+  const w = image ? (h * image.width()) / image.height() : 0;
+  const worldX = 1240;
+  const transform = useDerivedValue(
+    () => [{ translateX: worldX - depth.walkX.value - w / 2 }],
+    [w, depth],
+  );
+  const op = useDerivedValue(() => {
+    const part = stripPart(
+      depth.idx, depth.curIdx.value, depth.fromIdx.value,
+      depth.prog.value, depth.dir.value, PART.kerb, screenH,
+    );
+    return visible ? part.opacity : 0;
+  }, [visible, screenH, depth]);
+  if (!image) return null;
+  return (
+    <Group transform={transform}>
+      <SkImage
+        image={image}
+        x={0}
+        y={screenH * 0.56}
+        width={w}
+        height={h}
+        fit="fill"
+        opacity={op}
+      />
+    </Group>
+  );
+}
+
 function StripLayers({
-  stripId, width, height, drain, depth,
+  stripId, width, height, drain, depth, drowned,
 }: {
   stripId: string;
   width: number;
   height: number;
   drain: number;
   depth: Depth;
+  drowned: boolean;
 }) {
   const here = stripById(stripId);
   const planes = planesFor(here.kind);
@@ -310,17 +357,21 @@ function StripLayers({
       {here.kind === 'bank' ? (
         <Walkway stripId={stripId} screenH={height} drain={drain} depth={depth} />
       ) : null}
+      {here.kind === 'water' ? (
+        <Drowned depth={depth} screenH={height} visible={drowned} />
+      ) : null}
     </Group>
   );
 }
 
 const Scene = memo(function Scene({
-  width, height, drain, depthBase,
+  width, height, drain, depthBase, drowned,
 }: {
   width: number;
   height: number;
   drain: number;
   depthBase: Omit<Depth, 'idx'>;
+  drowned: boolean;
 }) {
   // Every strip, mounted once, for the app's whole life. Which is
   // visible is a per-frame decision on the UI thread - a depth swipe
@@ -336,6 +387,7 @@ const Scene = memo(function Scene({
           height={height}
           drain={drain}
           depth={{ ...depthBase, idx: i }}
+          drowned={drowned}
         />
       ))}
     </Canvas>
@@ -364,7 +416,9 @@ export function Walk() {
 
   useEffect(() => {
     const id = setInterval(
-      () => setState((s) => arriveAt(tick(s, 100), walkX.value, bandH)),
+      () => setState((s) =>
+        applyWarmth(arriveAt(tick(s, 100), walkX.value, bandH), 100, bandH),
+      ),
       100,
     );
     return () => clearInterval(id);
@@ -414,13 +468,36 @@ export function Walk() {
     [clearTrans],
   );
 
+  const doLookBack = useCallback(() => {
+    const s = stateRef.current;
+    if (transRef.current || s.fires === 0) return;
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+    setState(lookBack);
+    // She turns: the world sways back the way she came, and settles.
+    const here = walkX.value;
+    // eslint-disable-next-line react-hooks/immutability
+    walkX.value = withSequence(
+      withTiming(Math.max(0, here - 64), { duration: 170, easing: Easing.out(Easing.quad) }),
+      withTiming(here, { duration: 340, easing: Easing.inOut(Easing.quad) }),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // The initializer runs during render but the handlers it builds run
   // only on touches, long after - the refs `depth` reads through this
   // closure are never read during a render. Same false-positive class
   // as useSharedValue writes.
   // eslint-disable-next-line react-hooks/refs
   const [pan] = useState(() =>
-    Gesture.Pan()
+    Gesture.Race(
+      Gesture.Tap()
+        .numberOfTaps(2)
+        .maxDuration(260)
+        .onEnd(() => {
+          'worklet';
+          runOnJS(doLookBack)();
+        }),
+      Gesture.Pan()
       .onChange((e) => {
         'worklet';
         if (Math.abs(e.translationY) > 56
@@ -442,6 +519,7 @@ export function Walk() {
           clamp: [0, stripMax.value],
         });
       }),
+    ),
   );
 
   const crossings = state.pos.crossed.length;
@@ -457,7 +535,6 @@ export function Walk() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [crossings, state.pos.strip, bandH]);
 
-  const onLookBack = useCallback(() => setState(lookBack), []);
   const call = currentCall(state);
   const drain = drainAmount(state);
 
@@ -470,6 +547,7 @@ export function Walk() {
             height={height}
             drain={drain}
             depthBase={{ curIdx, fromIdx, prog, dir: dirSv, walkX, outX }}
+            drowned={state.fires === 0}
           />
         </View>
       </GestureDetector>
@@ -499,10 +577,7 @@ export function Walk() {
         </View>
       ) : null}
 
-      <Text style={styles.lookBack} onPress={onLookBack}>
-        look back
-      </Text>
-      <Text style={styles.stamp}>b38</Text>
+      <Text style={styles.stamp}>b39</Text>
     </GestureHandlerRootView>
   );
 }
@@ -521,10 +596,6 @@ const styles = StyleSheet.create({
   slow: { width: 9, height: 9, borderRadius: 5, backgroundColor: SOOT, opacity: 0.65 },
   quick: { width: 5, height: 5, borderRadius: 3, backgroundColor: SOOT, opacity: 0.45 },
   gap: { width: 16 },
-  lookBack: {
-    position: 'absolute', bottom: 34, right: 22,
-    color: SOOT, opacity: 0.3, fontSize: 12, letterSpacing: 2,
-  },
   stamp: {
     position: 'absolute', bottom: 34, left: 22,
     color: SOOT, opacity: 0.25, fontSize: 11, letterSpacing: 1,
