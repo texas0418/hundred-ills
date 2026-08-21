@@ -140,6 +140,7 @@ LANDED = {
     "47": "screens/inland-west.png",
     "49": "screens/inland-east.png",
     "50": "screens/inland-water.png",
+    "45": "screens/east-water.png  (Gemini put two red SEALS on the stones - rule 5; windowed out at x875, ships with no red)",
 }
 
 # (id, title, kind, note shown above the block, body)
