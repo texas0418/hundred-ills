@@ -680,6 +680,45 @@ THE TOWN IS A NETWORK  (100-104, added 2026-08-20)
      now a place to FIND rather than a gate to arrive at.
 
 
+107. THE WALKWAY IS AUTHORED SCENES, NOT TILES PLUS OBJECTS.
+     Decided 2026-08-21, after the bridge failed four times in one
+     night and Simon called for a restart. Scope: the COMPOSITION
+     approach only. Engine, docs, style and most plates survive.
+
+     WHAT DIED, and why it stays dead: compositing self-contained AI
+     paintings onto tiling planes at runtime. Four failures, one
+     disease in different clothes -
+       alignment constants that describe one image, not a class
+       opacity synthesised from luminance, fighting the art
+       tiling phase mismatches wherever an overlay met the plane
+     Year Walk never did this. Simogo authored whole scenes; the
+     bridge was painted INTO its landscape by the artist, and seams
+     existed only at fixed scene boundaries.
+
+     THE NEW MODEL, scoped to the MID PLANE (the walkway - the only
+     plane objects ever stood on):
+       A strip's walkway is a SEQUENCE OF AUTHORED SEGMENTS drawn at
+       fixed world positions. A bridge is not an object placed on a
+       segment; it is a segment WITH A BRIDGE IN IT, painted as one
+       scene by the model. North bank = three segments of 1200 world
+       px: plain, bridge-a, bridge-b.
+       Segments join edge to edge under the tile-cut rule that already
+       works: embankment cut at both edges at the same height.
+
+     WHAT SURVIVES UNCHANGED: far plane and kerb keep tiling - they are
+     deliberately featureless and have never had a seam problem. The
+     lane mouth stays a far-plane overlay; pale-on-pale, it composites
+     cleanly and looked right on the device. Parallax, the drain, the
+     fires, the watches: untouched.
+
+     GAMEPLAY DATA FOLLOWS THE ART: a bridge's world x is wherever the
+     segment's painting put it, measured after the art lands - never
+     the other way round.
+
+     The runtime machinery this kills (WorldObject bridge drawing, the
+     OPAQUE/SEAL alpha special-casing) comes out when the first bridge
+     segment lands.
+
 =============================================================
 DEAD
 =============================================================
@@ -697,6 +736,11 @@ DEAD
 93. Combat of any kind.
 
 94. A map.
+
+97b. (added 2026-08-21) Runtime compositing of walkway objects onto
+     tiling planes. Died at 107 after four one-night failures. Do not
+     revive it for anything that stands on the walkway; far-plane
+     overlays (pale on pale) are the one sanctioned exception.
 
 95. CANDIDATE A, the foretelling ending - the visions are true prophecy
     and what they foretell is what she does to the child. Rejected
