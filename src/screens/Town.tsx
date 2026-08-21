@@ -12,8 +12,10 @@ import {
   Rect,
   useImage,
 } from '@shopify/react-native-skia';
-import {
+import Animated, {
   Easing,
+  FadeIn,
+  FadeOut,
   runOnJS,
   useDerivedValue,
   useSharedValue,
@@ -35,6 +37,7 @@ import {
   type TownState,
   type Way,
 } from '../engine/nodes';
+import { holdMs, linesFor, type Line, type Trigger } from '../content/lines';
 
 /**
  * DECISIONS 109, the proof. The world is discrete screens: each place
@@ -127,6 +130,11 @@ const SCREENS = [
     id: 'house-lamp',
     live: require('../../assets/screens/house-lamp.png'),
     dead: require('../../assets/screens-drained/house-lamp.png'),
+  },
+  {
+    id: 'neighbours-wall',
+    live: require('../../assets/screens/neighbours-wall.png'),
+    dead: require('../../assets/screens-drained/neighbours-wall.png'),
   },
   {
     id: 'inland-west',
@@ -291,9 +299,52 @@ export function Town() {
     return () => clearInterval(id);
   }, []);
 
+  // Her voice: one line at a time, queued, once-lines kept for the
+  // night. The content lives in src/content/lines.ts; this is only
+  // the throat.
+  const [line, setLine] = useState<Line | null>(null);
+  const seen = useRef(new Set<string>());
+  const lineQueue = useRef<Line[]>([]);
+  const speaking = useRef(false);
+  const lineTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const showNext = useCallback(function show() {
+    const next = lineQueue.current.shift() ?? null;
+    setLine(next);
+    if (next) {
+      lineTimer.current = setTimeout(show, holdMs(next));
+    } else {
+      speaking.current = false;
+    }
+  }, []);
+
+  const speak = useCallback(
+    (nodeId: string, trigger: Trigger) => {
+      const due = linesFor(nodeId, trigger, seen.current);
+      if (!due.length) return;
+      for (const l of due) seen.current.add(l.id);
+      lineQueue.current.push(...due);
+      if (!speaking.current) {
+        speaking.current = true;
+        showNext();
+      }
+    },
+    [showNext],
+  );
+
+  useEffect(
+    () => () => {
+      if (lineTimer.current) clearTimeout(lineTimer.current);
+    },
+    [],
+  );
+
   const settle = useCallback(() => {
     busy.current = false;
-  }, []);
+    const id = stateRef.current.nodeId;
+    speak(id, 'enter');
+    if (nodeOf(id).water && stateRef.current.fires === 3) speak(id, 'flames');
+  }, [speak]);
 
   const move = useCallback(
     (way: Way) => {
@@ -339,16 +390,44 @@ export function Town() {
     setState(lookBack);
   }, []);
 
-  // eslint-disable-next-line react-hooks/refs
+  // Touch targets on the paintings. The bronze studs are the first
+  // (OPENING beat 2): the game's first working input is a touch, not
+  // a swipe. Regions are fractions of the displayed frame.
+  const dimsRef = useRef({ width, height });
+  dimsRef.current = { width, height };
+  const touch = useCallback(
+    (x: number, y: number) => {
+      if (busy.current) return;
+      const { width: w, height: h } = dimsRef.current;
+      if (
+        stateRef.current.nodeId === 'gate' &&
+        x > w * 0.2 && x < w * 0.8 &&
+        y > h * 0.28 && y < h * 0.65
+      ) {
+        Haptics.selectionAsync().catch(() => {});
+        speak('gate', 'touch');
+      }
+    },
+    [speak],
+  );
+
   const [pan] = useState(() =>
     Gesture.Race(
-      Gesture.Tap()
-        .numberOfTaps(2)
-        .maxDuration(260)
-        .onEnd(() => {
-          'worklet';
-          runOnJS(doLookBack)();
-        }),
+      Gesture.Exclusive(
+        Gesture.Tap()
+          .numberOfTaps(2)
+          .maxDuration(260)
+          .onEnd(() => {
+            'worklet';
+            runOnJS(doLookBack)();
+          }),
+        Gesture.Tap()
+          .maxDuration(260)
+          .onEnd((e) => {
+            'worklet';
+            runOnJS(touch)(e.x, e.y);
+          }),
+      ),
       Gesture.Pan()
         .minDistance(24)
         .onEnd((e) => {
@@ -392,6 +471,18 @@ export function Town() {
         </View>
       ) : null}
 
+      {line ? (
+        <Animated.View
+          key={line.id}
+          entering={FadeIn.duration(450)}
+          exiting={FadeOut.duration(350)}
+          style={[styles.line, { top: height * (line.at ?? 0.78) }]}
+          pointerEvents="none"
+        >
+          <Text style={styles.lineText}>{line.en}</Text>
+        </Animated.View>
+      ) : null}
+
       {watchmanCalling(state) ? (
         <View style={styles.call} pointerEvents="none">
           <Text style={styles.callLabel}>{wc.label}</Text>
@@ -407,7 +498,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b48</Text>
+      <Text style={styles.stamp}>b49</Text>
     </GestureHandlerRootView>
   );
 }
@@ -419,6 +510,11 @@ const styles = StyleSheet.create({
   flame: {
     width: 7, height: 14, borderRadius: 4,
     backgroundColor: PEACH_RED, opacity: 0.8,
+  },
+  line: { position: 'absolute', left: 30, right: 30, alignItems: 'center' },
+  lineText: {
+    color: SOOT, fontSize: 17, lineHeight: 26, textAlign: 'center',
+    opacity: 0.88, maxWidth: 330,
   },
   call: { position: 'absolute', top: 54, left: 0, right: 0, alignItems: 'center' },
   callLabel: { color: SOOT, fontSize: 26, letterSpacing: 6, opacity: 0.75 },

@@ -174,7 +174,7 @@ ALREADY DONE - not repeated below
   [50] SCREEN - THE SECOND WATER
         screens/inland-water.png
   [51] SCREEN - THE NEIGHBOUR'S WALL
-        screens/neighbours-wall.png  (asset landed, placement in the graph pending)
+        screens/neighbours-wall.png  (wired beside the house per OPENING, ratified 08-21)
   [52] SCREEN - THE COVERED BRIDGE  (LATER SET PIECE)
         screens/covered-bridge.png  (asset landed early; wired when its watch comes)
   [30] THE SECOND BANK

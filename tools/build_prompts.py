@@ -133,7 +133,7 @@ LANDED = {
     "43": "screens/bridge-b.png  (asset landed, not yet wired - needs [42] first)",
     "46": "screens/junction.png",
     "48": "screens/house-lamp.png  (asset landed, not yet wired - needs canal two's banks)",
-    "51": "screens/neighbours-wall.png  (asset landed, placement in the graph pending)",
+    "51": "screens/neighbours-wall.png  (wired beside the house per OPENING, ratified 08-21)",
     "52": "screens/covered-bridge.png  (asset landed early; wired when its watch comes)",
     "42": "screens/bank-east.png",
     "44": "screens/bank-end.png",

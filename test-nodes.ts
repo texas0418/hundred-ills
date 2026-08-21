@@ -89,10 +89,10 @@ ok(pastB.state.nodeId === 'bank-end', 'over bridge B the bank runs out');
 ok(pastB.state.crossed.length === 2, 'two of the three bridges spent');
 ok(bridgesRemaining(pastB.state) === 1, 'the covered bridge remains');
 
-// Canal two closes into a ring: junction, lantern, east, the house,
-// west, junction.
+// Canal two closes into a ring: junction, lantern, east, the
+// neighbour's wall, the house, west, junction.
 let ring: TownState = { ...s0, nodeId: 'junction' };
-for (const way of ['left', 'left', 'left', 'left', 'left'] as const) ring = move(ring, way).state;
+for (let i = 0; i < 6; i++) ring = move(ring, 'left').state;
 ok(ring.nodeId === 'junction', 'canal two is a loop and it closes');
 
 // Warmth: the lantern corner relights, in real time, only when short.

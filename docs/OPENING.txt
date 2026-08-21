@@ -1,6 +1,9 @@
 HUNDRED ILLS - THE FIRST FIVE MINUTES
-Draft 1, 2026-08-21. The fiction pass begins here. Nothing in this
-file is in the app; it is written to be torn apart. Where a line of
+Draft 1, 2026-08-21. RATIFIED same day, all five questions, all as
+recommended: two voices; her name is 阿秀 A-Xiu; no epigraph, the
+rules stay diegetic; the 摸釘 ask is sincere; "ours", once. The lines
+below are now the shipped content - src/content/lines.ts carries
+them and test-content.ts enforces the prose rules. Where a line of
 player-facing text is proposed, it is quoted and marked [C] like any
 other invention (LORE.txt rules apply to fiction too - the almanac
 layer stays [A]/[B], but we should know what we made up).
@@ -26,8 +29,8 @@ PROPOSED: two voices only, and the game never explains the difference.
   call, the almanac, the fortune poems, a shop sign. Always bilingual,
   characters first. This voice is quotation - half of it literally is.
 
-  HER VOICE. First person, present tense, never more than two short
-  sentences at a time, and rare - most screens say nothing. She talks
+  HER VOICE. First person, present tense, never more than three
+  short sentences at a time, and rare - most screens say nothing. She talks
   the way a tired practical woman talks to herself on an errand. She
   never describes what the player can see. She only says things the
   painting cannot: what she intends, what she remembers, what she
@@ -123,7 +126,7 @@ ENDING-SITE plant 6: her name spoken by someone living, learned the
 ordinary way. He is bored, cold, middle-aged. He does not stop
 walking.
 
-    WATCHMAN: "Out for the walk, 【NAME】? Bridges are slick."
+    WATCHMAN: "Out for the walk, A-Xiu? Bridges are slick."
     HER:      "I'll mind them."
 
 Two lines, the entire exchange. He exits the way she came, clapper
@@ -134,8 +137,7 @@ exchange becomes the saddest thing in the first watch. (He does not
 strike the hour here; his sounding walk pattern belongs to the audio
 pass.)
 
-Her name: see OPEN QUESTION 2. Everything else in this file works
-around the placeholder.
+Her name is 阿秀, A-Xiu (ratified, question 2a).
 
 BEAT 6 - THE WATER (3:30)
 
@@ -215,7 +217,7 @@ NOT in the first point. It belongs at the very edge of the first
 watch (一更五點, the last minutes before the 二更 card), from behind
 her, distant, once:
 
-    【NAME】——
+    阿秀——
 
 No sting, no fire cost, nothing to answer yet. She does not turn.
 One line from her, and this one is load-bearing:
@@ -249,7 +251,7 @@ WHAT THIS FORCES ON THE BUILD (nothing done yet)
 
 
 =============================================================
-OPEN QUESTIONS - answer with numbers
+OPEN QUESTIONS - RATIFIED 2026-08-21, answers inline
 =============================================================
 
 1. THE VOICE. Two-voice scheme as proposed (world + her interior,
