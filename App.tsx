@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { WatchCard } from './src/screens/WatchCard';
-import { Walk } from './src/screens/Walk';
+import { Town } from './src/screens/Town';
 import { PAPER, SOOT } from './src/palette';
 import { newGame } from './src/dbCore';
 import { chapterAt, showsWatchCard } from './src/engine/watches';
@@ -40,7 +40,9 @@ export default function App() {
     );
   }
 
-  return <Walk />;
+  // DECISIONS 109 proof: discrete screens. Walk.tsx is intact and
+  // returns after the verdict if the answer is no.
+  return <Town />;
 }
 
 const styles = StyleSheet.create({
