@@ -6,6 +6,9 @@
  * the only saturated value in the game. Spend it deliberately.
  */
 export const PAPER = '#E0D2B4';
+/** The paintings' own bare xuan paper, measured off the landed screens -
+ *  the town canvas ground, so a painting's paper top meets it seamlessly. */
+export const XUAN = '#F6F2EA';
 export const SOOT = '#17140F';
 export const MINERAL_GREEN = '#6E7F6B';
 export const GAMBOGE = '#B8963F';

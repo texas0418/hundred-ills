@@ -154,9 +154,9 @@ ALREADY DONE - not repeated below
   [40] SCREEN - THE FAR BANK
         screens/farbank.png  (BENCHED 08-21, DECISIONS 110: no honest edge until a far-bank lateral slot exists)
   [41] SCREEN - THE GATE LANE
-        screens/gatelane.png
+        screens/gatelane.png  (REPLACED by [53] 08-23)
   [42] SCREEN - THE BANK, EAST STRETCH
-        screens/bank-east.png
+        screens/bank-east.png  (REPLACED by [55] 08-23)
   [43] SCREEN - BRIDGE B, THE FLAT BRIDGE
         screens/bridge-b.png  (asset landed, not yet wired - needs [42] first)
   [44] SCREEN - THE BANK'S FAR END
@@ -164,11 +164,11 @@ ALREADY DONE - not repeated below
   [46] SCREEN - THE ALLEY JUNCTION
         screens/junction.png
   [47] SCREEN - SECOND CANAL, WEST
-        screens/inland-west.png
+        screens/inland-west.png  (REPLACED by [56] 08-23)
   [48] SCREEN - THE HOUSE WITH THE LAMP
         screens/house-lamp.png  (asset landed, not yet wired - needs canal two's banks)
   [49] SCREEN - SECOND CANAL, EAST
-        screens/inland-east.png
+        screens/inland-east.png  (REPLACED by [57] 08-23)
   [45] SCREEN - THE EAST WATER
         screens/east-water.png  (Gemini put two red SEALS on the stones - rule 5; windowed out at x875, ships with no red)
   [50] SCREEN - THE SECOND WATER
@@ -177,6 +177,16 @@ ALREADY DONE - not repeated below
         screens/neighbours-wall.png  (wired beside the house per OPENING, ratified 08-21)
   [52] SCREEN - THE COVERED BRIDGE  (LATER SET PIECE)
         screens/covered-bridge.png  (asset landed early; wired when its watch comes)
+  [53] SCREEN - THE GATE LANE, FACING THE GATE  (replaces [41])
+        screens/gatelane.png  (the gate at the lane's far end - first direction-aware reroll, on brief first try)
+  [54] SCREEN - THE MOORING, THE BANK CONTINUING  (replaces mooring)
+        screens/mooring.png  (bridge A's arch-stones at the right edge)
+  [55] SCREEN - BANK EAST, LATERAL  (replaces [42])
+        screens/bank-east.png  (lateral; arched bridge left edge, beam bridge right edge)
+  [56] SCREEN - SECOND CANAL WEST, LATERAL  (replaces [47])
+        screens/inland-west.png  (lateral; alley mouth left, the lamp-lit corner right)
+  [57] SCREEN - SECOND CANAL EAST, LATERAL  (replaces [49])
+        screens/inland-east.png  (lateral; lamp-lit corner left, shrine niche, warm light from the right edge)
   [30] THE SECOND BANK
         canal-far-b.png
   [24] WILLOW BRANCHES - NEAR OVERLAY
@@ -188,255 +198,6 @@ If one needs redoing, remove its id from LANDED and re-run.
 =============================================================
 STILL TO MAKE
 =============================================================
-
-[53] SCREEN - THE GATE LANE, FACING THE GATE  (replaces [41])
-      DECISIONS 110 reroll. She has stepped BACK from the shut gate and
-      is still facing it: up is toward the gate, down is back to the
-      mooring. ARRIVAL: the gate itself stands at the lane's far end.
-      Replaces screens/gatelane.png under the same name.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night view straight along a flagged lane just inside a Jiangnan
-town wall, seen from the middle of the lane facing along it,
-composed as one complete vertical painting. The lane runs from the
-bottom edge of the frame straight away into the distance, dead
-centre; at its FAR END, small and softened by mist but unmistakable,
-stands the closed city gate - a plain stone gatehouse with a dark
-wooden door studded with rows of round bronze nails and one small
-red lantern beside its arch, the only red in the picture. The high
-stone town wall runs along the RIGHT-hand side of the lane all the
-way to the gate, its top lost in mist; low whitewashed house-backs
-with black tile eaves run along the LEFT. One bare winter willow
-leans over the lane from the left, midway. Wet flagstones in the
-foreground catch faint light. No side lanes open off either side.
-Deserted. Seen straight on from the middle of the way itself, the
-way ahead running from the bottom edge of the frame straight into
-the distance, dead centre, narrowing gently - this one recession is
-the only depth in the picture; every wall, roof and bank beside it
-stands flat and parallel to the picture plane. Isolated on bare
-paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, painted to the edges, no white
-space, busy, ornate, dragons, red paper lanterns everywhere, large
-mass of red foliage, red canopy, fleet of boats, many boats, crowded
-boats, harbour, festival, market, market stalls, string lights,
-bunting, crowd, text, characters, calligraphy, inscription, seal,
-signature, watermark, frame, border.
---------------------------------------------------------------  to here
-
-[54] SCREEN - THE MOORING, THE BANK CONTINUING  (replaces mooring)
-      DECISIONS 110 reroll of the accepted mooring. She stands at the
-      water's edge facing inland: up is the alley rising to the gate
-      lane, down is the steps to the water, right is the bank toward
-      bridge A - which the old painting never drew. ARRIVAL: the end of
-      the arched bridge is visible at the right edge. Replaces
-      screens/mooring.png under the same name.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night view of a small Jiangnan canal mooring seen from the water
-facing inland, composed as one complete vertical painting. Across
-the bottom of the frame the dark still canal, one small empty wooden
-boat moored at worn stone steps; the steps climb to a narrow stone
-bank; from the bank a narrow alley rises DEAD CENTRE between
-whitewashed houses with black tile roofs, its far end lost in mist.
-The stone bank runs along the water the FULL WIDTH of the frame: at
-the RIGHT edge it continues out of the picture and the first arch-
-stones and stone rail of a low arched footbridge are just entering
-the frame there, clearly a bridge beginning; at the LEFT edge the
-bank stops against a blank whitewashed wall that comes straight down
-into the water. One lit window high up in the alley; one small red
-scrap on a door, the only red. Deserted. Seen straight on and flat,
-with no perspective and no vanishing point. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[55] SCREEN - BANK EAST, LATERAL  (replaces [42])
-      DECISIONS 110 reroll. A walking screen: left is back to bridge A,
-      right is on to bridge B, down is the east water. The old painting
-      ran the lane into the distance; this one runs the bank ACROSS the
-      frame. ARRIVALS: the end of the arched bridge at the LEFT edge,
-      the end of the flat beam bridge at the RIGHT edge. Replaces
-      screens/bank-east.png under the same name.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night view of a Jiangnan canal bank seen from directly across the
-water, composed as one complete vertical painting. The canal runs
-LEFT TO RIGHT across the lower third of the frame, still and dark;
-above it the stone embankment runs left to right the full width of
-the frame with a flagged towpath along its top; above that a row of
-whitewashed house-fronts with black tile roofs facing the water,
-their upper storeys going into mist. Bamboo laundry poles jut from
-upper windows out over the water with cloth hanging still from them.
-At the LEFT edge of the frame the end of a low ARCHED stone bridge
-meets the embankment, its arch beginning to rise; at the RIGHT edge
-the end of a FLAT stone beam bridge meets it, its straight deck on
-squared piers. One door near the middle with one small red lantern,
-the only red. One moored boat. Nothing recedes into the distance.
-Deserted. Seen straight on from directly across the water,
-everything parallel to the picture plane, no recession and no
-vanishing point; the bank, its path and the water are cut by the
-left and right edges of the frame at the same height so the scene
-reads as continuing both ways beyond the picture. Isolated on bare
-paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[56] SCREEN - SECOND CANAL WEST, LATERAL  (replaces [47])
-      DECISIONS 110 reroll. Canal two's west bank: left is the junction's
-      lane mouth, right is the house with the lamp, down is the inland
-      water. ARRIVALS: a dark alley mouth at the LEFT edge, the corner
-      of the lamp-lit house at the RIGHT edge. Replaces
-      screens/inland-west.png under the same name.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night view of a narrow inland Jiangnan canal seen from directly
-across it, composed as one complete vertical painting. The black
-water runs LEFT TO RIGHT across the lower quarter of the frame,
-barely wider than a lane; above it a low stone edge and a cramped
-towpath; above that a row of poorer two-storey houses pressed close
-together and leaning, their whitewash grey and stained, shutters
-closed, sagging black tile roofs with the eaves almost touching the
-mist. At the LEFT edge of the frame a dark alley mouth opens between
-two houses onto the path. At the RIGHT edge the corner of a taller,
-better-kept house is just entering the picture with one warm lamp
-lit high in its window. One small red scrap of paper on a doorpost
-near the middle, the only red. Nothing recedes into the distance.
-Deserted. Seen straight on from directly across the water,
-everything parallel to the picture plane, no recession and no
-vanishing point; the bank, its path and the water are cut by the
-left and right edges of the frame at the same height so the scene
-reads as continuing both ways beyond the picture. Isolated on bare
-paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
-
-[57] SCREEN - SECOND CANAL EAST, LATERAL  (replaces [49])
-      DECISIONS 110 reroll. Canal two's east bank: left is the
-      neighbour's wall and the house, right is the lantern corner. The
-      shrine niche stays. ARRIVALS: the corner of the lamp-lit house at
-      the LEFT edge; at the RIGHT edge the path turns under a wooden
-      bracket with warm light spilling in from beyond the frame (the
-      lantern corner, not shown). Replaces screens/inland-east.png
-      under the same name.
-
---------------------------------------------------------------  copy from here
-Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
-of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
-wet blooming edges, visible brush direction, the paper showing
-through. Large areas of the paper left completely unpainted to stand
-for mist, water and sky. Muted and drained palette - ink black, warm
-grey, pale ochre, washed-out green. One small area of vermilion red
-and no other saturated colour. Flat frontal composition, no camera
-perspective, no photographic realism. Quiet, plain, unspectacular.
-
-A night view of the same narrow inland Jiangnan canal seen from
-directly across it, composed as one complete vertical painting.
-Black water LEFT TO RIGHT across the lower quarter of the frame, a
-low stone edge and a cramped path above it, a row of close leaning
-grey-washed houses facing the water with sagging black tile roofs
-into mist. Set into the wall of the middle house at head height, a
-small roofed shrine niche holding a tiny red cloth and a stub of
-incense - the only red in the picture. At the LEFT edge of the frame
-the corner of a taller, better-kept house is just entering the
-picture with one warm lamp lit high in its window. At the RIGHT edge
-the path passes under a plain wooden bracket fixed to the wall, with
-faint warm light spilling onto the stones from beyond the edge of
-the picture. Nothing recedes into the distance. Deserted. Seen
-straight on from directly across the water, everything parallel to
-the picture plane, no recession and no vanishing point; the bank,
-its path and the water are cut by the left and right edges of the
-frame at the same height so the scene reads as continuing both ways
-beyond the picture. Isolated on bare paper.
-
-Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
-leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
-gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
-concept art, 3D render, anime, oversaturated, neon, HDR, glow,
-bloom, lens flare, photorealistic, perspective, vanishing point,
-receding row, diagonal recession, foreshortening, three-quarter
-view, converging lines, painted to the edges, no white space, busy,
-ornate, dragons, red paper lanterns everywhere, large mass of red
-foliage, red canopy, fleet of boats, many boats, crowded boats,
-harbour, festival, market, market stalls, string lights, bunting,
-crowd, text, characters, calligraphy, inscription, seal, signature,
-watermark, frame, border.
---------------------------------------------------------------  to here
 
 [29] 弄 - THE LANE GROUND  ** DO NOT GENERATE **
       THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.
