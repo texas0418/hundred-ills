@@ -8,7 +8,11 @@
  * Pure module - test-content checks every node and every fraction.
  */
 
-export type OverlayId = 'shigandang' | 'road-money' | 'door-gods-intact' | 'jiaobei';
+/** Plates still composited at runtime. Things that STAND in a place
+ *  are painted into the screen now ([60], [61] - Simon, b62: pasted
+ *  plates pop in and look pasted); only what appears and vanishes is
+ *  composited - the thrown blocks, the watchman, the drowned. */
+export type OverlayId = 'jiaobei';
 
 /** A plate composited onto a screen. x,y is the CENTRE-BOTTOM of the
  *  plate in painting fractions; w is its width as a fraction of the
@@ -22,13 +26,8 @@ export interface Overlay {
 }
 
 export const OVERLAYS: readonly Overlay[] = [
-  // 石敢當 at the bank's end: the stone that refuses passage (27),
-  // the lock on district two.
-  { plate: 'shigandang', node: 'bank-end', x: 0.27, y: 0.595, w: 0.10 },
-  // 買路錢 scattered where the funeral route runs out of her reach (72).
-  { plate: 'road-money', node: 'bank-end', x: 0.13, y: 0.545, w: 0.13 },
-  // Intact door gods on the lantern door of bank east - met OPEN.
-  { plate: 'door-gods-intact', node: 'bank-east', x: 0.468, y: 0.535, w: 0.058 },
+  // Nothing static is composited any more: the stone, the road money
+  // and the door gods are IN their paintings ([60], [61]).
 ];
 
 export type Act =
@@ -50,10 +49,13 @@ export interface Target {
 
 export const TARGETS: readonly Target[] = [
   { act: 'studs', node: 'gate', x0: 0.22, y0: 0.30, x1: 0.78, y1: 0.64 },
-  { act: 'door-gods', node: 'bank-east', x0: 0.40, y0: 0.36, x1: 0.54, y1: 0.56 },
-  { act: 'road-money', node: 'bank-end', x0: 0.04, y0: 0.44, x1: 0.22, y1: 0.58 },
+  // [61]: the door gods painted on the double door, mid-bank.
+  { act: 'door-gods', node: 'bank-east', x0: 0.55, y0: 0.32, x1: 0.70, y1: 0.50 },
+  // [60]: the stone standing in the path; the coins on the flagstones
+  // before it. The stone is checked first where they meet.
+  { act: 'stone', node: 'bank-end', x0: 0.42, y0: 0.58, x1: 0.60, y1: 0.78 },
+  { act: 'road-money', node: 'bank-end', x0: 0.30, y0: 0.78, x1: 0.60, y1: 0.95 },
   { act: 'shrine', node: 'inland-east', x0: 0.50, y0: 0.38, x1: 0.70, y1: 0.58 },
-  { act: 'stone', node: 'bank-end', x0: 0.18, y0: 0.46, x1: 0.36, y1: 0.64 },
 ];
 
 export function targetAt(node: string, fx: number, fy: number): Target | undefined {
