@@ -24,7 +24,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 
-import { PAPER, PEACH_RED, SOOT } from '../palette';
+import { PAPER, PEACH_RED, SOOT, XUAN } from '../palette';
 import {
   beginNight,
   call as watchCall,
@@ -253,13 +253,17 @@ function ScreenLayer({
 }) {
   const image = useImage(src);
   const deadImage = useImage(deadSrc);
-  // cover-fit: fill the screen, crop the overflow evenly
+  // DECISIONS 110: the whole painting, always. Fit the WIDTH so the
+  // arrivals at the left and right edges are never cropped away, and
+  // anchor the BOTTOM so the ground she stands on is kept; a painting
+  // shorter than the phone leaves bare xuan paper above it, which is
+  // 留白 and the medium's own habit. A taller one loses only mist.
   const dims = image
     ? (() => {
-        const s = Math.max(width / image.width(), height / image.height());
-        const w = image.width() * s;
+        const s = width / image.width();
+        const w = width;
         const h = image.height() * s;
-        return { w, h, x: (width - w) / 2, y: (height - h) / 2 };
+        return { w, h, x: 0, y: height - h };
       })()
     : null;
 
@@ -342,7 +346,7 @@ const TownCanvas = memo(function TownCanvas({
 }) {
   return (
     <Canvas style={StyleSheet.absoluteFill}>
-      <Rect x={0} y={0} width={width} height={height} color={PAPER} />
+      <Rect x={0} y={0} width={width} height={height} color={XUAN} />
       {SCREENS.map((s, i) => (
         <ScreenLayer
           key={s.id}
@@ -745,13 +749,13 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b55</Text>
+      <Text style={styles.stamp}>b56</Text>
     </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
-  fill: { flex: 1, backgroundColor: PAPER },
+  fill: { flex: 1, backgroundColor: XUAN },
   water: { position: 'absolute', left: 0, right: 0, height: 90, alignItems: 'center' },
   flames: { flexDirection: 'row', gap: 26 },
   flame: {
