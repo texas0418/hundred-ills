@@ -1,0 +1,291 @@
+HUNDRED ILLS - THE FIRST WATCH, 一更二點 TO 一更五點
+Draft 1, 2026-08-23. Continues docs/OPENING.txt (一更一點, ratified
+and shipped through b61). This is the rest of the first watch - the
+ninety minutes after the watchman's greeting, in the first district
+as it now stands under DECISIONS 110. Written to be torn apart. Every
+proposed line is [C] and must survive 65's two readings.
+
+THE TEST this file has to pass (LENGTH.txt): name the authored thing
+in every stretch. The first watch's are: the first ward, the first
+creature, the ask verb, the first relight, and the voice. One per
+point, in that order.
+
+WHAT THE FIRST WATCH TEACHES, without saying it: that the town has
+two states and she chooses between them (84). By the 二更 card the
+player should have lost a fire, been refused somewhere because of it,
+found warmth, been let through, and - if they went all the way down -
+been told by something drowned that she is no use to it.
+
+
+=============================================================
+THE VERBS - what the hands do by the end of the watch
+=============================================================
+
+Three exist: SWIPE walks, TOUCH acts on a thing in the painting (the
+studs, a fork's mouth, the water to lean), and double-tap looks back.
+The watch adds the ask verb, and this draft proposes changing how
+looking back is done - see OPEN QUESTION 1. The budget is four hand
+verbs for the whole game and no more: swipe, touch, hold, throw.
+
+  SWIPE   walk. Unchanged.
+  TOUCH   act on a thing. Unchanged.
+  HOLD    look back (proposed). Press and hold anywhere: she stops
+          and turns. The screen she came from shows for a moment
+          behind her, DRAINED - the dead town is what you see when
+          you look behind you - then she faces front and a fire is
+          out. A hold is the natural accidental input, which is right:
+          people break this rule by accident. The double-tap is
+          undiscoverable and never felt like turning.
+  THROW   ask (once she has the blocks). Tap the empty ground at her
+          feet: the blocks clatter and land, 聖筊 / 笑筊 / 陰筊. The
+          question is never typed; it is always the same question,
+          asked of the place she stands: "this way?" - and the god
+          laughs at places where that is the wrong question to ask.
+
+
+=============================================================
+一更二點 - THE FIRST WARD, AND THE FIRST LOSS
+=============================================================
+
+THE AUTHORED THING: a door that is open to the living and shut to
+the dead, met while she is still whole - so the player sees it open
+before they ever see it shut.
+
+WHERE: bank east, the door under the small red lantern (the painting
+already has it). Intact door gods, bright, this year's. At three fires
+the door is simply a door she could enter; she does not - it is not
+hers - but the gods on it are TOUCHABLE and touching them gives her
+first ward line:
+
+    門神還新得很。是好人家。
+    "The door gods are still new. A good household."
+
+Nothing else. She passes. The player has been shown an intact ward
+and a warm house behind it, and told nothing.
+
+THE FIRST LOSS, the same point: the road money. Scattered paper on
+the flagstones at the bank's far end [44], where the lane runs out
+into mist - the funeral route goes where she cannot yet go (72,
+planted, not explained). If the player touches the scraps:
+
+    買路錢。別碰，不是給活人的。
+    "Road money. Leave it - it's not for the living."
+
+and she does not pick it up. No cost. But the FIRST LOOK BACK is
+seeded here: as she turns from the dead end, the clapper sounds
+behind her once, close - the watchman, going the other way. A player
+who holds to look (or, today, double-taps) sees the bank behind her,
+drained, for a moment, and a flame is out. This is where most players
+will first lose one, by curiosity, and it is the right place: in the
+open, on her own bank, with the lantern corner twenty screens away.
+
+If they never look: fine. The rest of the watch still works at three
+fires; it is simply the living walk, and the second walk is the other
+one (80).
+
+
+=============================================================
+一更三點 - THE WATER, AND THE DROWNED
+=============================================================
+
+THE AUTHORED THING: the first creature, 水鬼, the drowned, whose
+entire behaviour is one rule about her (24): it cannot leave the water
+until something living takes its place.
+
+WHERE: the east water [45] - the washing slab with the paddle someone
+set down and never came back for. That paddle is the 水鬼's. She was
+washing here. (Said nowhere. Shown once.)
+
+THE RULE, as the player meets it:
+
+  THREE FIRES (living). Lean over the slab: her reflection, three
+  flames, the paddle, nothing else. Lean and stay, longer than is
+  sensible - past eight seconds - and the water reaches for what is
+  living: the surface breaks once, a cold touch, the SHOULDER TAP,
+  and a flame is out. No figure shown. Her line, the only one:
+
+      夜裡別對著水發呆。
+      "Don't stand staring at night water."
+
+  Taught: leaning is not free. The drowned take the living who lean.
+  A player who never lingers never meets this, which is correct.
+
+  ONE OR TWO FIRES (ambiguous). The water will not hold still - the
+  reflection shivers, the flames swim. Nothing reaches; nothing
+  shows. The middle is useless, by design.
+
+  ZERO FIRES (dead). Lean: no reflection. And the drowned is there,
+  in the water, plate [14], the paddle's owner, looking up at her.
+  It speaks, the world's voice, once:
+
+      你不成。你也是沒了的。
+      "You're no use to me. You're gone too."
+
+  and sinks. No cost, no threat. It wanted a substitute and she is
+  not one. FIRST READING: a drowned thing sizes her up and dismisses
+  her - a relief, almost, after the reach at three fires. SECOND
+  READING: it told her exactly what she is, in the first watch, and
+  the game moved on. This is 69's early door: a player who went to
+  zero on purpose in hour one is handed the truth, and it reads as a
+  monster's line.
+
+THE MERCY, noted for later: LORE says a 水鬼 that refuses a substitute
+is promoted to a water god. Somewhere after the first watch, when
+she has a living thing to offer it and does not, it becomes something
+else. Not here. Here it is only the rule.
+
+Her reflection is NEEDED ART: a small ink figure-on-water plate, drawn
+as her seen from above in still water, for the three water screens.
+Until it exists the flames alone carry the lean, as they do now.
+
+
+=============================================================
+一更四點 - THE SHRINE, THE BLOCKS, AND THE STONE
+=============================================================
+
+THE AUTHORED THING: the ask verb, and the first true lock.
+
+THE SHRINE. Inland east [57] has its niche, red cloth, a stub of
+incense. Touch it: a pair of crescent blocks lies in it, plate [22].
+She takes them. Her line:
+
+    借一下，回頭還。
+    "Borrowing. I'll bring them back."
+
+From now, tapping the empty ground at her feet throws them. They land
+in the painting at her feet - two blocks on stone, one of three ways:
+
+    聖筊   one flat one curved   yes - this place leads on
+    陰筊   both curved           no - not this way
+    笑筊   both flat             the god is laughing. wrong question.
+
+Authored per screen, plain data in the content table:
+  聖筊 at mooring, bridge, bank east, bridge B, alley, junction,
+       inland west - places the rite passes through
+  陰筊 at the gate, the waters (this is not a way), bank end
+  笑筊 at the house with the lamp, the neighbour's wall, the lantern
+       corner, the gate lane - places where "this way?" is not the
+       question. The god laughing at her own door is the best line
+       in the watch and it is two blocks on a step.
+
+No explanation of the three casts anywhere in the game. The almanac
+has the entry; the blocks teach themselves in three throws.
+
+THE STONE. The bank's far end [44] gets its 石敢當, plate [17]: the
+stone that stands where a road ends and refuses passage (27). It is
+the lock on the way to district two, and it is the first time the
+two towns are FELT:
+
+  THREE FIRES: the stone is a stone. The lane beyond it opens
+  (district two's first screen - generated when the map is drawn;
+  until then, the stone holds and the blocks say 陰筊). She passes.
+  FEWER: the stone refuses. It is set against malign influence, and
+  she reads as not-quite-living. Her line, at the refusal:
+
+      石敢當。說我不乾淨。
+      "Stone-dares. It's calling me unclean."
+
+  which is the rule stated as a complaint, and on the second walk it
+  is exactly true.
+
+So the first true puzzle is the loop the whole game runs on: lose a
+fire (curiosity at the dead end, or the water's reach), be refused by
+the stone, remember the warm place on canal two, go back for the
+warmth, return whole, pass. Nothing is told. The stone, the lantern
+and the fires are all already in the district; the loop is wiring
+and three lines.
+
+
+=============================================================
+一更五點 - THE WARM PLACE, AND THE VOICE
+=============================================================
+
+THE AUTHORED THING: the first relight, and ENDING-SITE plant 3.
+
+THE WARM PLACE. The lantern corner relights (already built). Two
+additions make it read: a brazier under the stall counter, small,
+lit - the sound when Simon finds it - and her line on the first
+relight, once:
+
+    暖和。站一會兒。
+    "Warm. Stand a moment."
+
+AND THE WATCHMAN, MOVING WARMTH (84, CHAPTERS): he is a living body
+with a lamp. When he crosses the mooring, standing in his path as he
+passes relights one flame if she is short - "close to a living person
+who does not know you are there". The player who has lost a fire and
+happens to be at the mooring when he passes gets it back without
+knowing why. The second walk knows why.
+
+THE VOICE. The last minutes of the watch, wherever she is, from
+behind her, distant, once:
+
+    阿秀——
+
+and nothing else. No sting, no cost, nothing to answer - there is no
+input for answering yet, and that is the point: the player learns the
+shape of the call before it ever costs. Her line:
+
+    走路的時候沒人會叫我。規矩大家都懂。
+    "No one calls me on the walk. Everyone knows the rule."
+
+False comfort (73): someone IS calling her, and it is the person who
+loves her most. Then the clapper, slow once, quick once, and the
+二更 card. The first watch ends.
+
+
+=============================================================
+WHAT THIS FORCES ON THE BUILD
+=============================================================
+
+  1. Touch targets per screen in the content table (the door gods on
+     bank east, the road money on bank end, the shrine niche, the
+     stone) - the studs' mechanism, generalised to data.
+  2. The lean timer at the waters, and the shoulder tap at eight
+     seconds while living. The drowned's appearance at zero fires
+     (plate [14] composited on the water screen at the lean).
+  3. The blocks: a held-item flag, the throw on ground-tap, the cast
+     plate [22] drawn at her feet, authored answers per node.
+  4. The stone at bank end: plate [17] composited; passage consults
+     passWard-style reading; the onward exit exists only when it
+     passes and district two exists.
+  5. Look back as hold (if ratified): the previous screen shown
+     drained behind her for ~600ms, then the cost.
+  6. The watchman as moving warmth: a relight if she is short and on
+     the mooring while his walk value is mid-crossing.
+  7. The voice at the watch's edge: a scripted line keyed to the
+     point index, not a node.
+  8. NEEDED ART: her reflection plate for the waters. Optional: a
+     brazier on the lantern screen (or the sound carries it).
+
+
+=============================================================
+OPEN QUESTIONS - answer with numbers
+=============================================================
+
+1. LOOK BACK AS HOLD. Replace the double-tap with press-and-hold,
+   showing the previous screen drained behind her before the cost?
+   Recommend yes - the double-tap is undiscoverable and never felt
+   like turning.
+
+2. THE DROWNED. (a) Leaning past eight seconds at three fires costs
+   a flame, no figure shown. (b) At zero fires it appears and
+   dismisses her - the early door to the truth. Recommend both; (b)
+   is the first watch's one moment for the player who went all the
+   way down on purpose.
+
+3. THE STONE AT THE BANK'S END as the lock on district two, passing
+   the living and refusing the rest. Recommend yes - it is the whole
+   game's loop met once, with every piece already in the district.
+
+4. THE BLOCKS: taken from the shrine, thrown by tapping the ground,
+   the question always "this way?", answers authored per screen, the
+   god laughing at her own door. Recommend yes.
+
+5. THE WATCHMAN AS MOVING WARMTH on his crossing. Recommend yes - it
+   costs nothing and the second walk pays it.
+
+6. THE REFLECTION PLATE - generate her reflection for the waters now
+   (one prompt, three screens), or carry the lean on flames alone
+   until the end-game needs it? Recommend now: the zero-fires "no
+   reflection" only means something if there was one.
