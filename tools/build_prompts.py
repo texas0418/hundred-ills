@@ -882,6 +882,31 @@ PLATES = [
      "the edge of the picture. Nothing recedes into the distance. "
      "Deserted."),
 
+
+    ("58", "SCREEN - THE FAR LANDING, OFF THE BRIDGE  (replaces alley)",
+     "depth",
+     "DECISIONS 110 reroll. She has just come UP over bridge A onto the\n"
+     "far landing; ahead the alley climbs into the town, behind her is\n"
+     "the bridge she crossed. The old painting put WATER behind her - a\n"
+     "second mooring - so 'back' read as stepping into the canal (Simon,\n"
+     "b58). ARRIVAL: the end of the arched bridge's deck at the BOTTOM\n"
+     "edge of the frame. Up is the deeper alley, down is back over the\n"
+     "bridge. Replaces screens/alley.png under the same name.",
+     "A night view from the far landing of a low arched stone footbridge "
+     "in a Jiangnan water town, seen from the middle of the way facing "
+     "inland, composed as one complete vertical painting. Across the "
+     "BOTTOM edge of the frame run the last worn stones of the bridge "
+     "deck itself, flat and wide, with the tops of its low stone rails at "
+     "both bottom corners - she is standing where the bridge ends, and "
+     "the canal she crossed is behind her and out of the picture. "
+     "Directly ahead, dead centre, a few broad stone steps climb from the "
+     "landing into a narrow alley between whitewashed houses with black "
+     "tile roofs, the alley running straight away into the distance and "
+     "losing itself in dark and mist; one lit window high up on its left "
+     "side, one small red scrap on a doorpost, the only red. Whitewashed "
+     "walls close the frame on both sides at the landing. No water "
+     "visible anywhere, no boat, no steps down. Deserted."),
+
     ("29", "弄 - THE LANE GROUND  ** DO NOT GENERATE **",
      "plane",
      "THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.\n"
