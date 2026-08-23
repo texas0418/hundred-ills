@@ -22,13 +22,18 @@ export interface TownNode {
   readonly warm?: boolean;
   /** The water's edge: flames show here, and worse at zero. */
   readonly water?: boolean;
+  /**
+   * A fork: two ways AHEAD. With her facing fixed (DECISIONS 110) a
+   * swipe cannot honestly choose between them, so the player touches
+   * the mouth they want; lateral swipes refuse here.
+   */
+  readonly fork?: boolean;
 }
 
 /**
- * The first district, per docs/TOWN-MAP.txt. Two edges are TEMPORARY
- * until the rest of the map's screens land, and are marked so:
- * canal two's banks ([47]-[49]) will carry the lantern corner, and
- * bank east ([42]) continues the near-bank chain past the bridge.
+ * The first district, per docs/TOWN-MAP.txt, wired under DECISIONS
+ * 110: she faces inland and never turns, the painting's path is the
+ * swipe, arrivals are in frame, forks are chosen by touch.
  */
 export const NODES: Record<string, TownNode> = {
   gate: {
@@ -62,18 +67,14 @@ export const NODES: Record<string, TownNode> = {
   },
   bridge: {
     id: 'bridge',
-    // The deck rises over the arch and carries the bank walk onward -
-    // right continues her bank to the east stretch, spending the
-    // bridge as she passes (the map's chain, DECISIONS 102/105). The
-    // far bank - the town not-hers - is down, past the arch and
-    // across. If walking it says the deck should cross to the far
-    // bank instead, swap right and down here.
-    exits: { left: 'mooring', up: 'alley', right: 'bank-east', down: 'farbank' },
+    // The canal runs across the frame; the bank walks left and right
+    // past the bridge, spending it as she passes (DECISIONS 102/105).
+    // Up is over the arch onto the far landing - the alley's steps.
+    // [40] the far bank is BENCHED (DECISIONS 110 audit): its lane
+    // runs corner to corner into the distance and nothing here leads
+    // to it honestly. It returns when a far-bank lateral slot exists.
+    exits: { left: 'mooring', up: 'alley', right: 'bank-east' },
     bridge: true,
-  },
-  farbank: {
-    id: 'farbank',
-    exits: { up: 'bridge' },
   },
   'bank-east': {
     id: 'bank-east',
@@ -93,15 +94,17 @@ export const NODES: Record<string, TownNode> = {
   },
   'bridge-b': {
     id: 'bridge-b',
-    // [43]: the flat beam bridge, second of the night's three.
-    exits: { left: 'bank-east', right: 'bank-end' },
+    // [43]: the flat beam bridge, second of the night's three. Over
+    // it, ahead, the bank runs out.
+    exits: { left: 'bank-east', up: 'bank-end' },
     bridge: true,
   },
   'bank-end': {
     id: 'bank-end',
-    // [44]: where her bank runs out. A dead end that says the town
-    // continues where she cannot yet go.
-    exits: { left: 'bridge-b' },
+    // [44]: where her bank runs out - the lane recedes AHEAD into
+    // mist, a depth dead end (DECISIONS 110 audit). The town
+    // continues where she cannot yet go; back is down.
+    exits: { down: 'bridge-b' },
   },
   alley: {
     id: 'alley',
@@ -119,6 +122,7 @@ export const NODES: Record<string, TownNode> = {
     // inland east, the house with the lamp, inland west, junction -
     // the first loop players will draw on their maps.
     exits: { down: 'alley-deep', left: 'lantern', right: 'inland-west' },
+    fork: true,
   },
   lantern: {
     id: 'lantern',

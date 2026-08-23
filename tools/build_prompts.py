@@ -37,6 +37,13 @@ NEGATIVE = (
     "calligraphy, inscription, seal, signature, watermark, frame, border."
 )
 
+# DECISIONS 110: a DEPTH screen asks for one honest recession - the way
+# ahead. Its negative keeps every ban except the perspective words, which
+# would contradict the only thing the prompt wants.
+NEGATIVE_DEPTH = NEGATIVE.replace(
+    "perspective, vanishing point, receding row, diagonal recession, "
+    "foreshortening, three-quarter view, converging lines, ", "")
+
 # Constraints that apply to a WHOLE CLASS of plate, appended automatically
 # so they cannot drift between prompts. Hard-won:
 #
@@ -70,6 +77,30 @@ KIND_CLAUSE = {
         "big empty field. Centred, touching none of the edges. Seen flat and "
         "straight on with no perspective. Nothing else in the frame, no "
         "ground, no background. Isolated on bare paper."
+    ),
+    # DECISIONS 110. A DEPTH screen: she faces along the way, the way
+    # runs from the bottom edge straight into the distance, up is deeper
+    # and down is back out. The one recession is the point of the
+    # picture; everything else stays flat.
+    "depth": (
+        " Seen straight on from the middle of the way itself, the way ahead "
+        "running from the bottom edge of the frame straight into the "
+        "distance, dead centre, narrowing gently - this one recession is the "
+        "only depth in the picture; every wall, roof and bank beside it "
+        "stands flat and parallel to the picture plane. Isolated on bare "
+        "paper."
+    ),
+    # DECISIONS 110. A LATERAL screen: she walks left and right along a
+    # bank that runs across the frame. Nothing recedes; the bank, path and
+    # water are cut by both edges at the same height so it reads as
+    # continuing both ways, and the arrivals (a bridge end, a house corner)
+    # stand AT the edges.
+    "lateral": (
+        " Seen straight on from directly across the water, everything "
+        "parallel to the picture plane, no recession and no vanishing "
+        "point; the bank, its path and the water are cut by the left and "
+        "right edges of the frame at the same height so the scene reads as "
+        "continuing both ways beyond the picture. Isolated on bare paper."
     ),
     # Things that hang into frame from an edge - they cannot be centred
     # with clear paper all round, because the anchoring edge is the point.
@@ -128,7 +159,7 @@ LANDED = {
     "37": "screens/water.png",
     "38": "screens/lantern.png",
     "39": "screens/alley-deep.png",
-    "40": "screens/farbank.png",
+    "40": "screens/farbank.png  (BENCHED 08-21, DECISIONS 110: no honest edge until a far-bank lateral slot exists)",
     "41": "screens/gatelane.png",
     "43": "screens/bridge-b.png  (asset landed, not yet wired - needs [42] first)",
     "46": "screens/junction.png",
@@ -728,6 +759,124 @@ PLATES = [
      "under the entrance planks. The lane arrives from both sides. One "
      "cold unlit lantern frame hanging at the mouth. Deserted."),
 
+
+    # ---- DECISIONS 110 REROLLS, 2026-08-21 -------------------------------
+    # Five first-district screens regenerated with the DIRECTION in the
+    # ask and the place she came from IN FRAME. Each replaces a landed
+    # file under the same name; the old painting is kept until the new
+    # one is judged.
+
+    ("53", "SCREEN - THE GATE LANE, FACING THE GATE  (replaces [41])",
+     "depth",
+     "DECISIONS 110 reroll. She has stepped BACK from the shut gate and\n"
+     "is still facing it: up is toward the gate, down is back to the\n"
+     "mooring. ARRIVAL: the gate itself stands at the lane's far end.\n"
+     "Replaces screens/gatelane.png under the same name.",
+     "A night view straight along a flagged lane just inside a Jiangnan "
+     "town wall, seen from the middle of the lane facing along it, "
+     "composed as one complete vertical painting. The lane runs from the "
+     "bottom edge of the frame straight away into the distance, dead "
+     "centre; at its FAR END, small and softened by mist but "
+     "unmistakable, stands the closed city gate - a plain stone gatehouse "
+     "with a dark wooden door studded with rows of round bronze nails and "
+     "one small red lantern beside its arch, the only red in the picture. "
+     "The high stone town wall runs along the RIGHT-hand side of the lane "
+     "all the way to the gate, its top lost in mist; low whitewashed "
+     "house-backs with black tile eaves run along the LEFT. One bare "
+     "winter willow leans over the lane from the left, midway. Wet "
+     "flagstones in the foreground catch faint light. No side lanes open "
+     "off either side. Deserted."),
+
+    ("54", "SCREEN - THE MOORING, THE BANK CONTINUING  (replaces mooring)",
+     "scene",
+     "DECISIONS 110 reroll of the accepted mooring. She stands at the\n"
+     "water's edge facing inland: up is the alley rising to the gate\n"
+     "lane, down is the steps to the water, right is the bank toward\n"
+     "bridge A - which the old painting never drew. ARRIVAL: the end of\n"
+     "the arched bridge is visible at the right edge. Replaces\n"
+     "screens/mooring.png under the same name.",
+     "A night view of a small Jiangnan canal mooring seen from the water "
+     "facing inland, composed as one complete vertical painting. Across "
+     "the bottom of the frame the dark still canal, one small empty "
+     "wooden boat moored at worn stone steps; the steps climb to a narrow "
+     "stone bank; from the bank a narrow alley rises DEAD CENTRE between "
+     "whitewashed houses with black tile roofs, its far end lost in mist. "
+     "The stone bank runs along the water the FULL WIDTH of the frame: at "
+     "the RIGHT edge it continues out of the picture and the first "
+     "arch-stones and stone rail of a low arched footbridge are just "
+     "entering the frame there, clearly a bridge beginning; at the LEFT "
+     "edge the bank stops against a blank whitewashed wall that comes "
+     "straight down into the water. One lit window high up in the alley; "
+     "one small red scrap on a door, the only red. Deserted."),
+
+    ("55", "SCREEN - BANK EAST, LATERAL  (replaces [42])",
+     "lateral",
+     "DECISIONS 110 reroll. A walking screen: left is back to bridge A,\n"
+     "right is on to bridge B, down is the east water. The old painting\n"
+     "ran the lane into the distance; this one runs the bank ACROSS the\n"
+     "frame. ARRIVALS: the end of the arched bridge at the LEFT edge,\n"
+     "the end of the flat beam bridge at the RIGHT edge. Replaces\n"
+     "screens/bank-east.png under the same name.",
+     "A night view of a Jiangnan canal bank seen from directly across the "
+     "water, composed as one complete vertical painting. The canal runs "
+     "LEFT TO RIGHT across the lower third of the frame, still and dark; "
+     "above it the stone embankment runs left to right the full width of "
+     "the frame with a flagged towpath along its top; above that a row of "
+     "whitewashed house-fronts with black tile roofs facing the water, "
+     "their upper storeys going into mist. Bamboo laundry poles jut from "
+     "upper windows out over the water with cloth hanging still from "
+     "them. At the LEFT edge of the frame the end of a low ARCHED stone "
+     "bridge meets the embankment, its arch beginning to rise; at the "
+     "RIGHT edge the end of a FLAT stone beam bridge meets it, its "
+     "straight deck on squared piers. One door near the middle with one "
+     "small red lantern, the only red. One moored boat. Nothing recedes "
+     "into the distance. Deserted."),
+
+    ("56", "SCREEN - SECOND CANAL WEST, LATERAL  (replaces [47])",
+     "lateral",
+     "DECISIONS 110 reroll. Canal two's west bank: left is the junction's\n"
+     "lane mouth, right is the house with the lamp, down is the inland\n"
+     "water. ARRIVALS: a dark alley mouth at the LEFT edge, the corner\n"
+     "of the lamp-lit house at the RIGHT edge. Replaces\n"
+     "screens/inland-west.png under the same name.",
+     "A night view of a narrow inland Jiangnan canal seen from directly "
+     "across it, composed as one complete vertical painting. The black "
+     "water runs LEFT TO RIGHT across the lower quarter of the frame, "
+     "barely wider than a lane; above it a low stone edge and a cramped "
+     "towpath; above that a row of poorer two-storey houses pressed "
+     "close together and leaning, their whitewash grey and stained, "
+     "shutters closed, sagging black tile roofs with the eaves almost "
+     "touching the mist. At the LEFT edge of the frame a dark alley mouth "
+     "opens between two houses onto the path. At the RIGHT edge the "
+     "corner of a taller, better-kept house is just entering the picture "
+     "with one warm lamp lit high in its window. One small red scrap of "
+     "paper on a doorpost near the middle, the only red. Nothing recedes "
+     "into the distance. Deserted."),
+
+    ("57", "SCREEN - SECOND CANAL EAST, LATERAL  (replaces [49])",
+     "lateral",
+     "DECISIONS 110 reroll. Canal two's east bank: left is the\n"
+     "neighbour's wall and the house, right is the lantern corner. The\n"
+     "shrine niche stays. ARRIVALS: the corner of the lamp-lit house at\n"
+     "the LEFT edge; at the RIGHT edge the path turns under a wooden\n"
+     "bracket with warm light spilling in from beyond the frame (the\n"
+     "lantern corner, not shown). Replaces screens/inland-east.png\n"
+     "under the same name.",
+     "A night view of the same narrow inland Jiangnan canal seen from "
+     "directly across it, composed as one complete vertical painting. "
+     "Black water LEFT TO RIGHT across the lower quarter of the frame, a "
+     "low stone edge and a cramped path above it, a row of close leaning "
+     "grey-washed houses facing the water with sagging black tile roofs "
+     "into mist. Set into the wall of the middle house at head height, a "
+     "small roofed shrine niche holding a tiny red cloth and a stub of "
+     "incense - the only red in the picture. At the LEFT edge of the "
+     "frame the corner of a taller, better-kept house is just entering "
+     "the picture with one warm lamp lit high in its window. At the RIGHT "
+     "edge the path passes under a plain wooden bracket fixed to the "
+     "wall, with faint warm light spilling onto the stones from beyond "
+     "the edge of the picture. Nothing recedes into the distance. "
+     "Deserted."),
+
     ("29", "弄 - THE LANE GROUND  ** DO NOT GENERATE **",
      "plane",
      "THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.\n"
@@ -793,7 +942,7 @@ def block(pid, title, kind, note, body):
         "",
         wrap(body.rstrip() + KIND_CLAUSE[kind]),
         "",
-        wrap(NEGATIVE),
+        wrap(NEGATIVE_DEPTH if kind == "depth" else NEGATIVE),
         f"{RULE}  to here",
         "", "",
     ]

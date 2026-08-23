@@ -38,7 +38,6 @@ export const MIX: Record<string, Mix> = {
   mooring: { water: 0.45, wind: 0.15 },
   water: { water: 1, wind: 0 },
   bridge: { water: 0.55, wind: 0.1 },
-  farbank: { water: 0.45, wind: 0.15 },
   'bank-east': { water: 0.45, wind: 0.1 },
   'east-water': { water: 1, wind: 0 },
   'bridge-b': { water: 0.55, wind: 0.1 },

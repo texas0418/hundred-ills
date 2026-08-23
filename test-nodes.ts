@@ -79,12 +79,12 @@ ok(lookBack({ ...s0, fires: 0 }).fires === 0, 'never below zero');
 const overEast = move(onBridge, 'right');
 ok(overEast.state.nodeId === 'bank-east', 'over the deck the bank continues east');
 ok(overEast.state.crossed.includes('bridge'), 'and passing over spends the bridge');
-const downToFar = move(onBridge, 'down');
-ok(downToFar.state.nodeId === 'farbank', 'down past the arch is the far bank');
-ok(downToFar.state.crossed.includes('bridge'), 'that way spends it too');
+ok(!move(onBridge, 'down').moved, 'nothing leads down from the bridge - the far bank is benched');
+ok(node('junction').fork === true, 'the junction is a fork, chosen by touch');
 
-// Bridge B is the second of the night's three.
-const pastB = move(move(overEast.state, 'right').state, 'right');
+// Bridge B is the second of the night's three; ahead of it the bank
+// runs out.
+const pastB = move(move(overEast.state, 'right').state, 'up');
 ok(pastB.state.nodeId === 'bank-end', 'over bridge B the bank runs out');
 ok(pastB.state.crossed.length === 2, 'two of the three bridges spent');
 ok(bridgesRemaining(pastB.state) === 1, 'the covered bridge remains');
