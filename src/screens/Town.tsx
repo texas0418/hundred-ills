@@ -266,10 +266,13 @@ const PLATES: Record<OverlayId, number> = {
  *  proportions. Drawn at full opacity only while that screen is the
  *  current one and not phasing. */
 function PlateLayer({
-  plate, nodeIdx, x, y, w, curIdx, fromIdx, width, height, show,
+  plate, nodeIdx, x, y, w, phase, width, height, show,
 }: {
   plate: OverlayId; nodeIdx: number; x: number; y: number; w: number;
-  curIdx: SharedValue<number>; fromIdx: SharedValue<number>;
+  phase: {
+    curIdx: SharedValue<number>; fromIdx: SharedValue<number>;
+    prog: SharedValue<number>; dir: SharedValue<number>; axis: SharedValue<number>;
+  };
   width: number; height: number;
   /** Optional extra gate (the thrown blocks). */
   show?: SharedValue<number>;
@@ -280,12 +283,19 @@ function PlateLayer({
   const ph = img ? pw * (img.height() / img.width()) : pw;
   const px = width * x - pw / 2;
   const py = geo.top + geo.ph * y - ph;
-  const opacity = useDerivedValue(() => {
-    if (curIdx.value !== nodeIdx || fromIdx.value >= 0) return 0;
-    return show ? show.value : 1;
-  }, [nodeIdx]);
+  const { transform, opacity: phaseOpacity } = usePhase(
+    nodeIdx, phase.curIdx, phase.fromIdx, phase.prog, phase.dir, phase.axis, width, height,
+  );
+  const opacity = useDerivedValue(
+    () => phaseOpacity.value * (show ? show.value : 1),
+    [],
+  );
   if (!img) return null;
-  return <SkImage image={img} x={px} y={py} width={pw} height={ph} fit="fill" opacity={opacity} />;
+  return (
+    <Group transform={transform}>
+      <SkImage image={img} x={px} y={py} width={pw} height={ph} fit="fill" opacity={opacity} />
+    </Group>
+  );
 }
 
 /** What she sees when she looks back: the screen she came from,
@@ -310,6 +320,42 @@ const DEMO_TIME_SCALE = 60;
  *  comes the last sixth of the way and solidifies. Both directions on
  *  the UI thread, 640ms, eased both ends. */
 const PHASE_MS = 640;
+
+/** The phase choreography for whatever is drawn as part of screen idx:
+ *  the painting itself and any plate composited onto it move and fade
+ *  as one. ONE verb (Simon, b56): every move is a step into the next
+ *  place - the arriving picture grows from within while the leaving one
+ *  swells past and thins; only stepping BACK (down) reverses it. */
+function usePhase(
+  idx: number,
+  curIdx: SharedValue<number>, fromIdx: SharedValue<number>,
+  prog: SharedValue<number>, dir: SharedValue<number>, axis: SharedValue<number>,
+  width: number, height: number,
+) {
+  const transform = useDerivedValue(() => {
+    const isCur = idx === curIdx.value && fromIdx.value >= 0;
+    const isFrom = idx === fromIdx.value;
+    if (!isCur && !isFrom) return [];
+    const p = prog.value;
+    const back = axis.value === 1 && dir.value > 0;
+    let sc: number;
+    if (!back) sc = isCur ? 0.88 + 0.12 * p : 1 + 0.18 * p;
+    else sc = isCur ? 1.14 - 0.14 * p : 1 - 0.12 * p;
+    const cx = width / 2;
+    const cy = height / 2;
+    return [
+      { translateX: cx }, { translateY: cy }, { scale: sc },
+      { translateX: -cx }, { translateY: -cy },
+    ];
+  }, [idx, width, height]);
+  const opacity = useDerivedValue(() => {
+    const p = prog.value;
+    if (idx === curIdx.value) return fromIdx.value < 0 ? 1 : p;
+    if (idx === fromIdx.value) return 1 - p;
+    return 0;
+  }, [idx]);
+  return { transform, opacity };
+}
 
 function ScreenLayer({
   idx, src, deadSrc, drain, curIdx, fromIdx, prog, dir, axis, width, height,
@@ -343,34 +389,7 @@ function ScreenLayer({
       })()
     : null;
 
-  // ONE verb (Simon, b56): every move is a step into the next place -
-  // the arriving painting grows from within while the leaving one
-  // swells past and thins, ink settling. Only stepping BACK (down)
-  // reverses it. Left and right keep their finger-follow; they phase
-  // rather than slide, so the world never reads as a pager.
-  const transform = useDerivedValue(() => {
-    const isCur = idx === curIdx.value && fromIdx.value >= 0;
-    const isFrom = idx === fromIdx.value;
-    if (!isCur && !isFrom) return [];
-    const p = prog.value;
-    const back = axis.value === 1 && dir.value > 0;
-    let sc: number;
-    if (!back) sc = isCur ? 0.88 + 0.12 * p : 1 + 0.18 * p;
-    else sc = isCur ? 1.14 - 0.14 * p : 1 - 0.12 * p;
-    const cx = width / 2;
-    const cy = height / 2;
-    return [
-      { translateX: cx }, { translateY: cy }, { scale: sc },
-      { translateX: -cx }, { translateY: -cy },
-    ];
-  }, [idx, width, height]);
-
-  const opacity = useDerivedValue(() => {
-    const p = prog.value;
-    if (idx === curIdx.value) return fromIdx.value < 0 ? 1 : p;
-    if (idx === fromIdx.value) return 1 - p;
-    return 0;
-  }, [idx]);
+  const { transform, opacity } = usePhase(idx, curIdx, fromIdx, prog, dir, axis, width, height);
 
   const deadOpacity = useDerivedValue(() => opacity.value * drain, [drain]);
   if (!image || !dims) return null;
@@ -498,13 +517,13 @@ const TownCanvas = memo(function TownCanvas({
         <PlateLayer
           key={`${o.node}-${o.plate}`}
           plate={o.plate} nodeIdx={IDX[o.node]} x={o.x} y={o.y} w={o.w}
-          curIdx={shared.curIdx} fromIdx={shared.fromIdx} width={width} height={height}
+          phase={shared} width={width} height={height}
         />
       ))}
       {cast ? (
         <PlateLayer
           plate="jiaobei" nodeIdx={cast.idx} x={0.5} y={0.985} w={0.2}
-          curIdx={shared.curIdx} fromIdx={shared.fromIdx} width={width} height={height}
+          phase={shared} width={width} height={height}
           show={shared.castShow}
         />
       ) : null}
@@ -1058,7 +1077,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b62</Text>
+      <Text style={styles.stamp}>b63</Text>
     </GestureHandlerRootView>
   );
 }
