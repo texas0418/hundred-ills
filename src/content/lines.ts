@@ -18,7 +18,7 @@ export type Trigger =
   | 'enter' | 'touch' | 'flames' | 'scripted'
   | 'door-gods' | 'road-money' | 'shrine' | 'stone-refuses'
   | 'cast-sheng' | 'cast-yin' | 'cast-xiao'
-  | 'relight' | 'call';
+  | 'relight' | 'call' | 'stare' | 'drowned';
 
 export interface Line {
   /** Stable id, used to keep a once-line from repeating. */
@@ -172,6 +172,30 @@ export const LINES: readonly Line[] = [
   {
     id: 'cast-xiao', node: '*', trigger: 'cast-xiao', voice: 'world',
     zh: '笑筊', en: 'The god is laughing. Ask a better question.',
+  },
+  // 一更三點: the water reaches for what is living. Her one line about
+  // leaning over night water, once.
+  {
+    id: 'water-stare',
+    node: '*',
+    trigger: 'stare',
+    voice: 'her',
+    zh: '夜裡別對著水發呆。',
+    en: "Don't stand staring at night water.",
+    once: true,
+    at: 0.2,
+  },
+  // At zero fires the drowned looks up at her and says exactly what
+  // she is, in the first watch, and it reads as a monster's line.
+  {
+    id: 'drowned',
+    node: 'east-water',
+    trigger: 'drowned',
+    voice: 'world',
+    zh: '你不成。你也是沒了的。',
+    en: "You're no use to me. You're gone too.",
+    once: true,
+    at: 0.22,
   },
   // 一更五點: the first relight, once.
   {
