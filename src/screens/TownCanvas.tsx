@@ -395,13 +395,18 @@ function ReflectionLayer({
   width: number; height: number;
 }) {
   const img = useImage(REFLECTION);
-  const size = width * 0.78;
+  // The figure fills only the middle third of the plate, so the plate
+  // is wider than the phone: her face reads at a real size, and the
+  // feathered black edges fall off-screen. Centred low so the flames
+  // (drawn at 0.66 of the height) sit on her reflected shoulders and
+  // the face lies in the black water.
+  const size = width * 1.5;
   const x = (width - size) / 2;
-  const y = height * 0.69 - size / 2;
+  const y = height * 0.75 - size / 2;
   const opacity = useDerivedValue(() => {
     if (!WATER_IDX[curIdx.value] || fromIdx.value >= 0) return 0;
     const f = firesSV.value;
-    return f >= 3 ? 0.95 : f === 2 ? 0.6 : f === 1 ? 0.35 : 0;
+    return f >= 3 ? 1 : f === 2 ? 0.6 : f === 1 ? 0.35 : 0;
   }, []);
   const transform = useDerivedValue(() => {
     const unrest = firesSV.value >= 3 ? 0.3 : 1.6;
