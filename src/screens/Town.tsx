@@ -15,7 +15,7 @@ import {
 } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 
-import { PEACH_RED, SOOT, XUAN } from '../palette';
+import { SOOT, XUAN } from '../palette';
 import {
   beginNight,
   call as watchCall,
@@ -622,7 +622,6 @@ export function Town() {
 
   const wc = watchCall(state);
   const drain = drainAmount(state);
-  const flames = nodeOf(state.nodeId).water && state.fires > 0 ? state.fires : 0;
 
   return (
     <GestureHandlerRootView style={styles.fill}>
@@ -639,15 +638,6 @@ export function Town() {
         </View>
       </GestureDetector>
 
-      {flames > 0 ? (
-        <View style={[styles.water, { top: height * 0.66 }]} pointerEvents="none">
-          <View style={styles.flames}>
-            {Array.from({ length: flames }).map((_, i) => (
-              <View key={i} style={styles.flame} />
-            ))}
-          </View>
-        </View>
-      ) : null}
 
       {line ? (
         <LineView key={line.id} line={line} top={height * (line.at ?? 0.72)} />
@@ -668,7 +658,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b66</Text>
+      <Text style={styles.stamp}>b67</Text>
     </GestureHandlerRootView>
   );
 }
@@ -676,12 +666,6 @@ export function Town() {
 
 const styles = StyleSheet.create({
   fill: { flex: 1, backgroundColor: XUAN },
-  water: { position: 'absolute', left: 0, right: 0, height: 90, alignItems: 'center' },
-  flames: { flexDirection: 'row', gap: 26 },
-  flame: {
-    width: 7, height: 14, borderRadius: 4,
-    backgroundColor: PEACH_RED, opacity: 0.8,
-  },
   call: { position: 'absolute', top: 54, left: 0, right: 0, alignItems: 'center' },
   callLabel: { color: SOOT, fontSize: 26, letterSpacing: 6, opacity: 0.75 },
   strikes: { flexDirection: 'row', alignItems: 'center', marginTop: 12, gap: 7 },
