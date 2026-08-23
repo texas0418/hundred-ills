@@ -147,7 +147,7 @@ LANDED = {
     "32": "seg-bridge-b.png  (third generation, single opening - the two-opening form failed twice)",
     "33": "night-water.png",
     "34": "screens/bridge.png  (the proof screen, accepted)",
-    "35": "screens/mooring.png + screens/alley.png (bonus variant landed too)",
+    "35": "screens/mooring.png + screens/alley.png (both since REPLACED: mooring by [54], alley by [58])",
     "25": "baby-print.png",
     # [29] deliberately NOT here. The plate exists and is unused - the
     # prompt asked for something a side-on game cannot show. Left out of
@@ -176,6 +176,7 @@ LANDED = {
     "55": "screens/bank-east.png  (lateral; arched bridge left edge, beam bridge right edge)",
     "56": "screens/inland-west.png  (lateral; alley mouth left, the lamp-lit corner right)",
     "57": "screens/inland-east.png  (lateral; lamp-lit corner left, shrine niche, warm light from the right edge)",
+    "58": "screens/alley.png  (the far landing: bridge deck at her feet, no water - on brief first try)",
     "45": "screens/east-water.png  (Gemini put two red SEALS on the stones - rule 5; windowed out at x875, ships with no red)",
 }
 
