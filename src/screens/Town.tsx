@@ -267,22 +267,19 @@ function ScreenLayer({
       })()
     : null;
 
-  // DECISIONS 110: two verbs for two axes. Along the bank is a SLIDE -
-  // the leaving painting is pushed out and the arriving one comes in
-  // from the edge the finger pulls from. Into the town is a DOLLY -
-  // stepping deeper, the arriving picture grows from within while the
-  // leaving one swells past and thins; stepping back reverses it.
+  // ONE verb (Simon, b56): every move is a step into the next place -
+  // the arriving painting grows from within while the leaving one
+  // swells past and thins, ink settling. Only stepping BACK (down)
+  // reverses it. Left and right keep their finger-follow; they phase
+  // rather than slide, so the world never reads as a pager.
   const transform = useDerivedValue(() => {
     const isCur = idx === curIdx.value && fromIdx.value >= 0;
     const isFrom = idx === fromIdx.value;
     if (!isCur && !isFrom) return [];
     const p = prog.value;
-    if (axis.value === 0) {
-      const d = isCur ? dir.value * (1 - p) * width : -dir.value * p * width;
-      return [{ translateX: d }];
-    }
+    const back = axis.value === 1 && dir.value > 0;
     let sc: number;
-    if (dir.value < 0) sc = isCur ? 0.88 + 0.12 * p : 1 + 0.18 * p;
+    if (!back) sc = isCur ? 0.88 + 0.12 * p : 1 + 0.18 * p;
     else sc = isCur ? 1.14 - 0.14 * p : 1 - 0.12 * p;
     const cx = width / 2;
     const cy = height / 2;
@@ -294,11 +291,8 @@ function ScreenLayer({
 
   const opacity = useDerivedValue(() => {
     const p = prog.value;
-    if (idx === curIdx.value) {
-      if (fromIdx.value < 0) return 1;
-      return axis.value === 0 ? 0.7 + 0.3 * p : p;
-    }
-    if (idx === fromIdx.value) return axis.value === 0 ? 1 : 1 - p;
+    if (idx === curIdx.value) return fromIdx.value < 0 ? 1 : p;
+    if (idx === fromIdx.value) return 1 - p;
     return 0;
   }, [idx]);
 
@@ -749,7 +743,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b56</Text>
+      <Text style={styles.stamp}>b57</Text>
     </GestureHandlerRootView>
   );
 }
