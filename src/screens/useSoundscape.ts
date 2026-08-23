@@ -133,6 +133,10 @@ export function useSoundscape(state: TownState) {
     touch() {
       oneShot(takeFor('studs', takes.current++));
     },
+    /** One quick strike of the watchman's clapper as he walks by. */
+    clap() {
+      oneShot(takeFor('clapper-quick', takes.current++));
+    },
   }));
   return api;
 }

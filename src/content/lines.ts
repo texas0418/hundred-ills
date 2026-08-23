@@ -14,7 +14,7 @@
  * Pure module - test-content.ts holds the prose rules.
  */
 
-export type Trigger = 'enter' | 'touch' | 'flames';
+export type Trigger = 'enter' | 'touch' | 'flames' | 'scripted';
 
 export interface Line {
   /** Stable id, used to keep a once-line from repeating. */
@@ -70,6 +70,30 @@ export const LINES: readonly Line[] = [
     once: true,
     // Up in the mist - the lower half of this painting is black water.
     at: 0.2,
+  },
+
+  // OPENING beat 5, DECISIONS 89's free beat, ENDING-SITE plant 6: the
+  // watchman crosses the mooring on her first visit and greets her by
+  // name - the only time tonight a living person speaks to her. The
+  // world's voice quotes him; she answers in hers.
+  {
+    id: 'watchman-greet',
+    node: 'mooring',
+    trigger: 'scripted',
+    voice: 'world',
+    zh: '阿秀，走百病去？橋上滑。',
+    en: 'Out for the walk, A-Xiu? Bridges are slick.',
+    once: true,
+    at: 0.56,
+  },
+  {
+    id: 'mind-them',
+    node: 'mooring',
+    trigger: 'scripted',
+    voice: 'her',
+    zh: '我會當心的。',
+    en: "I'll mind them.",
+    once: true,
   },
 
   // ENDING-SITE plants 1 and 2: the house, the lamp, the mundane

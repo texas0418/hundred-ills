@@ -333,6 +333,62 @@ function ScreenLayer({
   );
 }
 
+/** The watchman crossing the mooring (OPENING beat 5, DECISIONS 89).
+ *  walk runs 0..1 once: he comes in from the right along the bank,
+ *  greets her mid-way, and at the foot of the alley steps goes up the
+ *  way she came, thinning into the mist. Drawn only on the mooring.
+ *  Figure scale is relative to the painting, so the plate sits in the
+ *  town's own proportions however the phone frames it. */
+const WATCHMAN = require('../../assets/figures/watchman.png');
+const MOORING_IDX = IDX.mooring;
+function WatchmanLayer({
+  walk, curIdx, width, height,
+}: {
+  walk: SharedValue<number>;
+  curIdx: SharedValue<number>;
+  width: number;
+  height: number;
+}) {
+  const fig = useImage(WATCHMAN);
+  const painting = useImage(SCREENS[MOORING_IDX].live);
+  const geo = painting
+    ? (() => {
+        const s = width / painting.width();
+        const ph = painting.height() * s;
+        const top = height - ph;
+        const fh = ph * 0.085;                 // a man against the town
+        const fw = fig ? fh * (fig.width() / fig.height()) : fh * 0.7;
+        return { top, ph, fh, fw };
+      })()
+    : null;
+  const transform = useDerivedValue(() => {
+    if (!geo) return [];
+    const w = walk.value;
+    const along = Math.min(w / 0.7, 1);
+    const up = Math.max(0, (w - 0.7) / 0.3);
+    const x = width * (0.98 - 0.50 * along);
+    const feet = geo.top + geo.ph * 0.80 - geo.ph * 0.05 * up;
+    const sc = 1 - 0.45 * up;
+    return [
+      { translateX: x }, { translateY: feet },
+      { scale: sc },
+      { translateX: -geo.fw / 2 }, { translateY: -geo.fh },
+    ];
+  }, [geo, width]);
+  const opacity = useDerivedValue(() => {
+    const w = walk.value;
+    if (curIdx.value !== MOORING_IDX || w <= 0 || w >= 1) return 0;
+    return w < 0.7 ? 1 : 1 - (w - 0.7) / 0.3;
+  }, []);
+  if (!fig || !geo) return null;
+  return (
+    <Group transform={transform}>
+      <SkImage image={fig} x={0} y={0} width={geo.fw} height={geo.fh}
+        fit="fill" opacity={opacity} />
+    </Group>
+  );
+}
+
 const TownCanvas = memo(function TownCanvas({
   width, height, drain, shared,
 }: {
@@ -345,6 +401,7 @@ const TownCanvas = memo(function TownCanvas({
     prog: SharedValue<number>;
     dir: SharedValue<number>;
     axis: SharedValue<number>;
+    walk: SharedValue<number>;
   };
 }) {
   return (
@@ -366,6 +423,7 @@ const TownCanvas = memo(function TownCanvas({
           height={height}
         />
       ))}
+      <WatchmanLayer walk={shared.walk} curIdx={shared.curIdx} width={width} height={height} />
     </Canvas>
   );
 });
@@ -482,6 +540,8 @@ export function Town() {
   }, [width, height, WIDTH_SV, HEIGHT_SV]);
   const busySV = useSharedValue(0);
   const previewWay = useSharedValue(-1);
+  const walk = useSharedValue(0);
+  const metWatchman = useRef(false);
   const [state, setState] = useState<TownState>(() => beginNight('gate'));
   const soundscape = useSoundscape(state);
   const stateRef = useRef(state);
@@ -505,6 +565,21 @@ export function Town() {
     const id = stateRef.current.nodeId;
     speak(id, 'enter');
     if (nodeOf(id).water && stateRef.current.fires === 3) speak(id, 'flames');
+    // The watchman, once: he crosses, he greets her by name, he goes
+    // up the way she came. His clapper sounds twice as he walks.
+    if (id === 'mooring' && !metWatchman.current) {
+      metWatchman.current = true;
+      walk.value = 0;
+      walk.value = withTiming(1, { duration: 7600, easing: Easing.linear });
+      setTimeout(() => soundscape.clap(), 900);
+      setTimeout(() => soundscape.clap(), 1700);
+      setTimeout(() => {
+        // If she has already walked off, he keeps his greeting for the
+        // next time she passes - he is out all night.
+        if (stateRef.current.nodeId === 'mooring') speak('mooring', 'scripted');
+        else { metWatchman.current = false; walk.value = 0; }
+      }, 2800);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speak]);
 
@@ -729,7 +804,7 @@ export function Town() {
             width={width}
             height={height}
             drain={drain}
-            shared={{ curIdx, fromIdx, prog, dir, axis }}
+            shared={{ curIdx, fromIdx, prog, dir, axis, walk }}
           />
         </View>
       </GestureDetector>
@@ -763,7 +838,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b60</Text>
+      <Text style={styles.stamp}>b61</Text>
     </GestureHandlerRootView>
   );
 }
