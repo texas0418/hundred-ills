@@ -24,6 +24,13 @@ ok(node('water').water === true, 'the water\'s edge is water');
 ok(node('east-water').water === true, 'the east water is water');
 ok(node('inland-water').water === true, 'the inland water is water');
 ok(node('lantern').warm === true, 'the lantern corner is the warm place');
+// The water's edge is a lean, not a place she walks on through: its
+// only way is back up (DECISIONS 67/110).
+for (const t of Object.values(NODES)) {
+  if (!t.water) continue;
+  const ways = Object.keys(t.exits);
+  ok(ways.length === 1 && ways[0] === 'up', `${t.id}: a lean has one way, up`);
+}
 ok(!node('bridge').warm, 'warmth has moved off the bridge');
 
 const s0 = beginNight();
