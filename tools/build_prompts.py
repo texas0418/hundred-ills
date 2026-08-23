@@ -946,6 +946,54 @@ PLATES = [
      "frame and the reflection sits in the middle third. Nothing else in "
      "the picture."),
 
+
+    ("60", "SCREEN - THE BANK'S FAR END, WITH THE STONE  (replaces [44])",
+     "depth",
+     "Simon, b62: the composited stone and road money 'pop up' and look\n"
+     "pasted - the assembled-art failure, back by a side door. So they\n"
+     "go INTO the painting. Same dead-end screen as [44]: the lane runs\n"
+     "ahead into mist and stops her; down is back over bridge B. Now\n"
+     "with the 石敢當 and the scattered paper money painted in by the\n"
+     "same hand. Replaces screens/bank-end.png under the same name.",
+     "A night view along the last stretch of a Jiangnan canal bank, seen "
+     "from the middle of the towpath facing along it, composed as one "
+     "complete vertical painting. The flagged towpath runs from the "
+     "bottom edge of the frame straight away into the distance, the "
+     "canal's dark water beside it on the right, a row of shuttered "
+     "house-fronts on the left; ahead the path and the houses dissolve "
+     "into thick mist and go no further. Standing IN the path, a little "
+     "way ahead, a plain upright stone marker about knee-high, a rough "
+     "grey slab set on end with no carving and no writing on it, one "
+     "small red paper square pasted to its face, the only red. Scattered "
+     "on the flagstones just before the stone, a dozen small round paper "
+     "coins, pale, lying where they were thrown, a few fallen in a line "
+     "toward the mist. One lit window high on the left. Deserted."),
+
+    ("61", "SCREEN - BANK EAST, WITH THE DOOR GODS  (replaces [55])",
+     "lateral",
+     "Simon, b62: the door gods composited onto the lantern door looked\n"
+     "pasted. They go INTO the painting. Same lateral bank as [55] -\n"
+     "arched bridge at the left edge, beam bridge at the right, laundry\n"
+     "over the water - with a pair of door gods painted on the two leaves\n"
+     "of the lantern door, bright and new. Replaces screens/bank-east.png\n"
+     "under the same name.",
+     "A night view of a Jiangnan canal bank seen from directly across the "
+     "water, composed as one complete vertical painting. The canal runs "
+     "LEFT TO RIGHT across the lower third of the frame, still and dark; "
+     "above it the stone embankment runs left to right the full width of "
+     "the frame with a flagged towpath along its top; above that a row of "
+     "whitewashed house-fronts with black tile roofs facing the water, "
+     "their upper storeys going into mist. Bamboo laundry poles jut from "
+     "upper windows out over the water with cloth hanging still. At the "
+     "LEFT edge of the frame the end of a low ARCHED stone bridge meets "
+     "the embankment; at the RIGHT edge the end of a FLAT stone beam "
+     "bridge meets it. Near the middle, one double door with a small "
+     "lantern beside it, and on its two leaves a matched pair of New Year "
+     "door-god prints, freshly pasted, uncreased, two armoured guardian "
+     "figures facing each other, drawn small and plain with no "
+     "lettering - their red is the only red in the picture. One moored "
+     "boat. Nothing recedes into the distance. Deserted."),
+
     ("29", "弄 - THE LANE GROUND  ** DO NOT GENERATE **",
      "plane",
      "THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.\n"

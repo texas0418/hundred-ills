@@ -248,6 +248,109 @@ string lights, bunting, crowd, text, characters, calligraphy,
 inscription, seal, signature, watermark, frame, border.
 --------------------------------------------------------------  to here
 
+[60] SCREEN - THE BANK'S FAR END, WITH THE STONE  (replaces [44])
+      Simon, b62: the composited stone and road money 'pop up' and look
+      pasted - the assembled-art failure, back by a side door. So they
+      go INTO the painting. Same dead-end screen as [44]: the lane runs
+      ahead into mist and stops her; down is back over bridge B. Now
+      with the 石敢當 and the scattered paper money painted in by the
+      same hand. Replaces screens/bank-end.png under the same name.
+
+--------------------------------------------------------------  copy from here
+Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
+of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
+wet blooming edges, visible brush direction, the paper showing
+through. Large areas of the paper left completely unpainted to stand
+for mist, water and sky. Muted and drained palette - ink black, warm
+grey, pale ochre, washed-out green. One small area of vermilion red
+and no other saturated colour. Flat frontal composition, no camera
+perspective, no photographic realism. Quiet, plain, unspectacular.
+
+A night view along the last stretch of a Jiangnan canal bank, seen
+from the middle of the towpath facing along it, composed as one
+complete vertical painting. The flagged towpath runs from the bottom
+edge of the frame straight away into the distance, the canal's dark
+water beside it on the right, a row of shuttered house-fronts on the
+left; ahead the path and the houses dissolve into thick mist and go
+no further. Standing IN the path, a little way ahead, a plain
+upright stone marker about knee-high, a rough grey slab set on end
+with no carving and no writing on it, one small red paper square
+pasted to its face, the only red. Scattered on the flagstones just
+before the stone, a dozen small round paper coins, pale, lying where
+they were thrown, a few fallen in a line toward the mist. One lit
+window high on the left. Deserted. Seen straight on from the middle
+of the way itself, the way ahead running from the bottom edge of the
+frame straight into the distance, dead centre, narrowing gently -
+this one recession is the only depth in the picture; every wall,
+roof and bank beside it stands flat and parallel to the picture
+plane. Isolated on bare paper.
+
+Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
+leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
+gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
+concept art, 3D render, anime, oversaturated, neon, HDR, glow,
+bloom, lens flare, photorealistic, painted to the edges, no white
+space, busy, ornate, dragons, red paper lanterns everywhere, large
+mass of red foliage, red canopy, fleet of boats, many boats, crowded
+boats, harbour, festival, market, market stalls, string lights,
+bunting, crowd, text, characters, calligraphy, inscription, seal,
+signature, watermark, frame, border.
+--------------------------------------------------------------  to here
+
+[61] SCREEN - BANK EAST, WITH THE DOOR GODS  (replaces [55])
+      Simon, b62: the door gods composited onto the lantern door looked
+      pasted. They go INTO the painting. Same lateral bank as [55] -
+      arched bridge at the left edge, beam bridge at the right, laundry
+      over the water - with a pair of door gods painted on the two leaves
+      of the lantern door, bright and new. Replaces screens/bank-east.png
+      under the same name.
+
+--------------------------------------------------------------  copy from here
+Chinese ink and colour painting on xuan paper, 水墨設色, in the manner
+of a late Qing Jiangnan water town. Brush and wash: soft graded ink,
+wet blooming edges, visible brush direction, the paper showing
+through. Large areas of the paper left completely unpainted to stand
+for mist, water and sky. Muted and drained palette - ink black, warm
+grey, pale ochre, washed-out green. One small area of vermilion red
+and no other saturated colour. Flat frontal composition, no camera
+perspective, no photographic realism. Quiet, plain, unspectacular.
+
+A night view of a Jiangnan canal bank seen from directly across the
+water, composed as one complete vertical painting. The canal runs
+LEFT TO RIGHT across the lower third of the frame, still and dark;
+above it the stone embankment runs left to right the full width of
+the frame with a flagged towpath along its top; above that a row of
+whitewashed house-fronts with black tile roofs facing the water,
+their upper storeys going into mist. Bamboo laundry poles jut from
+upper windows out over the water with cloth hanging still. At the
+LEFT edge of the frame the end of a low ARCHED stone bridge meets
+the embankment; at the RIGHT edge the end of a FLAT stone beam
+bridge meets it. Near the middle, one double door with a small
+lantern beside it, and on its two leaves a matched pair of New Year
+door-god prints, freshly pasted, uncreased, two armoured guardian
+figures facing each other, drawn small and plain with no lettering -
+their red is the only red in the picture. One moored boat. Nothing
+recedes into the distance. Deserted. Seen straight on from directly
+across the water, everything parallel to the picture plane, no
+recession and no vanishing point; the bank, its path and the water
+are cut by the left and right edges of the frame at the same height
+so the scene reads as continuing both ways beyond the picture.
+Isolated on bare paper.
+
+Negative: Japanese, ukiyo-e, vermilion lacquer bridge, torii, gold
+leaf, stone lantern, pagoda, cherry blossom, koi, zen garden, raked
+gravel, mountains, karst peaks, cliffs, airbrush, digital painting,
+concept art, 3D render, anime, oversaturated, neon, HDR, glow,
+bloom, lens flare, photorealistic, perspective, vanishing point,
+receding row, diagonal recession, foreshortening, three-quarter
+view, converging lines, painted to the edges, no white space, busy,
+ornate, dragons, red paper lanterns everywhere, large mass of red
+foliage, red canopy, fleet of boats, many boats, crowded boats,
+harbour, festival, market, market stalls, string lights, bunting,
+crowd, text, characters, calligraphy, inscription, seal, signature,
+watermark, frame, border.
+--------------------------------------------------------------  to here
+
 [29] 弄 - THE LANE GROUND  ** DO NOT GENERATE **
       THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.
       
