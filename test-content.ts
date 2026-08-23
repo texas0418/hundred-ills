@@ -4,13 +4,15 @@ import {
   FILES, MIX, strikePattern, takeFor,
 } from './src/content/soundscape';
 import { NODES } from './src/engine/nodes';
+import { OVERLAYS, TARGETS, targetAt } from './src/content/targets';
+import { CAST, castAt } from './src/content/asks';
 
 let n = 0;
 function ok(c: boolean, m: string) { n++; if (!c) throw new Error(`FAIL: ${m}`); }
 
-// Every line belongs to a real node.
+// Every line belongs to a real node, or to anywhere ('*').
 for (const l of LINES) {
-  ok(!!NODES[l.node], `${l.id} plays on a real node`);
+  ok(l.node === '*' || !!NODES[l.node], `${l.id} plays on a real node`);
 }
 
 // Ids are unique - the once-tracking depends on it.
@@ -95,5 +97,26 @@ ok(pat[3].atMs - pat[2].atMs > 700, 'a breath between the counts');
 const seen4 = new Set([0, 1, 2, 3].map((i) => takeFor('clapper-slow', i)));
 ok(seen4.size === 4, 'four slow takes rotate');
 ok(takeFor('studs', 3) === 'studs-1', 'studs wrap at three');
+
+// Things in the paintings sit on real screens, inside the frame.
+for (const o of OVERLAYS) {
+  ok(!!NODES[o.node], `overlay ${o.plate} on a real node`);
+  ok(o.x > 0 && o.x < 1 && o.y > 0 && o.y <= 1 && o.w > 0 && o.w < 0.6,
+    `overlay ${o.plate} inside the painting`);
+}
+for (const t of TARGETS) {
+  ok(!!NODES[t.node], `target ${t.act} on a real node`);
+  ok(t.x0 < t.x1 && t.y0 < t.y1 && t.x0 >= 0 && t.x1 <= 1 && t.y0 >= 0 && t.y1 <= 1,
+    `target ${t.act} is a sane box`);
+}
+ok(targetAt('gate', 0.5, 0.45)?.act === 'studs', 'the studs are where the door is');
+ok(targetAt('gate', 0.5, 0.9) === undefined, 'the lane is not the studs');
+
+// The casts: every authored screen is real, and the god laughs at
+// her own door.
+for (const id of Object.keys(CAST)) ok(!!NODES[id], `cast authored for real node ${id}`);
+ok(castAt('house-lamp') === 'xiao', 'the god laughs at her own door');
+ok(castAt('bank-end') === 'yin', 'the dead end says no');
+ok(castAt('somewhere-unwritten') === 'xiao', 'the unwritten is the wrong question');
 
 console.log(`test-content: ${n} assertions passed`);

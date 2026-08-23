@@ -188,12 +188,16 @@ export interface TownState {
   readonly elapsedMs: number;
   /** Milliseconds of warmth accumulated where she stands. */
   readonly warmMs: number;
+  /** The screen she came from - what she sees if she looks back. */
+  readonly prevNodeId: string | null;
+  /** 擲筊: she has the shrine's blocks (FIRST-WATCH 一更四點). */
+  readonly blocks: boolean;
 }
 
 export function beginNight(at: string = 'gate'): TownState {
   return {
     nodeId: at, fires: MAX_FIRES, enteredFrom: null,
-    crossed: [], elapsedMs: 0, warmMs: 0,
+    crossed: [], elapsedMs: 0, warmMs: 0, prevNodeId: null, blocks: false,
   };
 }
 
@@ -229,7 +233,7 @@ export function move(s: TownState, way: Way): Move {
   return {
     state: {
       ...s, nodeId: to, enteredFrom: OPPOSITE[way],
-      crossed, fires, warmMs: 0,
+      crossed, fires, warmMs: 0, prevNodeId: s.nodeId,
     },
     moved: true,
     costAFlame: cost,
@@ -244,6 +248,23 @@ export function bridgesRemaining(s: TownState): number {
 export function lookBack(s: TownState): TownState {
   if (s.fires === 0) return s;
   return { ...s, fires: (s.fires - 1) as FireCount };
+}
+
+/** A flame out by any of the sourced ways - the shoulder tap at the
+ *  water, the look back. Same price, DECISIONS 16/18. */
+export const loseFire = lookBack;
+
+/** 陽氣 from a living body passing close - the watchman - or a hearth
+ *  she does not stand at long enough to tick. One flame back, at most
+ *  three. DECISIONS 84. */
+export function relight(s: TownState): TownState {
+  if (s.fires >= MAX_FIRES) return s;
+  return { ...s, fires: (s.fires + 1) as FireCount };
+}
+
+/** She takes the blocks from the shrine niche. */
+export function takeBlocks(s: TownState): TownState {
+  return s.blocks ? s : { ...s, blocks: true };
 }
 
 /** DECISIONS 84: standing by a lit lantern relights, in real time. */

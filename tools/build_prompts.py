@@ -44,6 +44,11 @@ NEGATIVE_DEPTH = NEGATIVE.replace(
     "perspective, vanishing point, receding row, diagonal recession, "
     "foreshortening, three-quarter view, converging lines, ", "")
 
+# A REFLECTION overlay is painted on black water to all four edges; its
+# negative keeps every ban except the two that forbid exactly that.
+NEGATIVE_REFLECTION = NEGATIVE.replace(
+    "painted to the edges, no white space, ", "")
+
 # Constraints that apply to a WHOLE CLASS of plate, appended automatically
 # so they cannot drift between prompts. Hard-won:
 #
@@ -101,6 +106,14 @@ KIND_CLAUSE = {
         "point; the bank, its path and the water are cut by the left and "
         "right edges of the frame at the same height so the scene reads as "
         "continuing both ways beyond the picture. Isolated on bare paper."
+    ),
+    # Painted ON near-black water, for the waters' overlays - the one
+    # class of plate that is NOT on bare paper, because it is composited
+    # into water and its edges must be water.
+    "reflection": (
+        " Seen straight down, flat, with no perspective. Painted entirely on "
+        "near-black still water with no bare paper anywhere; the water "
+        "reaches all four edges. Nothing else in the frame."
     ),
     # Things that hang into frame from an edge - they cannot be centred
     # with clear paper all round, because the anchoring edge is the point.
@@ -908,6 +921,31 @@ PLATES = [
      "walls close the frame on both sides at the landing. No water "
      "visible anywhere, no boat, no steps down. Deserted."),
 
+
+    # ---- FIRST-WATCH, ratified 2026-08-23 ----------------------------------
+
+    ("59", "HER REFLECTION IN THE WATER  (overlay for the three waters)",
+     "reflection",
+     "FIRST-WATCH question 6, ratified: the lean needs her reflection so\n"
+     "that at zero fires 'no reflection' means something (DECISIONS 67,\n"
+     "68). This is an OVERLAY composited onto the black water of [37],\n"
+     "[45] and [50] - so it is painted ON near-black water, not on paper,\n"
+     "and its edges dissolve into that black so the join never shows.\n"
+     "Seen from above, as she sees it: herself upside-down. The three\n"
+     "flames are drawn live by the engine - DO NOT paint them.",
+     "A square of still near-black canal water at night, filling the "
+     "whole frame edge to edge, and in it, seen from directly above, the "
+     "pale reflection of a young Chinese woman of the late Qing leaning "
+     "over the water's edge looking down - so her face and shoulders "
+     "appear UPSIDE-DOWN in the water, chin nearest the top of the frame, "
+     "hair drawn back plainly, a dark padded winter jacket, no jewellery. "
+     "The reflection is soft and slightly broken by the water's surface, "
+     "pale grey and paper-white against the black, thin ink, the features "
+     "quiet and unremarkable. No flames, no lantern, no light source "
+     "painted anywhere. The black water runs out to all four edges of the "
+     "frame and the reflection sits in the middle third. Nothing else in "
+     "the picture."),
+
     ("29", "弄 - THE LANE GROUND  ** DO NOT GENERATE **",
      "plane",
      "THIS PROMPT IS WRONG AND IS KEPT ONLY SO NOBODY WRITES IT AGAIN.\n"
@@ -973,7 +1011,8 @@ def block(pid, title, kind, note, body):
         "",
         wrap(body.rstrip() + KIND_CLAUSE[kind]),
         "",
-        wrap(NEGATIVE_DEPTH if kind == "depth" else NEGATIVE),
+        wrap(NEGATIVE_DEPTH if kind == "depth"
+             else NEGATIVE_REFLECTION if kind == "reflection" else NEGATIVE),
         f"{RULE}  to here",
         "", "",
     ]

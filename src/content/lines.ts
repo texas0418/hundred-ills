@@ -14,12 +14,16 @@
  * Pure module - test-content.ts holds the prose rules.
  */
 
-export type Trigger = 'enter' | 'touch' | 'flames' | 'scripted';
+export type Trigger =
+  | 'enter' | 'touch' | 'flames' | 'scripted'
+  | 'door-gods' | 'road-money' | 'shrine' | 'stone-refuses'
+  | 'cast-sheng' | 'cast-yin' | 'cast-xiao'
+  | 'relight' | 'call';
 
 export interface Line {
   /** Stable id, used to keep a once-line from repeating. */
   readonly id: string;
-  /** Node the line belongs to. */
+  /** Node the line belongs to; '*' means any node. */
   readonly node: string;
   readonly trigger: Trigger;
   readonly voice: 'her' | 'world';
@@ -118,6 +122,79 @@ export const LINES: readonly Line[] = [
     en: "The Zhous' new-year print. A fat boy and a carp. Theirs came in autumn - a girl, but healthy.",
     once: true,
   },
+
+  // ---- FIRST-WATCH, ratified 2026-08-23 ----------------------------
+
+  // 一更二點: the first ward, met open.
+  {
+    id: 'door-gods-new',
+    node: 'bank-east',
+    trigger: 'door-gods',
+    voice: 'her',
+    zh: '門神還新得很。是好人家。',
+    en: 'The door gods are still new. A good household.',
+    once: true,
+    at: 0.62,
+  },
+  // The road money at the bank's end: the prohibition, seen, obeyed.
+  {
+    id: 'road-money',
+    node: 'bank-end',
+    trigger: 'road-money',
+    voice: 'her',
+    zh: '買路錢。別碰，不是給活人的。',
+    en: "Road money. Leave it - it's not for the living.",
+    once: true,
+  },
+  // 一更四點: the shrine's blocks, borrowed.
+  {
+    id: 'shrine-borrow',
+    node: 'inland-east',
+    trigger: 'shrine',
+    voice: 'her',
+    zh: '借一下，回頭還。',
+    en: "Borrowing. I'll bring them back.",
+    once: true,
+  },
+  // The stone refuses her when she reads as less than living: the
+  // rule stated as a complaint, exactly true on the second walk.
+  {
+    id: 'stone-unclean',
+    node: 'bank-end',
+    trigger: 'stone-refuses',
+    voice: 'her',
+    zh: '石敢當。說我不乾淨。',
+    en: "Stone-dares. It's calling me unclean.",
+  },
+  // The casts, the world's voice, anywhere.
+  { id: 'cast-sheng', node: '*', trigger: 'cast-sheng', voice: 'world', zh: '聖筊', en: 'Yes.' },
+  { id: 'cast-yin', node: '*', trigger: 'cast-yin', voice: 'world', zh: '陰筊', en: 'No.' },
+  {
+    id: 'cast-xiao', node: '*', trigger: 'cast-xiao', voice: 'world',
+    zh: '笑筊', en: 'The god is laughing. Ask a better question.',
+  },
+  // 一更五點: the first relight, once.
+  {
+    id: 'warm-stand',
+    node: 'lantern',
+    trigger: 'relight',
+    voice: 'her',
+    zh: '暖和。站一會兒。',
+    en: 'Warm. Stand a moment.',
+    once: true,
+  },
+  // ENDING-SITE plant 3: the voice, from behind, distant, once, at the
+  // watch's edge. Nothing to answer yet. Her false comfort follows.
+  { id: 'the-call', node: '*', trigger: 'call', voice: 'world', zh: '阿秀——', en: 'A-Xiu——', once: true, at: 0.3 },
+  {
+    id: 'no-one-calls',
+    node: '*',
+    trigger: 'call',
+    voice: 'her',
+    zh: '走路的時候沒人會叫我。規矩大家都懂。',
+    en: 'No one calls me on the walk. Everyone knows the rule.',
+    once: true,
+  },
 ];
 
 /** Lines due for a node and trigger, in declared order, skipping
@@ -128,7 +205,8 @@ export function linesFor(
   seen: ReadonlySet<string>,
 ): Line[] {
   return LINES.filter(
-    (l) => l.node === node && l.trigger === trigger && !(l.once && seen.has(l.id)),
+    (l) => (l.node === node || l.node === '*') && l.trigger === trigger
+      && !(l.once && seen.has(l.id)),
   );
 }
 
