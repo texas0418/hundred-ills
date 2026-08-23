@@ -1,5 +1,5 @@
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
-import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { Image as RNImage, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import {
   Gesture,
   GestureDetector,
@@ -32,11 +32,16 @@ import {
   lookBack,
   move as moveNode,
   node as nodeOf,
+  pointIndex,
+  relight,
+  takeBlocks,
   tick as tickNight,
   watchmanCalling,
   type TownState,
   type Way,
 } from '../engine/nodes';
+import { OVERLAYS, targetAt, type Act, type OverlayId } from '../content/targets';
+import { castAt } from '../content/asks';
 import { CHAR_MS, holdMs, linesFor, revealMs, type Line, type Trigger } from '../content/lines';
 import { useSoundscape } from './useSoundscape';
 
@@ -236,6 +241,68 @@ const LEAN: boolean[] = SCREENS.map((s2) => {
   return !!to && !!nodeOf(to).water;
 });
 
+/** The paintings' pixel sizes, from the asset registry, so touch
+ *  targets and overlays authored in PAINTING fractions can be placed
+ *  on the phone under the width-fit / bottom-anchor rule. */
+const PAINT_SIZE: { w: number; h: number }[] = SCREENS.map((s2) => {
+  const src = RNImage.resolveAssetSource(s2.live);
+  return { w: src?.width ?? 1000, h: src?.height ?? 2048 };
+});
+function paintGeo(idx: number, width: number, height: number) {
+  const { w, h } = PAINT_SIZE[idx];
+  const s = width / w;
+  const ph = h * s;
+  return { s, ph, top: height - ph };
+}
+
+const PLATES: Record<OverlayId, number> = {
+  shigandang: require('../../assets/figures/shigandang.png'),
+  'road-money': require('../../assets/figures/road-money.png'),
+  'door-gods-intact': require('../../assets/figures/door-gods-intact.png'),
+  jiaobei: require('../../assets/figures/jiaobei.png'),
+};
+
+/** One plate composited on one screen, in the painting's own
+ *  proportions. Drawn at full opacity only while that screen is the
+ *  current one and not phasing. */
+function PlateLayer({
+  plate, nodeIdx, x, y, w, curIdx, fromIdx, width, height, show,
+}: {
+  plate: OverlayId; nodeIdx: number; x: number; y: number; w: number;
+  curIdx: SharedValue<number>; fromIdx: SharedValue<number>;
+  width: number; height: number;
+  /** Optional extra gate (the thrown blocks). */
+  show?: SharedValue<number>;
+}) {
+  const img = useImage(PLATES[plate]);
+  const geo = paintGeo(nodeIdx, width, height);
+  const pw = width * w;
+  const ph = img ? pw * (img.height() / img.width()) : pw;
+  const px = width * x - pw / 2;
+  const py = geo.top + geo.ph * y - ph;
+  const opacity = useDerivedValue(() => {
+    if (curIdx.value !== nodeIdx || fromIdx.value >= 0) return 0;
+    return show ? show.value : 1;
+  }, [nodeIdx]);
+  if (!img) return null;
+  return <SkImage image={img} x={px} y={py} width={pw} height={ph} fit="fill" opacity={opacity} />;
+}
+
+/** What she sees when she looks back: the screen she came from,
+ *  DRAINED, over everything, for the length of the turn. */
+function GlanceLayer({
+  src, glance, width, height,
+}: {
+  src: number | null; glance: SharedValue<number>; width: number; height: number;
+}) {
+  const img = useImage(src);
+  const opacity = useDerivedValue(() => glance.value, []);
+  if (!img || src === null) return null;
+  const s = width / img.width();
+  const h = img.height() * s;
+  return <SkImage image={img} x={0} y={height - h} width={width} height={h} fit="fill" opacity={opacity} />;
+}
+
 /** One real minute per point in the demo; ships at 1. */
 const DEMO_TIME_SCALE = 60;
 
@@ -390,7 +457,7 @@ function WatchmanLayer({
 }
 
 const TownCanvas = memo(function TownCanvas({
-  width, height, drain, shared,
+  width, height, drain, shared, cast, glanceSrc,
 }: {
   width: number;
   height: number;
@@ -402,7 +469,11 @@ const TownCanvas = memo(function TownCanvas({
     dir: SharedValue<number>;
     axis: SharedValue<number>;
     walk: SharedValue<number>;
+    castShow: SharedValue<number>;
+    glance: SharedValue<number>;
   };
+  cast: { idx: number } | null;
+  glanceSrc: number | null;
 }) {
   return (
     <Canvas style={StyleSheet.absoluteFill}>
@@ -423,7 +494,22 @@ const TownCanvas = memo(function TownCanvas({
           height={height}
         />
       ))}
+      {OVERLAYS.map((o) => (
+        <PlateLayer
+          key={`${o.node}-${o.plate}`}
+          plate={o.plate} nodeIdx={IDX[o.node]} x={o.x} y={o.y} w={o.w}
+          curIdx={shared.curIdx} fromIdx={shared.fromIdx} width={width} height={height}
+        />
+      ))}
+      {cast ? (
+        <PlateLayer
+          plate="jiaobei" nodeIdx={cast.idx} x={0.5} y={0.985} w={0.2}
+          curIdx={shared.curIdx} fromIdx={shared.fromIdx} width={width} height={height}
+          show={shared.castShow}
+        />
+      ) : null}
       <WatchmanLayer walk={shared.walk} curIdx={shared.curIdx} width={width} height={height} />
+      <GlanceLayer src={glanceSrc} glance={shared.glance} width={width} height={height} />
     </Canvas>
   );
 });
@@ -523,6 +609,110 @@ function useHerVoice() {
   return { line, speak, hush: hushOnMove, holdUntilSV };
 }
 
+/** LOOK BACK as a HOLD (FIRST-WATCH question 1, ratified): she stops
+ *  and turns; the screen she came from shows DRAINED behind her for
+ *  the length of the turn - the dead town is what you see when you
+ *  look behind you - and a flame is out. Let go early and she only
+ *  began to turn: no cost. */
+function useGlance({
+  busySV, refuse, stateRef, setState,
+}: {
+  busySV: SharedValue<number>;
+  refuse: () => void;
+  stateRef: React.MutableRefObject<TownState>;
+  setState: React.Dispatch<React.SetStateAction<TownState>>;
+}) {
+  const glance = useSharedValue(0);
+  const [glanceSrc, setGlanceSrc] = useState<number | null>(null);
+  const glanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const glanceStart = useCallback(() => {
+    const st = stateRef.current;
+    if (busySV.value || !st.prevNodeId || st.fires === 0) { refuse(); return; }
+    setGlanceSrc(SCREENS[IDX[st.prevNodeId]].dead);
+    // eslint-disable-next-line react-hooks/immutability
+    glance.value = withTiming(0.9, { duration: 380 });
+    glanceTimer.current = setTimeout(() => {
+      glanceTimer.current = null;
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {});
+      setState(lookBack);
+      glance.value = withTiming(0, { duration: 420 }, (done) => {
+        'worklet';
+        if (done) runOnJS(setGlanceSrc)(null);
+      });
+    }, 700);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refuse]);
+
+  const glanceEnd = useCallback(() => {
+    if (glanceTimer.current) {
+      clearTimeout(glanceTimer.current);
+      glanceTimer.current = null;
+      // eslint-disable-next-line react-hooks/immutability
+      glance.value = withTiming(0, { duration: 220 }, (done) => {
+        'worklet';
+        if (done) runOnJS(setGlanceSrc)(null);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return { glance, glanceSrc, glanceStart, glanceEnd };
+}
+
+/** What her hands do to the things in the paintings (FIRST-WATCH):
+ *  the touchable things, and the blocks thrown at her feet. */
+function useActs({
+  speak, soundscape, setState, stateRef, castShow, setCast,
+}: {
+  speak: (node: string, trigger: Trigger) => void;
+  soundscape: { touch(): void; clatter(): void };
+  setState: React.Dispatch<React.SetStateAction<TownState>>;
+  stateRef: React.MutableRefObject<TownState>;
+  castShow: SharedValue<number>;
+  setCast: (c: { idx: number } | null) => void;
+}) {
+  /** 擲筊: the blocks clatter and land at her feet; the world names
+   *  the cast. The question is always "this way?" of where she stands.
+   *  (castShow is a shared value, mutable by Reanimated's contract.) */
+  // eslint-disable-next-line react-hooks/immutability
+  const throwBlocks = useCallback(() => {
+    const id = stateRef.current.nodeId;
+    soundscape.clatter();
+    setCast({ idx: IDX[id] });
+    // eslint-disable-next-line react-hooks/immutability
+    castShow.value = 0;
+    // eslint-disable-next-line react-hooks/immutability
+    castShow.value = withTiming(1, { duration: 180 });
+    setTimeout(() => {
+      castShow.value = withTiming(0, { duration: 500 });
+    }, 3200);
+    setTimeout(() => speak(id, `cast-${castAt(id)}`), 420);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [speak, soundscape]);
+
+  /** What touching a thing in the painting does. */
+  const actOn = useCallback(
+    (act: Act, st: TownState) => {
+      Haptics.selectionAsync().catch(() => {});
+      if (act === 'studs') { soundscape.touch(); speak('gate', 'touch'); }
+      else if (act === 'door-gods') speak('bank-east', 'door-gods');
+      else if (act === 'road-money') speak('bank-end', 'road-money');
+      else if (act === 'shrine') {
+        if (!st.blocks) { setState(takeBlocks); speak('inland-east', 'shrine'); }
+      } else if (act === 'stone' && st.fires < 3) {
+        // The lock on district two: a stone to the living, a refusal to
+        // the rest. The lane beyond arrives with district two.
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {});
+        speak('bank-end', 'stone-refuses');
+      }
+    },
+    [speak, soundscape],
+  );
+
+  return { actOn, throwBlocks };
+}
+
 export function Town() {
   const { width, height } = useWindowDimensions();
   const curIdx = useSharedValue(0);
@@ -542,6 +732,10 @@ export function Town() {
   const previewWay = useSharedValue(-1);
   const walk = useSharedValue(0);
   const metWatchman = useRef(false);
+  const castShow = useSharedValue(0);
+  const [cast, setCast] = useState<{ idx: number } | null>(null);
+  const calledOnce = useRef(false);
+  const prevFires = useRef(3);
   const [state, setState] = useState<TownState>(() => beginNight('gate'));
   const soundscape = useSoundscape(state);
   const stateRef = useRef(state);
@@ -573,6 +767,14 @@ export function Town() {
       walk.value = withTiming(1, { duration: 7600, easing: Easing.linear });
       setTimeout(() => soundscape.clap(), 900);
       setTimeout(() => soundscape.clap(), 1700);
+      // A living body passing close (84): if she is short and still
+      // here as he passes, one flame comes back, unexplained.
+      setTimeout(() => {
+        if (stateRef.current.nodeId === 'mooring' && stateRef.current.fires < 3) {
+          Haptics.selectionAsync().catch(() => {});
+          setState(relight);
+        }
+      }, 3600);
       setTimeout(() => {
         // If she has already walked off, he keeps his greeting for the
         // next time she passes - he is out all night.
@@ -674,13 +876,6 @@ export function Town() {
     [commit, settle],
   );
 
-  const doLookBack = useCallback(() => {
-    if (busySV.value || stateRef.current.fires === 0) return;
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
-    setState(lookBack);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   // Touch targets on the paintings. The bronze studs are the first
   // (OPENING beat 2): the game's first working input is a touch, not
   // a swipe. Regions are fractions of the displayed frame.
@@ -688,27 +883,28 @@ export function Town() {
   useEffect(() => {
     dimsRef.current = { width, height };
   }, [width, height]);
+  const { actOn, throwBlocks } = useActs({
+    speak, soundscape, setState, stateRef, castShow, setCast,
+  });
+
   const touch = useCallback(
     (x: number, y: number) => {
       if (busySV.value) return;
       const { width: w, height: h } = dimsRef.current;
-      const here = nodeOf(stateRef.current.nodeId);
-      if (
-        here.id === 'gate' &&
-        x > w * 0.2 && x < w * 0.8 &&
-        y > h * 0.28 && y < h * 0.65
-      ) {
-        Haptics.selectionAsync().catch(() => {});
-        soundscape.touch();
-        speak('gate', 'touch');
-        return;
-      }
+      const st = stateRef.current;
+      const here = nodeOf(st.nodeId);
+      // Things in the painting first - authored in painting fractions.
+      const geo = paintGeo(IDX[here.id], w, h);
+      const hit = targetAt(here.id, x / w, (y - geo.top) / geo.ph);
+      if (hit) { actOn(hit.act, st); return; }
       // A fork (DECISIONS 110): tap the mouth you want. Both ways are
       // ahead, so the phase is the dolly inward either way.
       if (here.fork && y < h * 0.7) {
         move(x < w / 2 ? 'left' : 'right', { axis: 1, dir: -1 });
         return;
       }
+      // The blocks: tap the ground at her feet.
+      if (st.blocks && y > h * 0.9) { throwBlocks(); return; }
       // The water's edge (DECISIONS 67/110): touch the water and she
       // leans down to it. Not a step - her feet never leave the bank.
       if (LEAN[IDX[here.id]] && y > h * 0.55) {
@@ -716,19 +912,27 @@ export function Town() {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [speak, move, soundscape],
+    [speak, move, soundscape, throwBlocks, actOn],
   );
+
+  const { glance, glanceSrc, glanceStart, glanceEnd } = useGlance({
+    busySV, refuse, stateRef, setState,
+  });
 
   // eslint-disable-next-line react-hooks/refs
   const [pan] = useState(() =>
     Gesture.Race(
       Gesture.Exclusive(
-        Gesture.Tap()
-          .numberOfTaps(2)
-          .maxDuration(260)
-          .onEnd(() => {
+        Gesture.LongPress()
+          .minDuration(420)
+          .maxDistance(18)
+          .onStart(() => {
             'worklet';
-            runOnJS(doLookBack)();
+            runOnJS(glanceStart)();
+          })
+          .onFinalize(() => {
+            'worklet';
+            runOnJS(glanceEnd)();
           }),
         Gesture.Tap()
           .maxDuration(260)
@@ -792,6 +996,20 @@ export function Town() {
     ),
   );
 
+  // The first relight under the lantern gets its line; the watch's
+  // last minutes bring the voice, once, wherever she is.
+  useEffect(() => {
+    if (state.fires > prevFires.current && state.nodeId === 'lantern') {
+      speak('lantern', 'relight');
+    }
+    prevFires.current = state.fires;
+    if (!calledOnce.current && pointIndex(state) >= 5) {
+      calledOnce.current = true;
+      speak(state.nodeId, 'call');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.fires, state.nodeId, state.elapsedMs]);
+
   const wc = watchCall(state);
   const drain = drainAmount(state);
   const flames = nodeOf(state.nodeId).water && state.fires > 0 ? state.fires : 0;
@@ -804,7 +1022,9 @@ export function Town() {
             width={width}
             height={height}
             drain={drain}
-            shared={{ curIdx, fromIdx, prog, dir, axis, walk }}
+            shared={{ curIdx, fromIdx, prog, dir, axis, walk, castShow, glance }}
+            cast={cast}
+            glanceSrc={glanceSrc}
           />
         </View>
       </GestureDetector>
@@ -838,7 +1058,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b61</Text>
+      <Text style={styles.stamp}>b62</Text>
     </GestureHandlerRootView>
   );
 }

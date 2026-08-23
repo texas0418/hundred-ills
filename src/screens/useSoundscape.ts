@@ -137,6 +137,11 @@ export function useSoundscape(state: TownState) {
     clap() {
       oneShot(takeFor('clapper-quick', takes.current++));
     },
+    /** The blocks landing on stone - two knocks, close together. */
+    clatter() {
+      oneShot(takeFor('studs', takes.current++));
+      setTimeout(() => oneShot(takeFor('studs', takes.current++)), 110);
+    },
   }));
   return api;
 }

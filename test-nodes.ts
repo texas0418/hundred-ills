@@ -1,6 +1,6 @@
 import {
   NODES, beginNight, move, lookBack, tick, bridgesRemaining,
-  drainAmount, call, RELIGHT_MS, node, type TownState,
+  drainAmount, call, RELIGHT_MS, node, relight, takeBlocks, type TownState,
 } from './src/engine/nodes';
 
 let n = 0;
@@ -114,6 +114,18 @@ ok(cold.warmMs === 0, 'no lantern here - the warmth goes');
 // The night still runs on the watches.
 ok(call(s0).label === '一更一點', 'the night opens at 一更一點');
 ok(drainAmount({ ...s0, fires: 0 }) === 1, 'zero fires is a fully drained world');
+
+// She remembers where she came from, for the look back.
+ok(beginNight().prevNodeId === null, 'nothing behind her at the gate');
+ok(move(s0, 'down').state.prevNodeId === 'gate', 'the gate is behind her on the lane');
+
+// A living body passing close gives one flame back, never a fourth.
+ok(relight({ ...s0, fires: 1 }).fires === 2, 'the watchman passing warms her');
+ok(relight(s0).fires === 3, 'three is the most she can be');
+
+// The blocks, once taken, stay taken.
+ok(!s0.blocks && takeBlocks(s0).blocks && takeBlocks(takeBlocks(s0)).blocks,
+  'the shrine\'s blocks are hers for the night');
 
 // Moving resets warmth.
 ok(move({ ...onBridge, warmMs: 1500 }, 'left').state.warmMs === 0, 'walking away resets warmth');
