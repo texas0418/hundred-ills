@@ -226,6 +226,15 @@ const EXITS: number[][] = SCREENS.map((s2) =>
   }),
 );
 const FORK: boolean[] = SCREENS.map((s2) => !!nodeOf(s2.id).fork);
+/** LEAN[idx] is true where the down exit goes to the water's edge:
+ *  her feet are the bottom edge of every painting, and on a bank that
+ *  edge is water, so stepping back is impossible - going to the water
+ *  is a LEAN (DECISIONS 67/110), chosen by touching the water, and a
+ *  swipe down refuses. */
+const LEAN: boolean[] = SCREENS.map((s2) => {
+  const to = nodeOf(s2.id).exits.down;
+  return !!to && !!nodeOf(to).water;
+});
 
 /** One real minute per point in the demo; ships at 1. */
 const DEMO_TIME_SCALE = 60;
@@ -623,6 +632,12 @@ export function Town() {
       // ahead, so the phase is the dolly inward either way.
       if (here.fork && y < h * 0.7) {
         move(x < w / 2 ? 'left' : 'right', { axis: 1, dir: -1 });
+        return;
+      }
+      // The water's edge (DECISIONS 67/110): touch the water and she
+      // leans down to it. Not a step - her feet never leave the bank.
+      if (LEAN[IDX[here.id]] && y > h * 0.55) {
+        move('down', { axis: 1, dir: -1 });
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -659,6 +674,7 @@ export function Town() {
               busySV.value === 1 ||
               Date.now() < holdUntilSV.value ||
               (FORK[cur] && way !== 3) ||
+              (LEAN[cur] && way === 3) ||
               EXITS[cur][way] < 0;
             if (blocked) {
               previewWay.value = -2;
@@ -747,7 +763,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b59</Text>
+      <Text style={styles.stamp}>b60</Text>
     </GestureHandlerRootView>
   );
 }
