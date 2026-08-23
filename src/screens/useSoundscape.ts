@@ -8,7 +8,7 @@
  * loses colour. The clapper reads the same watch call as the visual
  * strike display. One-shots rotate takes so nothing repeats.
  */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createAudioPlayer, setAudioModeAsync, type AudioPlayer } from 'expo-audio';
 
 import { drainAmount, watchmanCalling, call as watchCall, type TownState } from '../engine/nodes';
@@ -126,10 +126,13 @@ export function useSoundscape(state: TownState) {
     wasCalling.current = calling;
   }, [state]);
 
-  return {
+  // One stable object for the life of the component, so callers can
+  // hold it without re-wiring gestures: everything it touches is a ref.
+  const [api] = useState(() => ({
     /** The bronze studs, and whatever touch targets come after. */
     touch() {
       oneShot(takeFor('studs', takes.current++));
     },
-  };
+  }));
+  return api;
 }

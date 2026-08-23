@@ -822,6 +822,52 @@ THE TOWN IS A NETWORK  (100-104, added 2026-08-20)
      showed that forward existed. A gap, a passage, steps, a bridge
      deck - the art declares the exits, or the node does not get one.
 
+
+110. SHE FACES INLAND AND NEVER TURNS. THE PAINTING'S PATH IS THE
+     SWIPE. Ratified by Simon 2026-08-21 after walking b54 with all
+     nineteen screens of the first district in hand.
+
+     The exit rule at 109 caught MISSING exits. It never said which
+     way an exit runs, and three screens proved the gap: the far
+     bank's lane ran corner to corner into the distance while its
+     return was wired sideways; the gate lane, reached by stepping
+     back from the gate, had no gate in it; the mooring's "right to
+     the bridge" had no rightward bank drawn at all. Every screen was
+     beautiful alone and the town did not hold together in the hand.
+
+     THE RULE, in four parts, binding on every screen from here:
+
+     FACING. She faces inland and keeps facing inland. Swipe up is a
+     step deeper into the picture; swipe down is a step back out of
+     it, still looking the same way. She does not turn. Left and
+     right walk along a bank or lane that runs ACROSS the frame,
+     with the water beside her.
+
+     THE PATH IS THE SWIPE. A lane drawn running left-right across
+     the frame is a left/right pair. A lane drawn from the foreground
+     into the distance is an up/down pair. Never wire across that;
+     if the painting's geometry and the graph disagree, the painting
+     is regenerated with the direction in the prompt, or the edge
+     goes.
+
+     ARRIVALS. The place she came from is in frame at the edge she
+     entered from: the gate small at the lane's far end, the end of
+     the bridge at the bank's edge, the house at the end of the
+     neighbour's wall. A screen shows its exits AND its arrivals.
+
+     FORKS. Two ways ahead cannot be a left/right swipe - both are
+     forward. A fork is chosen by TOUCH: the player taps the mouth
+     they want, the ambiguous swipe refuses. The world answers
+     touches; it already did at the studs.
+
+     COST ON THE FIRST DISTRICT: five rerolls with direction-aware
+     prompts (gate lane, mooring, bank east, inland west, inland
+     east), two rewires (bank end becomes a depth dead end past
+     bridge B; the junction becomes a touch fork), and [40] the far
+     bank BENCHED until a far-bank lateral slot exists. The prompt
+     kinds "depth" and "lateral" exist now so the direction is in
+     every future ask and the perspective negatives stop fighting it.
+
 =============================================================
 DEAD
 =============================================================

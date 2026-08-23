@@ -145,11 +145,6 @@ const SCREENS = [
     dead: require('../../assets/screens-drained/bridge.png'),
   },
   {
-    id: 'farbank',
-    live: require('../../assets/screens/farbank.png'),
-    dead: require('../../assets/screens-drained/farbank.png'),
-  },
-  {
     id: 'bank-east',
     live: require('../../assets/screens/bank-east.png'),
     dead: require('../../assets/screens-drained/bank-east.png'),
@@ -220,6 +215,18 @@ const IDX: Record<string, number> = Object.fromEntries(
   SCREENS.map((s2, i) => [s2.id, i]),
 );
 
+/** The graph flattened for the UI thread: EXITS[idx][way] is the
+ *  destination index or -1; FORK[idx] marks a touch-chosen fork.
+ *  Plain arrays, captured by the gesture worklet. */
+const WAYS: Way[] = ['left', 'right', 'up', 'down'];
+const EXITS: number[][] = SCREENS.map((s2) =>
+  WAYS.map((w) => {
+    const to = nodeOf(s2.id).exits[w];
+    return to && IDX[to] !== undefined ? IDX[to] : -1;
+  }),
+);
+const FORK: boolean[] = SCREENS.map((s2) => !!nodeOf(s2.id).fork);
+
 /** One real minute per point in the demo; ships at 1. */
 const DEMO_TIME_SCALE = 60;
 
@@ -256,21 +263,38 @@ function ScreenLayer({
       })()
     : null;
 
+  // DECISIONS 110: two verbs for two axes. Along the bank is a SLIDE -
+  // the leaving painting is pushed out and the arriving one comes in
+  // from the edge the finger pulls from. Into the town is a DOLLY -
+  // stepping deeper, the arriving picture grows from within while the
+  // leaving one swells past and thins; stepping back reverses it.
   const transform = useDerivedValue(() => {
-    let d = 0;
-    if (idx === curIdx.value && fromIdx.value >= 0) {
-      d = dir.value * (1 - prog.value) * width * 0.16;
-    } else if (idx === fromIdx.value) {
-      d = -dir.value * prog.value * width * 0.28;
+    const isCur = idx === curIdx.value && fromIdx.value >= 0;
+    const isFrom = idx === fromIdx.value;
+    if (!isCur && !isFrom) return [];
+    const p = prog.value;
+    if (axis.value === 0) {
+      const d = isCur ? dir.value * (1 - p) * width : -dir.value * p * width;
+      return [{ translateX: d }];
     }
-    return axis.value === 1 ? [{ translateY: d }] : [{ translateX: d }];
-  }, [idx, width]);
+    let sc: number;
+    if (dir.value < 0) sc = isCur ? 0.88 + 0.12 * p : 1 + 0.18 * p;
+    else sc = isCur ? 1.14 - 0.14 * p : 1 - 0.12 * p;
+    const cx = width / 2;
+    const cy = height / 2;
+    return [
+      { translateX: cx }, { translateY: cy }, { scale: sc },
+      { translateX: -cx }, { translateY: -cy },
+    ];
+  }, [idx, width, height]);
 
   const opacity = useDerivedValue(() => {
+    const p = prog.value;
     if (idx === curIdx.value) {
-      return fromIdx.value >= 0 ? prog.value : 1;
+      if (fromIdx.value < 0) return 1;
+      return axis.value === 0 ? 0.7 + 0.3 * p : p;
     }
-    if (idx === fromIdx.value) return 1 - prog.value;
+    if (idx === fromIdx.value) return axis.value === 0 ? 1 : 1 - p;
     return 0;
   }, [idx]);
 
@@ -339,42 +363,44 @@ const TownCanvas = memo(function TownCanvas({
   );
 });
 
-export function Town() {
-  const { width, height } = useWindowDimensions();
-  const curIdx = useSharedValue(0);
-  const fromIdx = useSharedValue(-1);
-  const prog = useSharedValue(1);
-  const dir = useSharedValue(1);
-  const axis = useSharedValue(0);
-  const [state, setState] = useState<TownState>(() => beginNight('gate'));
-  const soundscape = useSoundscape(state);
-  const soundscapeRef = useRef(soundscape);
-  soundscapeRef.current = soundscape;
-  const busy = useRef(false);
-  const stateRef = useRef(state);
-  useEffect(() => {
-    stateRef.current = state;
-  }, [state]);
+/** Which way a drag is going, once it is clearly going somewhere. */
+function wayFrom(tx: number, ty: number): number {
+  'worklet';
+  const ax = Math.abs(tx);
+  const ay = Math.abs(ty);
+  if (Math.max(ax, ay) < 14) return -1;
+  if (ay > ax * 1.2) return ty < 0 ? 2 : 3;
+  if (ax > ay * 1.2) return tx < 0 ? 1 : 0;
+  return -1;
+}
 
-  // The night runs whether or not she moves.
-  useEffect(() => {
-    const id = setInterval(
-      () => setState((s) => tickNight(s, 100, DEMO_TIME_SCALE)),
-      100,
-    );
-    return () => clearInterval(id);
-  }, []);
+/** How far the finger has travelled ALONG the chosen way. */
+function alongWay(w: number, tx: number, ty: number): number {
+  'worklet';
+  if (w === 0) return tx;
+  if (w === 1) return -tx;
+  if (w === 2) return -ty;
+  return ty;
+}
 
-  // Her voice: one line at a time, queued, once-lines kept for the
-  // night. The content lives in src/content/lines.ts; this is only
-  // the throat.
+/** A flick along the way commits even from a short drag. */
+function flungAlong(w: number, vx: number, vy: number): boolean {
+  'worklet';
+  return (w === 0 && vx > 600) || (w === 1 && vx < -600)
+    || (w === 2 && vy < -600) || (w === 3 && vy > 600);
+}
+
+/** Her voice: one line at a time, queued, once-lines kept for the
+ *  night. The content lives in src/content/lines.ts; this is only the
+ *  throat. holdUntilSV is the gesture's gate - while a line prints,
+ *  she does not walk. */
+function useHerVoice() {
+  const holdUntilSV = useSharedValue(0);
   const [line, setLine] = useState<Line | null>(null);
   const seen = useRef(new Set<string>());
   const lineQueue = useRef<Line[]>([]);
   const speaking = useRef(false);
   const lineTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const printingUntil = useRef(0);
 
   const showNext = useCallback(function show() {
     const next = lineQueue.current.shift() ?? null;
@@ -384,7 +410,7 @@ export function Town() {
       // queued - a line swept away by a move can still play later.
       if (next.once) seen.current.add(next.id);
       // While the line prints, she does not walk (Simon, b52).
-      printingUntil.current = Date.now() + revealMs(next);
+      holdUntilSV.value = Date.now() + revealMs(next);
       lineTimer.current = setTimeout(show, holdMs(next));
     } else {
       speaking.current = false;
@@ -414,7 +440,7 @@ export function Town() {
     if (lineTimer.current) clearTimeout(lineTimer.current);
     lineQueue.current = [];
     speaking.current = false;
-    printingUntil.current = 0;
+    holdUntilSV.value = 0;
     setLine(null);
   }, []);
 
@@ -425,27 +451,62 @@ export function Town() {
     [],
   );
 
+  return { line, speak, hush: hushOnMove, holdUntilSV };
+}
+
+export function Town() {
+  const { width, height } = useWindowDimensions();
+  const curIdx = useSharedValue(0);
+  const fromIdx = useSharedValue(-1);
+  const prog = useSharedValue(1);
+  const dir = useSharedValue(1);
+  const axis = useSharedValue(0);
+  // Gates the gesture worklet reads directly: a phase in flight, and a
+  // line still printing (DECISIONS: she does not walk mid-sentence).
+  const WIDTH_SV = useSharedValue(width);
+  const HEIGHT_SV = useSharedValue(height);
+  useEffect(() => {
+    WIDTH_SV.value = width;
+    HEIGHT_SV.value = height;
+  }, [width, height, WIDTH_SV, HEIGHT_SV]);
+  const busySV = useSharedValue(0);
+  const previewWay = useSharedValue(-1);
+  const [state, setState] = useState<TownState>(() => beginNight('gate'));
+  const soundscape = useSoundscape(state);
+  const stateRef = useRef(state);
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
+
+  // The night runs whether or not she moves.
+  useEffect(() => {
+    const id = setInterval(
+      () => setState((s) => tickNight(s, 100, DEMO_TIME_SCALE)),
+      100,
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  const { line, speak, hush: hushOnMove, holdUntilSV } = useHerVoice();
+
   const settle = useCallback(() => {
-    busy.current = false;
+    busySV.value = 0;
     const id = stateRef.current.nodeId;
     speak(id, 'enter');
     if (nodeOf(id).water && stateRef.current.fires === 3) speak(id, 'flames');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [speak]);
 
-  const move = useCallback(
-    (way: Way) => {
-      if (busy.current) return;
-      // A printing line holds her still; the refusal haptic says wait.
-      if (Date.now() < printingUntil.current) {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-        return;
-      }
+  const refuse = useCallback(() => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+  }, []);
+
+  /** The engine side of a move: the rite, the haptics, the state.
+   *  Visual choreography is the caller's (the drag, or move()). */
+  const commit = useCallback(
+    (way: Way): boolean => {
       const m = moveNode(stateRef.current, way);
-      if (!m.moved) {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-        return;
-      }
-      busy.current = true;
+      if (!m.moved) return false;
       hushOnMove();
       if (m.costAFlame) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {});
@@ -453,12 +514,29 @@ export function Town() {
         Haptics.selectionAsync().catch(() => {});
       }
       setState(m.state);
-      fromIdx.value = curIdx.value;
-      curIdx.value = IDX[m.state.nodeId];
-      // Swiping up moves INTO the picture, so the leaving screen rises
-      // away; the arriving one comes up from beneath. Down mirrors.
-      axis.value = way === 'left' || way === 'right' ? 0 : 1;
-      dir.value = way === 'right' || way === 'down' ? 1 : -1;
+      return true;
+    },
+    [hushOnMove],
+  );
+
+  /** A move not driven by a drag - a fork chosen by touch. Forks are
+   *  two ways AHEAD, so the phase is always the dolly inward. */
+  const move = useCallback(
+    (way: Way, visual: { axis: 0 | 1; dir: 1 | -1 }) => {
+      if (busySV.value) return;
+      if (Date.now() < holdUntilSV.value) { refuse(); return; }
+      const from = curIdx.value;
+      const dest = EXITS[from][WAYS.indexOf(way)];
+      if (dest < 0) { refuse(); return; }
+      // Shared values are mutable by Reanimated's contract; the React
+      // Compiler rule cannot see that.
+      // eslint-disable-next-line react-hooks/immutability
+      busySV.value = 1;
+      if (!commit(way)) { busySV.value = 0; return; }
+      fromIdx.value = from;
+      curIdx.value = dest;
+      axis.value = visual.axis;
+      dir.value = visual.dir;
       prog.value = 0;
       prog.value = withTiming(
         1,
@@ -473,37 +551,83 @@ export function Town() {
       );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [settle],
+    [commit, refuse, settle],
+  );
+
+  /** The drag landed: the engine moves, the picture finishes arriving. */
+  const land = useCallback(
+    (wayIdx: number) => {
+      const way = WAYS[wayIdx];
+      if (!commit(way)) {
+        // The world refused after all - put the picture back.
+        // eslint-disable-next-line react-hooks/immutability
+        prog.value = withTiming(0, { duration: 200 }, (done) => {
+          'worklet';
+          if (done) {
+            curIdx.value = fromIdx.value;
+            fromIdx.value = -1;
+            busySV.value = 0;
+          }
+        });
+        return;
+      }
+      const left = 1 - prog.value;
+      prog.value = withTiming(
+        1,
+        { duration: 140 + PHASE_MS * 0.7 * left, easing: Easing.out(Easing.cubic) },
+        (done) => {
+          'worklet';
+          if (done) {
+            fromIdx.value = -1;
+            runOnJS(settle)();
+          }
+        },
+      );
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [commit, settle],
   );
 
   const doLookBack = useCallback(() => {
-    if (busy.current || stateRef.current.fires === 0) return;
+    if (busySV.value || stateRef.current.fires === 0) return;
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     setState(lookBack);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Touch targets on the paintings. The bronze studs are the first
   // (OPENING beat 2): the game's first working input is a touch, not
   // a swipe. Regions are fractions of the displayed frame.
   const dimsRef = useRef({ width, height });
-  dimsRef.current = { width, height };
+  useEffect(() => {
+    dimsRef.current = { width, height };
+  }, [width, height]);
   const touch = useCallback(
     (x: number, y: number) => {
-      if (busy.current) return;
+      if (busySV.value) return;
       const { width: w, height: h } = dimsRef.current;
+      const here = nodeOf(stateRef.current.nodeId);
       if (
-        stateRef.current.nodeId === 'gate' &&
+        here.id === 'gate' &&
         x > w * 0.2 && x < w * 0.8 &&
         y > h * 0.28 && y < h * 0.65
       ) {
         Haptics.selectionAsync().catch(() => {});
-        soundscapeRef.current.touch();
+        soundscape.touch();
         speak('gate', 'touch');
+        return;
+      }
+      // A fork (DECISIONS 110): tap the mouth you want. Both ways are
+      // ahead, so the phase is the dolly inward either way.
+      if (here.fork && y < h * 0.7) {
+        move(x < w / 2 ? 'left' : 'right', { axis: 1, dir: -1 });
       }
     },
-    [speak],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [speak, move, soundscape],
   );
 
+  // eslint-disable-next-line react-hooks/refs
   const [pan] = useState(() =>
     Gesture.Race(
       Gesture.Exclusive(
@@ -522,16 +646,54 @@ export function Town() {
           }),
       ),
       Gesture.Pan()
-        .minDistance(24)
+        .minDistance(10)
+        .onUpdate((e) => {
+          'worklet';
+          if (previewWay.value === -1) {
+            const way = wayFrom(e.translationX, e.translationY);
+            if (way < 0) return;
+            const cur = curIdx.value;
+            const blocked =
+              busySV.value === 1 ||
+              Date.now() < holdUntilSV.value ||
+              (FORK[cur] && way !== 3) ||
+              EXITS[cur][way] < 0;
+            if (blocked) {
+              previewWay.value = -2;
+              runOnJS(refuse)();
+              return;
+            }
+            previewWay.value = way;
+            fromIdx.value = cur;
+            curIdx.value = EXITS[cur][way];
+            axis.value = way < 2 ? 0 : 1;
+            dir.value = way === 1 || way === 3 ? 1 : -1;
+            prog.value = 0;
+          }
+          const w = previewWay.value;
+          if (w < 0) return;
+          const travel = w < 2 ? WIDTH_SV.value * 0.6 : HEIGHT_SV.value * 0.45;
+          const along = alongWay(w, e.translationX, e.translationY);
+          prog.value = Math.min(1, Math.max(0, along / travel));
+        })
         .onEnd((e) => {
           'worklet';
-          const ax = Math.abs(e.translationX);
-          const ay = Math.abs(e.translationY);
-          if (Math.max(ax, ay) < 48) return;
-          if (ay > ax * 1.2) {
-            runOnJS(move)(e.translationY < 0 ? 'up' : 'down');
-          } else if (ax > ay * 1.2) {
-            runOnJS(move)(e.translationX < 0 ? 'right' : 'left');
+          const w = previewWay.value;
+          previewWay.value = -1;
+          if (w < 0) return;
+          const flung = flungAlong(w, e.velocityX, e.velocityY);
+          busySV.value = 1;
+          if (prog.value > 0.3 || flung) {
+            runOnJS(land)(w);
+          } else {
+            prog.value = withTiming(0, { duration: 220 }, (done) => {
+              'worklet';
+              if (done) {
+                curIdx.value = fromIdx.value;
+                fromIdx.value = -1;
+                busySV.value = 0;
+              }
+            });
           }
         }),
     ),
@@ -583,7 +745,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b54</Text>
+      <Text style={styles.stamp}>b55</Text>
     </GestureHandlerRootView>
   );
 }
