@@ -4,12 +4,13 @@ import {
   Canvas,
   Group,
   Image as SkImage,
+  Oval,
   Rect,
   useImage,
 } from '@shopify/react-native-skia';
 import { useDerivedValue, type SharedValue } from 'react-native-reanimated';
 
-import { XUAN } from '../palette';
+import { PEACH_RED, XUAN } from '../palette';
 import { node as nodeOf, type Way } from '../engine/nodes';
 import { OVERLAYS, type OverlayId } from '../content/targets';
 
@@ -356,7 +357,7 @@ function WatchmanLayer({
     const along = Math.min(w / 0.7, 1);
     const up = Math.max(0, (w - 0.7) / 0.3);
     const x = width * (0.98 - 0.50 * along);
-    const feet = geo.top + geo.ph * 0.80 - geo.ph * 0.05 * up;
+    const feet = geo.top + geo.ph * 0.725 - geo.ph * 0.05 * up;
     const sc = 1 - 0.45 * up;
     return [
       { translateX: x }, { translateY: feet },
@@ -412,11 +413,42 @@ function ReflectionLayer({
     const unrest = firesSV.value >= 3 ? 0.3 : 1.6;
     return [{ translateY: Math.sin(shiver.value * Math.PI * 2) * unrest * 2.4 }];
   }, []);
+  // 三把火: one flame on each shoulder and one on the crown - seated on
+  // her reflection, where she counts them (DECISIONS 16/67). The
+  // crown goes first, then the right shoulder, then the left.
+  const FIRES = [
+    { fx: 0.37, fy: 0.31, need: 1 },
+    { fx: 0.63, fy: 0.31, need: 2 },
+    { fx: 0.50, fy: 0.59, need: 3 },
+  ];
+  const fw = Math.max(5, size * 0.022);
+  const fh = fw * 1.9;
+  const flamesOn = useDerivedValue(() => {
+    if (!WATER_IDX[curIdx.value] || fromIdx.value >= 0) return 0;
+    return 0.92;
+  }, []);
+  const flicker = useDerivedValue(() => 0.82 + 0.18 * Math.abs(Math.sin(shiver.value * Math.PI * 3)), []);
+  const fireOpacity = FIRES.map((f) =>
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useDerivedValue(() => (firesSV.value >= f.need ? flamesOn.value * flicker.value : 0), []),
+  );
+  const haloOpacity = FIRES.map((f) =>
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useDerivedValue(() => (firesSV.value >= f.need ? flamesOn.value * 0.28 : 0), []),
+  );
   if (!img) return null;
   return (
     <Group transform={transform}>
       <SkImage image={img} x={x} y={y} width={size} height={size} fit="fill"
         opacity={opacity} blendMode="screen" />
+      {FIRES.map((f, i) => (
+        <Group key={i}>
+          <Oval x={x + f.fx * size - fw * 1.4} y={y + f.fy * size - fh * 1.3}
+            width={fw * 2.8} height={fh * 2.2} color={PEACH_RED} opacity={haloOpacity[i]} />
+          <Oval x={x + f.fx * size - fw / 2} y={y + f.fy * size - fh}
+            width={fw} height={fh} color={PEACH_RED} opacity={fireOpacity[i]} />
+        </Group>
+      ))}
     </Group>
   );
 }
