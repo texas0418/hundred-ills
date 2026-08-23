@@ -256,9 +256,6 @@ function paintGeo(idx: number, width: number, height: number) {
 }
 
 const PLATES: Record<OverlayId, number> = {
-  shigandang: require('../../assets/figures/shigandang.png'),
-  'road-money': require('../../assets/figures/road-money.png'),
-  'door-gods-intact': require('../../assets/figures/door-gods-intact.png'),
   jiaobei: require('../../assets/figures/jiaobei.png'),
 };
 
@@ -1077,7 +1074,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b63</Text>
+      <Text style={styles.stamp}>b64</Text>
     </GestureHandlerRootView>
   );
 }
