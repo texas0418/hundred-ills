@@ -187,6 +187,7 @@ LANDED = {
     "53": "screens/gatelane.png  (the gate at the lane's far end - first direction-aware reroll, on brief first try)",
     "54": "screens/mooring.png  (bridge A's arch-stones at the right edge)",
     "55": "screens/bank-east.png  (REPLACED by [61] 08-23)",
+    "59": "figures/reflection.png  (her reflection, feathered, screen-blended onto the waters)",
     "60": "screens/bank-end.png  (the stone and the road money IN the paint - on brief first try)",
     "61": "screens/bank-east.png  (door gods painted on the door, no lettering - on brief first try)",
     "56": "screens/inland-west.png  (lateral; alley mouth left, the lamp-lit corner right)",
