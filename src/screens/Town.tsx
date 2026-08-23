@@ -361,22 +361,26 @@ const TownCanvas = memo(function TownCanvas({
   );
 });
 
-/** Which way a drag is going, once it is clearly going somewhere. */
+/** Which way a drag is going, once it is clearly going somewhere.
+ *  THE FINGER'S DIRECTION IS HER DIRECTION on both axes (Simon, b57):
+ *  swipe left, she goes left; swipe up, she goes deeper. Nothing
+ *  slides under the finger any more, so the scrolling convention
+ *  (drag the world left to go right) had nothing left to justify it. */
 function wayFrom(tx: number, ty: number): number {
   'worklet';
   const ax = Math.abs(tx);
   const ay = Math.abs(ty);
   if (Math.max(ax, ay) < 14) return -1;
   if (ay > ax * 1.2) return ty < 0 ? 2 : 3;
-  if (ax > ay * 1.2) return tx < 0 ? 1 : 0;
+  if (ax > ay * 1.2) return tx < 0 ? 0 : 1;
   return -1;
 }
 
 /** How far the finger has travelled ALONG the chosen way. */
 function alongWay(w: number, tx: number, ty: number): number {
   'worklet';
-  if (w === 0) return tx;
-  if (w === 1) return -tx;
+  if (w === 0) return -tx;
+  if (w === 1) return tx;
   if (w === 2) return -ty;
   return ty;
 }
@@ -384,7 +388,7 @@ function alongWay(w: number, tx: number, ty: number): number {
 /** A flick along the way commits even from a short drag. */
 function flungAlong(w: number, vx: number, vy: number): boolean {
   'worklet';
-  return (w === 0 && vx > 600) || (w === 1 && vx < -600)
+  return (w === 0 && vx < -600) || (w === 1 && vx > 600)
     || (w === 2 && vy < -600) || (w === 3 && vy > 600);
 }
 
@@ -743,7 +747,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b57</Text>
+      <Text style={styles.stamp}>b58</Text>
     </GestureHandlerRootView>
   );
 }
