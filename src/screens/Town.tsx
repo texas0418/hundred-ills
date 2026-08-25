@@ -504,7 +504,7 @@ export function Town() {
       const here = nodeOf(st.nodeId);
       // Things in the painting first - authored in painting fractions.
       const geo = paintGeo(IDX[here.id], w, h);
-      const hit = targetAt(here.id, x / w, (y - geo.top) / geo.ph);
+      const hit = targetAt(here.id, (x - geo.left) / geo.pw, (y - geo.top) / geo.ph);
       if (hit) { actOn(hit.act, st); return; }
       // A fork (DECISIONS 110): tap the mouth you want. Both ways are
       // ahead, so the phase is the dolly inward either way.
@@ -658,7 +658,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b67</Text>
+      <Text style={styles.stamp}>b68</Text>
     </GestureHandlerRootView>
   );
 }
