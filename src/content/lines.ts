@@ -18,7 +18,8 @@ export type Trigger =
   | 'enter' | 'touch' | 'flames' | 'scripted'
   | 'door-gods' | 'road-money' | 'shrine' | 'stone-refuses'
   | 'cast-sheng' | 'cast-yin' | 'cast-xiao'
-  | 'relight' | 'call' | 'stare' | 'drowned';
+  | 'relight' | 'call' | 'stare' | 'drowned'
+  | 'crossed-1' | 'crossed-2' | 'stone-not-yet';
 
 export interface Line {
   /** Stable id, used to keep a once-line from repeating. */
@@ -59,6 +60,47 @@ export const LINES: readonly Line[] = [
     zh: '釘就是丁。求個兒子，誰家不求。',
     en: 'A nail for a son. Everyone asks for a son.',
     once: true,
+  },
+
+  // The rite, in her own mouth - her grandmother's instructions, the
+  // reason she is out. First walk: the rules of the walk. Second walk:
+  // the exact rules that keep the dead from being recognised.
+  {
+    id: 'the-rules',
+    node: 'gate',
+    trigger: 'touch',
+    voice: 'her',
+    zh: '三座橋，雞叫前過完。不回頭，不應名。',
+    en: "Three bridges before cockcrow. Don't look back, don't answer your name.",
+    once: true,
+  },
+
+  // She counts her crossings aloud - the rite is deliberate work.
+  { id: 'crossed-one', node: '*', trigger: 'crossed-1', voice: 'her', zh: '一座。', en: 'One.', once: true },
+  { id: 'crossed-two', node: '*', trigger: 'crossed-2', voice: 'her', zh: '兩座。', en: 'Two.', once: true },
+
+  // The stone, when the walk here is not yet done. Repeatable - a
+  // wall that explains itself every time it is touched.
+  {
+    id: 'stone-not-yet',
+    node: 'bank-end',
+    trigger: 'stone-not-yet',
+    voice: 'her',
+    zh: '石敢當不讓。橋還沒走完。',
+    en: "It won't let me by. The bridges aren't done.",
+  },
+
+  // The slice's horizon: the mouth of the covered bridge, the only
+  // one you cannot see through.
+  {
+    id: 'third-bridge',
+    node: 'covered-bridge',
+    trigger: 'enter',
+    voice: 'her',
+    zh: '第三座橋。過了它就回家。',
+    en: 'The third bridge. Across it, and home.',
+    once: true,
+    at: 0.24,
   },
 
   // The fires, taught only by her counting habit (DECISIONS 66/67).

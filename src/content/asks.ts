@@ -13,10 +13,10 @@ export const CAST: Record<string, Cast> = {
   // the rite passes through these - yes
   mooring: 'sheng', bridge: 'sheng', 'bank-east': 'sheng', 'bridge-b': 'sheng',
   alley: 'sheng', 'alley-deep': 'sheng', junction: 'sheng', 'inland-west': 'sheng',
-  'inland-east': 'sheng',
+  'inland-east': 'sheng', 'covered-bridge': 'sheng',
   // not a way - no
   gate: 'yin', water: 'yin', 'east-water': 'yin', 'inland-water': 'yin',
-  'bank-end': 'yin',
+  'bank-end': 'sheng',
   // the wrong question - the god is laughing
   'house-lamp': 'xiao', 'neighbours-wall': 'xiao', lantern: 'xiao', gatelane: 'xiao',
 };

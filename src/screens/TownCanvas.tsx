@@ -86,6 +86,12 @@ export const SCREENS = [
     cover: true,
   },
   {
+    id: 'covered-bridge',
+    live: require('../../assets/screens/covered-bridge.png'),
+    dead: require('../../assets/screens-drained/covered-bridge.png'),
+    cover: true,
+  },
+  {
     id: 'alley',
     live: require('../../assets/screens/alley.png'),
     dead: require('../../assets/screens-drained/alley.png'),

@@ -41,6 +41,8 @@ import {
   DEMO_TIME_SCALE, EXITS, FORK, IDX, LEAN, PHASE_MS, SCREENS, TownCanvas, WAYS, paintGeo,
 } from './TownCanvas';
 
+const COVERED_IDX = IDX['covered-bridge'];
+
 /** The watchman crossing the mooring (OPENING beat 5, DECISIONS 89),
  *  once: he comes in from the right, his clapper sounds twice, he
  *  greets her by name mid-way, and at the foot of the alley steps he
@@ -156,6 +158,21 @@ function alongWay(w: number, tx: number, ty: number): number {
   if (w === 1) return tx;
   if (w === 2) return -ty;
   return ty;
+}
+
+/** Why a drag cannot start: 0 = it can, 1 = plain refusal, 2 = the
+ *  stone's gate at the covered bridge's mouth. */
+function dragBar(
+  cur: number, way: number, busy: number, holdUntil: number,
+  rite: number, fires: number, coveredIdx: number,
+): number {
+  'worklet';
+  if (busy === 1 || Date.now() < holdUntil) return 1;
+  if (FORK[cur] && way !== 3) return 1;
+  if (LEAN[cur] && way === 3) return 1;
+  if (EXITS[cur][way] < 0) return 1;
+  if (EXITS[cur][way] === coveredIdx && !(rite >= 2 && fires >= 3)) return 2;
+  return 0;
 }
 
 /** A flick along the way commits even from a short drag. */
@@ -320,11 +337,16 @@ function useActs({
       else if (act === 'road-money') speak('bank-end', 'road-money');
       else if (act === 'shrine') {
         if (!st.blocks) { setState(takeBlocks); speak('inland-east', 'shrine'); }
-      } else if (act === 'stone' && st.fires < 3) {
-        // The lock on district two: a stone to the living, a refusal to
-        // the rest. The lane beyond arrives with district two.
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {});
-        speak('bank-end', 'stone-refuses');
+      } else if (act === 'stone') {
+        // The first true wall: unclean if she is short, not-yet if the
+        // bridges are not done, and silent when it is ready to yield.
+        if (st.fires < 3) {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {});
+          speak('bank-end', 'stone-refuses');
+        } else if (st.crossed.length < 2) {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {});
+          speak('bank-end', 'stone-not-yet');
+        }
       }
     },
     [speak, soundscape],
@@ -353,6 +375,7 @@ export function Town() {
   const castShow = useSharedValue(0);
   const [cast, setCast] = useState<{ idx: number } | null>(null);
   const firesSV = useSharedValue(3);
+  const riteSV = useSharedValue(0);
   const shiver = useSharedValue(0);
   useEffect(() => {
     shiver.value = withRepeat(withTiming(1, { duration: 1900, easing: Easing.linear }), -1, false);
@@ -396,12 +419,21 @@ export function Town() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
   }, []);
 
+  /** The 石敢當 speaks its refusal: unclean if she is short a flame,
+   *  not-yet if the bridges are not done. The wall explains itself. */
+  const stoneSays = useCallback(() => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {});
+    speak('bank-end', stateRef.current.fires < 3 ? 'stone-refuses' : 'stone-not-yet');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [speak]);
+
   /** The engine side of a move: the rite, the haptics, the state.
    *  Visual choreography is the caller's (the drag, or move()). */
   const commit = useCallback(
     (way: Way): boolean => {
       const m = moveNode(stateRef.current, way);
       if (!m.moved) return false;
+      const before = stateRef.current.crossed.length;
       hushOnMove();
       water.stop();
       if (m.costAFlame) {
@@ -410,10 +442,14 @@ export function Town() {
         Haptics.selectionAsync().catch(() => {});
       }
       setState(m.state);
+      // She counts her crossings aloud - the rite is deliberate work.
+      if (m.state.crossed.length > before) {
+        speak(m.state.nodeId, m.state.crossed.length === 1 ? 'crossed-1' : 'crossed-2');
+      }
       return true;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [hushOnMove, water],
+    [hushOnMove, water, speak],
   );
 
   /** A move not driven by a drag - a fork chosen by touch. Forks are
@@ -558,15 +594,14 @@ export function Town() {
             const way = wayFrom(e.translationX, e.translationY);
             if (way < 0) return;
             const cur = curIdx.value;
-            const blocked =
-              busySV.value === 1 ||
-              Date.now() < holdUntilSV.value ||
-              (FORK[cur] && way !== 3) ||
-              (LEAN[cur] && way === 3) ||
-              EXITS[cur][way] < 0;
-            if (blocked) {
+            const bar = dragBar(
+              cur, way, busySV.value, holdUntilSV.value,
+              riteSV.value, firesSV.value, COVERED_IDX,
+            );
+            if (bar) {
               previewWay.value = -2;
-              runOnJS(refuse)();
+              if (bar === 2) runOnJS(stoneSays)();
+              else runOnJS(refuse)();
               return;
             }
             previewWay.value = way;
@@ -608,7 +643,10 @@ export function Town() {
   // The first relight under the lantern gets its line; the watch's
   // last minutes bring the voice, once, wherever she is.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/immutability
     firesSV.value = state.fires;
+    // eslint-disable-next-line react-hooks/immutability
+    riteSV.value = state.crossed.length;
     if (state.fires > prevFires.current && state.nodeId === 'lantern') {
       speak('lantern', 'relight');
     }
@@ -658,7 +696,7 @@ export function Town() {
         </View>
       ) : null}
 
-      <Text style={styles.stamp}>b68</Text>
+      <Text style={styles.stamp}>b69</Text>
     </GestureHandlerRootView>
   );
 }
