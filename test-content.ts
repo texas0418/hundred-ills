@@ -55,9 +55,10 @@ for (const l of LINES) {
 
 // Once-lines are skipped once seen; unseen lines come in order.
 const gateTouch = linesFor('gate', 'touch', new Set());
-ok(gateTouch.length === 2 && gateTouch[0].id === 'mo-ding-1',
-  'the studs speak twice, in order');
-ok(linesFor('gate', 'touch', new Set(['mo-ding-1', 'mo-ding-2'])).length === 0,
+ok(gateTouch.length === 3 && gateTouch[0].id === 'mo-ding-1'
+  && gateTouch[2].id === 'the-rules',
+  'the studs speak three times, ending on the rules');
+ok(linesFor('gate', 'touch', new Set(['mo-ding-1', 'mo-ding-2', 'the-rules'])).length === 0,
   'the rite counts once');
 
 // Hold times scale with length and stay humane, and a line always
@@ -116,7 +117,7 @@ ok(targetAt('gate', 0.5, 0.9) === undefined, 'the lane is not the studs');
 // her own door.
 for (const id of Object.keys(CAST)) ok(!!NODES[id], `cast authored for real node ${id}`);
 ok(castAt('house-lamp') === 'xiao', 'the god laughs at her own door');
-ok(castAt('bank-end') === 'yin', 'the dead end says no');
+ok(castAt('bank-end') === 'sheng', 'the stone stands on the way itself');
 ok(castAt('somewhere-unwritten') === 'xiao', 'the unwritten is the wrong question');
 
 console.log(`test-content: ${n} assertions passed`);

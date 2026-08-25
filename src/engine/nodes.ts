@@ -101,10 +101,17 @@ export const NODES: Record<string, TownNode> = {
   },
   'bank-end': {
     id: 'bank-end',
-    // [44]: where her bank runs out - the lane recedes AHEAD into
-    // mist, a depth dead end (DECISIONS 110 audit). The town
-    // continues where she cannot yet go; back is down.
-    exits: { down: 'bridge-b' },
+    // [44]: where her bank runs out into mist - and where the 石敢當
+    // stands. The way on is the mouth of the covered bridge, and the
+    // stone yields only to a walker who is WHOLE with both bridges
+    // crossed (the gate lives in the UI; the edge is real).
+    exits: { down: 'bridge-b', up: 'covered-bridge' },
+  },
+  'covered-bridge': {
+    id: 'covered-bridge',
+    // [52]: the third bridge, the only one you cannot see through.
+    // The slice ends at its mouth; its far side is district two's.
+    exits: { down: 'bank-end' },
   },
   alley: {
     id: 'alley',
