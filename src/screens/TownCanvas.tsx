@@ -29,17 +29,25 @@ import { OVERLAYS, type OverlayId } from '../content/targets';
 
 /** Paintings by node id. The GRAPH lives in src/engine/nodes.ts; this
  *  is only where the files are. Index order is the identity the shared
- *  values use. */
+ *  values use.
+ *
+ *  FIT (Simon, b67: the corridor screens sat low and empty): screens
+ *  marked `cover` FILL the phone - depth corridors whose sides carry
+ *  no arrivals - cropping their flanks; everything else fits the
+ *  WIDTH so edge arrivals are never lost. Bottom-anchored either way:
+ *  the ground she stands on never leaves the frame. */
 export const SCREENS = [
   {
     id: 'gate',
     live: require('../../assets/screens/gate.png'),
     dead: require('../../assets/screens-drained/gate.png'),
+    cover: true,
   },
   {
     id: 'gatelane',
     live: require('../../assets/screens/gatelane.png'),
     dead: require('../../assets/screens-drained/gatelane.png'),
+    cover: true,
   },
   {
     id: 'mooring',
@@ -75,21 +83,25 @@ export const SCREENS = [
     id: 'bank-end',
     live: require('../../assets/screens/bank-end.png'),
     dead: require('../../assets/screens-drained/bank-end.png'),
+    cover: true,
   },
   {
     id: 'alley',
     live: require('../../assets/screens/alley.png'),
     dead: require('../../assets/screens-drained/alley.png'),
+    cover: true,
   },
   {
     id: 'alley-deep',
     live: require('../../assets/screens/alley-deep.png'),
     dead: require('../../assets/screens-drained/alley-deep.png'),
+    cover: true,
   },
   {
     id: 'junction',
     live: require('../../assets/screens/junction.png'),
     dead: require('../../assets/screens-drained/junction.png'),
+    cover: true,
   },
   {
     id: 'lantern',
@@ -157,9 +169,11 @@ const PAINT_SIZE: { w: number; h: number }[] = SCREENS.map((s2) => {
 });
 export function paintGeo(idx: number, width: number, height: number) {
   const { w, h } = PAINT_SIZE[idx];
-  const s = width / w;
+  const cover = !!(SCREENS[idx] as { cover?: boolean }).cover;
+  const s = cover ? Math.max(width / w, height / h) : width / w;
+  const pw = w * s;
   const ph = h * s;
-  return { s, ph, top: height - ph };
+  return { s, pw, ph, left: (width - pw) / 2, top: height - ph };
 }
 
 const PLATES: Record<OverlayId, number> = {
@@ -183,9 +197,9 @@ function PlateLayer({
 }) {
   const img = useImage(PLATES[plate]);
   const geo = paintGeo(nodeIdx, width, height);
-  const pw = width * w;
+  const pw = geo.pw * w;
   const ph = img ? pw * (img.height() / img.width()) : pw;
-  const px = width * x - pw / 2;
+  const px = geo.left + geo.pw * x - pw / 2;
   const py = geo.top + geo.ph * y - ph;
   const { transform, opacity: phaseOpacity } = usePhase(
     nodeIdx, phase.curIdx, phase.fromIdx, phase.prog, phase.dir, phase.axis, width, height,
@@ -279,19 +293,10 @@ function ScreenLayer({
 }) {
   const image = useImage(src);
   const deadImage = useImage(deadSrc);
-  // DECISIONS 110: the whole painting, always. Fit the WIDTH so the
-  // arrivals at the left and right edges are never cropped away, and
-  // anchor the BOTTOM so the ground she stands on is kept; a painting
-  // shorter than the phone leaves bare xuan paper above it, which is
-  // 留白 and the medium's own habit. A taller one loses only mist.
-  const dims = image
-    ? (() => {
-        const s = width / image.width();
-        const w = width;
-        const h = image.height() * s;
-        return { w, h, x: 0, y: height - h };
-      })()
-    : null;
+  // Per-screen fit (see SCREENS): corridors fill, laterals keep their
+  // width and their edge arrivals; the ground is always anchored.
+  const geo = paintGeo(idx, width, height);
+  const dims = image ? { w: geo.pw, h: geo.ph, x: geo.left, y: geo.top } : null;
 
   const { transform, opacity } = usePhase(idx, curIdx, fromIdx, prog, dir, axis, width, height);
 
@@ -340,23 +345,18 @@ function WatchmanLayer({
   height: number;
 }) {
   const fig = useImage(WATCHMAN);
-  const painting = useImage(SCREENS[MOORING_IDX].live);
-  const geo = painting
-    ? (() => {
-        const s = width / painting.width();
-        const ph = painting.height() * s;
-        const top = height - ph;
-        const fh = ph * 0.085;                 // a man against the town
-        const fw = fig ? fh * (fig.width() / fig.height()) : fh * 0.7;
-        return { top, ph, fh, fw };
-      })()
-    : null;
+  const g = paintGeo(MOORING_IDX, width, height);
+  const geo = (() => {
+    const fh = g.ph * 0.085;                 // a man against the town
+    const fw = fig ? fh * (fig.width() / fig.height()) : fh * 0.7;
+    return { top: g.top, ph: g.ph, left: g.left, pw: g.pw, fh, fw };
+  })();
   const transform = useDerivedValue(() => {
     if (!geo) return [];
     const w = walk.value;
     const along = Math.min(w / 0.7, 1);
     const up = Math.max(0, (w - 0.7) / 0.3);
-    const x = width * (0.98 - 0.50 * along);
+    const x = geo.left + geo.pw * (0.98 - 0.50 * along);
     const feet = geo.top + geo.ph * 0.725 - geo.ph * 0.05 * up;
     const sc = 1 - 0.45 * up;
     return [
