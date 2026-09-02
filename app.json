@@ -34,7 +34,13 @@
           "imageWidth": 180
         }
       ],
-      "expo-audio"
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "enableBackgroundPlayback": false
+        }
+      ]
     ]
   }
 }
